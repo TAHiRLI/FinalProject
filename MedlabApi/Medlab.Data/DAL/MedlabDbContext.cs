@@ -11,8 +11,17 @@ namespace Medlab.Data.DAL
         {
 
         }
-
+        public DbSet<Setting> Settings { get; set; }
         public DbSet<Category> Cateogries { get; set; }
+
+
+
+
+
+        //===================
+        // Fluent Validation
+        //===================
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());  

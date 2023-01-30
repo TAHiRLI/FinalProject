@@ -3,16 +3,18 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Expressions;
 using Microsoft.OpenApi.Models;
 using Medlab.Core.Entities;
 using Medlab.Data.DAL;
 using Swashbuckle.AspNetCore.Swagger;
-using MedlabApi.Dtos;
 using MedlabApi.Services.Interfaces;
 using MedlabApi.Services.Implementations;
+using Medlab.Data.Repositories;
+using Medlab.Core.Repositories;
+using AutoMapper;
+using MedlabApi.Profiles;
+using MedlabApi.Dtos.SettingDtos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +28,11 @@ var builder = WebApplication.CreateBuilder(args);
 // 5 Swager 
 // 6 Jwt Auth
 // 7 Cors addcors
-// 8 Cors usecors
+// 8 Mapper
+
+
+//-----------------
+// 1 Cors usecors
 
 
 builder.Services.AddControllers()
@@ -36,7 +42,7 @@ builder.Services.AddControllers()
 //===============
     .AddNewtonsoftJson(opt =>
                           opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
-    .AddFluentValidation(x=> x.RegisterValidatorsFromAssemblyContaining<CategoryDto>());
+    .AddFluentValidation(x=> x.RegisterValidatorsFromAssemblyContaining<SettingGetDto>());
 
 
 // ==========================
@@ -70,6 +76,8 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 //===================
 
 builder.Services.AddSingleton<IJwtService, JwtService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ISettingRepository, SettingRepository>();
 
 
 //===================
@@ -136,6 +144,16 @@ builder.Services.AddAuthentication(opt =>
 
 builder.Services.AddCors();
 
+//======================
+// 8 Mapper
+//======================
+
+builder.Services.AddSingleton(provider => new MapperConfiguration(cfg =>
+{
+    cfg.AddProfile(new AdminMapper(provider.GetService<IHttpContextAccessor>()));
+}).CreateMapper());
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -149,7 +167,7 @@ app.UseHttpsRedirection();
 
 
 //======================
-// 8 Cors useCors
+// 1 Cors useCors
 //======================
 app.UseCors(builder =>
 {
