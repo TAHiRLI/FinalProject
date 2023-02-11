@@ -1,0 +1,309 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+}
+
+@section Styles{
+    <link rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+}
+
+
+
+    <!-- Bread crumb -->
+    <div class="breadCrumb p-3 bg-light">
+        <p class="container mb-0 px-5">
+            <a asp-action="index" asp-controller="home">Home</a>/<a asp-action="index" asp-controller="doctor">Doctors</a>/<a href="#">Dr. Frank Bigham</a>
+        </p>
+    </div>
+
+    <main>
+        <!--  Doctor details -->
+        <section id="Doctor-Details_Section" class="py-5 ">
+            <div class="container px-lg-5">
+                <div class="doctorDetails row">
+                    <div class="doctorDetails_photo col-sm ">
+                        <div class="doctorDetails_photo_image">
+                            <img src="~/Assets/Uploads/Doctors/doctor-01.jpg"
+                             alt=""
+                             class="w-100" />
+                        </div>
+                        <table class="doctorDetails_photo_info mt-5 ">
+                            <tbody>
+                                <tr>
+                                    <td class="py-3">Speciality</td>
+                                    <td class="py-3">Dentist</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3">Office</td>
+                                    <td class="py-3">12 General Office</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3">Meeting Price</td>
+                                    <td class="py-3"> $2 / 10 min </td>
+                                </tr>
+                                <tr class="py-1">
+                                    <td class="py-3">Gender</td>
+                                    <td class="py-3">Male</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="doctorDetails_info col-lg-8 col-md-9  mt-4 mt-md-0">
+                        <div class="doctorDetails_info_name row align-items-baseline justify-content-between">
+                            <div class="col-8 col-md-6">
+
+                                <h1 class="h2">Dr. Frank Bigham</h1>
+                                <h3 class="h6 text-base">Associate Dentist</h3>
+                            </div>
+                            <div class="col-4 col-lg-5 d-flex flex-column justify-content-end align-items-center">
+                                <button class="my-custom-btn py-2 px-2  w-100">
+                                    <i class="fa-solid fa-video me-2"></i>
+                                    <span class="d-none d-md-inline">    Set Meeting</span>
+
+                                </button>
+                                <div class="links text-nowrap ">
+                                    <a href="#" class="fs-5 mx-2 link-hover-base">
+                                        <i class="fa-brands fa-facebook-f"></i>
+                                    </a>
+                                    <a href="#" class="fs-5 mx-2 link-hover-base">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="doctorDetails_info_desc mt-4">
+                            <p>
+                                Dr. Frank Bigham received his Doctorate in Medical Dentistry
+                                from Hospital, USA in 2003. Following his professional
+                                qualification, he practiced maxillofacial surgery at Hospital
+                                and the Royal Hospital. Dr. Bigham gained membership of the
+                                College of Surgeons of USA in 2007. He has over 10 years of
+                                experience working as a general dental practitioner in both
+                                Surrey and central. Dr. Bigham enjoys all aspects of his field
+                                especially cosmetic dentistry and prosthetics. Passionate in
+                                learning languages, he is fluent in both English and Arabic,
+                                and also speaks French and some Italian. His interests include
+                                sports and history.
+                                <br />
+                                <br>
+                                When asked what makes dentistry so rewarding, he said "My job
+                                is rewarding because sometimes even the simplest treatment can
+                                change the patient's confidence in himself/herself and I feel
+                                that I am part of a larger global healthcare promotion
+                                program."
+                            </p>
+                        </div>
+                        <div class="doctorDetails_info_blogs mt-4">
+                            <h3 class="text-base my-3">Latest Blogs</h3>
+                            <ul class="">
+
+                                <!-- blog -->
+                                <li class="blogs_item my-2 row">
+                                    <div class="blogs_item_photo">
+                                        <img src="~/Assets/Uploads/Doctors/doctor-02.jpg" alt="" />
+                                    </div>
+                                    <div class="blogs_item col pe-5">
+                                        <span class="blogs_item_info_date">Mar 12 2020</span>
+                                        <p class="blogs_item_info_title">
+                                            <a href="" class="text-decoration-none">
+                                                Biochemical Receptor Reverses Bone Degradation Caused by
+                                                Osteoporosis
+                                            </a>
+                                        </p>
+                                    </div>
+                                </li>
+                                <!-- blog -->
+                                <li class="blogs_item my-2 row">
+                                    <div class="blogs_item_photo">
+                                        <img src="~/Assets/Uploads/Doctors/doctor-02.jpg" alt="" />
+                                    </div>
+                                    <div class="blogs_item col pe-5">
+                                        <span class="blogs_item_info_date">Mar 12 2020</span>
+                                        <p class="blogs_item_info_title">
+                                            <a href="" class="text-decoration-none">
+                                                Biochemical Receptor Reverses Bone Degradation Caused by
+                                                Osteoporosis
+                                            </a>
+                                        </p>
+                                    </div>
+                                </li>
+
+                                <!-- END -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other Doctors -->
+        <section id="Doctors_Section" class="py-5">
+            <span class="sectionName text-center d-block mb-4">Perfect Team</span>
+            <div class="sectionTitle">
+                <h2 class="h1 position-relative text-center double-title text-dark title_underlined"
+                data-title="Specialists">
+                    Our Specialists
+                </h2>
+            </div>
+
+            <div class="doctors mt-5">
+                <div class="container">
+                    <div class="doctorSlider d-flex mx-5">
+                        <!-- slide -->
+                        <div class="doctor_box mx-3">
+                            <div class="doctor_box_photo position-relative">
+                                <a asp-action="details" asp-controller="doctor" class="d-block w-100 h-100">
+                                    <img src="~/Assets/Uploads/Doctors/doctor-01.jpg" alt="" />
+                                </a>
+                                <div class="doctor_box_photo_links bg-light position-absolute">
+                                    <div class="p-2 text-center">
+                                        <a href="#" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-facebook-f"></i>
+                                        </a>
+                                    </div>
+                                    <div class="p-2 text-center">
+                                        <a href="#" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-instagram"></i>
+                                        </a>
+                                    </div>
+                                    <div class="p-2 text-center">
+                                        <a href="#" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-twitter"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="doctor_box_footer">
+                                <h5 class="doctor_box_footer_name text-center my-3">
+                                    <a href="#">Dr. Robert Rush</a>
+                                </h5>
+                                <div class="doctor_box_footer_position text-center">
+                                    Psychiatrist
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- slide -->
+                        <div class="doctor_box mx-3">
+                            <div class="doctor_box_photo position-relative">
+                                <a asp-action="details" asp-controller="doctor" class="d-block w-100 h-100">
+                                    <img src="~/Assets/Uploads/Doctors/doctor-02.jpg" alt="" />
+                                </a>
+                                <div class="doctor_box_photo_links bg-light position-absolute">
+                                    <div class="p-2 text-center">
+                                        <a href="#" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-facebook-f"></i>
+                                        </a>
+                                    </div>
+                                    <div class="p-2 text-center">
+                                        <a href="#" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-instagram"></i>
+                                        </a>
+                                    </div>
+                                    <div class="p-2 text-center">
+                                        <a href="#" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-twitter"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="doctor_box_footer">
+                                <h5 class="doctor_box_footer_name text-center my-3">
+                                    <a href="#">Dr. Robert Rush</a>
+                                </h5>
+                                <div class="doctor_box_footer_position text-center">
+                                    Psychiatrist
+                                </div>
+                            </div>
+                        </div>
+                        <!-- slide -->
+                        <div class="doctor_box mx-3">
+                            <div class="doctor_box_photo position-relative">
+                                <a asp-action="details" asp-controller="doctor" class="d-block w-100 h-100">
+                                    <img src="~/Assets/Uploads/Doctors/doctor-03.jpg" alt="" />
+                                </a>
+                                <div class="doctor_box_photo_links bg-light position-absolute">
+                                    <div class="p-2 text-center">
+                                        <a href="#" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-facebook-f"></i>
+                                        </a>
+                                    </div>
+                                    <div class="p-2 text-center">
+                                        <a href="#" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-instagram"></i>
+                                        </a>
+                                    </div>
+                                    <div class="p-2 text-center">
+                                        <a href="#" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-twitter"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="doctor_box_footer">
+                                <h5 class="doctor_box_footer_name text-center my-3">
+                                    <a href="#">Dr. Robert Rush</a>
+                                </h5>
+                                <div class="doctor_box_footer_position text-center">
+                                    Psychiatrist
+                                </div>
+                            </div>
+                        </div>
+                        <!-- slide -->
+                        <div class="doctor_box mx-3">
+                            <div class="doctor_box_photo position-relative">
+                                <a asp-action="details" asp-controller="doctor" class="d-block w-100 h-100">
+                                    <img src="~/Assets/Uploads/Doctors/doctor-04.jpg" alt="" />
+                                </a>
+                                <div class="doctor_box_photo_links bg-light position-absolute">
+                                    <div class="p-2 text-center">
+                                        <a href="#" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-facebook-f"></i>
+                                        </a>
+                                    </div>
+                                    <div class="p-2 text-center">
+                                        <a href="#" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-instagram"></i>
+                                        </a>
+                                    </div>
+                                    <div class="p-2 text-center">
+                                        <a href="#" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-twitter"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="doctor_box_footer">
+                                <h5 class="doctor_box_footer_name text-center my-3">
+                                    <a href="#">Dr. Robert Rush</a>
+                                </h5>
+                                <div class="doctor_box_footer_position text-center">
+                                    Psychiatrist
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- END -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+@section Scripts{
+    <!-- ========================= CDNs =============================== -->
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Slick Slide -->
+    <script type="text/javascript"
+        src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <!-- ========================= Custom =============================== -->
+    <!-- Slick Settings -->
+    <script type="module" src="~/Assets/Js/slider.js"></script>
+}

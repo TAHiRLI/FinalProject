@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!-- Bread crumb -->
+<div class="breadCrumb p-3 bg-light">
+    <p class="container mb-0 px-5">
+        <a asp-action="Index" asp-controller="home">Home</a>/<a href="#">Blogs</a>
+    </p>
+</div>
+
+<main>
+    <section id="All-Blogs_Section" class="py-5 ">
+        <div class="sectionTitle">
+            <h2 class="h1 position-relative text-center  text-dark title_underlined mb-5">
+                Blogs of our doctors
+            </h2>
+        </div>
+        <div class="container ">
+
+            <div class="row">
+
+
+                <div class="blogs col-lg-9 px-md-3">
+
+                    <!-- blog -->
+                    <div class="blogs_item mb-5 border-gray p-3">
+                        <div class="blogs_item_body_header row flex-nowrap ps-lg-4">
+                            <div class="post-date  col-2 d-flex flex-column align-items-center justify-content-center">
+                                <span class="fs-3 day">17</span>
+                                <span class="text-base">Jan</span>
+                            </div>
+                            <div class="post-title col-9">
+                                <h2 class="h4">
+                                    <a asp-action="details" asp-controller="blog" class="text-decoration-none link-base text-wrap+">How to Choose the Best Toothbrush</a>
+                                </h2>
+                                <p class="my-2">
+                                    by
+                                    <a href="#" class="text-decoration-none link-hover-base">admin</a>
+
+                                    <a href="" class="text-decoration-none link-base">
+                                        <i class="mx-2 fa-brands fa-facebook-f"></i>
+                                    </a>
+                                    <a href="" class="text-decoration-none link-base">
+                                        <i class="mx-2 fa-brands fa-twitter"></i>
+                                    </a>
+                                    <a href="" class="text-decoration-none link-base">
+                                        <i class="mx-2 fa-brands fa-instagram"></i>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="blogs_item_photo w-100 my-4">
+                            <a asp-action="details" asp-controller="blog" class="d-block overflow-hidden d-flex align-items-center justify-content-center w-100">
+                                <img src="/Assets/Uploads/Blogs/blog-post-img-1.jpg" alt="" class="d-block" />
+                            </a>
+                        </div>
+                        <div class="blogs_item_body  p-4">
+                            <p class="blogs_item_body_preview mt-4">
+                                Oral hygiene is essential for your overall wellbeing, not just
+                                your oral health. In fact, gum disease is a major risk factor
+                                for developing certain dangerous health conditions, such as
+                                diabetes and heart disease […]
+                            </p>
+                            <a asp-action="details" asp-controller="blog" class="rounded-pill read-more-btn m-0 mt-4">Read More</a>
+                        </div>
+                    </div>
+
+                    <!-- end -->
+                </div>
+
+                <div class="col-lg-3  bg-light h-min py-3 px-4 ">
+                    <div>
+                        <p class="h3">Categories</p>
+                        <ul class=" mt-3">
+                            <li class="mt-2">
+                                <a href="#" class="text-decoration-none link-base"><i class="fa-solid fa-check text-base mx-1"></i> Category1</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="#" class="text-decoration-none link-base"><i class="fa-solid fa-check text-base mx-1"></i> Category1</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="#" class="text-decoration-none link-base"><i class="fa-solid fa-check text-base mx-1"></i> Category1</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="#" class="text-decoration-none link-base"><i class="fa-solid fa-check text-base mx-1"></i> Category1</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="#" class="text-decoration-none link-base"><i class="fa-solid fa-check text-base mx-1"></i> Category1</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="#" class="text-decoration-none link-base"><i class="fa-solid fa-check text-base mx-1"></i> Category1</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <div class=" mt-4">
+                        <p class="h4">Recent Posts</p>
+
+                        <ul class="recent-blogs container-fluid">
+                            <!-- recent Blog -->
+                            <li class="recent-blogs_item my-2 row  p-1">
+                                <div class="recent-blogs_item_photo col-2 p-0 ">
+                                    <a asp-action="details" asp-controller="blog" class="w-100 h-100 d-block d-flex align-items-center justify-content-center"><img src="/Assets/Uploads/Blogs/blog-post-img-1.jpg" alt=""></a>
+                                </div>
+                                <div class="recent-blogs_item_info col-10 ">
+                                    <h6>
+                                        <a asp-action="details" asp-controller="blog" class="text-decoration-none link-base">
+                                            Do you brush your teeth correctly?
+                                        </a>
+                                    </h6>
+                                    <p class="m-0 post-small-info">
+                                        <i class=" me-2 me-2 fas fa-clock text-base"></i>
+                                        <span class="post-date">17 Jan, 2018</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <!-- recent Blog -->
+                            <li class="recent-blogs_item my-2 row  p-1">
+                                <div class="recent-blogs_item_photo col-2 p-0 ">
+                                    <a asp-action="details" asp-controller="blog" class="w-100 h-100 d-block d-flex align-items-center justify-content-center"><img src="/Assets/Uploads/Blogs/blog-post-img-1.jpg" alt=""></a>
+                                </div>
+                                <div class="recent-blogs_item_info col-10 ">
+                                    <h6>
+                                        <a asp-action="details" asp-controller="blog" class="text-decoration-none link-base">
+                                            Do you brush your teeth correctly?
+                                        </a>
+                                    </h6>
+                                    <p class="m-0 post-small-info">
+                                        <i class=" me-2 me-2 fas fa-clock text-base"></i>
+                                        <span class="post-date">17 Jan, 2018</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <!-- recent Blog -->
+                            <li class="recent-blogs_item my-2 row  p-1">
+                                <div class="recent-blogs_item_photo col-2 p-0 ">
+                                    <a asp-action="details" asp-controller="blog" class="w-100 h-100 d-block d-flex align-items-center justify-content-center"><img src="/Assets/Uploads/Blogs/blog-post-img-1.jpg" alt=""></a>
+                                </div>
+                                <div class="recent-blogs_item_info col-10 ">
+                                    <h6>
+                                        <a asp-action="details" asp-controller="blog" class="text-decoration-none link-base">
+                                            Do you brush your teeth correctly?
+                                        </a>
+                                    </h6>
+                                    <p class="m-0 post-small-info">
+                                        <i class=" me-2 me-2 fas fa-clock text-base"></i>
+                                        <span class="post-date">17 Jan, 2018</span>
+                                    </p>
+                                </div>
+                            </li>
+
+
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+

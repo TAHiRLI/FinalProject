@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<!-- Bread crumb -->
+<div class="breadCrumb p-3 bg-light">
+    <p class="container mb-0 px-5">
+        <a asp-action="index" asp-controller="home">Home</a>/<a href="#">Contacts</a>
+    </p>
+</div>
+
+<main>
+    <section id="Contact-info_Section" class="">
+        <iframe src="https://maps.google.com/maps?q=40.37729659248599, 49.85392148513519&hl=es;z=14&amp;output=embed"
+                width="100%"
+                height="400"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="container px-5 py-5">
+            <div class="row">
+                <div class="col-lg-4  p-4 mt-2">
+                    <h5 class="title_underlined h3 mb-5">Clinic Location</h5>
+                    <div class="d-flex">
+                        <div class="">
+                            <i class="fa-solid fa-location-dot text-base"></i>
+                        </div>
+                        <p class="col ps-3">
+                            DentCo Dental Clinic 1560 Holden Street San Diego, CA 92139
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4  p-4 mt-2">
+                    <h5 class="title_underlined h3 mb-5">Contact Info</h5>
+                    <div class="d-flex">
+                        <div class="">
+                            <i class="fa-solid fa-phone text-base"></i>
+                        </div>
+                        <div class="col ps-3">
+                            Phone: <span class="text-base">+994 77 547 49 48</span>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="">
+                            <i class="fa-solid fa-envelope text-base"></i>
+                        </div>
+                        <div class="col ps-3">
+                            tahirlitahirr@gmail.com
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4  p-4 mt-2">
+                    <h5 class="title_underlined h3 mb-5">Working Time</h5>
+                    <div class="d-flex">
+                        <div class="pe-3">
+                            <i class="fa-solid fa-clock text-base"></i>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-between w-100">
+                                <span>Mon-Thu</span>
+                                <span class="text-base">08:00 - 20:00</span>
+                            </div>
+                            <div class="d-flex justify-content-between w-100">
+                                <span>Friday</span>
+                                <span class="text-base">07:00 - 22:00</span>
+                            </div>
+                            <div class="d-flex justify-content-between w-100">
+                                <span>Saturday</span>
+                                <span class="text-base">08:00 - 18:00</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="Contact-form_Section" class="py-5 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 pe-lg-5">
+                    <div class="sectionTitle">
+                        <h2 class="h1 position-relative  text-dark title_underlined"
+                            data-title="Specialists">
+                            Get In Touch With Us
+                        </h2>
+                    </div>
+
+                    <p class="mt-5 mb-3">For general questions, please send us a message and we’ll get right back to you. You can also call us directly to speak with a member of our service team or insurance expert.</p>
+                    <h5 class="my-4">Stay Connected</h5>
+
+                    <div class="links d-flex">
+                        <a href="#" class="links_link d-flex align-items-center justify-content-center bg-light mx-1 link-base text-decoration-none">
+                            <i class="fa-brands fa-google"></i>
+                        </a>
+                        <a href="#" class="links_link d-flex align-items-center justify-content-center bg-light mx-1 link-base text-decoration-none">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="links_link d-flex align-items-center justify-content-center bg-light mx-1 link-base text-decoration-none">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="#" class="links_link d-flex align-items-center justify-content-center bg-light mx-1 link-base text-decoration-none">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <form action="">
+
+                        <input type="text" class="form-control " placeholder="Your fullname">
+                        <input type="email" class="form-control " placeholder="Email">
+                        <input type="text" class="form-control " placeholder="Your phone">
+                        <textarea name="" id="" class="form-control" placeholder="Message"></textarea>
+
+                        <button class="submitBtn rounded-pill mt-4">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
