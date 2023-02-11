@@ -1,0 +1,388 @@
+// Content
+// 1 Main Slider
+// 2 About Us section
+// 3 Tests section
+// 4 Doctors Section
+// 5 Appointment section
+// 6 Blogs section
+
+
+//=======================
+// 1 Main Slider
+// note: main slider is imported from "Partials/mainSlider"
+//=======================
+
+//=======================
+// 2 About Us section
+//=======================
+
+.aboutUs {
+  &_values {
+    background-size: contain;
+    background-repeat: no-repeat;
+    &_item {
+      background-color: white;
+      box-shadow: 0 8px 22px rgb(0 0 0 / 10%);
+    
+      .valueIcon {
+        font-size: 55px;
+        line-height: 55px;
+        color: $baseColor;
+      }
+      .valueName {
+        font-size: 1rem;
+        font-weight: 600;
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: -10px;
+          width: 33px;
+          height: 3px;
+          border-radius: 1px;
+          background-color: $baseColor;
+        }
+      }
+
+      &:hover {
+        background-color: $baseColor;
+        .valueIcon {
+          color: white;
+        }
+        .valueName {
+          color: white;
+          &::before {
+            background-color: white;
+          }
+        }
+      }
+    }
+  }
+  &_info {
+  
+    &_title {
+      font-size: 2.2em;
+      font-weight: 600;
+      line-height: 1.22em;
+      letter-spacing: 1px;
+      color: $font_baseColor;
+      margin-bottom: 25px;
+
+      span {
+        color: $baseColor;
+      }
+    }
+    &_desc {
+      color: $font_gray;
+      ul {
+        padding-left: 0px;
+        li {
+          list-style-type: none;
+          margin: 10px 0px;
+          i {
+            color: $baseColor;
+          }
+        }
+      }
+    }
+
+    &_button {
+      @extend %button_link;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+//=======================
+// 3 Tests section
+//=======================
+
+#Tests_Section{
+    background-color: #f6f7f5;
+}
+.tests {
+
+
+    
+
+
+   &_slider{
+    &_item{
+      background-color: $font_milk;
+        margin: 0 10px 10px;
+        padding: 20px 17px 25px;
+        cursor: pointer;
+        text-shadow: none;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+        font-family: "Poppins", serif;
+        color: #444;
+        border: 0;
+        border-radius: 4px;
+        text-align: center;
+        transition: 0.3s;
+
+        &_icon i{
+        transition: 0.3s;
+
+
+            font-size: 1.5rem;
+            color: $baseColor;
+        }
+        &_title{
+            padding: 0 10px;
+            font-size: 1rem;
+        }
+
+        &:hover, &.slick-current{
+            background-color: $baseColor;
+            color: white ;
+            i{
+                color: white;
+            }
+        }
+    }
+
+   
+}
+  &_content {
+    &_image{
+        &_holder{
+            width: 100%;
+            height: 100%;
+            img{
+              object-fit: contain;
+              mask-repeat: no-repeat;
+            }
+        }
+    }
+
+    &_info {
+     
+      color: $font_gray;
+      ul {
+        padding-left: 10px;
+        li {
+          list-style-type: none;
+          margin: 10px 0px;
+          i {
+            color: $baseColor;
+          }
+        }
+      }
+
+      &_title{
+        font-size: 2.2em;
+        font-weight: 600;
+        line-height: 1.22em;
+        letter-spacing: 1px;
+        color: $font_baseColor;
+        margin-bottom: 25px;
+  
+      }
+
+      &_button{
+        @extend %button_link;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        width: min-content;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+
+//=======================
+// 4 Doctors Section
+//=======================
+
+.doctor_search{
+    // width: 25%;
+    margin: auto;
+    .form-control{
+        padding: 10px;
+        border-color: $font_gray;
+
+         &:focus{
+        box-shadow: none;
+        border-color: $font_gray;
+    }
+    }
+    
+   
+    button{
+        padding: 7px  15px ;
+        border-color: $font_gray;
+        &:hover{
+            color: $baseColor;
+            border: 1px solid $font_gray;
+
+        }
+    }
+}
+
+.doctors{
+    .doctor_box{
+        &_photo{
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img{
+                transition: 0.5s;
+                width: 100%;
+            }
+
+            &_links{
+                background-color: white;
+                top: 2rem;
+                right: 0;
+                a:hover{
+                    color: $font_baseColor
+                }
+            }
+           
+           } 
+            
+            &:hover{
+            a img{
+                transform: scale(1.1);
+            }
+
+    
+        }
+
+        &_footer{
+            &_name a{
+                text-decoration: none;
+                font-weight: 600;
+                color: $font_baseColor;
+
+            }
+            &_position{
+                color: $baseColor
+            }
+        }
+    }
+}
+
+
+
+//=======================
+// 5 Appointment section
+//=======================
+
+.appointment{
+    &_form{
+        .sectionTitle{
+              .double-title{
+            @include doubled-title($font_milk,  -10%, 0% ,0%,-50% ,100px );
+        }
+        }
+
+        &_submit{
+            @extend %button_link;
+        }
+           
+        form input , form textarea{
+            font-size: 0.9rem ;
+            padding: 10px ;
+
+            &:focus{
+                box-shadow: none ;
+                border-color: $font_gray;
+            }
+            &::placeholder{
+                font-size: 0.9rem;                
+            }
+        }
+          
+        
+    }
+  
+}
+
+
+
+
+//=======================
+// 6 Blogs section
+//=======================
+#Blogs_Section, .doctorDetails_info_blogs {
+    background: rgb(248,250,248);
+    background: linear-gradient(90deg, rgba(248,250,248,1) 0%, rgba(255,255,255,1) 46%, rgba(255,255,255,0.13769257703081228) 47%, rgba(255,255,255,0) 89%);
+
+
+
+
+
+.blogs{
+        .sectionTitle{
+            .double-title{
+          @include doubled-title($font_milk, 45%, 0% ,0%,-50% ,80px );
+      }
+      }
+        
+    
+    &_item{
+        &_photo{
+            width: 140px;
+            height:140px;
+            img{
+                width: 100%;
+            }
+        }
+        &_info{
+            &_date{
+                color: $baseColor;
+                font-weight: 500;
+            }
+            &_title a{
+                font-weight: 600;
+                transition: 0.3s;
+                color: $font_baseColor;
+                &:hover {
+                    color: $baseColor;
+
+                }
+            }
+        }
+    }
+}
+
+  }
+
+.achievements_counter{
+  .counter {
+    font-size: 2rem;
+    font-weight: 600;
+ 
+  }
+  sup{
+    font-size:1.5rem;
+      }
+
+      &_title{
+        font-size: 1rem;
+      }
+}
+
+@media (max-width:560px) {
+  .achievements_counter{
+    .counter {
+      font-size: 1.5em;   
+    font-weight: 400;
+
+    }
+    sup{
+      font-size:1rem;
+        }
+  
+        &_title{
+          font-size: .8rem;
+        }
+  }
+}

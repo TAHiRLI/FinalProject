@@ -1,0 +1,51 @@
+#Our_Services_Section{
+
+    .services{
+        display:  grid;
+        grid-template-columns: 1fr 1fr 1fr ;
+        gap: 2rem;
+     &_card{
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        &_photo{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img{
+                height: 40vh;
+                transition: 0.3s;
+                object-fit: cover;
+            }
+
+            &:hover img{
+             border-radius: 20%;
+            }
+        }
+        &_name{
+            .title_underlined::before{
+                left:-16.5px;
+            }
+        }
+        &_desc{
+            color: $font_baseColor;
+            ul{
+                margin: 0;
+            }
+        }
+     }
+   
+}
+}
+
+@media (max-width:992px) and (min-width:768px) {
+     #Our_Services_Section .services{
+        grid-template-columns: 1fr 1fr ;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width:767px)  {
+    #Our_Services_Section .services{
+       grid-template-columns: 1fr ;
+       gap: 1.5rem;
+   }
+}

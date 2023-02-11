@@ -1,0 +1,48 @@
+@mixin theme($theme: DarkGray) {
+  background: $theme;
+  box-shadow: 0 0 1px rgba($theme, 0.25);
+  color: #fff;
+}
+
+.info {
+  @include theme;
+}
+
+@mixin doubled-title(
+  $color: #f7f9fb,
+  $top: 50%,
+  $left: 50%,
+  $translateX: 35%,
+  $translateY: -50%,
+  $fontSize: 120px
+) 
+{
+
+  color: $color;
+  &::after {
+    position: absolute;
+    z-index: -1;
+    right: 0;
+    font-size: $fontSize;
+    line-height: 1em;
+    white-space: nowrap;
+    content: attr(data-title);
+    color: $color;
+    // color: orange;
+    z-index: -1;
+    top: $top;
+    left: $left;
+    transform: translate($translateX, $translateY);
+  }
+
+  @media (max-width:992px) {
+     &::after{
+      font-size: $fontSize *0.7;
+     } 
+  }
+  @media (max-width:768px) {
+    &::after{
+      display: none;
+    } 
+ }
+}

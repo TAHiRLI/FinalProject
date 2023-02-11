@@ -1,0 +1,46 @@
+#login-body{
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: right;
+    // background-color: #bfceb9;
+    background-color: rgb(245, 245, 245);
+    
+    .meeting-img{
+        height: 100vh;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+    .login-form{
+        width: min-content;
+        min-width: 350px;
+    }
+    .register-form{
+        width: min-content;
+        min-width: 350px;
+    }
+    label{
+        font-size: 0.9rem;
+    }
+    input{
+        font-size: 0.9rem;
+    }
+    .title{
+        font-weight: 700;
+        border-top:  3px solid $baseColor
+    }
+    .submit-btn{
+        @extend %button_link;
+        padding:  10px 15px;
+        width: 100%;
+    }
+    .social{
+        a{
+            border: 1px solid#ccc;
+            font-size: 1rem;
+        }
+    }
+
+
+}

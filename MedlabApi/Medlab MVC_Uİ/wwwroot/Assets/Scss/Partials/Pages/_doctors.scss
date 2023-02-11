@@ -1,0 +1,87 @@
+
+#AllDoctors_Section{
+
+    .departments_item{
+        border: 2px solid $font_baseColor;
+    }
+   .slick-current{
+    border: 2px solid $baseColor;
+    color: $baseColor;
+   }
+
+.all-doctors{
+
+ &_card{
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    &_photo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img{
+            height: 40vh;
+            transition: 0.3s;
+            object-fit: cover;
+        }
+
+        &:hover img{
+         border-radius: 20%;
+        }
+    }
+    &_name{
+        .title_underlined::before{
+            left:-16.5px;
+        }
+    }
+    &_position{
+        font-weight: 500;
+    }
+    &_desc{
+        color: $font_baseColor;
+     
+    }
+    &_links{
+        .set_meeting{
+            @extend %button_link;
+        }
+    }
+ }
+
+}
+}
+
+// @media (max-width:992px) and (min-width:768px) {
+//     #AllDoctors_Section .all-doctors{
+//     grid-template-columns: 1fr 1fr ;
+//     gap: 1.5rem;
+// }
+// }
+
+// @media (max-width:767px)  {
+//     #AllDoctors_Section .all-doctors{
+//    grid-template-columns: 1fr ;
+//    gap: 1.5rem;
+// }
+// }
+
+
+#Doctor-Details_Section{
+    .doctorDetails{
+        &_photo{
+            &_info{
+                width: 100%;
+            tr:nth-child(odd){
+                    background-color: #f6f6f6;
+                }
+            }
+        }
+        &_info{
+            &_name {
+              .set_meeting{
+                @extend %button_link;
+              }
+               
+            }
+
+        }
+    }
+}

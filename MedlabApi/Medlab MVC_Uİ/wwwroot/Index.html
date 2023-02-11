@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
+    />
+    <link rel="stylesheet" href="" />
+
+    <link rel="stylesheet" href="Assets/css/Main.css" />
+    <title>Medlab</title>
+  </head>
+  <body
+    id="indexPage"
+    style="background-image: url('/Assets/Images/bg-bottom-right.png')"
+  >
+    <!-- Navbar Main  -->
+    <nav class="navbar py-3 bg-light">
+      <div class="navbar_container px-xl-5 px-lg-2 mx-xl-3 mx-lg-1">
+        <div class="navbar_container_logoBox ms-lg-5">
+          <div>
+            <a href="#">
+              <img src="../Assets/Images/logo/logo.png" alt="" />
+            </a>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div
+            class="navbar_container_menuBox position-relative d-none d-lg-block"
+          >
+            <ul class="d-flex menuBox">
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> About us</a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Services </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Shop </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Our specialists</a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Testimonials </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Blog </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Contact </a>
+              </li>
+              <li class="menuBox_link d-inline-block searchBox bg-light">
+                <input class="bg-light" type="text" placeholder="Search..." />
+                <i class="fas fa-search"></i>
+              </li>
+            </ul>
+          </div>
+
+          <div class="navbar_container_widgetBox d-flex align-items-center">
+            <div
+              class="navbar_container_widgetBox_cart mx-3 position-relative p-2"
+            >
+              <i class="fa-sharp fa-solid fa-bag-shopping"></i>
+              <span class="cartCount rounded-pill">12</span>
+              <div class="cartMini cartMiniTop position-absolute">
+                <ul class="cartMini_list p-0">
+                  <li
+                    class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0"
+                  >
+                    <i
+                      class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"
+                    ></i>
+
+                    <div class="cartMini_list_item_image mx-2">
+                      <img
+                        src="../Assets/Uploads/Products/prd-sm-1.jpg"
+                        alt=""
+                      />
+                    </div>
+
+                    <div class="me-2">
+                      <span class="cartMini_list_item_title mb-0 pe-4">
+                        <a href="">Active Wow Teeth tasty Charcoal Powder</a>
+                      </span>
+                      <p class="cartMini_list_item_price mb-0 mt-2">$38</p>
+                    </div>
+                  </li>
+                  <li
+                    class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0"
+                  >
+                    <i
+                      class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"
+                    ></i>
+
+                    <div class="cartMini_list_item_image mx-2">
+                      <img src="../Assets/Images/logo/logo.png" alt="" />
+                    </div>
+
+                    <div class="me-2">
+                      <span class="cartMini_list_item_title mb-0 pe-4">
+                        <a href="">Active Wow Teeth tasty Charcoal Powder</a>
+                      </span>
+                      <p class="cartMini_list_item_price mb-0 mt-2">$38</p>
+                    </div>
+                  </li>
+                  <li
+                    class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0"
+                  >
+                    <i
+                      class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"
+                    ></i>
+                    <div class="cartMini_list_item_image mx-2">
+                      <img
+                        src="../Assets/Uploads/Products/prd-sm-2.jpg"
+                        alt=""
+                      />
+                    </div>
+
+                    <div class="me-2">
+                      <span class="cartMini_list_item_title mb-0 pe-4">
+                        <a href="">Active Wow Teeth tasty Charcoal Powder</a>
+                      </span>
+                      <p class="cartMini_list_item_price mb-0 mt-2">$38.25</p>
+                    </div>
+                  </li>
+                </ul>
+
+                <hr />
+                <div class="cartMini_footer">
+                  <div class="d-flex justify-content-between fs-4 mb-2">
+                    <span>Total:</span> <span>$78.85</span>
+                  </div>
+                  <button class="checkoutBtn rounded-pill">CheckOut</button>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="navbar_container_widgetBox_profile p-3 d-none d-lg-block"
+            >
+              <a href=""> <i class="fa-solid fa-user"></i></a>
+
+              <button class="btn btn-outline-dark d-none rounded-1">
+                Sign In
+              </button>
+            </div>
+
+            <div
+              class="navbar_container_widgetBox_mobileMenu mobileBars d-md-block d-lg-none"
+            >
+              <i class="fa-solid fa-bars"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div class="mobile mobileTop d-block d-lg-none">
+        <ul class="mobileNav">
+          <li class="mobileNav_item active">
+            <a href="#" class="nav-link">Home</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link">About Us</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link">Services</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link">Our Specialists</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link">Testimonials</a>
+          </li>
+          <li class="mobileNav_item dropdown">
+            <a href="" class="nav-link">Blogs</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link">Contacts</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--Navbar Scroll  -->
+    <nav id="navbarScroll" class="navbarScroll p-1 bg-light">
+      <div class="navbar_container px-xl-5 px-lg-2 mx-xl-3 mx-lg-1 m-auto">
+        <div class="navbar_container_logoBox ms-lg-5">
+          <div>
+            <a href="#">
+              <img src="../Assets/Images/logo/logo.png" alt="" />
+            </a>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div
+            class="navbar_container_menuBox position-relative d-none d-lg-block"
+          >
+            <ul class="d-flex menuBox">
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> About us</a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Services </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Shop </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Our specialists</a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Testimonials </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Blog </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Contact </a>
+              </li>
+              <li class="menuBox_link d-inline-block searchBox bg-light">
+                <input class="bg-light" type="text" placeholder="Search..." />
+                <i id="search-icon" class="fas fa-search"></i>
+              </li>
+            </ul>
+          </div>
+
+          <div class="navbar_container_widgetBox d-flex align-items-center">
+            <div
+              class="navbar_container_widgetBox_cart mx-2 position-relative p-2"
+            >
+              <i class="fa-sharp fa-solid fa-bag-shopping scroll"></i>
+              <span class="cartCount rounded-pill">12</span>
+              <div class="cartMini cartMiniScroll position-absolute">
+                <ul class="cartMini_list p-0">
+                  <li
+                    class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0"
+                  >
+                    <i
+                      class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"
+                    ></i>
+
+                    <div class="cartMini_list_item_image mx-2">
+                      <img
+                        src="../Assets/Uploads/Products/prd-sm-1.jpg"
+                        alt=""
+                      />
+                    </div>
+
+                    <div class="me-2">
+                      <span class="cartMini_list_item_title mb-0 pe-4">
+                        <a href="">Active Wow Teeth tasty Charcoal Powder</a>
+                      </span>
+                      <p class="cartMini_list_item_price mb-0 mt-2">$38</p>
+                    </div>
+                  </li>
+                  <li
+                    class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0"
+                  >
+                    <i
+                      class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"
+                    ></i>
+
+                    <div class="cartMini_list_item_image mx-2">
+                      <img src="../Assets/Images/logo/logo.png" alt="" />
+                    </div>
+
+                    <div class="me-2">
+                      <span class="cartMini_list_item_title mb-0 pe-4">
+                        <a href="">Active Wow Teeth tasty Charcoal Powder</a>
+                      </span>
+                      <p class="cartMini_list_item_price mb-0 mt-2">$38</p>
+                    </div>
+                  </li>
+                  <li
+                    class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0"
+                  >
+                    <i
+                      class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"
+                    ></i>
+                    <div class="cartMini_list_item_image mx-2">
+                      <img
+                        src="../Assets/Uploads/Products/prd-sm-2.jpg"
+                        alt=""
+                      />
+                    </div>
+
+                    <div class="me-2">
+                      <span class="cartMini_list_item_title mb-0 pe-4">
+                        <a href="">Active Wow Teeth tasty Charcoal Powder</a>
+                      </span>
+                      <p class="cartMini_list_item_price mb-0 mt-2">$38.25</p>
+                    </div>
+                  </li>
+                </ul>
+
+                <hr />
+                <div class="cartMini_footer">
+                  <div class="d-flex justify-content-between fs-4 mb-2">
+                    <span>Total:</span> <span>$78.85</span>
+                  </div>
+                  <button class="checkoutBtn rounded-pill">CheckOut</button>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="navbar_container_widgetBox_profile p-3 d-none d-lg-block"
+            >
+              <a href=""> <i class="fa-solid fa-user"></i></a>
+
+              <button class="btn btn-outline-dark d-none rounded-1">
+                Sign In
+              </button>
+            </div>
+
+            <div
+              class="navbar_container_widgetBox_mobileMenu mobileBars scroll d-md-block d-lg-none"
+            >
+              <i class="fa-solid fa-bars"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+
+      <div class="mobile mobileScroll d-block d-lg-none">
+        <ul class="mobileNav">
+          <li class="mobileNav_item active">
+            <a href="#" class="nav-link">Home</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link">About Us</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link">Services</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link">Our Specialists</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link">Testimonials</a>
+          </li>
+          <li class="mobileNav_item dropdown">
+            <a href="" class="nav-link">Blogs</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link">Contacts</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- main Section -->
+    <main>
+      <!-- Main Slider not responsive -->
+      <section id="MainSlider_Section" class="">
+        <div class="mainSlider position-relative">
+          <!-- slide  -->
+          <div class="mainSlider_item d-flex justify-content-center">
+            <div class="holder">
+              <img
+                src="/Assets/Uploads/Sliders/slide-01.jpg"
+                alt=""
+                class="mainSlider_item_image"
+              />
+            </div>
+            <div
+              class="mainSlider_item_content d-flex flex-column align-items-center justify-content-center position-absolute"
+            >
+              <p class="mainSlider_item_content_title p-0">
+                We provide <br />
+                Full Medical care
+              </p>
+              <p class="mainSlider_item_content_desc">
+                Advanced medicine. Compassionate care
+              </p>
+              <a
+                href="#"
+                class="mainSlider_item_content_button rounded-pill my-custom-btn p-0 py-2 px-3 mt-lg-5 px-lg-4 py-lg-3"
+                >Explore Our Services <i class="las la-arrow-right"></i
+              ></a>
+            </div>
+          </div>
+          <!-- slide  -->
+          <div class="mainSlider_item d-flex justify-content-center">
+            <div class="holder">
+              <img
+                src="/Assets/Uploads/Sliders/slide-02.jpg"
+                alt=""
+                class="mainSlider_item_image"
+              />
+            </div>
+            <div
+              class="mainSlider_item_content d-flex flex-column align-items-center justify-content-center position-absolute"
+            >
+              <p class="mainSlider_item_content_title p-0">
+                Leading the Way <br />
+                Lorem, ipsum dolor.
+              </p>
+              <p class="mainSlider_item_content_desc">
+                Advanced medicine. Compassionate care
+              </p>
+              <a
+                href="#"
+                class="mainSlider_item_content_button rounded-pill my-custom-btn p-0 py-2 px-3 mt-lg-5 px-lg-4 py-lg-3"
+                >Explore Our Services <i class="las la-arrow-right"></i
+              ></a>
+            </div>
+          </div>
+          <!-- slide  -->
+          <div class="mainSlider_item d-flex justify-content-center">
+            <div class="holder">
+              <img
+                src="/Assets/Uploads/Sliders/slide-03.jpg"
+                alt=""
+                class="mainSlider_item_image"
+              />
+            </div>
+            <div
+              class="mainSlider_item_content d-flex flex-column align-items-center justify-content-center position-absolute"
+            >
+              <p class="mainSlider_item_content_title p-0">
+                We provide <br />
+                Full Medical care
+              </p>
+              <p class="mainSlider_item_content_desc">
+                Advanced medicine. Compassionate care
+              </p>
+              <a
+                href="#"
+                class="mainSlider_item_content_button rounded-pill my-custom-btn p-0 py-2 px-3 mt-lg-5 px-lg-4 py-lg-3"
+                >Explore Our Services <i class="las la-arrow-right"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- End -->
+        </div>
+      </section>
+      <!-- About us  -->
+      <section id="AboutUs_Section" class=" bg-light ">
+        <div class="container-md container-fluid py-5">
+
+
+          <div class="aboutUs row  justify-content-center align-items-center my-5 ">
+            <div
+              class="aboutUs_values col-lg-6 row  justify-content-center"
+              style="background-image: url('Assets/Images/bg-department.png')"
+            >
+              <!-- Value -->
+              <div class="col-6 p-0 px-2 py-2">
+                <div
+                  class="aboutUs_values_item p-2 p-md-3 p-lg-4 px-lg-5 d-flex flex-column align-items-start"
+                >
+                  <i class="valueIcon las la-file-medical-alt mb-3"></i>
+                  <p class="valueName position-relative">Latest Equipment</p>
+                </div>
+              </div>
+              <!-- Value -->
+              <div class="col-6 p-0 px-2 py-2">
+                <div
+                  class="aboutUs_values_item p-2 p-md-3 p-lg-4 px-lg-5 d-flex flex-column align-items-start"
+                >
+                  <i class="valueIcon las la-file-medical-alt mb-3"></i>
+                  <p class="valueName position-relative">Latest Equipment</p>
+                </div>
+              </div>
+
+              <!-- Value -->
+              <div class="col-6 p-0 px-2 py-2">
+                <div
+                  class="aboutUs_values_item p-2 p-md-3 p-lg-4 px-lg-5 d-flex flex-column align-items-start"
+                >
+                  <i class="valueIcon las la-file-medical-alt mb-3"></i>
+                  <p class="valueName position-relative">Latest Equipment</p>
+                </div>
+              </div>
+
+              <!-- Value -->
+              <div class="col-6 p-0 px-2 py-2">
+                <div
+                  class="aboutUs_values_item p-2 p-md-3 p-lg-4 px-lg-5 d-flex flex-column align-items-start"
+                >
+                  <i class="valueIcon las la-file-medical-alt mb-3"></i>
+                  <p class="valueName position-relative">Latest Equipment</p>
+                </div>
+              </div>
+
+              <!-- End -->
+            </div>
+            <div class="aboutUs_info col-lg-6 mt-lg-0 mt-3">
+              <span class="aboutUs_info_sectionName sectionName">About Us</span>
+              <p class="aboutUs_info_title">
+                Personal Licensed
+                <br />
+
+                Diagnostic <span> Lab Services </span>
+              </p>
+              <div class="aboutUs_info_desc">
+                We pride ourselves on the trained skills needed for the
+                preparation of diversified testing. We are of the sound belief
+                that timely diagnosis could cast off the scar of many of the
+                grave diseases. It can be made possible if you consult your
+                doctor for suspected diseases.
+                <br />
+                <br />
+                <ul>
+                  <li>
+                    <i class="las la-check-square"></i>
+                    All reports for clients are made simple and easy to
+                    understand
+                  </li>
+                  <li>
+                    <i class="las la-check-square"></i>
+                    User- friendly website offers custom settings for each
+                    physician
+                  </li>
+                  <li>
+                    <i class="las la-check-square"></i>
+                    We customize panels to meet physician’s needs.
+                  </li>
+                </ul>
+              </div>
+
+              <a href="#" class="aboutUs_info_button rounded-pill col-5"
+                >Make an appointment</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Services -->
+      <section id="Tests_Section" class="py-5 ">
+        <div class="container-md container-fluid">
+          <div class="sectionTitle tests mb-5">
+            <h2
+              class="h1 position-relative text-center double-title text-dark title_underlined"
+              data-title="General Tests"
+            >
+              General Diagnostic Tests
+            </h2>
+          </div>
+
+          <div class="tests position-relative">
+            <!-- Slider Nav -->
+            <div class="mt-4 px-lg-5">
+              <div class="tests_slider tests_sliderNav">
+                <!-- Item -->
+                <a class="tests_slider_item border-gray mx-2 d-block text-decoration-none">
+                  <div class="tests_slider_item_icon my-2">
+                    <i class="fa-solid fa-flask-vial"></i>
+                  </div>
+                  <span class="tests_slider_item_title d-block mt-3"
+                    >Naturopathic Tests 1</span
+                  >
+                </a>
+
+                <!-- Item -->
+                <a class="tests_slider_item mx-2 d-block text-decoration-none">
+                  <div class="tests_slider_item_icon my-2">
+                    <i class="fa-solid fa-vial"></i>
+                  </div>
+                  <span class="tests_slider_item_title d-block mt-3"
+                    >Naturopathic Tests2</span
+                  >
+                </a>
+
+                <!-- Item -->
+                <a class="tests_slider_item mx-2 d-block text-decoration-none">
+                  <div class="tests_slider_item_icon my-2">
+                    <i class="fa-solid fa-dna"></i>
+                  </div>
+                  <span class="tests_slider_item_title d-block mt-3"
+                    >Naturopathic Tests3</span
+                  >
+                </a>
+
+                <!-- Item -->
+                <a class="tests_slider_item mx-2 d-block text-decoration-none">
+                  <div class="tests_slider_item_icon my-2">
+                    <i class="fa-solid fa-flask-vial"></i>
+                  </div>
+                  <span class="tests_slider_item_title d-block mt-3"
+                    >Naturopathic Tests4</span
+                  >
+                </a>
+
+                <!-- Item -->
+                <a class="tests_slider_item mx-2 d-block text-decoration-none">
+                  <div class="tests_slider_item_icon my-2">
+                    <i class="fa-solid fa-flask-vial"></i>
+                  </div>
+                  <span class="tests_slider_item_title d-block mt-3"
+                    >Naturopathic Tests5</span
+                  >
+                </a>
+                <!-- Item -->
+                <a class="tests_slider_item mx-2 d-block text-decoration-none">
+                  <div class="tests_slider_item_icon my-2">
+                    <i class="fa-solid fa-flask-vial"></i>
+                  </div>
+                  <span class="tests_slider_item_title d-block mt-3"
+                    >Naturopathic Tests6</span
+                  >
+                </a>
+              </div>
+            </div>
+
+            <!-- Slider Display -->
+            <div class="tests_sliderFor ">
+              <!-- Slide Item  -->
+              <div>
+                <div
+                  class="row tests_content px-lg-5 mt-4"
+                  style="
+                    background-image: url('Assets/Images/bg-department.png');
+                  "
+                >
+                  <div class="tests_content_image col-lg-6">
+                    <div class="tests_content_image_holder">
+                      <img
+                        src="/Assets/Images/index-img-01-2.jpg"
+                        alt=""
+                        class="w-100 h-100"
+                      />
+                    </div>
+                  </div>
+                  <div class="tests_content_info bg-light col-lg-6 mt-lg-0 mt-3">
+                    <h2 class="tests_content_info_title h3">
+                      Molecular Testing & Oncology 1
+                    </h2>
+
+                    <p class="tests_content_info_desc">
+                      Our comprehensive and highly sensitive and specific range
+                      of tests can detect genetic alterations that drive tumor
+                      growth in all types of cancer. We are highly experienced
+                      in characterizing mechanisms of action of targeted
+                      therapies, particularly against epidermal growth factor
+                      receptor (EGFR), as well as other tyrosine kinase
+                      inhibitors. We perform:
+                    </p>
+
+                    <ul>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Mutation analysis in tumor tissue and blood
+                      </li>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Gene amplification and translocation testing
+                      </li>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Immunohistochemistry (IHC)
+                      </li>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Gene expression
+                      </li>
+                    </ul>
+
+                    <a href="#" class="tests_content_info_button rounded-pill"
+                      >Order Test</a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide Item  -->
+              <div>
+                <div
+                  class="row tests_content px-lg-5 mt-4"
+                  style="
+                    background-image: url('Assets/Images/bg-department.png');
+                  "
+                >
+                  <div class="tests_content_image col-lg-6">
+                    <div class="tests_content_image_holder">
+                      <img
+                        src="/Assets/Images/index-img-01-5.jpg"
+                        alt=""
+                        class="w-100 h-100"
+                      />
+                    </div>
+                  </div>
+                  <div class="tests_content_info col-lg-6 mt-lg-0 mt-3">
+                    <h2 class="tests_content_info_title h3">
+                      Molecular Testing & Oncology 2
+                    </h2>
+
+                    <p class="tests_content_info_desc">
+                      Our comprehensive and highly sensitive and specific range
+                      of tests can detect genetic alterations that drive tumor
+                      growth in all types of cancer. We are highly experienced
+                      in characterizing mechanisms of action of targeted
+                      therapies, particularly against epidermal growth factor
+                      receptor (EGFR), as well as other tyrosine kinase
+                      inhibitors. We perform:
+                    </p>
+
+                    <ul>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Mutation analysis in tumor tissue and blood
+                      </li>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Gene amplification and translocation testing
+                      </li>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Immunohistochemistry (IHC)
+                      </li>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Gene expression
+                      </li>
+                    </ul>
+
+                    <a href="#" class="tests_content_info_button rounded-pill"
+                      >Order Test</a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide Item  -->
+              <div>
+                <div
+                  class="row tests_content px-lg-5 mt-4"
+                  style="
+                    background-image: url('Assets/Images/bg-department.png');
+                  "
+                >
+                  <div class="tests_content_image col-lg-6">
+                    <div class="tests_content_image_holder">
+                      <img
+                        src="/Assets/Images/index-img-01-5.jpg"
+                        alt=""
+                        class="w-100 h-100"
+                      />
+                    </div>
+                  </div>
+                  <div class="tests_content_info col-lg-6 mt-lg-0 mt-3">
+                    <h2 class="tests_content_info_title h3">
+                      Molecular Testing & Oncology 3
+                    </h2>
+
+                    <p class="tests_content_info_desc">
+                      Our comprehensive and highly sensitive and specific range
+                      of tests can detect genetic alterations that drive tumor
+                      growth in all types of cancer. We are highly experienced
+                      in characterizing mechanisms of action of targeted
+                      therapies, particularly against epidermal growth factor
+                      receptor (EGFR), as well as other tyrosine kinase
+                      inhibitors. We perform:
+                    </p>
+
+                    <ul>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Mutation analysis in tumor tissue and blood
+                      </li>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Gene amplification and translocation testing
+                      </li>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Immunohistochemistry (IHC)
+                      </li>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Gene expression
+                      </li>
+                    </ul>
+
+                    <a href="#" class="tests_content_info_button rounded-pill"
+                      >Order Test</a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide Item  -->
+              <div>
+                <div
+                  class="row tests_content px-lg-5 mt-4"
+                  style="
+                    background-image: url('Assets/Images/bg-department.png');
+                  "
+                >
+                  <div class="tests_content_image col-lg-6">
+                    <div class="tests_content_image_holder">
+                      <img
+                        src="/Assets/Images/index-img-01-3.jpg"
+                        alt=""
+                        class="w-100 h-100"
+                      />
+                    </div>
+                  </div>
+                  <div class="tests_content_info col-lg-6 mt-lg-0 mt-3">
+                    <h2 class="tests_content_info_title h3">
+                      Molecular Testing & Oncology 4
+                    </h2>
+
+                    <p class="tests_content_info_desc">
+                      Our comprehensive and highly sensitive and specific range
+                      of tests can detect genetic alterations that drive tumor
+                      growth in all types of cancer. We are highly experienced
+                      in characterizing mechanisms of action of targeted
+                      therapies, particularly against epidermal growth factor
+                      receptor (EGFR), as well as other tyrosine kinase
+                      inhibitors. We perform:
+                    </p>
+
+                    <ul>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Mutation analysis in tumor tissue and blood
+                      </li>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Gene amplification and translocation testing
+                      </li>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Immunohistochemistry (IHC)
+                      </li>
+                      <li>
+                        <i class="las la-check-square"></i>
+                        Gene expression
+                      </li>
+                    </ul>
+
+                    <a href="#" class="tests_content_info_button rounded-pill"
+                      >Order Test</a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- END -->
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Featured Doctors -->
+      <section id="Doctors_Section" class="py-5 ">
+        <span class="sectionName text-center d-block mb-2">Perfect Team</span>
+        <div class="sectionTitle">
+          <h2
+            class="h1 position-relative text-center double-title text-dark title_underlined"
+            data-title="Professional "
+          >
+            A Professional & Care Provider
+          </h2>
+        </div>
+
+        <div class="doctor_search col-8 col-sm-6 col-md-4 col-lg-3">
+          <div class="input-group my-5 ">
+            <input
+              type="text"
+              class="form-control "
+              placeholder="Search For Specialist"
+              aria-label="Recipient's username"
+              aria-describedby="button-addon2"
+            />
+            <button class="btn fas fa-search bg-light"></button>
+          </div>
+        </div>
+
+        <div class="doctors">
+          <div class="container">
+            <div class="doctorSlider d-flex px-lg-5">
+              <!-- slide -->
+              <div class="doctor_box mx-3  bg-light pb-3">
+                <div class="doctor_box_photo position-relative">
+                  <a href="#" class="d-block w-100 h-100">
+                    <img src="Assets/Uploads/Doctors/doctor-01.jpg" alt="" />
+                  </a>
+                  <div
+                    class="doctor_box_photo_links bg-light position-absolute"
+                  >
+                    <div class="p-2 text-center">
+                      <a href="#" class="text-decoration-none text-base"
+                        ><i class="fa-brands fa-facebook-f"></i
+                      ></a>
+                    </div>
+                    <div class="p-2 text-center">
+                      <a href="#" class="text-decoration-none text-base"
+                        ><i class="fa-brands fa-instagram"></i
+                      ></a>
+                    </div>
+                    <div class="p-2 text-center">
+                      <a href="#" class="text-decoration-none text-base"
+                        ><i class="fa-brands fa-twitter"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="doctor_box_footer">
+                  <h5 class="doctor_box_footer_name text-center my-3">
+                    <a href="#">Dr. Robert Rush</a>
+                  </h5>
+                  <div class="doctor_box_footer_position text-center">
+                    Psychiatrist
+                  </div>
+                </div>
+              </div>
+
+              <!-- slide -->
+              <div class="doctor_box mx-3 bg-light pb-3">
+                <div class="doctor_box_photo position-relative">
+                  <a href="#" class="d-block w-100 h-100">
+                    <img src="Assets/Uploads/Doctors/doctor-02.jpg" alt="" />
+                  </a>
+                  <div
+                    class="doctor_box_photo_links bg-light position-absolute"
+                  >
+                    <div class="p-2 text-center">
+                      <a href="#" class="text-decoration-none text-base"
+                        ><i class="fa-brands fa-facebook-f"></i
+                      ></a>
+                    </div>
+                    <div class="p-2 text-center">
+                      <a href="#" class="text-decoration-none text-base"
+                        ><i class="fa-brands fa-instagram"></i
+                      ></a>
+                    </div>
+                    <div class="p-2 text-center">
+                      <a href="#" class="text-decoration-none text-base"
+                        ><i class="fa-brands fa-twitter"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="doctor_box_footer">
+                  <h5 class="doctor_box_footer_name text-center my-3">
+                    <a href="#">Dr. Robert Rush</a>
+                  </h5>
+                  <div class="doctor_box_footer_position text-center">
+                    Psychiatrist
+                  </div>
+                </div>
+              </div>
+              <!-- slide -->
+              <div class="doctor_box mx-3 bg-light pb-3">
+                <div class="doctor_box_photo position-relative">
+                  <a href="#" class="d-block w-100 h-100">
+                    <img src="Assets/Uploads/Doctors/doctor-03.jpg" alt="" />
+                  </a>
+                  <div
+                    class="doctor_box_photo_links bg-light position-absolute"
+                  >
+                    <div class="p-2 text-center">
+                      <a href="#" class="text-decoration-none text-base"
+                        ><i class="fa-brands fa-facebook-f"></i
+                      ></a>
+                    </div>
+                    <div class="p-2 text-center">
+                      <a href="#" class="text-decoration-none text-base"
+                        ><i class="fa-brands fa-instagram"></i
+                      ></a>
+                    </div>
+                    <div class="p-2 text-center">
+                      <a href="#" class="text-decoration-none text-base"
+                        ><i class="fa-brands fa-twitter"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="doctor_box_footer">
+                  <h5 class="doctor_box_footer_name text-center my-3">
+                    <a href="#">Dr. Robert Rush</a>
+                  </h5>
+                  <div class="doctor_box_footer_position text-center">
+                    Psychiatrist
+                  </div>
+                </div>
+              </div>
+              <!-- slide -->
+              <div class="doctor_box mx-3 bg-light pb-3">
+                <div class="doctor_box_photo position-relative">
+                  <a href="#" class="d-block w-100 h-100">
+                    <img src="Assets/Uploads/Doctors/doctor-04.jpg" alt="" />
+                  </a>
+                  <div
+                    class="doctor_box_photo_links bg-light position-absolute"
+                  >
+                    <div class="p-2 text-center">
+                      <a href="#" class="text-decoration-none text-base"
+                        ><i class="fa-brands fa-facebook-f"></i
+                      ></a>
+                    </div>
+                    <div class="p-2 text-center">
+                      <a href="#" class="text-decoration-none text-base"
+                        ><i class="fa-brands fa-instagram"></i
+                      ></a>
+                    </div>
+                    <div class="p-2 text-center">
+                      <a href="#" class="text-decoration-none text-base"
+                        ><i class="fa-brands fa-twitter"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="doctor_box_footer">
+                  <h5 class="doctor_box_footer_name text-center my-3">
+                    <a href="#">Dr. Robert Rush</a>
+                  </h5>
+                  <div class="doctor_box_footer_position text-center">
+                    Psychiatrist
+                  </div>
+                </div>
+              </div>
+
+              <!-- END -->
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Blogs And News -->
+      <section id="Blogs_Section" class="py-5 bg-light ">
+        <div class="container px-lg-4">
+          <div class="row">
+            <div class="col-lg-5 blogs d-flex flex-column">
+              <div class="sectionTitle blogs_title mb-5">
+                <h2
+                  class="h1 position-relative double-title text-dark"
+                  data-title="Blogs"
+                >
+                  Blogs and news
+                </h2>
+              </div>
+
+              <ul class="">
+                <!-- blog -->
+                <li class="blogs_item my-2 row">
+                  <div class="blogs_item_photo">
+                    <img src="Assets/Uploads/Doctors/doctor-02.jpg" alt="" />
+                  </div>
+                  <div class="blogs_item col pe-5">
+                    <span class="blogs_item_info_date">Mar 12 2020</span>
+                    <p class="blogs_item_info_title">
+                      <a href="" class="text-decoration-none"
+                        >Biochemical Receptor Reverses Bone Degradation Caused
+                        by Osteoporosis</a
+                      >
+                    </p>
+                  </div>
+                </li>
+                <!-- blog -->
+                <li class="blogs_item my-2 row">
+                  <div class="blogs_item_photo">
+                    <img src="Assets/Uploads/Doctors/doctor-02.jpg" alt="" />
+                  </div>
+                  <div class="blogs_item col pe-5">
+                    <span class="blogs_item_info_date">Mar 12 2020</span>
+                    <p class="blogs_item_info_title">
+                      <a href="" class="text-decoration-none"
+                        >Biochemical Receptor Reverses Bone Degradation Caused
+                        by Osteoporosis</a
+                      >
+                    </p>
+                  </div>
+                </li>
+                <!-- blog -->
+                <li class="blogs_item my-2 row">
+                  <div class="blogs_item_photo">
+                    <img src="Assets/Uploads/Doctors/doctor-02.jpg" alt="" />
+                  </div>
+                  <div class="blogs_item col pe-5">
+                    <span class="blogs_item_info_date">Mar 12 2020</span>
+                    <p class="blogs_item_info_title">
+                      <a href="" class="text-decoration-none"
+                        >Biochemical Receptor Reverses Bone Degradation Caused
+                        by Osteoporosis</a
+                      >
+                    </p>
+                  </div>
+                </li>
+
+                <!-- END -->
+              </ul>
+              <div></div>
+            </div>
+            <div class="col-lg-7 col-12 achievements position-relative">
+
+
+              <div class="sectionTitle achievements_title mb-5">
+                <h2 class="h1 position-relative text-center text-dark title_underlined">
+                  Our <span class="text-base"> Achievements </span>
+                </h2>
+              </div>
+
+              <div class="achievements_photo">
+                <img src="Assets/Images/banner-right.jpg" alt="" class="w-100" />
+              </div>
+
+
+              <div class="achievements_counter bg-base text-light d-flex p-3">
+                <div class="achievements_counter_1 col-4 text-center">
+                  <p class="achievements_counter_number mb-0">
+                    <span class="counter "> 150</span> <sup class="">K</sup>
+                  </p>
+                  <p class="achievements_counter_title mb-0 text-center">Tests Performed</p>
+                </div>
+
+                <div class="achievements_counter_2 col-4 text-center">
+                  <p class="achievements_counter_number mb-0">
+                    <span class="counter "> 250</span> <sup class="">+</sup>
+                  </p>
+                  <p class="achievements_counter_title mb-0 text-center">Permanent Staff</p>
+                </div>
+
+                <div class="achievements_counter_3 col-4 text-center">
+                  <p class="achievements_counter_number mb-0">
+                    <span class="counter "> 50</span> <sup class="">+</sup>
+                  </p>
+                  <p class="achievements_counter_title mb-0 text-center">Suppliers</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Appointment  -->
+      <section id="Appointment_Section" class="p-5 ">
+        <div class="container px-lg-5">
+          <div class="appointment row">
+            <div class="appointment_form col-lg-6">
+              <div class="sectionTitle mt-5">
+                <h2
+                  class="h1 position-relative text-center text-dark double-title"
+                  data-title="Appointment"
+                >
+                  Make an <span class="text-base">Appointment</span>
+                </h2>
+              </div>
+
+              <p class="text-center">
+                We believe in providing the best possible care to all our
+                existing patients and welcome new patients to sample.
+              </p>
+              <form action="" class="d-flex flex-column gap-3 mt-5">
+                <input
+                  type="text"
+                  class="form-control w-100"
+                  placeholder="Your Fullname*"
+                />
+                <div class="row ">
+                  <div class="col-sm-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Your phone*"
+                    />
+                  </div>
+                  <div class="col-sm-6 mt-3 mt-sm-0">
+                    <input
+                      type="email"
+                      class="form-control"
+                      placeholder="Your Email*"
+                    />
+                  </div>
+                </div>
+                <textarea
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="4"
+                  class="form-control"
+                  placeholder="Message"
+                ></textarea>
+                <button
+                  type="submit"
+                  class="appointment_form_submit rounded-pill align-self-center mt-4"
+                >
+                  Send Request
+                </button>
+              </form>
+            </div>
+            <div class="appointment_photo col-lg-6 d-lg-block d-none">
+              <img src="Assets/Images/banner-appointment.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- footer -->
+    <footer class="bg-light">
+      <div class="footerWrap pb-2">
+        <div
+          class="footerWrap_info d-flex flex-column flex-md-row flex-lg-column"
+        >
+          <div class="col-lg-12 col-md-6 col-sm-12">
+            <div class="footerWrap_info_logo">
+              <img src="../Assets/Images/logo/logo.png" alt="" />
+            </div>
+            <div class="footerWrap_info_subscribe">
+              <p>
+                To receive email releases, simply provide <br />
+                us with your email below
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-6 col-sm-12">
+            <div class="footerWrap_info_input mt-sm-3 mt-lg-0">
+              <form action="" class="">
+                <input
+                  type="text"
+                  placeholder="Your Email"
+                  class="form-control"
+                />
+                <i class="fa-solid fa-envelope"></i>
+              </form>
+            </div>
+            <div class="footerWrap_info_social d-flex">
+              <a href="#" class="footerWrap_info_social_link"
+                ><i class="fa-brands fa-google"></i
+              ></a>
+              <a href="#" class="footerWrap_info_social_link"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a href="#" class="footerWrap_info_social_link"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+              <a href="#" class="footerWrap_info_social_link"
+                ><i class="fa-brands fa-twitter"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footerWrap_blogs">
+          <p class="footerWrap_blogs_title">Blogs</p>
+
+          <!-- Blog -->
+          <div class="footerWrap_blogs_item row align-items-center">
+            <div class="footerWrap_blogs_item_imageWrapper">
+              <img
+                src="../Assets/Uploads/Blogs/footer-post-author-01.jpg"
+                alt=""
+              />
+            </div>
+            <div class="footerWrap_blogs_item_info col">
+              <a href="#" class="blogTitle">
+                The doctor’s guide to healthy break...</a
+              >
+              <small>September 26, 2018</small>
+            </div>
+          </div>
+
+          <!-- Blog -->
+          <div class="footerWrap_blogs_item row align-items-center">
+            <div class="footerWrap_blogs_item_imageWrapper">
+              <img
+                src="../Assets/Uploads/Blogs/footer-post-author-01.jpg"
+                alt=""
+              />
+            </div>
+            <div class="footerWrap_blogs_item_info col">
+              <a href="#" class="blogTitle">
+                The doctor’s guide to healthy break...</a
+              >
+              <small>September 26, 2018</small>
+            </div>
+          </div>
+
+          <!-- Blog -->
+          <div class="footerWrap_blogs_item row align-items-center">
+            <div class="footerWrap_blogs_item_imageWrapper">
+              <img
+                src="../Assets/Uploads/Blogs/footer-post-author-01.jpg"
+                alt=""
+              />
+            </div>
+            <div class="footerWrap_blogs_item_info col">
+              <a href="#" class="blogTitle">
+                The doctor’s guide to healthy break...</a
+              >
+              <small>September 26, 2018</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="footerWrap_contact">
+          <p class="footerWrap_contact_title">Our Contacts</p>
+
+          <div class="footerWrap_contact_info row p-1 align-items-center">
+            <div class="col-1">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="col-10">
+              <address class="mb-0">
+                1560 Holden Street San Diego
+                <a
+                  href=""
+                  class="btn footerWrap_contact_addressButton col-sm-5 col-md-11 col-lg-11"
+                  ><small>Get directions on the map</small>
+                </a>
+              </address>
+            </div>
+          </div>
+
+          <div class="footerWrap_contact_info row p-1 align-items-center mt-1">
+            <div class="col-1">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="col-10">
+              <p class="mb-0">1560 Holden Street San Diego</p>
+            </div>
+          </div>
+
+          <div class="footerWrap_contact_info row p-1 align-items-center mt-1">
+            <div class="col-1">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="col-10">
+              <p class="mb-0">tahirlitahirr@gmail.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <div class="container">
+          <div
+            class="m-auto justify-content-between align-items-center flex-column flex-md-row d-flex p-2"
+          >
+            <div class="">
+              Copyright © 2020 Medlab | <a href="#">Privacy Policy</a>
+            </div>
+            <div class="">
+              For emergency cases <i class="fa-solid fa-phone mx-3"></i>
+              <span> 1-800-267-0000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Content end -->
+
+    <!-- ========================= CDNs =============================== -->
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Slick Slide -->
+    <script
+      type="text/javascript"
+      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+
+    <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/f0bcda735f.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Counter cdn-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/counterup2/2.0.2/index.js"></script>
+
+    <!-- ========================= Custom =============================== -->
+
+    <!-- Slick Settings -->
+    <script type="module" src="Assets/Js/slider.js"></script>
+    <!-- Navbar Js -->
+    <script src="Assets/Js/navbar.js"></script>
+    <!-- Counter -->
+    <script src="Assets/Js/counter.js"></script>
+  </body>
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- 
+      Requirments
+      ============= CSS ==========
+    <link rel="stylesheet" href="../Assets/css/Main.css" />
+
+      ============= JS ==========
+      
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/f0bcda735f.js" crossorigin="anonymous"></script>
+
+    <script src="../Assets/Js/navbar.js"></script>
+    
+    -->
+  
+
+    <link rel="stylesheet" href="../Assets/css/Main.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar</title>
+  </head>
+  <body>
+    <!-- Navbar Main  -->
+    <nav class="navbar py-3 bg-light">
+      <div
+        class=" navbar_container px-xl-5 px-lg-2 mx-xl-3 mx-lg-1"
+      >
+        <div class="navbar_container_logoBox ms-lg-5">
+          <div>
+            <a href="#">
+              <img src="../Assets/Images/logo/logo.png" alt="" />
+            </a>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div
+            class="navbar_container_menuBox position-relative d-none d-lg-block"
+          >
+            <ul class="d-flex menuBox">
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> About us</a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Services </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Shop </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Our specialists</a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Testimonials </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Blog </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Contact </a>
+              </li>
+              <li class="menuBox_link d-inline-block searchBox bg-light">
+                <input class="bg-light" type="text" placeholder="Search..." />
+                <i class="fas fa-search"></i>
+              </li>
+            </ul>
+          </div>
+
+          <div class="navbar_container_widgetBox d-flex align-items-center">
+            <div
+              class="navbar_container_widgetBox_cart   mx-3 position-relative p-2"
+            >
+             <i class="fa-sharp fa-solid fa-bag-shopping"></i>
+              <span class="cartCount rounded-pill">12</span>
+              <div class="cartMini cartMiniTop position-absolute">
+                <ul class="cartMini_list p-0">
+                  <li
+                    class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0"
+                  >
+                    <i
+                      class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"
+                    ></i>
+
+                    <div class="cartMini_list_item_image mx-2">
+                      <img
+                        src="../Assets/Uploads/Products/prd-sm-1.jpg"
+                        alt=""
+                      />
+                    </div>
+
+                    <div class="me-2">
+                      <span class="cartMini_list_item_title mb-0 pe-4">
+                        <a href="">Active Wow Teeth tasty Charcoal Powder</a>
+                      </span>
+                      <p class="cartMini_list_item_price mb-0 mt-2">$38</p>
+                    </div>
+                  </li>
+                  <li
+                    class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0"
+                  >
+                    <i
+                      class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"
+                    ></i>
+
+                    <div class="cartMini_list_item_image mx-2">
+                      <img src="../Assets/Images/logo/logo.png" alt="" />
+                    </div>
+
+                    <div class="me-2">
+                      <span class="cartMini_list_item_title mb-0 pe-4">
+                        <a href="">Active Wow Teeth tasty Charcoal Powder</a>
+                      </span>
+                      <p class="cartMini_list_item_price mb-0 mt-2">$38</p>
+                    </div>
+                  </li>
+                  <li
+                    class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0"
+                  >
+                    <i
+                      class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"
+                    ></i>
+                    <div class="cartMini_list_item_image mx-2">
+                      <img
+                        src="../Assets/Uploads/Products/prd-sm-2.jpg"
+                        alt=""
+                      />
+                    </div>
+
+                    <div class="me-2">
+                      <span class="cartMini_list_item_title mb-0 pe-4">
+                        <a href="">Active Wow Teeth tasty Charcoal Powder</a>
+                      </span>
+                      <p class="cartMini_list_item_price mb-0 mt-2">$38.25</p>
+                    </div>
+                  </li>
+                </ul>
+
+                <hr />
+                <div class="cartMini_footer">
+                  <div class="d-flex justify-content-between fs-4 mb-2">
+                    <span>Total:</span> <span>$78.85</span>
+                  </div>
+                  <button class="checkoutBtn rounded-pill">CheckOut</button>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="navbar_container_widgetBox_profile p-3 d-none d-lg-block"
+            >
+              <a href=""> <i class="fa-solid fa-user"></i></a>
+
+              <button class="btn btn-outline-dark d-none rounded-1">
+                Sign In
+              </button>
+            </div>
+
+            <div
+              class="navbar_container_widgetBox_mobileMenu mobileBars d-md-block d-lg-none"
+            >
+              <i class="fa-solid fa-bars"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Mobile Menu -->
+      <div class="mobile mobileTop   d-block d-lg-none">
+        <ul class="mobileNav" >
+          <li  class="mobileNav_item active">
+            <a href="#" class="nav-link" >Home</a>
+          </li>
+          <li  class="mobileNav_item">
+            <a href="#" class="nav-link" >About Us</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link " >Services</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link " >Our Specialists</a>
+          </li>
+          <li class="mobileNav_item">
+            <a  href="#" class="nav-link">Testimonials</a>
+          </li>
+          <li class="mobileNav_item dropdown">
+            <a href="" class="nav-link">Blogs</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link" >Contacts</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--Navbar Scroll  -->
+    <nav id="navbarScroll" class="navbarScroll p-1 bg-light">
+      <div
+        class=" navbar_container px-xl-5 px-lg-2 mx-xl-3 mx-lg-1 m-auto"
+      >
+        <div class="navbar_container_logoBox ms-lg-5">
+          <div>
+            <a href="#">
+              <img src="../Assets/Images/logo/logo.png" alt="" />
+            </a>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div
+            class="navbar_container_menuBox position-relative d-none d-lg-block"
+          >
+            <ul class="d-flex menuBox">
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> About us</a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Services </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Shop </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Our specialists</a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Testimonials </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Blog </a>
+              </li>
+              <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                <a href="#"> Contact </a>
+              </li>
+              <li class="menuBox_link d-inline-block searchBox bg-light">
+                <input class="bg-light" type="text" placeholder="Search..." />
+                <i id="search-icon" class="fas fa-search"></i>
+              </li>
+            </ul>
+          </div>
+
+          <div class="navbar_container_widgetBox d-flex align-items-center">
+            <div
+              class="navbar_container_widgetBox_cart  mx-2 position-relative p-2"
+            >
+             <i class="fa-sharp fa-solid fa-bag-shopping scroll"></i>
+             <span class="cartCount rounded-pill">12</span>
+              <div class="cartMini cartMiniScroll position-absolute">
+                <ul class="cartMini_list p-0">
+                  <li
+                    class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0"
+                  >
+                    <i
+                      class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"
+                    ></i>
+
+                    <div class="cartMini_list_item_image mx-2">
+                      <img
+                        src="../Assets/Uploads/Products/prd-sm-1.jpg"
+                        alt=""
+                      />
+                    </div>
+
+                    <div class="me-2">
+                      <span class="cartMini_list_item_title mb-0 pe-4">
+                        <a href="">Active Wow Teeth tasty Charcoal Powder</a>
+                      </span>
+                      <p class="cartMini_list_item_price mb-0 mt-2">$38</p>
+                    </div>
+                  </li>
+                  <li
+                    class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0"
+                  >
+                    <i
+                      class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"
+                    ></i>
+
+                    <div class="cartMini_list_item_image mx-2">
+                      <img src="../Assets/Images/logo/logo.png" alt="" />
+                    </div>
+
+                    <div class="me-2">
+                      <span class="cartMini_list_item_title mb-0 pe-4">
+                        <a href="">Active Wow Teeth tasty Charcoal Powder</a>
+                      </span>
+                      <p class="cartMini_list_item_price mb-0 mt-2">$38</p>
+                    </div>
+                  </li>
+                  <li
+                    class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0"
+                  >
+                    <i
+                      class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"
+                    ></i>
+                    <div class="cartMini_list_item_image mx-2">
+                      <img
+                        src="../Assets/Uploads/Products/prd-sm-2.jpg"
+                        alt=""
+                      />
+                    </div>
+
+                    <div class="me-2">
+                      <span class="cartMini_list_item_title mb-0 pe-4">
+                        <a href="">Active Wow Teeth tasty Charcoal Powder</a>
+                      </span>
+                      <p class="cartMini_list_item_price mb-0 mt-2">$38.25</p>
+                    </div>
+                  </li>
+                </ul>
+
+                <hr />
+                <div class="cartMini_footer">
+                  <div class="d-flex justify-content-between fs-4 mb-2">
+                    <span>Total:</span> <span>$78.85</span>
+                  </div>
+                  <button class="checkoutBtn rounded-pill">CheckOut</button>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="navbar_container_widgetBox_profile p-3 d-none d-lg-block"
+            >
+              <a href=""> <i class="fa-solid fa-user"></i></a>
+
+              <button class="btn btn-outline-dark d-none rounded-1">
+                Sign In
+              </button>
+            </div>
+
+            <div
+              class="navbar_container_widgetBox_mobileMenu mobileBars scroll d-md-block d-lg-none"
+            >
+              <i class="fa-solid fa-bars "></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Mobile Menu -->
+
+      <div class="mobile mobileScroll   d-block d-lg-none">
+        <ul class="mobileNav" >
+          <li  class="mobileNav_item active">
+            <a href="#" class="nav-link" >Home</a>
+          </li>
+          <li  class="mobileNav_item">
+            <a href="#" class="nav-link" >About Us</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link " >Services</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link " >Our Specialists</a>
+          </li>
+          <li class="mobileNav_item">
+            <a  href="#" class="nav-link">Testimonials</a>
+          </li>
+          <li class="mobileNav_item dropdown">
+            <a href="" class="nav-link">Blogs</a>
+          </li>
+          <li class="mobileNav_item">
+            <a href="#" class="nav-link" >Contacts</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="mt-">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam animi
+      asperiores veniam suscipit quo, fugit voluptatem doloremque iusto quidem
+      voluptate facere perferendis voluptas praesentium dicta, ut repellat iste?
+      Ipsa, aspernatur velit in a sint, laboriosam dolorum laudantium natus
+      pariatur reprehenderit porro veritatis beatae reiciendis corrupti? Impedit
+      assumenda in quae praesentium corrupti omnis provident ut dolorum,
+      adipisci corporis rerum. Accusamus, molestias eum. Fugiat nisi,
+      necessitatibus quasi esse id odio perspiciatis iste quas! Ipsam nemo ut
+      distinctio error qui? Reiciendis voluptate quaerat, iusto sunt tempora
+      excepturi, mollitia eius placeat incidunt ad rem vitae possimus? Id,
+      repellendus odio. Accusantium asperiores nulla eum natus repudiandae
+      labore excepturi quas ratione esse, voluptatem ipsa maiores cum molestiae
+      consequatur totam neque cupiditate ipsum, quae minus numquam facilis
+      laborum harum sint vel? Tempore, quas qui. Cumque at nostrum error ad
+      placeat laborum velit assumenda aut aspernatur. Voluptatem iusto autem
+      eius voluptatibus cupiditate officia quibusdam alias molestiae dicta,
+      accusamus earum eaque aliquid itaque. Magni ducimus temporibus enim
+      incidunt officiis sunt voluptatum modi non veritatis, culpa sit expedita
+      minima placeat vel in error corporis deleniti vitae accusantium dolor
+      commodi fugit consequuntur maiores. Quo laudantium odio tenetur quasi
+      autem, inventore esse maiores quam. Eum pariatur distinctio officia quam
+      quis, odit corporis excepturi doloremque, quod sequi in officiis. Placeat
+      molestias dolores sunt quia. Ipsa quisquam delectus, perferendis,
+      molestias velit vel dignissimos facilis fuga repellat sequi dolorem
+      veritatis atque nemo eius. Sunt quia perferendis atque esse nesciunt
+      tempore dolorum ut. Id aliquid tenetur accusamus doloribus natus hic,
+      expedita perspiciatis rem quasi fugit aut cum quod quam eum quos molestiae
+      illo necessitatibus debitis. Voluptatibus placeat eius, esse eos debitis
+      accusamus beatae a modi dolore laudantium reprehenderit cumque maiores
+      quasi voluptas nostrum nulla itaque totam possimus, deserunt corporis
+      deleniti? Recusandae tenetur eveniet reiciendis magni hic quis, soluta
+      distinctio, minima nemo praesentium impedit tempora nam! Hic expedita
+      consectetur voluptatem. Reiciendis similique nam totam. Cumque consequatur
+      aliquid nam reiciendis, hic pariatur suscipit deleniti quasi placeat?
+      Voluptatem eos natus sunt nostrum vero hic expedita similique aliquam ad
+      ex voluptatibus animi doloribus quasi optio perspiciatis, enim assumenda
+      eius architecto sequi doloremque cum cupiditate. Sunt reiciendis deserunt
+      porro sed similique dolores adipisci, debitis repellat voluptates ullam
+      dolore. Inventore maxime a obcaecati dolores maiores mollitia aliquam
+      eaque voluptate error repudiandae et itaque repellendus, minima neque ad,
+      unde necessitatibus tempora! Exercitationem hic quaerat earum unde, ab
+      accusamus id ipsa nemo, ad numquam soluta, minus amet? Omnis minima non,
+      aliquam vero, facere asperiores ex dicta quidem, consequatur ut
+      praesentium nam quisquam aut labore. Quidem, mollitia adipisci accusantium
+      expedita esse distinctio ut harum voluptatem sint delectus debitis eius
+      ipsum repellendus architecto quaerat ad, quasi eum ab. Natus est officiis
+      ducimus? Incidunt maxime, veniam labore possimus eligendi perspiciatis in
+      doloribus id dolor consequuntur corrupti nisi aspernatur fugit animi,
+      laboriosam quisquam est. Assumenda quod officia minima repellendus
+      deserunt quaerat ipsam! Illo nulla adipisci porro quod, vitae distinctio!
+      Distinctio repellat ex ducimus dicta nam tenetur saepe, similique fugit
+      debitis aspernatur soluta sapiente voluptas voluptate ullam asperiores
+      incidunt tempora expedita nesciunt. Adipisci iure minima enim excepturi
+      fuga accusamus sed voluptate quo nisi. Nihil illo tempore temporibus
+      assumenda debitis, doloribus eligendi excepturi vero esse provident
+      sapiente necessitatibus molestiae eum cum sint laborum! Rem, deserunt id?
+      Quaerat explicabo eligendi, harum amet maxime hic quidem sed dignissimos
+      beatae odit sapiente dolor error natus numquam voluptates impedit eius
+      velit tempore corporis. Error vero fuga possimus molestias nihil
+      blanditiis sit culpa, quaerat, beatae voluptas nulla ut exercitationem
+      quod consequatur accusamus incidunt perspiciatis minima impedit provident?
+      Dicta omnis vero dolores optio cum, error eaque, natus necessitatibus
+      debitis suscipit temporibus amet. Doloremque id natus odio distinctio et
+      ea quis consequuntur quas iure aspernatur nihil, corrupti temporibus
+      exercitationem sunt vero rem? Repellat tempora harum nesciunt quia tempore
+      alias. Possimus, fugiat. Quae amet voluptatum incidunt earum sed sit,
+      reiciendis obcaecati animi ad dolorum voluptas adipisci perspiciatis odio
+      corporis nihil iste. Aliquid quos, quisquam repellendus veniam molestiae
+      nam, voluptate autem sed aut eveniet, ullam eligendi nobis neque ut. Autem
+      consectetur saepe, tempore beatae earum dicta sit facere corporis error,
+      esse sunt magni obcaecati quasi libero necessitatibus sint debitis modi.
+      Delectus iusto perspiciatis impedit eveniet error laborum velit laboriosam
+      sequi architecto saepe, quisquam obcaecati ullam aperiam quas deleniti
+      facilis quaerat odit odio nisi soluta! Eum quas illo esse debitis enim
+      odio ipsum omnis rem sint? Totam unde harum vitae magnam reprehenderit
+      eligendi quos aliquid incidunt distinctio est, maxime atque eum doloribus
+      cum ex soluta? Blanditiis eius unde iste! Fugiat repudiandae accusamus
+      autem, optio perspiciatis illum iure itaque sequi eveniet minus, eius
+      asperiores voluptatibus harum deleniti tempora magni. Eius placeat rerum,
+      dignissimos saepe ab pariatur. Hic eligendi dolor recusandae accusantium
+      expedita qui ea consequatur magni nemo, corporis, fuga natus veniam
+      adipisci sed sunt nisi quos inventore repudiandae soluta dolore! Quae,
+      nihil minima! Voluptate ex consequatur enim asperiores eum velit
+      architecto ab fugiat, ipsam maiores tempore amet dicta facilis eaque natus
+      placeat. Dolore accusamus officiis fugiat earum, repudiandae perferendis
+      iste ipsa tempore laudantium? Ratione aliquid neque odit illum id
+      doloremque laborum, cumque aut vero soluta placeat cupiditate labore
+      debitis, sequi veniam. Obcaecati, a vitae! Recusandae illum cupiditate,
+      quia praesentium enim iusto magnam commodi ut, porro, ipsum tempore est
+      nemo quo fugiat? Quisquam labore suscipit vel dolorem necessitatibus sunt
+      obcaecati, totam consequuntur minima nesciunt facere saepe voluptatum
+      cumque ducimus doloribus accusamus quae maiores accusantium officia velit
+      repudiandae, mollitia exercitationem esse ipsa. Quo vitae tempora, vel
+      dolores beatae eaque nihil, optio voluptatum provident, veritatis libero
+      officia. Magni sint perspiciatis veritatis excepturi nisi voluptatum rem,
+      earum quod numquam, dolores necessitatibus voluptatem placeat repellat
+      alias dolor exercitationem possimus doloremque tempora ea voluptatibus,
+      quasi vero aperiam iusto! Pariatur, molestiae magni. Accusamus magni
+      ratione neque facere enim, unde iste doloremque aperiam fugit iusto
+      consequuntur animi magnam delectus quas fugiat ad quidem illum eum, ab
+      suscipit quae! Eligendi, excepturi molestias. Magni, distinctio
+      perferendis ut inventore neque dolorum iure cupiditate iste tempore soluta
+      nobis cumque corporis pariatur quos eligendi non itaque consequuntur
+      dignissimos eum? Explicabo voluptates veritatis laudantium accusamus porro
+      labore voluptas expedita saepe officia voluptatum ab dolorem doloremque
+      placeat mollitia neque molestias unde aliquid nulla, accusantium atque non
+      aspernatur praesentium reiciendis minima. Dignissimos praesentium
+      voluptatem laudantium corrupti vel sint, esse dolorem dolore inventore
+      fugit amet alias doloribus incidunt aliquid eaque harum atque laboriosam
+      dolorum quis. Esse, a aperiam? Maxime sunt corporis aut facere, nobis
+      dolor maiores, veritatis repudiandae, officia facilis pariatur praesentium
+      ducimus voluptatum rerum architecto esse? Voluptas recusandae at ratione?
+      Debitis saepe vel qui, laboriosam nesciunt, amet molestiae cupiditate
+      quasi labore optio laborum dolorum explicabo molestias atque quidem
+      assumenda voluptas beatae sequi reiciendis excepturi praesentium nam neque
+      illum! Minima nam laudantium nesciunt eum officia quibusdam fugiat
+      consequatur ullam labore, molestiae, architecto voluptatem ratione
+      delectus ipsam ut cum laboriosam eveniet doloribus, maxime dolor explicabo
+      placeat facere id eligendi! Autem asperiores odio, officia reprehenderit
+      optio placeat, libero impedit perferendis minima expedita alias, ea quo
+      soluta omnis laudantium labore modi enim iste quis assumenda deleniti?
+      Quam velit delectus dolore maiores unde minima cumque, suscipit error
+      ducimus aut adipisci? Aspernatur pariatur ex ad explicabo repellendus
+      molestiae asperiores distinctio iusto quae? Maxime quia voluptates ratione
+      blanditiis veniam architecto accusamus ea reiciendis voluptas id harum
+      fugiat nulla unde, dolores dignissimos adipisci, vel repellendus numquam?
+      Esse in debitis mollitia sit. Consequatur facere porro recusandae sint
+      officia suscipit? Exercitationem blanditiis odit vitae aut, est cumque
+      iure? Magnam illo atque excepturi consectetur quos reprehenderit vel
+      accusamus nisi similique explicabo, dicta aspernatur animi, dignissimos
+      consequatur veniam dolores quod nostrum architecto soluta adipisci eaque
+      placeat itaque. Esse, quo error ea voluptas, vel repellat fugiat doloribus
+      nihil vero inventore aliquam! Ducimus, nisi voluptates iusto magnam magni
+      velit accusantium iste delectus obcaecati inventore porro quis facere
+      nihil, tempore tenetur iure non atque quo repellendus modi fugiat ratione,
+      aliquam recusandae necessitatibus! Blanditiis error illo, unde fugit dolor
+      labore voluptatibus omnis numquam tempore totam. Hic voluptatem eius nam
+      tenetur inventore quaerat perspiciatis, ratione illo error odit nesciunt
+      ab id, quibusdam porro vitae ducimus at magni itaque animi aliquid,
+      possimus repellat quis ipsam? Consequuntur odio distinctio doloremque fuga
+      eveniet hic ipsam reprehenderit autem beatae, alias vero cumque. Doloribus
+      eveniet inventore ex modi, perspiciatis, saepe nisi temporibus beatae sunt
+      eligendi possimus pariatur? Magnam culpa consectetur tempora repellat
+      labore laborum voluptates! Sint officiis totam perspiciatis enim ullam
+      consequatur ex omnis voluptatum vel impedit nulla quasi dolorum dicta,
+      veritatis incidunt, et in tenetur. Dolorum eum ea aperiam provident modi
+      enim officia, animi, quis eligendi repellendus ipsum impedit itaque culpa
+      dolores quod fugit consequuntur molestias placeat mollitia et beatae nemo
+      incidunt dolore totam! Ipsa, laborum. Error numquam repudiandae eligendi
+      esse quos soluta? Ullam, ipsa! Reprehenderit quaerat, sapiente reiciendis
+      hic eum beatae deserunt a velit alias ad in voluptas et ipsam qui earum!
+      Nostrum pariatur ea ipsum commodi excepturi vitae inventore! Sit eos
+      necessitatibus, quia culpa dolores minus adipisci, voluptatem, laborum aut
+      hic cupiditate odio sunt amet. Modi inventore ipsam eaque, accusamus
+      aliquid vel. Ex placeat doloremque magni aliquam voluptatem minima
+      excepturi, natus vitae cum dolore repellat quo ipsam, earum
+      exercitationem. Quo autem similique odio asperiores eaque sequi eligendi
+      natus? Dolorum atque ut maiores vero natus, beatae esse ipsa tempore
+      deserunt iste, laborum nihil harum dignissimos recusandae quis!
+    </div>
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- font awesome  -->
+    <script
+      src="https://kit.fontawesome.com/f0bcda735f.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../Assets/Js/navbar.js"></script>
+  </body>
+</html>

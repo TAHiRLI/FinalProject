@@ -2903,11 +2903,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Hp\\Desktop\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\Medlab MVC_Uİ.csproj",
+      "projectUniqueName": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\Medlab MVC_Uİ.csproj",
       "projectName": "Medlab MVC_Uİ",
-      "projectPath": "C:\\Users\\Hp\\Desktop\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\Medlab MVC_Uİ.csproj",
+      "projectPath": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\Medlab MVC_Uİ.csproj",
       "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Hp\\Desktop\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\obj\\",
+      "outputPath": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2924,8 +2924,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Hp\\Desktop\\FinalProject 1.0\\MedlabApi\\Medlab.Data\\Medlab.Data.csproj": {
-              "projectPath": "C:\\Users\\Hp\\Desktop\\FinalProject 1.0\\MedlabApi\\Medlab.Data\\Medlab.Data.csproj"
+            "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab.Data\\Medlab.Data.csproj": {
+              "projectPath": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab.Data\\Medlab.Data.csproj"
             }
           }
         }

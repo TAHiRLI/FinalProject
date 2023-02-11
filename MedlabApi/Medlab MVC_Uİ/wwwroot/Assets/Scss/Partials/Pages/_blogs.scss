@@ -1,0 +1,44 @@
+#All-Blogs_Section {
+  .blogs {
+    &_item {
+      &_photo {
+        img {
+            width: 100%;
+        }
+    }
+    
+        
+        .post-date {
+            background-color: #f5f6f7;
+            color: #424242;
+          width: 70px;
+          height: 70px;
+          border-radius: 50%;
+          .day {
+            line-height: 1rem;
+          }
+        }
+      
+      .read-more-btn {
+        @extend %button_link;
+      }
+    }
+
+  }
+  
+
+  .recent-blogs {
+    &_item {
+      &_photo {
+        img{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+      }
+    }
+  }
+  .post-small-info{
+    font-size: 0.9rem;
+  }
+}

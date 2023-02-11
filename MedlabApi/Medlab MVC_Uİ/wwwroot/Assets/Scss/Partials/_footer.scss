@@ -1,0 +1,187 @@
+
+footer {
+  .footerWrap {
+    width: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-areas: "info blogs contact" ;
+    &_info {
+        grid-area: info;
+      padding: 1rem 1rem;
+
+      &_subscribe {
+        p {
+          margin-top: 10px;
+          font-size: 0.9rem;
+        }
+
+       
+      }
+      &_input {
+        position: relative;
+        width: 80%;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+        i {
+          font-size: 1em;
+          position: absolute;
+          right: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: $baseColor;
+          cursor: pointer;
+        }
+        input {
+          font-size: 0.9rem;
+          width: 100%;
+          padding: 10px 35px 10px 10px;
+          outline: none;
+          border-radius: 3px !important;
+          border: none;
+          &:hover {
+            box-shadow: 0 0 0 3px rgb(0 0 0 / 5%);
+          }
+        }
+      }
+
+      &_social {
+        margin-top: 2rem;
+
+        &_link {
+          transition: 0.3s;
+          width: 48px;
+          height: 48px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          margin: 0 5px;
+          text-decoration: none;
+          font-size: 1.3rem;
+          cursor: pointer;
+          color: $baseColor;
+          &:hover {
+            box-shadow: inset 0 0 0 5px rgb(51 104 198 / 20%);
+          }
+        }
+      }
+    }
+    &_blogs {
+        grid-area: blogs;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+
+      &_title {
+        position: relative;
+        align-self: start;
+        @extend %header_underlined;
+        font-size: 1.5rem;
+      }
+      &_item {
+        width: 100%;
+        margin-top: 0.5rem;
+        &_imageWrapper {
+            padding: 0;
+          width: 15%;
+          img {
+            border-radius: 50%;
+          }
+        }
+        &_info {
+          margin: 0.5rem 0.5rem;
+          .blogTitle {
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            color: $font_baseColor;
+            font-weight: 600;
+            &:hover {
+              color: $baseColor;
+            }
+          }
+        }
+      }
+    }
+    &_contact {
+        grid-area: contact;
+      &_title {
+        position: relative;
+        align-self: start;
+        @extend %header_underlined;
+        font-size: 1.5rem;
+      }
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+
+      &_info {
+        margin: 0.7rem 0rem;
+        p,
+        address {
+          font-size: 0.9rem;
+        }
+      }
+
+      &_addressButton {
+        @extend %button_link;
+        padding: 5px 20px;
+        margin-left: 0;
+        font-size: 0.8rem;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .copyright {
+    background-color: $baseColor;
+    color: white;
+    font-size: 0.9rem;
+
+    a {
+      color: white;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 768px) and (min-width: 0px) {
+    footer {
+      .footerWrap {
+        width: 100%;
+        grid-template-areas: "info"
+                             "blogs"
+                            "contact"   ;
+        &_info_subscribe_input {
+          width: 50%;
+        }
+      }
+    }
+}
+@media (max-width: 992px) and (min-width: 768px) {
+  footer {
+    .footerWrap {
+      width: 100%;
+      grid-template-areas: "info info"
+                           "blogs contact"   ;
+      &_info_subscribe_input {
+        width: 50%;
+      }
+    }
+  }
+
+  
+}
+@media (max-width: 1200px) and (min-width: 992px) {
+    footer {
+      .footerWrap {
+        width: 100%;
+        padding: 0 20px;
+      }
+    }
+  }

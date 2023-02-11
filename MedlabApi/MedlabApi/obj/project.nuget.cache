@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "A3kHbAvnB1nF3lVTmp+YZi6dmqyU0/Y68nMHYJZEotXwklVRmfcZdXeAyEwKqibk9HTK8n8PvfsVww1qrhnMtA==",
+  "dgSpecHash": "9JgydkO91BJQmMOkf2m93dhUdE4GmfJsz5Zg+XAjTMWVGM0DA05WwEfYXh3yKyCghMQwvl+4Jaykwhl99mNGgQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Hp\\Desktop\\FinalProject 1.0\\MedlabApi\\MedlabApi\\MedlabApi.csproj",
+  "projectFilePath": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\MedlabApi\\MedlabApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hp\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

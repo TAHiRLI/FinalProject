@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/Assets/css/Main.css" />
+    <title>Your Profile</title>
+  </head>
+  <body>
+    <!-- Bread crumb -->
+    <div class="breadCrumb p-3 bg-light">
+      <p class="container mb-0 px-5">
+        <a href="#">Home</a>/<a href="#">Profile</a>
+      </p>
+    </div>
+
+    <main class="position-relative">
+      <section id="User-profile_Section" class="">
+        <div class="user-greeting  position-relative">
+          <p class="h1 text-center text-light fs-1">Hi, Tahir Tahirli</p>
+          <div class="user-greeting_user-photo position-absolute">
+            <img src="/Assets/Uploads/Users/DEFAULT-USER.jpg" alt="" class="" />
+          </div>
+        </div>
+        <div class="container py-5">
+          <div class="mt-md-5 row ">
+            <div
+              class="tab-buttons bg-light d-flex nav flex-row flex-sm-column col-lg-2 col-3 p-0  align-items-center justify-content-sm-start justify-content-evenly"
+            >
+              <button
+                class="tab-btn active"
+                id="account-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#tab-account"
+                type="button"
+                role="tab"
+                aria-controls="tab-account"
+                aria-selected="true"
+              >
+                <i class="fa-solid fa-user"></i>
+                <span class="d-none d-sm-inline"> Account</span>
+              </button>
+              <button
+                class="tab-btn"
+                id="order-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#tab-order"
+                type="button"
+                role="tab"
+                aria-controls="tab-order"
+                aria-selected="false"
+              >
+                <i class="fa-solid fa-box"></i>
+                <span class="d-none d-sm-inline"> Orders</span>
+              </button>
+
+              <button
+                class="tab-btn"
+                id="exam-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#tab-exam"
+                type="button"
+                role="tab"
+                aria-controls="tab-exam"
+                aria-selected="false"
+              >
+                <i class="fa-solid fa-file-waveform"></i>
+                <span class="d-none d-sm-inline"> Medical Examinations</span>
+              </button>
+
+              <button
+                class="tab-btn"
+                id="appointment-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#tab-appointment"
+                type="button"
+                role="tab"
+                aria-controls="tab-appointment"
+                aria-selected="false"
+              >
+                <i class="fa-solid fa-video"></i>
+                <span class="d-none d-sm-inline"> Appointments</span>
+              </button>
+
+              <button class="tab-btn" data-bs-toggle="tab">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span class="d-none d-sm-inline"> Log Out</span>
+              </button>
+            </div>
+
+            <div class="tab-content p-2 border-gray col-lg-10 col-12 col-sm-9">
+              <!--Profile tab -->
+              <div
+                class="tab-pane p-2 tab-content-profile bg-light fade show active "
+                id="tab-account"
+                role="tabpanel"
+                aria-labelledby="account-tab"
+                tabindex="0"
+              >
+                <div class="d-flex align-items-center justify-content-center position-relative ">
+                  <div class="user-photo position-relative">
+                    <img
+                      src="/Assets/Uploads/Users/DEFAULT-USER.jpg"
+                      alt=""
+                      class="w-100 h-100"
+                    />
+                    <input id="user-photo-input" type="file" hidden />
+                    <i class="fas fa-pen add-photo"></i>
+
+                 
+                  </div>
+                  <button class="my-custom-btn edit-btn position-top-right py-1 px-3  ">
+                    <i class="fas fa-pencil me-2"></i>
+                    Edit
+                </button>
+
+                <button type="submit" form="profile-edit-form" class="save-btn position-top-right my-custom-btn py-1 px-2 d-none">
+                    <i class="fas fa-save me-2"></i>
+                    Save
+                </button>
+                </div>
+              
+                   
+
+                <form id="profile-edit-form"  action="" class="row">
+                  <div class="col-md-6 d-flex flex-column align-items-center">
+                    <div class="my-3">
+                      <label class="form-label" for="">Fullname</label>
+                      <input
+                        class="form-control user-input"
+                        disabled
+                        type="text"
+                        value="Tahir Tahirli"
+                      />
+                    </div>
+                    <div class="my-3">
+                      <label class="form-label" for="">Email</label>
+                      <input
+                        class="form-control user-input"
+                        disabled
+                        type="email"
+                        value="tahirlitahir@gmail.com"
+                      />
+                    </div>
+                    <div class="my-3">
+                      <label class="form-label" for="">Phone</label>
+                      <input
+                        class="form-control user-input"
+                        disabled
+                        type="text"
+                        value="+994 77 5474948"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6 d-flex flex-column align-items-center">
+                    <div class="my-3">
+                      <label class="form-label" for="">Username</label>
+                      <input
+                        class="form-control user-input"
+                        disabled
+                        type="text"
+                        value="User1234"
+                      />
+                    </div>
+                    <div class="my-3">
+                      <label class="form-label" for="">Password</label>
+                      <input class="form-control user-input"
+                      disabled type="password" />
+                    </div>
+                    <div class="my-3">
+                      <label class="form-label" for="">Confirm Password</label>
+                      <input class="form-control user-input"
+                      disabled type="password" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- Orders tab  -->
+              <div
+                class="tab-pane bg-light p-2 tab-content-orders fade "
+                id="tab-order"
+                role="tabpanel"
+                aria-labelledby="order-tab"
+                tabindex="0"
+              >
+                <div class="container">
+                  <div class="cart-products">
+                    <!-- Item -->
+                    <div
+                      class="cart-product_item bgi my-3 p-2  row position-relative"
+                    >
+                      <div
+                        class="cart-product_item_photo d-flex align-items-center justify-content-center col-md-2 mb-3 mb-md-0 p-0"
+                      >
+                        <img
+                          src="/Assets/Uploads/Products/prd-4.jpg"
+                          alt=""
+                          class=""
+                        />
+                      </div>
+                      <div class="cart-product_item_info col-md-10">
+                        <h3 class="cart-product-title fw-semibold h5">
+                            <a href="" class="link-base text-decoration-none">  Activated Charcoal Teeth Whitening Toothpaste MINT
+                          Flavor</a>
+                        
+                        </h3>
+                        <p class="text-decoration-line-through m-0">$112.2</p>
+                        <p class="my-1 cart-product-price text-base">
+                          $68.5 / 4
+                        </p>
+                        <p class="mb-0">17.05.2022</p>
+                        <p class="mb-0">Azerbaijan , baku</p>
+                        <p class="mb-0">Suraxanı Nizami 12b</p>
+                        <p class="mb-0">Aze4115</p>
+                      </div>
+                    </div>
+                          <!-- Item -->
+                          <div
+                          class="cart-product_item my-3 p-2 row position-relative"
+                        >
+                          <div
+                            class="cart-product_item_photo d-flex align-items-center justify-content-center col-md-2 mb-3 mb-md-0 p-0"
+                          >
+                            <img
+                              src="/Assets/Uploads/Products/prd-4.jpg"
+                              alt=""
+                              class=""
+                            />
+                          </div>
+                          <div class="cart-product_item_info col-md-10">
+                            <h3 class="cart-product-title fw-semibold h5">
+                                <a href="" class="link-base text-decoration-none">  Activated Charcoal Teeth Whitening Toothpaste MINT
+                              Flavor</a>
+                            
+                            </h3>
+                            <p class="text-decoration-line-through m-0">$112.2</p>
+                            <p class="my-1 cart-product-price text-base">
+                              $68.5 / 4
+                            </p>
+                            <p class="mb-0">17.05.2022</p>
+                            <p class="mb-0">Azerbaijan , baku</p>
+                            <p class="mb-0">Suraxanı Nizami 12b</p>
+                            <p class="mb-0">Aze4115</p>
+                          </div>
+                        </div>
+                              <!-- Item -->
+                    <div
+                    class="cart-product_item my-3 p-2 row position-relative"
+                  >
+                    <div
+                      class="cart-product_item_photo d-flex align-items-center justify-content-center col-md-2 mb-3 mb-md-0 p-0"
+                    >
+                      <img
+                        src="/Assets/Uploads/Products/prd-4.jpg"
+                        alt=""
+                        class=""
+                      />
+                    </div>
+                    <div class="cart-product_item_info col-md-10">
+                      <h3 class="cart-product-title fw-semibold h5">
+                          <a href="" class="link-base text-decoration-none">  Activated Charcoal Teeth Whitening Toothpaste MINT
+                        Flavor</a>
+                      
+                      </h3>
+                      <p class="text-decoration-line-through m-0">$112.2</p>
+                      <p class="my-1 cart-product-price text-base">
+                        $68.5 / 4
+                      </p>
+                      <p class="mb-0">17.05.2022</p>
+                      <p class="mb-0">Azerbaijan , baku</p>
+                      <p class="mb-0">Suraxanı Nizami 12b</p>
+                      <p class="mb-0">Aze4115</p>
+                    </div>
+                  </div>
+                        <!-- Item -->
+                        <div
+                        class="cart-product_item my-3 p-2 row position-relative"
+                      >
+                        <div
+                          class="cart-product_item_photo d-flex align-items-center justify-content-center col-md-2 mb-3 mb-md-0 p-0"
+                        >
+                          <img
+                            src="/Assets/Uploads/Products/prd-4.jpg"
+                            alt=""
+                            class=""
+                          />
+                        </div>
+                        <div class="cart-product_item_info col-md-10">
+                          <h3 class="cart-product-title fw-semibold h5">
+                              <a href="" class="link-base text-decoration-none">  Activated Charcoal Teeth Whitening Toothpaste MINT
+                            Flavor</a>
+                          
+                          </h3>
+                          <p class="text-decoration-line-through m-0">$112.2</p>
+                          <p class="my-1 cart-product-price text-base">
+                            $68.5 / 4
+                          </p>
+                          <p class="mb-0">17.05.2022</p>
+                          <p class="mb-0">Azerbaijan , baku</p>
+                          <p class="mb-0">Suraxanı Nizami 12b</p>
+                          <p class="mb-0">Aze4115</p>
+                        </div>
+                      </div>
+                            <!-- Item -->
+                    <div
+                    class="cart-product_item my-3 p-2 row position-relative"
+                  >
+                    <div
+                      class="cart-product_item_photo d-flex align-items-center justify-content-center col-md-2 mb-3 mb-md-0 p-0"
+                    >
+                      <img
+                        src="/Assets/Uploads/Products/prd-4.jpg"
+                        alt=""
+                        class=""
+                      />
+                    </div>
+                    <div class="cart-product_item_info col-md-10">
+                      <h3 class="cart-product-title fw-semibold h5">
+                          <a href="" class="link-base text-decoration-none">  Activated Charcoal Teeth Whitening Toothpaste MINT
+                        Flavor</a>
+                      
+                      </h3>
+                      <p class="text-decoration-line-through m-0">$112.2</p>
+                      <p class="my-1 cart-product-price text-base">
+                        $68.5 / 4
+                      </p>
+                      <p class="mb-0">17.05.2022</p>
+                      <p class="mb-0">Azerbaijan , baku</p>
+                      <p class="mb-0">Suraxanı Nizami 12b</p>
+                      <p class="mb-0">Aze4115</p>
+                    </div>
+                  </div>
+
+
+                    
+                    <!-- End -->
+                  </div>
+                </div>
+              </div>
+              <!-- Medical Examinations tab  -->
+              <div
+                class="tab-pane bg-light p-2 tab-content-exam fade "
+                id="tab-exam"
+                role="tabpanel"
+                aria-labelledby="exam-tab"
+                tabindex="0"
+              >
+                <div class="exams-container container scrollable ">
+                    <!-- Item -->
+                    <div class="border-gray p-3 d-flex justify-content-between align-items-center my-2">
+                        <div class=" ">
+                              <h2 class="h5 fw-semibold">General Diagnostic Test </h2>
+                        <p><span class="fw-semibold">Date : </span> 17 Jan 2023 15:00</p>
+                        <p class="fw-semibold"> Status : <span class=" badge bg-warning ">Pending</span></p>
+                        </div>
+                        <div class="c">
+                            <!-- <a href="" disabled download class="d-block text-center download-btn m-0 p-0 text-decoration-none"> 
+                                <i class="fa-solid fa-file-arrow-down d-block"></i>
+                                Download
+                            </a> -->
+                        </div>
+
+                      
+                    </div>
+
+                       <!-- Item -->
+                       <div class="border-gray p-3 d-flex justify-content-between align-items-center my-2">
+                        <div class=" ">
+                              <h2 class="h6 fw-semibold">General Diagnostic Test </h2>
+                        <p>17 Jan 2023 15:00</p>
+                        <p class="fw-semibold"> Status : <span class=" badge bg-warning ">Pending</span></p>
+                        </div>
+                        <div class="">
+                            <!-- <a href="" disabled download class="d-block text-center download-btn m-0 p-0 text-decoration-none"> 
+                                <i class="fa-solid fa-file-arrow-down d-block"></i>
+                                Download
+                            </a> -->
+                        </div>
+
+                      
+                    </div>
+                       <!-- Item -->
+                       <div class="border-gray p-3 d-flex justify-content-between align-items-center my-2">
+                        <div class=" ">
+                              <h2 class="h6 fw-semibold">General Diagnostic Test </h2>
+                        <p>17 Jan 2023 15:00</p>
+                        <p class="fw-semibold"> Status : <span class=" badge bg-success">Ready</span></p>
+                        </div>
+                        <div class="">
+                            <a href=""  download class="d-block text-center download-btn m-0 p-0 text-decoration-none"> 
+                                <i class="fa-solid fa-file-arrow-down d-block"></i>
+                                Download
+                            </a>
+                        </div>
+
+                      
+                    </div>
+
+                       <!-- Item -->
+                       <div class="border-gray p-3 d-flex justify-content-between align-items-center my-2">
+                        <div class=" ">
+                              <h2 class="h6 fw-semibold">General Diagnostic Test </h2>
+                        <p>17 Jan 2023 15:00</p>
+                        <p class="fw-semibold"> Status : <span class=" badge bg-danger ">Rejected</span></p>
+                        </div>
+                        <div class="">
+                            <!-- <a href="" disabled download class="d-block text-center download-btn m-0 p-0 text-decoration-none"> 
+                                <i class="fa-solid fa-file-arrow-down d-block"></i>
+                                Download
+                            </a> -->
+                        </div>
+
+                      
+                    </div>
+                    
+
+                    <!-- END -->
+                </div>
+              </div>
+              <!-- Appointments tab  -->
+              <div
+                class="tab-pane bg-light p-2 tab-content-appointment fade "
+                id="tab-appointment"
+                role="tabpanel"
+                aria-labelledby="appointment-tab"
+                tabindex="0"
+              >
+                <div class="appointments-container container scrollable">
+                    <!-- Item -->
+                    <div class=" d-flex align-items-center justify-content-between border-gray p-3 my-2">
+                        <div class="">
+                            <h2 class="h5"><a href="#" class="text-decoration-none link-base fw-bold">Dr Tahir Tahirli</a></h2>
+                            <p class="appointment-date"><span class="fw-semibold">Date : </span> <span> 17 Jan 2023 15:00</span></p>
+                            <p><span class="fw-semibold"> Status:</span> <span class="badge bg-success">Approved</span></p>
+                        </div>
+                        <div class=" ">
+                            <button class="call-btn d-flex align-items-center">
+                                <i class="fa-solid fa-video mx-2"></i>
+                                <span class="d-none d-sm-inline"> Call</span>
+                                    
+                            </button>
+                            
+                        </div>
+                    </div>
+
+                      <!-- Item -->
+                      <div class=" d-flex align-items-center justify-content-between border-gray p-3 my-2">
+                        <div class="">
+                            <h2 class="h5"><a href="#" class="text-decoration-none link-base fw-bold">Dr Tahir Tahirli</a></h2>
+                            <p class="appointment-date"><span class="fw-semibold">Date : </span> <span> 17 Jan 2023 15:00</span></p>
+                            <p><span class="fw-semibold"> Status:</span> <span class="badge bg-warning">Pending</span></p>
+                        </div>
+                        <div class=" ">
+                            <button class="cancel-btn d-flex align-items-center">
+                                <i class="fa-solid fa-xmark mx-2"></i>
+                                <span class="d-none d-sm-inline">Cancel</span>
+                                    
+                            </button>
+                            
+                        </div>
+                    </div>
+
+                </div>
+              </div>
+
+              <!-- End -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ========================= CDNs =============================== -->
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/f0bcda735f.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Bootsrap js -->
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map"></script>
+
+    <!-- ========================= Custom =============================== -->
+
+    <script src="/Assets/Js/hidden-file-input.js"></script>
+  </body>
+</html>

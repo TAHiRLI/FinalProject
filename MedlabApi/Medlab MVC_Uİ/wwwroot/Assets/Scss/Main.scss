@@ -1,0 +1,57 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+
+@import "Partials/variables";
+@import "Partials/extends";
+@import "Partials/mixins";
+
+
+// Global classes
+@import "Partials/globalClasses";
+// components
+@import "Partials/navbar";
+@import "Partials/sliders";
+@import "Partials/footer";
+
+// Pages
+@import "Partials/Pages/index";
+@import "Partials/Pages/aboutUs";
+@import "Partials/Pages/services";
+@import "Partials/Pages/doctors";
+@import "Partials/Pages/shop";
+@import "Partials/Pages/contact";
+@import "Partials/Pages/product-details";
+@import "Partials/Pages/login";
+@import "Partials/Pages/blogs";
+@import "Partials/Pages/cart";
+@import "Partials/Pages/profile";
+
+
+
+
+body {
+  color: $font_baseColor;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+}
+ul{
+    margin: 0;
+    li{
+        list-style: none;
+    }
+}
+
+#indexPage {
+  background-position: right;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+@media (max-width:992px) {
+  body{
+    font-size: 14px;
+  }
+}

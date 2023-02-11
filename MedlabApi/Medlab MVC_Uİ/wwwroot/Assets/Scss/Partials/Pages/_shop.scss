@@ -1,0 +1,74 @@
+.price-slider .ui-slider {
+  &-handle {
+    background-color: white !important;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  &-range {
+    background: $baseColor !important;
+  }
+  &-track {
+    background-color: green !important;
+  }
+}
+.ui-widget-content {
+  background-color: $font_gray !important;
+  height: 7.5px;
+}
+
+.shop {
+ 
+
+  &_filters{
+    background-color: #f7f7f7;
+    height: min-content;
+  }
+
+  &_products_sorting{
+    .form-control, .searchBtn{
+      box-shadow: none;
+      border: 1px solid #ccc;
+    }
+  }
+
+  &_products_cards {
+ 
+    .product {
+      background-color: rgb(245, 245, 245);
+      transition: 0.5s;
+      border: 1px solid #f0f0f0;
+      &:hover{
+        box-shadow: 0 0 25px rgb(0 0 0 / 10%);
+      }
+      &-img{
+        // height: 45vh;
+        border-bottom:1px solid #f0f0f0;
+        img{
+          height: 100%;
+          width: 100%;
+        }
+        object-fit: contain;
+
+      }
+      &-stars {
+        font-size: 0.8rem;
+      }
+      &-addToCart {
+        border: 2px solid $baseColor;
+        transition: 0.3s;
+        &:hover {
+          background-color: $baseColor;
+          color: white;
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+
+
+  
+}

@@ -555,11 +555,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Hp\\Desktop\\FinalProject 1.0\\MedlabApi\\Medlab.Core\\Medlab.Core.csproj",
+      "projectUniqueName": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab.Core\\Medlab.Core.csproj",
       "projectName": "Medlab.Core",
-      "projectPath": "C:\\Users\\Hp\\Desktop\\FinalProject 1.0\\MedlabApi\\Medlab.Core\\Medlab.Core.csproj",
+      "projectPath": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab.Core\\Medlab.Core.csproj",
       "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Hp\\Desktop\\FinalProject 1.0\\MedlabApi\\Medlab.Core\\obj\\",
+      "outputPath": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config",

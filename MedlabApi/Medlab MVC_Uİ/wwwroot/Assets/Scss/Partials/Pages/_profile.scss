@@ -1,0 +1,172 @@
+#User-profile_Section {
+  .user-greeting {
+    background: #085078; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      #85d8ce,
+      #085078
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #85d8ce,
+      #085078
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    padding: 30px;
+    &_user-photo {
+      width: 100px;
+      height: 100px;
+      bottom: 0;
+      left: 3rem;
+      transform: translate(0, 50%);
+
+      img {
+        border-radius: 50%;
+        border: 6px solid #085078;
+        width: 100%;
+        height: 100%;
+        object-fit: covre;
+      }
+    }
+  }
+  .tab-btn {
+    margin: 0;
+    padding: 14px 0;
+    width: 100%;
+    cursor: pointer;
+    text-shadow: none;
+    font-size: 14px;
+    transition: 0.3s ease;
+    font-weight: 600;
+    line-height: 19px;
+    padding: 14px 16px;
+    color: #787878;
+    border: 1px solid #f0f0f0;
+    border-bottom: 2px solid #ccc;
+    border-radius: 0;
+    &:hover {
+      background-color: #f8f8f8;
+    }
+    &.active {
+      border-bottom-color: #3368c6;
+      color: #3368c6;
+      box-shadow: none;
+      background-color: #fff;
+    }
+  }
+
+  .tab-content {
+    background: #085078; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      #85d8ce,
+      #085078
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #85d8ce,
+      #085078
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  .tab-content-profile {
+    .save-btn {
+      background-image: linear-gradient(
+        45deg,
+        green 0%,
+        #baf516c2 51%,
+        green 100%
+      );
+    }
+    .user-photo {
+      width: 100px;
+      height: 100px;
+
+      img {
+        object-fit: cover;
+        border-radius: 50%;
+        border: 6px solid $baseColor;
+      }
+      i.add-photo {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background-color: white;
+        padding: 5px;
+        border-radius: 50%;
+        cursor: pointer;
+        color: $baseColor;
+      }
+    }
+    input {
+      width: fit-content;
+      font-size: 0.9rem;
+      min-width: 240px;
+    }
+  }
+  .download-btn,
+  .call-btn {
+    @extend %button_link;
+    width: min-content;
+    color: white;
+    padding: 10px 14px !important;
+    i {
+      font-size: 1.5rem;
+    }
+    &[disabled] {
+      color: #787878;
+    }
+  }
+
+  .cancel-btn {
+    @extend %button_link;
+    width: min-content;
+    color: white;
+    padding: 10px 14px !important;
+    i {
+      font-size: 1.5rem;
+    }
+    &[disabled] {
+      color: #787878;
+    }
+    background-image: linear-gradient(
+      45deg,
+      rgb(245, 73, 73) 0%,
+      #fbdb4d 51%,
+      rgb(245, 73, 73) 100%
+    );
+  }
+
+  .exams-container,
+  .appointments-container {
+    max-height: 100vh;
+    overflow-x: hidden;
+
+  }
+
+  //   Responsive
+  @media (max-width: 768px) {
+    .user-greeting_user-photo {
+      left: 1rem;
+    }
+    .tab-btn {
+      padding: 10px 12px !important;
+    }
+  }
+  @media (max-width: 576px) {
+    .user-greeting_user-photo {
+      left: 1rem;
+      width: 70px;
+      height: 70px;
+    }
+    .tab-btn {
+      padding: 10px 12px !important;
+      width: min-content;
+    }
+    .tab-buttons {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 9;
+    }
+  }
+}

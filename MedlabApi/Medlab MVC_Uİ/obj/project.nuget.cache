@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uQ0J4KFY+6XnaLPK4WSWwgItX4haQGiMBLTifuqSlaL6yyS3Rcc+zUnJ63kQ+OA+DMVZWwTwGWeNHpFYd2xwsQ==",
+  "dgSpecHash": "s3xzxS/H8Eqi5luT6zyRkVpcEOMRqa2e0w1DB/mdlheBfpK+Qwh7YclfzWP6M7qKQlYOF12YxsWY9VvCutna2w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Hp\\Desktop\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\Medlab MVC_Uİ.csproj",
+  "projectFilePath": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\Medlab MVC_Uİ.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
