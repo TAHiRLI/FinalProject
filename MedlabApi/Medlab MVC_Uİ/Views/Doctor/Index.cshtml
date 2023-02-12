@@ -1,4 +1,12 @@
-﻿@section Styles{
+﻿
+@model DoctorsViewModel
+
+
+
+
+
+
+@section Styles{
     <!-- Slick slider -->
     <link rel="stylesheet"
       type="text/css"
@@ -30,272 +38,69 @@
             <!-- Departments -->
 
             <div class="departments departmentsSlider py-4">
-                <div class="departments_item rounded-pill text-nowrap mx-2 btn"
-                     department="All">
-                    All
-                </div>
-                <div class="departments_item rounded-pill text-nowrap mx-2 btn"
-                     department="Endodontics">
-                    Endodontics
-                </div>
-                <div class="departments_item rounded-pill text-nowrap mx-2 btn"
-                     department="Oral Medicine">
-                    Oral Medicine
-                </div>
-                <div class="departments_item rounded-pill text-nowrap mx-2 btn"
-                     department="Endodontics">
-                    Endodontics
-                </div>
-                <div class="departments_item rounded-pill text-nowrap mx-2 btn"
-                     department="Dentists">
-                    Dentists
-                </div>
-                <div class="departments_item rounded-pill text-nowrap mx-2 btn"
-                     department="Endodontics">
-                    Endodontics
-                </div>
-                <div class="departments_item rounded-pill text-nowrap mx-2 btn"
-                     department="Endodontics">
-                    Periodontics
-                </div>
-                <div class="departments_item rounded-pill text-nowrap mx-2 btn"
-                     department="Endodontics">
-                    Endodontics
-                </div>
-                <div class="departments_item rounded-pill text-nowrap mx-2 btn"
-                     department="Oral Medicine">
-                    Oral Medicine
-                </div>
-                <div class="departments_item rounded-pill text-nowrap mx-2 btn"
-                     department="Endodontics">
-                    Endodontics
-                </div>
-                <div class="departments_item rounded-pill text-nowrap mx-2 btn"
-                     department="Dentists">
-                    Dentists
-                </div>
-                <div class="departments_item rounded-pill text-nowrap mx-2 btn"
-                     department="Endodontics">
-                    Endodontics
-                </div>
-                <div class="departments_item rounded-pill text-nowrap mx-2 btn"
-                     department="Endodontics">
-                    Periodontics
-                </div>
+
+                    <!-- Department -->
+                    <div class="departments_item rounded-pill text-nowrap mx-2 btn">
+                        <a class="link-base text-decoration-none" asp-action="index" asp-controller="doctor" >All</a>
+                    </div>
+
+                 @foreach (var department in Model.Deparments)
+                {
+                 <!-- Department -->
+                    <div class="departments_item rounded-pill text-nowrap mx-2 btn"
+                     >
+                       <a class="link-base text-decoration-none" asp-action="index" asp-controller="doctor" asp-route-departmentId="@department.Id">@department.Name</a>
+                    </div>
+                }
+                
+             
             </div>
+
+
 
             <!-- Doctors -->
             <div class="all-doctors  row">
-                <!-- card -->
-                <div class="all-doctors_card col-lg-4 col-md-6 mt-5">
-                    <div class="all-doctors_card_photo">
-                        <a asp-action="details" asp-controller="doctor"  class="d-block w-100">
-                            <img src="../Assets/Uploads/Doctors/doctor-01.jpg"
+                @foreach (var doctor in Model.Doctors)
+                {
+                    <!-- card -->
+                    <div class="all-doctors_card col-lg-4 col-md-6 mt-5 Endodontics bg-light">
+                        <div class="all-doctors_card_photo">
+                            <a asp-action="details" asp-controller="doctor" class="d-block w-100">
+                                <img src="~/Assets/Uploads/Doctors/@doctor.ImageUrl"
                                  alt=""
                                  class="w-100" />
-                        </a>
-                    </div>
-                    <div class="p-4">
-                        <div class="all-doctors_card_name mb-4">
-                            <a   asp-action="details" asp-controller="doctor" class="text-decoration-none link-base">
-                                <h2 class="h4 position-relativ text-center">
-                                    Dr. Frank Bigham
-                                </h2>
                             </a>
-                            <p class="all-doctors_card_position text-base text-center">
-                                Associate Dentist
-                            </p>
                         </div>
-                        <div class="all-doctors_card_desc">
-                            <p class="text-center">
-                                Dr. Frank Bigham has been in practice for almost 20 years
-                                graduating BDS from the University of Manchester, UK in 1997
-                            </p>
-                            <p class="text-center text-base fw-bold">$2 / 10 min</p>
-                        </div>
-                        <div class="all-doctors_card_links mt-4">
-                            <div class="set_meeting rounded-pill w-100 m-0">
-                                <i class="fa-solid fa-video me-2"></i>
-                                Online Appointment
+                        <div class="p-4">
+                            <div class="all-doctors_card_name mb-4">
+                                <a asp-action="details" asp-controller="doctor" asp-route-id="@doctor.Id" class="text-decoration-none link-base">
+                                    <h2 class="h4 position-relativ text-center">
+                                        @doctor.Fullname
+                                    </h2>
+                                </a>
+                                <p class="all-doctors_card_position text-base text-center">
+                                    @doctor.Positon
+                                </p>
+                            </div>
+                            <div class="all-doctors_card_desc">
+                                <p class="text-center">
+                                    @doctor.Desc
+                                </p>
+                                <p class="text-center text-base fw-bold">$2 / 10 min</p>
+                            </div>
+                            <div class="all-doctors_card_links mt-4">
+                                <div class="set_meeting rounded-pill w-100 m-0">
+                                    <i class="fa-solid fa-video me-2"></i>
+                                    Online Appointment
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- card -->
-                <div class="all-doctors_card col-lg-4 col-md-6 mt-5 Endodontics">
-                    <div class="all-doctors_card_photo">
-                        <a asp-action="details" asp-controller="doctor"  class="d-block w-100">
-                            <img src="../Assets/Uploads/Doctors/doctor-04.jpg"
-                                 alt=""
-                                 class="w-100" />
-                        </a>
-                    </div>
-                    <div class="p-4">
-                        <div class="all-doctors_card_name mb-4">
-                            <a   asp-action="details" asp-controller="doctor" class="text-decoration-none link-base">
-                                <h2 class="h4 position-relativ text-center">
-                                    Dr. Frank Bigham
-                                </h2>
-                            </a>
-                            <p class="all-doctors_card_position text-base text-center">
-                                Associate Dentist
-                            </p>
-                        </div>
-                        <div class="all-doctors_card_desc">
-                            <p class="text-center">
-                                Dr. Frank Bigham has been in practice for almost 20 years
-                                graduating BDS from the University of Manchester, UK in 1997
-                            </p>
-                            <p class="text-center text-base fw-bold">$2 / 10 min</p>
-                        </div>
-                        <div class="all-doctors_card_links mt-4">
-                            <div class="set_meeting rounded-pill w-100 m-0">
-                                <i class="fa-solid fa-video me-2"></i>
-                                Online Appointment
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- card -->
-                <div class="all-doctors_card col-lg-4 col-md-6 mt-5 Endodontics">
-                    <div class="all-doctors_card_photo">
-                        <a asp-action="details" asp-controller="doctor"  class="d-block w-100">
-                            <img src="../Assets/Uploads/Doctors/doctor-03.jpg"
-                                 alt=""
-                                 class="w-100" />
-                        </a>
-                    </div>
-                    <div class="p-4">
-                        <div class="all-doctors_card_name mb-4">
-                            <a   asp-action="details" asp-controller="doctor" class="text-decoration-none link-base">
-                                <h2 class="h4 position-relativ text-center">
-                                    Dr. Frank Bigham
-                                </h2>
-                            </a>
-                            <p class="all-doctors_card_position text-base text-center">
-                                Associate Dentist
-                            </p>
-                        </div>
-                        <div class="all-doctors_card_desc">
-                            <p class="text-center">
-                                Dr. Frank Bigham has been in practice for almost 20 years
-                                graduating BDS from the University of Manchester, UK in 1997
-                            </p>
-                            <p class="text-center text-base fw-bold">$2 / 10 min</p>
-                        </div>
-                        <div class="all-doctors_card_links mt-4">
-                            <div class="set_meeting rounded-pill w-100 m-0">
-                                <i class="fa-solid fa-video me-2"></i>
-                                Online Appointment
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- card -->
-                <div class="all-doctors_card col-lg-4 col-md-6 mt-5">
-                    <div class="all-doctors_card_photo">
-                        <a asp-action="details" asp-controller="doctor"  class="d-block w-100">
-                            <img src="../Assets/Uploads/Doctors/doctor-03.jpg"
-                                 alt=""
-                                 class="w-100" />
-                        </a>
-                    </div>
-                    <div class="p-4">
-                        <div class="all-doctors_card_name mb-4">
-                            <a   asp-action="details" asp-controller="doctor" class="text-decoration-none link-base">
-                                <h2 class="h4 position-relativ text-center">
-                                    Dr. Frank Bigham
-                                </h2>
-                            </a>
-                            <p class="all-doctors_card_position text-base text-center">
-                                Associate Dentist
-                            </p>
-                        </div>
-                        <div class="all-doctors_card_desc">
-                            <p class="text-center">
-                                Dr. Frank Bigham has been in practice for almost 20 years
-                                graduating BDS from the University of Manchester, UK in 1997
-                            </p>
-                            <p class="text-center text-base fw-bold">$2 / 10 min</p>
-                        </div>
-                        <div class="all-doctors_card_links mt-4">
-                            <div class="set_meeting rounded-pill w-100 m-0">
-                                <i class="fa-solid fa-video me-2"></i>
-                                Online Appointment
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- card -->
-                <div class="all-doctors_card col-lg-4 col-md-6 mt-5">
-                    <div class="all-doctors_card_photo">
-                        <a asp-action="details" asp-controller="doctor"  class="d-block w-100">
-                            <img src="../Assets/Uploads/Doctors/doctor-05.jpg"
-                                 alt=""
-                                 class="w-100" />
-                        </a>
-                    </div>
-                    <div class="p-4">
-                        <div class="all-doctors_card_name mb-4">
-                            <a   asp-action="details" asp-controller="doctor" class="text-decoration-none link-base">
-                                <h2 class="h4 position-relativ text-center">
-                                    Dr. Frank Bigham
-                                </h2>
-                            </a>
-                            <p class="all-doctors_card_position text-base text-center">
-                                Associate Dentist
-                            </p>
-                        </div>
-                        <div class="all-doctors_card_desc">
-                            <p class="text-center">
-                                Dr. Frank Bigham has been in practice for almost 20 years
-                                graduating BDS from the University of Manchester, UK in 1997
-                            </p>
-                            <p class="text-center text-base fw-bold">$2 / 10 min</p>
-                        </div>
-                        <div class="all-doctors_card_links mt-4">
-                            <div class="set_meeting rounded-pill w-100 m-0">
-                                <i class="fa-solid fa-video me-2"></i>
-                                Online Appointment
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- card -->
-                <div class="all-doctors_card col-lg-4 col-md-6 mt-5 Endodontics">
-                    <div class="all-doctors_card_photo">
-                        <a asp-action="details" asp-controller="doctor"  class="d-block w-100">
-                            <img src="../Assets/Uploads/Doctors/doctor-02.jpg"
-                                 alt=""
-                                 class="w-100" />
-                        </a>
-                    </div>
-                    <div class="p-4">
-                        <div class="all-doctors_card_name mb-4">
-                            <a   asp-action="details" asp-controller="doctor"class="text-decoration-none link-base">
-                                <h2 class="h4 position-relativ text-center">
-                                    Dr. Frank Bigham
-                                </h2>
-                            </a>
-                            <p class="all-doctors_card_position text-base text-center">
-                                Associate Dentist
-                            </p>
-                        </div>
-                        <div class="all-doctors_card_desc">
-                            <p class="text-center">
-                                Dr. Frank Bigham has been in practice for almost 20 years
-                                graduating BDS from the University of Manchester, UK in 1997
-                            </p>
-                            <p class="text-center text-base fw-bold">$2 / 10 min</p>
-                        </div>
-                        <div class="all-doctors_card_links mt-4">
-                            <div class="set_meeting rounded-pill w-100 m-0">
-                                <i class="fa-solid fa-video me-2"></i>
-                                Online Appointment
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
+
+
+           
+                
                 <!-- END -->
             </div>
         </div>
@@ -305,11 +110,6 @@
 @section Scripts{
 
     <!-- ========================= CDNs =============================== -->
-    <!-- Jquery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
- 
-
     <!-- Slick Slide -->
     <script type="text/javascript"
         src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

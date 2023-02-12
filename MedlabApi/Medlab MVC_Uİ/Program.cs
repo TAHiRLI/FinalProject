@@ -5,7 +5,9 @@ using Medlab.Data.Repositories;
 using Medlab_MVC_Uİ.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebSockets;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Dynamic;
 
 
 
@@ -74,6 +76,8 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ISettingRepository, SettingRepository>();
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
 
 

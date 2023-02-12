@@ -27,7 +27,7 @@ namespace Medlab_MVC_Uİ.Controllers
 
         public IActionResult Index()
         {
-            homeViewModel model = new homeViewModel
+            HomeViewModel model = new HomeViewModel
             {
                 Sliders = _sliderRepository.GetAll(x => true).OrderBy(x=>x.Order).ToList()
         };
