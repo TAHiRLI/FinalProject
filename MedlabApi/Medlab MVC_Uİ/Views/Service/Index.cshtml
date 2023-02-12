@@ -1,5 +1,8 @@
-﻿
+﻿@using Medlab.Core.Entities
 
+
+
+@model List<Service>
 
 
 
@@ -25,209 +28,38 @@
 
         <div class="container px-lg-5">
             <div class="services  my-5">
+                @foreach (var service in Model)
+                {
                 <!-- card -->
-                <div class="services_card bg-light ">
-                    <div class="services_card_photo">
-                        <a href="#" class="d-block w-100">
-                            <img src="../Assets/Uploads/Services/services-05.jpg"
+
+                    <div class="services_card bg-light ">
+                        <div class="services_card_photo">
+                            <a href="#" class="d-block w-100">
+                                <img src="../Assets/Uploads/Services/@service.ImageUrl"
                                  alt=""
                                  class="w-100" />
-                        </a>
-                    </div>
-                    <div class="p-4">
-                        <div class="services_card_name mb-4">
-                            <a href="#" class="text-decoration-none link-base">
-                                <h2 class="h4 title_underlined position-relative">
-                                    Molecular Testing & Oncology
-                                </h2>
                             </a>
                         </div>
-                        <div class="services_card_desc">
-                            <p>
-                                Laboratory Services provides an expanding menu of
-                                molecular-based testing. Our services include:
-
-                                <ul>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                </ul>
-                            </p>
+                        <div class="p-4">
+                            <div class="services_card_name mb-4">
+                                <a href="#" class="text-decoration-none link-base">
+                                    <h2 class="h4 title_underlined position-relative">
+                                       @service.Name
+                                    </h2>
+                                </a>
+                            </div>
+                            <div class="services_card_desc">
+                                <p>
+                                   @Html.Raw(service.Description);
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    // 051 631 80 45
 
-                <!-- card -->
-                <div class="services_card bg-light ">
-                    <div class="services_card_photo">
-                        <a href="#" class="d-block w-100">
-                            <img src="../Assets/Uploads/Services/services-07.jpg"
-                                 alt=""
-                                 class="w-100" />
-                        </a>
-                    </div>
-                    <div class="p-4">
-                        <div class="services_card_name mb-4">
-                            <a href="#" class="text-decoration-none link-base">
-                                <h2 class="h4 title_underlined position-relative">
-                                    Molecular Testing & Oncology
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="services_card_desc">
-                            <p>
-                                Laboratory Services provides an expanding menu of
-                                molecular-based testing. Our services include:
+                }
 
-                                <ul>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- card -->
-                <div class="services_card bg-light ">
-                    <div class="services_card_photo">
-                        <a href="#" class="d-block w-100">
-                            <img src="../Assets/Uploads/Services/services-08.jpg"
-                                 alt=""
-                                 class="w-100" />
-                        </a>
-                    </div>
-                    <div class="p-4">
-                        <div class="services_card_name mb-4">
-                            <a href="#" class="text-decoration-none link-base">
-                                <h2 class="h4 title_underlined position-relative">
-                                    Molecular Testing & Oncology
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="services_card_desc">
-                            <p>
-                                Laboratory Services provides an expanding menu of
-                                molecular-based testing. Our services include:
-
-                                <ul>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- card -->
-                <div class="services_card bg-light ">
-                    <div class="services_card_photo">
-                        <a href="#" class="d-block w-100">
-                            <img src="../Assets/Uploads/Services/services-09.jpg"
-                                 alt=""
-                                 class="w-100" />
-                        </a>
-                    </div>
-                    <div class="p-4">
-                        <div class="services_card_name mb-4">
-                            <a href="#" class="text-decoration-none link-base">
-                                <h2 class="h4 title_underlined position-relative">
-                                    Molecular Testing & Oncology
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="services_card_desc">
-                            <p>
-                                Laboratory Services provides an expanding menu of
-                                molecular-based testing. Our services include:
-
-                                <ul>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- card -->
-                <div class="services_card bg-light ">
-                    <div class="services_card_photo">
-                        <a href="#" class="d-block w-100">
-                            <img src="../Assets/Images/index-img-01-2.jpg"
-                                 alt=""
-                                 class="w-100" />
-                        </a>
-                    </div>
-                    <div class="p-4">
-                        <div class="services_card_name mb-4">
-                            <a href="#" class="text-decoration-none link-base">
-                                <h2 class="h4 title_underlined position-relative">
-                                    Molecular Testing & Oncology
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="services_card_desc">
-                            <p>
-                                Laboratory Services provides an expanding menu of
-                                molecular-based testing. Our services include:
-
-                                <ul>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- card -->
-                <div class="services_card bg-light ">
-                    <div class="services_card_photo">
-                        <a href="#" class="d-block w-100">
-                            <img src="../Assets/Uploads/Services/services-05.jpg"
-                                 alt=""
-                                 class="w-100" />
-                        </a>
-                    </div>
-                    <div class="p-4">
-                        <div class="services_card_name mb-4">
-                            <a href="#" class="text-decoration-none link-base">
-                                <h2 class="h4 title_underlined position-relative">
-                                    Molecular Testing & Oncology
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="services_card_desc">
-                            <p>
-                                Laboratory Services provides an expanding menu of
-                                molecular-based testing. Our services include:
-
-                                <ul>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                    <li class="my-1">Feature 1</li>
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
+             
             </div>
         </div>
     </section>

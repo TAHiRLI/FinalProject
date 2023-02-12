@@ -1,7 +1,8 @@
-using Medlab.Core.Entities;
+﻿using Medlab.Core.Entities;
 using Medlab.Core.Repositories;
 using Medlab.Data.DAL;
 using Medlab.Data.Repositories;
+using Medlab_MVC_Uİ.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebSockets;
 using Microsoft.EntityFrameworkCore;
@@ -68,9 +69,11 @@ builder.Services.AddAuthentication()
 // 4 Custom Services
 //===================
 
+builder.Services.AddScoped<LayoutService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ISettingRepository, SettingRepository>();
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 
 
 

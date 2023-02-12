@@ -1,4 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@using Medlab_MVC_Uİ.Services
+
+
+@inject LayoutService _layoutService
+@{
+    var setting = _layoutService.GetSetting();
+}
+
+
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -25,7 +37,7 @@
             <div class="navbar_container_logoBox ms-lg-5">
                 <div>
                     <a asp-action="index" asp-controller="home" >
-                        <img src="~/Assets/Images/logo/logo.png" alt="" />
+                        <img src="~/Assets/Images/logo/@setting["header_logo"]" alt="" />
                     </a>
                 </div>
             </div>
@@ -70,7 +82,7 @@
                                     <i class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"></i>
 
                                     <div class="cartMini_list_item_image mx-2">
-                                        <img src="~/Assets/Images/logo/logo.png"
+                                        <img src="~/Assets/Images/logo/@setting["header_logo"]"
                                              alt="" />
                                     </div>
 
@@ -85,7 +97,7 @@
                                     <i class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"></i>
 
                                     <div class="cartMini_list_item_image mx-2">
-                                        <img src="~/Assets/Images/logo/logo.png" alt="" />
+                                        <img src="~/Assets/Images/logo/@setting["header_logo"]" alt="" />
                                     </div>
 
                                     <div class="me-2">
@@ -318,7 +330,7 @@
             <div class="footerWrap_info d-flex flex-column flex-md-row flex-lg-column">
                 <div class="col-lg-12 col-md-6 col-sm-12">
                     <div class="footerWrap_info_logo">
-                        <img src="~/Assets/Images/logo/logo.png" alt="" />
+                        <img src="~/Assets/Images/logo/@setting["footer_logo"]" alt="" />
                     </div>
                     <div class="footerWrap_info_subscribe">
                         <p>
@@ -337,16 +349,16 @@
                         </form>
                     </div>
                     <div class="footerWrap_info_social d-flex">
-                        <a href="#" class="footerWrap_info_social_link">
+                        <a href="@setting["gmail"]" class="footerWrap_info_social_link">
                             <i class="fa-brands fa-google"></i>
                         </a>
-                        <a href="#" class="footerWrap_info_social_link">
+                        <a href="@setting["instagram"]" class="footerWrap_info_social_link">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
-                        <a href="#" class="footerWrap_info_social_link">
+                        <a href="@setting["facebook"]" class="footerWrap_info_social_link">
                             <i class="fa-brands fa-facebook"></i>
                         </a>
-                        <a href="#" class="footerWrap_info_social_link">
+                        <a href="@setting["twitter"]" class="footerWrap_info_social_link">
                             <i class="fa-brands fa-twitter"></i>
                         </a>
                     </div>
@@ -408,8 +420,8 @@
                     </div>
                     <div class="col-10">
                         <address class="mb-0">
-                            1560 Holden Street San Diego
-                            <a href=""
+                            @setting["location"]
+                            <a href="@setting["location_link"]"
                                class="btn footerWrap_contact_addressButton col-sm-5 col-md-11 col-lg-11">
                                 <small>Get directions on the map</small>
                             </a>
@@ -422,7 +434,7 @@
                         <i class="fa-solid fa-phone"></i>
                     </div>
                     <div class="col-10">
-                        <p class="mb-0">1560 Holden Street San Diego</p>
+                        <p class="mb-0">@setting["phone"]</p>
                     </div>
                 </div>
 
@@ -431,7 +443,7 @@
                         <i class="fa-solid fa-envelope"></i>
                     </div>
                     <div class="col-10">
-                        <p class="mb-0">tahirlitahirr@gmail.com</p>
+                        <p class="mb-0">@setting["email"]</p>
                     </div>
                 </div>
             </div>
@@ -444,7 +456,7 @@
                     </div>
                     <div class="">
                         For emergency cases <i class="fa-solid fa-phone mx-3"></i>
-                        <span> 1-800-267-0000</span>
+                        <span> @setting["phone"]</span>
                     </div>
                 </div>
             </div>

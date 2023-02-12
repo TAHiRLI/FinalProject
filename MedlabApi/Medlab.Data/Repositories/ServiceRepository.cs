@@ -9,18 +9,13 @@ using System.Threading.Tasks;
 
 namespace Medlab.Data.Repositories
 {
-    public class SettingRepository:EntityRepository<Setting>, ISettingRepository
+    public class ServiceRepository:EntityRepository<Service> , IServiceRepository
     {
         private readonly MedlabDbContext _context;
 
-        public SettingRepository(MedlabDbContext context):base(context)
+        public ServiceRepository(MedlabDbContext context):base(context)
         {
             this._context = context;
-        }
-
-        public Dictionary<string, string> GetSettingDictionary()
-        {
-            return _context.Settings.ToDictionary(x => x.Key, x => x.Value);
         }
     }
 }
