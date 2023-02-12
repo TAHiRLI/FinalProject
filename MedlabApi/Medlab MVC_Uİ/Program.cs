@@ -1,13 +1,37 @@
 using Medlab.Core.Entities;
+using Medlab.Core.Repositories;
 using Medlab.Data.DAL;
+using Medlab.Data.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebSockets;
 using Microsoft.EntityFrameworkCore;
+
+
+
+
+//       Content
+//--------------------------
+// 1 Database
+// 2 Identity
+// 3 Google Auth
+// 4 Custom Services
+
+
+
+
+
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//===================
+// 1 Database
+//===================
+
 
 builder.Services.AddDbContext<MedlabDbContext>(opt =>
 {
@@ -15,7 +39,9 @@ builder.Services.AddDbContext<MedlabDbContext>(opt =>
 });
 
 
-//identity
+//===================
+// 2 Identity
+//===================
 
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
@@ -27,7 +53,9 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 }).AddDefaultTokenProviders().AddEntityFrameworkStores<MedlabDbContext>();
 
 
-// google auth
+//===================
+// 3 Google auth
+//===================
 builder.Services.AddAuthentication()
                .AddGoogle(options =>
                {
@@ -35,6 +63,16 @@ builder.Services.AddAuthentication()
                    options.ClientSecret = "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";
                    options.SignInScheme = IdentityConstants.ExternalScheme;
                });
+
+//===================
+// 4 Custom Services
+//===================
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ISettingRepository, SettingRepository>();
+builder.Services.AddScoped<ISliderRepository, SliderRepository>();
+
+
 
 var app = builder.Build();
 

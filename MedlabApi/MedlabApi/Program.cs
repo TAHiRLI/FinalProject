@@ -78,6 +78,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 builder.Services.AddSingleton<IJwtService, JwtService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ISettingRepository, SettingRepository>();
+builder.Services.AddScoped<ISliderRepository, SliderRepository>();
 
 
 //===================

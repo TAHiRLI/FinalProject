@@ -13,6 +13,7 @@ namespace Medlab.Data.DAL
         }
         public DbSet<Setting> Settings { get; set; }
         public DbSet<Category> Cateogries { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
 
 
 

@@ -1,74 +1,40 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+    @model homeViewModel
 }
 
 <main>
+    
     <!-- Main Slider -->
     <section id="MainSlider_Section" class="">
         <div class="mainSlider position-relative">
+            @foreach (var slide in Model.Sliders)
+            {
+                
             <!-- slide  -->
             <div class="mainSlider_item d-flex justify-content-center">
                 <div class="holder">
-                    <img src="/Assets/Uploads/Sliders/slide-01.jpg"
+                    <img src="/Assets/Uploads/Sliders/@slide.ImageUrl"
                          alt=""
                          class="mainSlider_item_image" />
                 </div>
                 <div class="mainSlider_item_content d-flex flex-column align-items-center justify-content-center position-absolute">
                     <p class="mainSlider_item_content_title p-0">
-                        We provide <br />
-                        Full Medical care
+                        @slide.Title
                     </p>
                     <p class="mainSlider_item_content_desc">
-                        Advanced medicine. Compassionate care
+                       @slide.Desc
                     </p>
-                    <a href="#"
+                    <a href="@slide.BtnUrl"
                        class="mainSlider_item_content_button rounded-pill my-custom-btn p-0 py-2 px-3 mt-lg-5 px-lg-4 py-lg-3">
-                        Explore Our Services <i class="las la-arrow-right"></i>
+                       @slide.BtnText <i class="las la-arrow-right"></i>
                     </a>
                 </div>
             </div>
-            <!-- slide  -->
-            <div class="mainSlider_item d-flex justify-content-center">
-                <div class="holder">
-                    <img src="/Assets/Uploads/Sliders/slide-02.jpg"
-                         alt=""
-                         class="mainSlider_item_image" />
-                </div>
-                <div class="mainSlider_item_content d-flex flex-column align-items-center justify-content-center position-absolute">
-                    <p class="mainSlider_item_content_title p-0">
-                        Leading the Way <br />
-                        Lorem, ipsum dolor.
-                    </p>
-                    <p class="mainSlider_item_content_desc">
-                        Advanced medicine. Compassionate care
-                    </p>
-                    <a href="#"
-                       class="mainSlider_item_content_button rounded-pill my-custom-btn p-0 py-2 px-3 mt-lg-5 px-lg-4 py-lg-3">
-                        Explore Our Services <i class="las la-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <!-- slide  -->
-            <div class="mainSlider_item d-flex justify-content-center">
-                <div class="holder">
-                    <img src="/Assets/Uploads/Sliders/slide-03.jpg"
-                         alt=""
-                         class="mainSlider_item_image" />
-                </div>
-                <div class="mainSlider_item_content d-flex flex-column align-items-center justify-content-center position-absolute">
-                    <p class="mainSlider_item_content_title p-0">
-                        We provide <br />
-                        Full Medical care
-                    </p>
-                    <p class="mainSlider_item_content_desc">
-                        Advanced medicine. Compassionate care
-                    </p>
-                    <a href="#"
-                       class="mainSlider_item_content_button rounded-pill my-custom-btn p-0 py-2 px-3 mt-lg-5 px-lg-4 py-lg-3">
-                        Explore Our Services <i class="las la-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
+            }
+          
+   
 
             <!-- End -->
         </div>
