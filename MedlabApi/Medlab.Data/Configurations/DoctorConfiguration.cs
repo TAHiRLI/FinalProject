@@ -30,8 +30,12 @@ namespace Medlab.Data.Configurations
                .HasMaxLength(1000);
             builder.Property(x => x.Email).IsRequired(false)
              .HasMaxLength(100);
-            builder.Property(x => x.DepartmentId).IsRequired(false);
+            builder.Property(x => x.Office).IsRequired(false)
+            .HasMaxLength(100);
             builder.Property(x => x.Salary).HasColumnType("decimal(18,2)");
+            builder.Property(x => x.MeetingPrice).HasColumnType("decimal(18,2)");
+
+            builder.Property(x => x.DepartmentId).IsRequired(false);
             builder.HasOne(x => x.Department).WithMany(x => x.Doctors).OnDelete(DeleteBehavior.SetNull);
         }
     }

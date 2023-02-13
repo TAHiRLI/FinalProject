@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Details";
 }
+@model BlogDetailsViewModel
+
 
 <!-- Bread crumb -->
 <div class="breadCrumb p-3 bg-light">
@@ -14,7 +16,7 @@
     <section id="All-Blogs_Section" class="py-5">
         <div class="sectionTitle">
             <h2 class="h1 position-relative text-center text-dark title_underlined mb-5">
-                How to Choose the Best Toothbrush
+                @Model.Blog.Title
             </h2>
         </div>
         <div class="container">
@@ -29,20 +31,22 @@
                             </div>
                             <div class="post-title col-9">
                                 <h2 class="h4">
-                                    <a href=""
-                                       class="text-decoration-none link-base text-wrap+">How to Choose the Best Toothbrush</a>
+                                    <span
+                                       class="text-decoration-none link-base text-wrap">@Model.Blog.Title</span>
                                 </h2>
                                 <p class="my-2">
                                     by
-                                    <a href="#" class="text-decoration-none link-hover-base">admin</a>
+                                    <a asp-action="details" asp-controller="doctor" asp-route-id="@Model.Blog?.Doctor?.Id" class="text-decoration-none link-hover-base">
+                                        @Model.Blog?.Doctor?.Fullname
+                                        </a>
 
-                                    <a href="" class="text-decoration-none link-base">
+                                    <a href="@Model.Blog?.Doctor?.Facebook" class="text-decoration-none link-base">
                                         <i class="mx-2 fa-brands fa-facebook-f"></i>
                                     </a>
-                                    <a href="" class="text-decoration-none link-base">
+                                    <a href="@Model.Blog?.Doctor?.Twitter" class="text-decoration-none link-base">
                                         <i class="mx-2 fa-brands fa-twitter"></i>
                                     </a>
-                                    <a href="" class="text-decoration-none link-base">
+                                    <a href="@Model.Blog?.Doctor?.Instagram" class="text-decoration-none link-base">
                                         <i class="mx-2 fa-brands fa-instagram"></i>
                                     </a>
                                 </p>
@@ -51,47 +55,14 @@
                         <div class="blogs_item_photo w-100 my-4">
                             <a href=""
                                class="d-block overflow-hidden d-flex align-items-center justify-content-center w-100">
-                                <img src="~/Assets/Uploads/Blogs/blog-post-img-1.jpg"
-                                     alt=""
+                                <img src="~/Assets/Uploads/Blogs/@Model.Blog.ImageUrl"
+                                     alt="@Model.Blog.ImageUrl"
                                      class="d-block" />
                             </a>
                         </div>
                         <div class="blogs_item_body p-4">
                             <p class="blogs_item_body_dontent mt-4">
-                                Oral hygiene is essential for your overall wellbeing, not
-                                just your oral health. In fact, gum disease is a major risk
-                                factor for developing certain dangerous health conditions,
-                                such as diabetes and heart disease. Brushing regularly is
-                                one of the best methods for keeping your teeth and gums
-                                healthy. However, how do you know which toothbrush is best
-                                to use? Tips for Choosing a Toothbrush There are specific
-                                features to look for in a toothbrush, regardless of whether
-                                it is powered or manual. The variety of styles, sizes, and
-                                shapes of toothbrushes available can make choosing the right
-                                one overwhelming. Here’s what to look Expert
-                                recommendations. Look for powered or manual toothbrushes
-                                with the American Dental Association Seal of Approval. You
-                                can also ask your dentist for a recommendation to ensure
-                                your toothbrush has passed quality control tests for safety
-                                and cleaning effectiveness. Bristle options. Manual
-                                toothbrushes or replacement heads for your electric
-                                toothbrush are available with hard, medium, or soft nylon
-                                bristles. Soft bristles are the safest and most comfortable
-                                option for most people. You could damage the enamel
-                                protecting your teeth, root surface, and gums depending on
-                                the strength of the bristles and how vigorously you brush
-                                your teeth. Rounded bristle tips offer even more protection.
-                                Toothbrush head size. The best size of toothbrush head is
-                                one that permits easy access to the surfaces of all your
-                                teeth. A toothbrush head that’s one-inch tall and a
-                                half-inch wide is easy to use for most adults and can reach
-                                all of your teeth efficiently. The toothbrush should have a
-                                long enough handle to hold it comfortably in your hand. Make
-                                sure to replace your toothbrush every three months or when
-                                it begins to show wear, whichever comes first. It is also
-                                vital to replace your toothbrush after you’ve had a cold
-                                because the bristles can accumulate bacteria and result in
-                                reinfection.
+                               @Html.Raw(Model.Blog.Text)
                             </p>
                         </div>
                     </div>
@@ -103,112 +74,58 @@
                     <div>
                         <p class="h3">Categories</p>
                         <ul class="mt-3">
-                            <li class="mt-2">
-                                <a href="#" class="text-decoration-none link-base">
-                                    <i class="fa-solid fa-check text-base mx-1"></i>
-                                    Category1
-                                </a>
-                            </li>
-                            <li class="mt-2">
-                                <a href="#" class="text-decoration-none link-base">
-                                    <i class="fa-solid fa-check text-base mx-1"></i>
-                                    Category1
-                                </a>
-                            </li>
-                            <li class="mt-2">
-                                <a href="#" class="text-decoration-none link-base">
-                                    <i class="fa-solid fa-check text-base mx-1"></i>
-                                    Category1
-                                </a>
-                            </li>
-                            <li class="mt-2">
-                                <a href="#" class="text-decoration-none link-base">
-                                    <i class="fa-solid fa-check text-base mx-1"></i>
-                                    Category1
-                                </a>
-                            </li>
-                            <li class="mt-2">
-                                <a href="#" class="text-decoration-none link-base">
-                                    <i class="fa-solid fa-check text-base mx-1"></i>
-                                    Category1
-                                </a>
-                            </li>
-                            <li class="mt-2">
-                                <a href="#" class="text-decoration-none link-base">
-                                    <i class="fa-solid fa-check text-base mx-1"></i>
-                                    Category1
-                                </a>
-                            </li>
+                            @foreach (var category in Model.BlogCategories)
+                            {
+                                <!-- Category -->
+                                <li class="mt-2">
+                                    <a asp-action="index" asp-controller="blog" asp-route-BlogCategoryId="@category.Id" class="text-decoration-none   @(Model.Blog.BlogCategoryId == category.Id? "link-hover-base":"link-base")">
+                                        <i class="fa-solid fa-check text-base mx-1"></i>
+                                        @category.Name
+                                    </a>
+                                </li>
+                            }
+                            <!-- End -->
+
+                           
                         </ul>
                     </div>
+
+                    <!-- recent Blogs -->
+
 
                     <div class="mt-4">
                         <p class="h4">Recent Posts</p>
 
                         <ul class="recent-blogs container-fluid">
-                            <!-- recent Blog -->
-                            <li class="recent-blogs_item my-2 row p-1">
-                                <div class="recent-blogs_item_photo col-2 p-0">
-                                    <a href=""
+
+                            @foreach (var blog in Model.RecentBlogs)
+                            {
+                                <!-- recent Blog -->
+                                <li class="recent-blogs_item my-2 row p-1">
+                                    <div class="recent-blogs_item_photo col-2 p-0">
+                                        <a asp-action="details" asp-controller="blog" asp-route-id="@blog.Id"
                                        class="w-100 h-100 d-block d-flex align-items-center justify-content-center">
-                                        <img src="~/Assets/Uploads/Blogs/blog-post-img-1.jpg"
-                                             alt="" />
-                                    </a>
-                                </div>
-                                <div class="recent-blogs_item_info col-10">
-                                    <h6>
-                                        <a href="" class="text-decoration-none link-base">
-                                            Do you brush your teeth correctly?
+                                            <img src="~/Assets/Uploads/Blogs/@blog.ImageUrl"
+                                             alt="@blog.ImageUrl" />
                                         </a>
-                                    </h6>
-                                    <p class="m-0 post-small-info">
-                                        <i class="me-2 me-2 fas fa-clock text-base"></i>
-                                        <span class="post-date">17 Jan, 2018</span>
-                                    </p>
-                                </div>
-                            </li>
-                            <!-- recent Blog -->
-                            <li class="recent-blogs_item my-2 row p-1">
-                                <div class="recent-blogs_item_photo col-2 p-0">
-                                    <a href=""
-                                       class="w-100 h-100 d-block d-flex align-items-center justify-content-center">
-                                        <img src="~/Assets/Uploads/Blogs/blog-post-img-1.jpg"
-                                             alt="" />
-                                    </a>
-                                </div>
-                                <div class="recent-blogs_item_info col-10">
-                                    <h6>
-                                        <a href="" class="text-decoration-none link-base">
-                                            Do you brush your teeth correctly?
-                                        </a>
-                                    </h6>
-                                    <p class="m-0 post-small-info">
-                                        <i class="me-2 me-2 fas fa-clock text-base"></i>
-                                        <span class="post-date">17 Jan, 2018</span>
-                                    </p>
-                                </div>
-                            </li>
-                            <!-- recent Blog -->
-                            <li class="recent-blogs_item my-2 row p-1">
-                                <div class="recent-blogs_item_photo col-2 p-0">
-                                    <a href=""
-                                       class="w-100 h-100 d-block d-flex align-items-center justify-content-center">
-                                        <img src="~/Assets/Uploads/Blogs/blog-post-img-1.jpg"
-                                             alt="" />
-                                    </a>
-                                </div>
-                                <div class="recent-blogs_item_info col-10">
-                                    <h6>
-                                        <a href="" class="text-decoration-none link-base">
-                                            Do you brush your teeth correctly?
-                                        </a>
-                                    </h6>
-                                    <p class="m-0 post-small-info">
-                                        <i class="me-2 me-2 fas fa-clock text-base"></i>
-                                        <span class="post-date">17 Jan, 2018</span>
-                                    </p>
-                                </div>
-                            </li>
+                                    </div>
+                                    <div class="recent-blogs_item_info col-10">
+                                        <h6>
+                                            <a asp-action="details" asp-controller="blog" asp-route-id="@blog.Id" class="text-decoration-none link-base">
+                                               @blog.Title
+                                            </a>
+                                        </h6>
+                                        <p class="m-0 post-small-info">
+                                            <i class="me-2 me-2 fas fa-clock text-base"></i>
+                                            <span class="post-date">@blog.CreatedAt.ToString("dd MMM yyyy")</span>
+                                        </p>
+                                    </div>
+                                </li>
+                            }
+
+
+                            <!-- End -->
+
                         </ul>
                     </div>
                 </div>

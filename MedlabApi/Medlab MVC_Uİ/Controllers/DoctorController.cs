@@ -9,11 +9,13 @@ namespace Medlab_MVC_Uİ.Controllers
     {
         private readonly IDoctorRepository _doctorRepository;
         private readonly IDepartmentRepository _departmentRepository;
+        private readonly IBlogRepostiory _blogRepostiory;
 
-        public DoctorController(IDoctorRepository doctorRepository, IDepartmentRepository departmentRepository)
+        public DoctorController(IDoctorRepository doctorRepository, IDepartmentRepository departmentRepository, IBlogRepostiory blogRepostiory)
         {
             this._doctorRepository = doctorRepository;
             this._departmentRepository = departmentRepository;
+            this._blogRepostiory = blogRepostiory;
         }
         public IActionResult Index(int? departmentId = null)
         {
@@ -38,9 +40,20 @@ namespace Medlab_MVC_Uİ.Controllers
             ViewBag.departmentId = departmentId;
             return View(model);
         }
-        public IActionResult Details()
+        public async Task<IActionResult>  Details(int id)
         {
-            return View();
+            Doctor doctor =await _doctorRepository.GetAsync(x => x.Id == id, "Blogs");
+            if (doctor == null)
+                return NotFound();
+
+            DoctorDetailsViewModel model = new DoctorDetailsViewModel
+            {
+                Doctor = doctor,
+                Doctors = _doctorRepository.GetAll(x => x.DepartmentId == doctor.DepartmentId).ToList(),
+                Blogs = doctor.Blogs.OrderByDescending(x => x.CreatedAt).Take(2).ToList()
+            };
+
+            return View(model);
 
         }
     }

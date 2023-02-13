@@ -91,6 +91,72 @@ namespace Medlab.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Medlab.Core.Entities.Blog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("BlogCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("PrevText")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogCategoryId");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("Medlab.Core.Entities.BlogCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BlogCategories");
+                });
+
             modelBuilder.Entity("Medlab.Core.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -184,6 +250,13 @@ namespace Medlab.Data.Migrations
 
                     b.Property<bool>("IsFeatured")
                         .HasColumnType("bit");
+
+                    b.Property<decimal>("MeetingPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Office")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Positon")
                         .IsRequired()
@@ -439,6 +512,22 @@ namespace Medlab.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Medlab.Core.Entities.Blog", b =>
+                {
+                    b.HasOne("Medlab.Core.Entities.BlogCategory", "BlogCategory")
+                        .WithMany("Blogs")
+                        .HasForeignKey("BlogCategoryId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Medlab.Core.Entities.Doctor", "Doctor")
+                        .WithMany("Blogs")
+                        .HasForeignKey("DoctorId");
+
+                    b.Navigation("BlogCategory");
+
+                    b.Navigation("Doctor");
+                });
+
             modelBuilder.Entity("Medlab.Core.Entities.Doctor", b =>
                 {
                     b.HasOne("Medlab.Core.Entities.Department", "Department")
@@ -500,9 +589,19 @@ namespace Medlab.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Medlab.Core.Entities.BlogCategory", b =>
+                {
+                    b.Navigation("Blogs");
+                });
+
             modelBuilder.Entity("Medlab.Core.Entities.Department", b =>
                 {
                     b.Navigation("Doctors");
+                });
+
+            modelBuilder.Entity("Medlab.Core.Entities.Doctor", b =>
+                {
+                    b.Navigation("Blogs");
                 });
 #pragma warning restore 612, 618
         }

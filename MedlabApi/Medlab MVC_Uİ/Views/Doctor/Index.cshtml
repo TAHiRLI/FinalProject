@@ -65,7 +65,7 @@
                     <!-- card -->
                     <div class="all-doctors_card col-lg-4 col-md-6 mt-5 Endodontics bg-light">
                         <div class="all-doctors_card_photo">
-                            <a asp-action="details" asp-controller="doctor" class="d-block w-100">
+                            <a asp-action="details" asp-controller="doctor" asp-route-id="@doctor.Id" class="d-block w-100">
                                 <img src="~/Assets/Uploads/Doctors/@doctor.ImageUrl"
                                  alt=""
                                  class="w-100" />
@@ -86,7 +86,7 @@
                                 <p class="text-center">
                                     @doctor.Desc
                                 </p>
-                                <p class="text-center text-base fw-bold">$2 / 10 min</p>
+                                <p class="text-center text-base fw-bold">$@doctor.MeetingPrice / 10 min</p>
                             </div>
                             <div class="all-doctors_card_links mt-4">
                                 <div class="set_meeting rounded-pill w-100 m-0">

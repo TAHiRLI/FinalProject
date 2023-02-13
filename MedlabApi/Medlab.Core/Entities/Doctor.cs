@@ -17,6 +17,9 @@ namespace Medlab.Core.Entities
         public decimal Salary { get; set; }
         public bool Gender { get; set; }  // true if male
         public string Positon { get; set; }
+        public string? Office { get; set; }
+        public decimal MeetingPrice { get; set; }
+
         public bool IsFeatured { get; set; }
 
         public string? Email { get; set; }
@@ -30,6 +33,7 @@ namespace Medlab.Core.Entities
 
         public Department? Department { get; set; }
         public int? DepartmentId { get; set; }
+        public List<Blog> Blogs { get; set; } = new List<Blog>();
 
     }
 }

@@ -18,6 +18,8 @@ namespace Medlab.Data.DAL
 
         public DbSet<Department> Departments { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<BlogCategory> BlogCategories { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
 
 
 
