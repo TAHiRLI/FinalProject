@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 
 namespace Medlab.Data.Configurations
 {
-    internal class CategoryConfiguration : IEntityTypeConfiguration<Category>
+    public class TagConfiguration : IEntityTypeConfiguration<Tag>
     {
-        public void Configure(EntityTypeBuilder<Category> builder)
+        public void Configure(EntityTypeBuilder<Tag> builder)
         {
-            builder.Property(x => x.Name).IsRequired(true).HasMaxLength(20);
+            builder.Property(x => x.Name).IsRequired(true)
+                .HasMaxLength(30);
+            
         }
     }
 }

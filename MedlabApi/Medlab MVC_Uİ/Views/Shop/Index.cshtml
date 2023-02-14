@@ -1,4 +1,4 @@
-﻿
+﻿@model ShopViewModel
 
 @section Styles{
     <!--  jquery Ui -->
@@ -14,7 +14,7 @@
 <!-- Bread crumb -->
 <div class="breadCrumb p-3 bg-light">
     <p class="container mb-0 px-5">
-        <a href="#">Home</a>/<a href="#">Shop</a>
+        <a asp-action="index" asp-controller="home">Home</a>/<a href="#">Shop</a>
     </p>
 </div>
 
@@ -34,17 +34,20 @@
 
                         <table class="w-100">
                             <tbody>
+                                @foreach (var category in Model.Categories)
+                                {
+                                      <!--Category-->
                                 <tr>
                                     <td>
                                         <div class="checkbox-wrapper-28 my-2">
-                                            <input id="tmp-28"
+                                            <input id="cateogry-@category.Id"
                                                    type="checkbox"
                                                    class="promoted-input-checkbox" />
-                                            <svg><use xlink:href="#checkmark-28" /></svg>
-                                            <label for="tmp-28"> Category1 </label>
+                                            <svg><use xlink:href="#checkmark-@category.Id" /></svg>
+                                                <label for="cateogry-@category.Id"> @category.Name </label>
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                  style="display: none">
-                                                <symbol id="checkmark-28" viewBox="0 0 24 24">
+                                                <symbol id="checkmark-@category.Id" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round"
                                                           stroke-miterlimit="10"
                                                           fill="none"
@@ -53,113 +56,10 @@
                                             </svg>
                                         </div>
                                     </td>
-                                    <td><span>15</span></td>
+                                    <td><span>@category.Products.Count</span></td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div class="checkbox-wrapper-28 my-2">
-                                            <input id="tmp-28"
-                                                   type="checkbox"
-                                                   class="promoted-input-checkbox" />
-                                            <svg><use xlink:href="#checkmark-28" /></svg>
-                                            <label for="tmp-28"> Category1 </label>
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                 style="display: none">
-                                                <symbol id="checkmark-28" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round"
-                                                          stroke-miterlimit="10"
-                                                          fill="none"
-                                                          d="M22.9 3.7l-15.2 16.6-6.6-7.1"></path>
-                                                </symbol>
-                                            </svg>
-                                        </div>
-                                    </td>
-                                    <td><span>15</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="checkbox-wrapper-28 my-2">
-                                            <input id="tmp-28"
-                                                   type="checkbox"
-                                                   class="promoted-input-checkbox" />
-                                            <svg><use xlink:href="#checkmark-28" /></svg>
-                                            <label for="tmp-28"> Category1 </label>
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                 style="display: none">
-                                                <symbol id="checkmark-28" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round"
-                                                          stroke-miterlimit="10"
-                                                          fill="none"
-                                                          d="M22.9 3.7l-15.2 16.6-6.6-7.1"></path>
-                                                </symbol>
-                                            </svg>
-                                        </div>
-                                    </td>
-                                    <td><span>15</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="checkbox-wrapper-28 my-2">
-                                            <input id="tmp-28"
-                                                   type="checkbox"
-                                                   class="promoted-input-checkbox" />
-                                            <svg><use xlink:href="#checkmark-28" /></svg>
-                                            <label for="tmp-28"> Category1 </label>
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                 style="display: none">
-                                                <symbol id="checkmark-28" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round"
-                                                          stroke-miterlimit="10"
-                                                          fill="none"
-                                                          d="M22.9 3.7l-15.2 16.6-6.6-7.1"></path>
-                                                </symbol>
-                                            </svg>
-                                        </div>
-                                    </td>
-                                    <td><span>15</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="checkbox-wrapper-28 my-2">
-                                            <input id="tmp-28"
-                                                   type="checkbox"
-                                                   class="promoted-input-checkbox" />
-                                            <svg><use xlink:href="#checkmark-28" /></svg>
-                                            <label for="tmp-28"> Category1 </label>
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                 style="display: none">
-                                                <symbol id="checkmark-28" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round"
-                                                          stroke-miterlimit="10"
-                                                          fill="none"
-                                                          d="M22.9 3.7l-15.2 16.6-6.6-7.1"></path>
-                                                </symbol>
-                                            </svg>
-                                        </div>
-                                    </td>
-                                    <td><span>15</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="checkbox-wrapper-28 my-2">
-                                            <input id="tmp-28"
-                                                   type="checkbox"
-                                                   class="promoted-input-checkbox" />
-                                            <svg><use xlink:href="#checkmark-28" /></svg>
-                                            <label for="tmp-28"> Category1 </label>
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                 style="display: none">
-                                                <symbol id="checkmark-28" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round"
-                                                          stroke-miterlimit="10"
-                                                          fill="none"
-                                                          d="M22.9 3.7l-15.2 16.6-6.6-7.1"></path>
-                                                </symbol>
-                                            </svg>
-                                        </div>
-                                    </td>
-                                    <td><span>15</span></td>
-                                </tr>
+                                }
+                              <!--End-->
                             </tbody>
                         </table>
 
@@ -177,55 +77,28 @@
 
                     <div class="shop_popular">
                         <p class="h4 ms-3 mb-2">Popular</p>
-                        <!-- item -->
+                        @foreach (var product in Model.FeaturedProducts)
+                        {
+                              <!-- item -->
                         <div class="shop_popular_item  row my-2">
                             <div class="col-4 shop_popular_item_img d-flex align-self-center justify-content-center">
-                                <img src="/Assets/Uploads/Doctors/doctor-01.jpg"
-                                     alt=""
+                                <img src="/Assets/Uploads/Products/@product?.ProductImages.FirstOrDefault(x=> x.IsMain)?.ImageUrl"
+                                     alt="@product?.ProductImages.FirstOrDefault(x=> x.IsMain)?.ImageUrl"
                                      class="w-100" />
                             </div>
                             <div class="col-8 shop_popular_item_info">
-                                <a href="#" class="link-base text-decoration-none">
+                                    <a asp-action="details" asp-controller="product" asp-route-id="@product.Id" class="link-base text-decoration-none">
                                     <h2 class="h6">
-                                        Active Wow Teeth Whitening Charcoal Powder
+                                        @product.Name
                                     </h2>
                                 </a>
-                                <div class="price text-base">$38.88</div>
+                                <div class="price text-base"> $@((
+                                           product.SalePrice * (100 - product.DiscoutPercent)/100).ToString("0.00") 
+                                            )</div>
                             </div>
                         </div>
-
-                        <!-- item -->
-                        <div class="shop_popular_item  row my-2">
-                            <div class="col-4 shop_popular_item_img d-flex align-self-center justify-content-center">
-                                <img src="/Assets/Uploads/Doctors/doctor-01.jpg"
-                                     alt=""
-                                     class="w-100" />
-                            </div>
-                            <div class="col-8 shop_popular_item_info">
-                                <a href="#" class="link-base text-decoration-none">
-                                    <h2 class="h6">
-                                        Active Wow Teeth Whitening Charcoal Powder
-                                    </h2>
-                                </a>
-                                <div class="price text-base">$38.88</div>
-                            </div>
-                        </div>
-                        <!-- item -->
-                        <div class="shop_popular_item  row my-2">
-                            <div class="col-4 shop_popular_item_img d-flex align-self-center justify-content-center">
-                                <img src="/Assets/Uploads/Doctors/doctor-01.jpg"
-                                     alt=""
-                                     class="w-100" />
-                            </div>
-                            <div class="col-8 shop_popular_item_info">
-                                <a href="#" class="link-base text-decoration-none">
-                                    <h2 class="h6">
-                                        Active Wow Teeth Whitening Charcoal Powder
-                                    </h2>
-                                </a>
-                                <div class="price text-base">$38.88</div>
-                            </div>
-                        </div>
+                        }
+                        <!-- End -->
                     </div>
                 </div>
 
@@ -252,41 +125,62 @@
                         </div>
                     </div>
 
-                    <div class="shop_products_cards mt-2 row gy-5">
+                    <div class="shop_products_cards mt-2 row gy-5 flex-grow-1">
 
-                        <!-- Item -->
-                        <div class=" col-lg-4 col-md-6">
-                            <div class="product  text-center p-3 ">
+                       @foreach (var product in Model.Products)
+                        {
+                            <!-- Item -->
+                            <div class=" col-lg-4 col-md-6">
+                                <div class="product  text-center p-3 h-100 d-flex flex-column justify-content-between">
 
-                                <div class="product-img">
-                                    <a href="#" class="w-100 h-100 d-block">
-                                        <img src="/Assets/Uploads/Products/prd-6.jpg"
+                                    <div class="product-img">
+                                        <a asp-action="details" asp-controller="product" asp-route-id="@product.Id" class="w-100 h-100 d-block">
+                                            <img src="/Assets/Uploads/Products/@product.ProductImages?.FirstOrDefault(x=> x.IsMain == true)?.ImageUrl"
                                              alt=""
                                              class="w-100" />
-                                    </a>
+                                        </a>
 
-                                </div>
-                                <div class="product-footer p-2">
-                                    <h1 class="product-name h6 text-dark mt-3">
-                                        <a href="#" class="link-base text-decoration-none">Oral B Replacement Brush Heads (5 Pack)</a>
-                                    </h1>
-                                    <p class="product-price fs-4 mt-3 mb-0  text-base">
-                                        $35.21
-                                    </p>
-                                    <div class="product-stars text-center">
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-regular fa-star"></i>
-                                        <i class="text-base fa-regular fa-star"></i>
                                     </div>
-                                    <button class="product-addToCart text-nowrap btn rounded-pill text-base my-3">
-                                        <i class="fa-sharp fa-solid fa-bag-shopping mx-2"></i>
-                                        Add To Cart
-                                    </button>
+                                    <div class="product-footer p-2">
+                                        <h1 class="product-name h6 text-dark my-3">
+                                            <a asp-action="details" asp-controller="product" asp-route-id="@product.Id" class="link-base text-decoration-none">
+                                                @product.Name
+                                                </a>
+                                        </h1>
+                                        @if (product.DiscoutPercent > 0)
+                                        {
+                                            <small class="text-decoration-line-through text-muted mx-1">$@product.SalePrice</small>
+                                        }
+
+                                        <p class="product-price fs-4  mb-0  text-base">
+                                            $@((
+                                           product.SalePrice * (100 - product.DiscoutPercent)/100).ToString("0.00") 
+                                            )
+
+                                          
+                                        </p>
+                                        <div class="product-stars text-center">
+
+                                            @for (int i = 0; i < 5; i++)
+                                            {
+                                                if(i >= product.AvgRating){
+                                                    <i class="text-base fa-regular fa-star"></i>
+                                                }
+                                                else{
+                                                  <i class="text-base fa-solid fa-star"></i>
+
+                                                }
+                                            }
+                                       
+                                        </div>
+                                        <button class="product-addToCart text-nowrap btn rounded-pill text-base my-3">
+                                            <i class="fa-sharp fa-solid fa-bag-shopping mx-2"></i>
+                                            Add To Cart
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                         <!-- Item -->
                         <div class=" col-lg-4 col-md-6">
                             <div class="product  text-center p-3 r">

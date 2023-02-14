@@ -16,7 +16,7 @@
     <!-- Bread crumb -->
     <div class="breadCrumb p-3 bg-light">
         <p class="container mb-0 px-5">
-            <a asp-action="index" asp-controller="home">Home</a>/<a asp-action="index" asp-controller="doctor">Doctors</a>/<a href="#">Dr. Frank Bigham</a>
+            <a asp-action="index" asp-controller="home">Home</a>/<a asp-action="index" asp-controller="doctor">Doctors</a>/<a href="#">@Model.Doctor.Fullname</a>
         </p>
     </div>
 

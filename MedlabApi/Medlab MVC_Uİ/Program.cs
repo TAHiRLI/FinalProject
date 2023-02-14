@@ -72,14 +72,27 @@ builder.Services.AddAuthentication()
 //===================
 
 builder.Services.AddScoped<LayoutService>();
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+//General
 builder.Services.AddScoped<ISettingRepository, SettingRepository>();
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+
+//Doctor
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+//Blog
 builder.Services.AddScoped<IBlogCategoryRepository, BlogCategoryRepository>();
 builder.Services.AddScoped<IBlogRepostiory, BlogRepository>();
+
+//Product
+builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+builder.Services.AddScoped<ITagRepository, TagRepository>();
+builder.Services.AddScoped<IProductTagRepository, ProductTagRepository>();  
+builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 
 
 

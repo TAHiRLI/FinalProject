@@ -12,7 +12,6 @@ namespace Medlab.Data.DAL
 
         }
         public DbSet<Setting> Settings { get; set; }
-        public DbSet<Category> Cateogries { get; set; }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Service> Services { get; set; }
 
@@ -21,7 +20,13 @@ namespace Medlab.Data.DAL
         public DbSet<BlogCategory> BlogCategories { get; set; }
         public DbSet<Blog> Blogs { get; set; }
 
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<ProductTag> ProductTags { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Product> Products { get; set; }
 
+        
 
         //===================
         // Fluent Validation
