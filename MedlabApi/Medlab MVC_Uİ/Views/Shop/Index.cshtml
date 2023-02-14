@@ -11,55 +11,56 @@
 }
 
 
-<!-- Bread crumb -->
-<div class="breadCrumb p-3 bg-light">
-    <p class="container mb-0 px-5">
-        <a asp-action="index" asp-controller="home">Home</a>/<a href="#">Shop</a>
-    </p>
-</div>
+    <!-- Bread crumb -->
+    <div class="breadCrumb p-3 bg-light">
+        <p class="container mb-0 px-5">
+            <a asp-action="index" asp-controller="home">Home</a>/<a href="#">Shop</a>
+        </p>
+    </div>
 
-<main>
-    <section id="Shop_Section" class="py-5 ">
-        <div class="container container-sm-fluid  px-xl-5">
-            <div class="sectionTitle">
-                <h2 class="h1 position-relative text-center text-dark title_underlined">
-                    Online Shop
-                </h2>
-            </div>
+    <main>
+        <section id="Shop_Section" class="py-5 ">
+            <div class="container container-sm-fluid  px-xl-5">
+                <div class="sectionTitle">
+                    <h2 class="h1 position-relative text-center text-dark title_underlined">
+                        Online Shop
+                    </h2>
+                </div>
 
-            <div class="shop mt-5 row">
-                <div class="shop_filters col-lg-3 col-md-4  p-3">
-                    <form id="filter_form" action="" class="shop_filters_categories mt-4 ms-3">
-                        <h4>Categories</h4>
+                <div class="shop mt-5 row">
+                    <div class="shop_filters col-lg-3 col-md-4  p-3">
+                        <form id="filter_form" action="" class="shop_filters_categories mt-4 ms-3">
+                            <h4>Categories</h4>
 
-                        <table class="w-100">
-                            <tbody>
+                            <table class="w-100">
+                                <tbody>
                                 @foreach (var category in Model.Categories)
                                 {
-                                      <!--Category-->
-                                <tr>
-                                    <td>
-                                        <div class="checkbox-wrapper-28 my-2">
-                                            <input id="cateogry-@category.Id"
+                                    <!--Category-->
+                                    <tr>
+                                        <td>
+                                            <div class="checkbox-wrapper-28 my-2">
+                                                <input id="cateogry-@category.Id" name="CategoryIds" value="@category.Id"
+                                                   @(ViewBag.CategoryIds?.Contains(category.Id)?"checked":"")
                                                    type="checkbox"
                                                    class="promoted-input-checkbox" />
-                                            <svg><use xlink:href="#checkmark-@category.Id" /></svg>
+                                                <svg><use xlink:href="#checkmark-@category.Id" /></svg>
                                                 <label for="cateogry-@category.Id"> @category.Name </label>
-                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                <svg xmlns="http://www.w3.org/2000/svg"
                                                  style="display: none">
-                                                <symbol id="checkmark-@category.Id" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round"
+                                                    <symbol id="checkmark-@category.Id" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round"
                                                           stroke-miterlimit="10"
                                                           fill="none"
                                                           d="M22.9 3.7l-15.2 16.6-6.6-7.1"></path>
-                                                </symbol>
-                                            </svg>
-                                        </div>
-                                    </td>
-                                    <td><span>@category.Products.Count</span></td>
-                                </tr>
+                                                    </symbol>
+                                                </svg>
+                                            </div>
+                                        </td>
+                                        <td><span>@category.Products.Count</span></td>
+                                    </tr>
                                 }
-                              <!--End-->
+                                <!--End-->
                             </tbody>
                         </table>
 
@@ -67,10 +68,16 @@
 
                         <div>
                             <p class="d-flex justify-content-between">
-                                Price: <span class="amount">$30 - $63</span>
+                                Price: <span class="amount">$@ViewBag.minPrice.ToString("0.0") - $@ViewBag.maxPrice.ToString("0.0")</span>
                             </p>
+
+                            <input type="hidden" class="minPrice" name="minPrice" />
+                            <input type="hidden" class="maxPrice" name="maxPrice" />
                             <div class="price-slider"></div>
                         </div>
+                        <hr />
+
+                        <button type="submit" class="my-custom-btn m-auto py-1 w-100">Filter</button>
                     </form>
 
                     <hr class="my-4" />
@@ -79,24 +86,30 @@
                         <p class="h4 ms-3 mb-2">Popular</p>
                         @foreach (var product in Model.FeaturedProducts)
                         {
-                              <!-- item -->
-                        <div class="shop_popular_item  row my-2">
-                            <div class="col-4 shop_popular_item_img d-flex align-self-center justify-content-center">
-                                <img src="/Assets/Uploads/Products/@product?.ProductImages.FirstOrDefault(x=> x.IsMain)?.ImageUrl"
+                            <!-- item -->
+                            <div class="shop_popular_item  row my-2">
+                                <div class="col-4 shop_popular_item_img d-flex align-self-center justify-content-center">
+                                    <img src="/Assets/Uploads/Products/@product?.ProductImages.FirstOrDefault(x=> x.IsMain)?.ImageUrl"
                                      alt="@product?.ProductImages.FirstOrDefault(x=> x.IsMain)?.ImageUrl"
                                      class="w-100" />
-                            </div>
-                            <div class="col-8 shop_popular_item_info">
+                                </div>
+                                <div class="col-8 shop_popular_item_info">
                                     <a asp-action="details" asp-controller="product" asp-route-id="@product.Id" class="link-base text-decoration-none">
-                                    <h2 class="h6">
-                                        @product.Name
-                                    </h2>
-                                </a>
-                                <div class="price text-base"> $@((
-                                           product.SalePrice * (100 - product.DiscoutPercent)/100).ToString("0.00") 
-                                            )</div>
+                                        <h2 class="h6">
+                                            @product.Name
+                                        </h2>
+                                    </a>
+                                    @if (product.DiscoutPercent > 0)
+                                    {
+                                        <small class="text-decoration-line-through text-muted mx-1">$@product.SalePrice</small>
+                                    }
+                                    <div class="price text-base">
+                                        $@((
+                                           product.SalePrice * (100 - product.DiscoutPercent) / 100).ToString("0.00")
+                                           )
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                         }
                         <!-- End -->
                     </div>
@@ -106,18 +119,18 @@
                 <div class="shop_products col-lg-9 col-md-8  p-3">
                     <div class="shop_products_sorting row justify-content-between align-items-center">
                         <div class="col-sm-4 my-2 ">
-                            <select class="js-select2">
-                                <option value="1">High To Low</option>
-                                <option value="2">Low To High</option>
-                                <option value="3">A-Z</option>
-                                <option value="3">Z-A</option>
+                            <select name="sort" form="filter_form" class="js-select2" >
+                                <option selected="@(ViewBag.Sort == "HighToLow" ? "selected" : null)" value="HighToLow">High To Low</option>
+                                <option selected="@(ViewBag.Sort == "LowToHigh" ? "selected" : null)" value="LowToHigh">Low To High</option>
+                                <option selected="@(ViewBag.Sort == "AZ" ? "selected" : null)" value="AZ">A-Z</option>
+                                <option selected="@(ViewBag.Sort == "ZA" ? "selected" : null)" value="ZA">Z-A</option>
                             </select>
                         </div>
-                        <p class="col-sm-4 my-2 d-none d-sm-block text-secondary text-center m-0">Showing 1–9 of 18 results</p>
+                        <p class="col-sm-4 my-2 d-none d-sm-block text-secondary text-center m-0">Showing 1–9 of @(Model.Products.Count) results</p>
 
                         <div class="col-sm-4 my-2  ">
                             <div class="input-group ">
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input type="text" form="filter_form" class="form-control" placeholder="Search..." name="search" value="@ViewBag.Search">
                                 <button form="filter_form" class="btn bg-light searchBtn" type="submit">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </button>
@@ -127,7 +140,7 @@
 
                     <div class="shop_products_cards mt-2 row gy-5 flex-grow-1">
 
-                       @foreach (var product in Model.Products)
+                        @foreach (var product in Model.Products)
                         {
                             <!-- Item -->
                             <div class=" col-lg-4 col-md-6">
@@ -145,7 +158,7 @@
                                         <h1 class="product-name h6 text-dark my-3">
                                             <a asp-action="details" asp-controller="product" asp-route-id="@product.Id" class="link-base text-decoration-none">
                                                 @product.Name
-                                                </a>
+                                            </a>
                                         </h1>
                                         @if (product.DiscoutPercent > 0)
                                         {
@@ -154,24 +167,26 @@
 
                                         <p class="product-price fs-4  mb-0  text-base">
                                             $@((
-                                           product.SalePrice * (100 - product.DiscoutPercent)/100).ToString("0.00") 
-                                            )
+                                               product.SalePrice * (100 - product.DiscoutPercent) / 100).ToString("0.00")
+                                               )
 
-                                          
+
                                         </p>
                                         <div class="product-stars text-center">
 
                                             @for (int i = 0; i < 5; i++)
                                             {
-                                                if(i >= product.AvgRating){
+                                                if (i >= product.AvgRating)
+                                                {
                                                     <i class="text-base fa-regular fa-star"></i>
                                                 }
-                                                else{
-                                                  <i class="text-base fa-solid fa-star"></i>
+                                                else
+                                                {
+                                                    <i class="text-base fa-solid fa-star"></i>
 
                                                 }
                                             }
-                                       
+
                                         </div>
                                         <button class="product-addToCart text-nowrap btn rounded-pill text-base my-3">
                                             <i class="fa-sharp fa-solid fa-bag-shopping mx-2"></i>
@@ -181,185 +196,19 @@
                                 </div>
                             </div>
                         }
-                        <!-- Item -->
-                        <div class=" col-lg-4 col-md-6">
-                            <div class="product  text-center p-3 r">
 
-                                <div class="product-img">
-                                    <a href="#" class="w-100 h-100 d-block">
-                                        <img src="/Assets/Uploads/Products/prd-5.jpg"
-                                             alt=""
-                                             class="w-100" />
-                                    </a>
-
-                                </div>
-                                <div class="product-footer p-2">
-                                    <h1 class="product-name h6 text-dark mt-3">
-                                        <a href="#" class="link-base text-decoration-none">Oral B Replacement Brush Heads (5 Pack)</a>
-                                    </h1>
-                                    <p class="product-price fs-4 mt-3 mb-0  text-base">
-                                        $35.21
-                                    </p>
-                                    <div class="product-stars text-center">
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-regular fa-star"></i>
-                                        <i class="text-base fa-regular fa-star"></i>
-                                    </div>
-                                    <button class="product-addToCart text-nowrap btn rounded-pill text-base my-3">
-                                        <i class="fa-sharp fa-solid fa-bag-shopping mx-2"></i>
-                                        Add To Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item -->
-                        <div class=" col-lg-4 col-md-6">
-                            <div class="product  text-center p-3 r">
-
-                                <div class="product-img">
-                                    <a href="#" class="w-100 h-100 d-block">
-                                        <img src="/Assets/Uploads/Products/prd-4.jpg"
-                                             alt=""
-                                             class="w-100" />
-                                    </a>
-
-                                </div>
-                                <div class="product-footer p-2">
-                                    <h1 class="product-name h6 text-dark mt-3">
-                                        <a href="#" class="link-base text-decoration-none">Oral B Replacement Brush Heads (5 Pack)</a>
-                                    </h1>
-                                    <p class="product-price fs-4 mt-3 mb-0  text-base">
-                                        $35.21
-                                    </p>
-                                    <div class="product-stars text-center">
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-regular fa-star"></i>
-                                        <i class="text-base fa-regular fa-star"></i>
-                                    </div>
-                                    <button class="product-addToCart text-nowrap btn rounded-pill text-base my-3">
-                                        <i class="fa-sharp fa-solid fa-bag-shopping mx-2"></i>
-                                        Add To Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item -->
-                        <div class=" col-lg-4 col-md-6">
-                            <div class="product  text-center p-3 r">
-
-                                <div class="product-img">
-                                    <a href="#" class="w-100 h-100 d-block">
-                                        <img src="/Assets/Uploads/Products/prd-5.jpg"
-                                             alt=""
-                                             class="w-100" />
-                                    </a>
-
-                                </div>
-                                <div class="product-footer p-2">
-                                    <h1 class="product-name h6 text-dark mt-3">
-                                        <a href="#" class="link-base text-decoration-none">Oral B Replacement Brush Heads (5 Pack)</a>
-                                    </h1>
-                                    <p class="product-price fs-4 mt-3 mb-0  text-base">
-                                        $35.21
-                                    </p>
-                                    <div class="product-stars text-center">
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-regular fa-star"></i>
-                                        <i class="text-base fa-regular fa-star"></i>
-                                    </div>
-                                    <button class="product-addToCart text-nowrap btn rounded-pill text-base my-3">
-                                        <i class="fa-sharp fa-solid fa-bag-shopping mx-2"></i>
-                                        Add To Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item -->
-                        <div class=" col-lg-4 col-md-6">
-                            <div class="product  text-center p-3 r">
-
-                                <div class="product-img">
-                                    <a href="#" class="w-100 h-100 d-block">
-                                        <img src="/Assets/Uploads/Products/prd-1.jpg"
-                                             alt=""
-                                             class="w-100" />
-                                    </a>
-
-                                </div>
-                                <div class="product-footer p-2">
-                                    <h1 class="product-name h6 text-dark mt-3">
-                                        <a href="#" class="link-base text-decoration-none">Oral B Replacement Brush Heads (5 Pack)</a>
-                                    </h1>
-                                    <p class="product-price fs-4 mt-3 mb-0  text-base">
-                                        $35.21
-                                    </p>
-                                    <div class="product-stars text-center">
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-regular fa-star"></i>
-                                        <i class="text-base fa-regular fa-star"></i>
-                                    </div>
-                                    <button class="product-addToCart text-nowrap btn rounded-pill text-base my-3">
-                                        <i class="fa-sharp fa-solid fa-bag-shopping mx-2"></i>
-                                        Add To Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item -->
-                        <div class=" col-lg-4 col-md-6">
-                            <div class="product  text-center p-3 r">
-
-                                <div class="product-img">
-                                    <a href="#" class="w-100 h-100 d-block">
-                                        <img src="/Assets/Uploads/Products/prd-7.jpg"
-                                             alt=""
-                                             class="w-100" />
-                                    </a>
-
-                                </div>
-                                <div class="product-footer p-2">
-                                    <h1 class="product-name h6 text-dark mt-3">
-                                        <a href="#" class="link-base text-decoration-none">Oral B Replacement Brush Heads (5 Pack)</a>
-                                    </h1>
-                                    <p class="product-price fs-4 mt-3 mb-0  text-base">
-                                        $35.21
-                                    </p>
-                                    <div class="product-stars text-center">
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-solid fa-star"></i>
-                                        <i class="text-base fa-regular fa-star"></i>
-                                        <i class="text-base fa-regular fa-star"></i>
-                                    </div>
-                                    <button class="product-addToCart text-nowrap btn rounded-pill text-base my-3">
-                                        <i class="fa-sharp fa-solid fa-bag-shopping mx-2"></i>
-                                        Add To Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- End -->
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 </main>
 
 
 @section Scripts{
     <!-- ========================= CDNs =============================== -->
-
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- Jquery UI -->
@@ -369,8 +218,31 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- ========================= Custom =============================== -->
-    <!-- jquery Ui slider -->
-    <script src="/Assets/Js/range.js"></script>
     <!-- Select 2 -->
     <script src="/Assets/Js/selectBox.js"></script>
-                                    }
+
+    <!-- jquery Ui slider -->
+
+    <script>
+        console.log(@ViewBag.minPrice)
+        $(".price-slider").slider({
+            range: true,
+            min: @ViewBag.minPrice,
+            max: @ViewBag.maxPrice,
+            step: .01,
+            values: [@ViewBag.selectedMin, @ViewBag.selectedMax],
+            slide: function (event, ui) {
+                $(".amount").html("$" + ui.values[0] + " - $" + ui.values[1]);
+            },
+            change: function (event, ui) {
+                $(".minPrice").val(ui.values[0]);
+                $(".maxPrice").val(ui.values[1]);
+            }
+        });
+        $(".amount").val("$" + $(".slider-range").slider("values", 0) +
+            " - $" + $(".slider-range").slider("values", 1));
+
+
+
+    </script>
+ }
