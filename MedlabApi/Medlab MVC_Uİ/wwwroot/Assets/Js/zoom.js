@@ -4,4 +4,3 @@ $(document).ready(function() {
         magnifiedHeight:750
     });
   });
-  

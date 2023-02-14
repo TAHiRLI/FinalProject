@@ -13,15 +13,15 @@ namespace Medlab_MVC_Uİ.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly SignInManager<AppUser> _signInManager;
-        private readonly UserManager<AppUser> _userManager;
         private readonly ISliderRepository _sliderRepository;
+        private readonly ISettingRepository _settingRepository;
+        private readonly IValueRepository _valueRepository;
 
-        public HomeController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, ISliderRepository sliderRepository )
+        public HomeController( ISliderRepository sliderRepository, ISettingRepository settingRepository, IValueRepository valueRepository )
         {
-            this._signInManager = signInManager;
-            this._userManager = userManager;
             this._sliderRepository = sliderRepository;
+            this._settingRepository = settingRepository;
+            this._valueRepository = valueRepository;
         }
 
 
@@ -35,7 +35,11 @@ namespace Medlab_MVC_Uİ.Controllers
         }
         public IActionResult AboutUs()
         {
-            return View();
+            AboutUsViewModel model = new AboutUsViewModel
+            {
+                Values = _valueRepository.GetAll(x => true).Take(20).ToList()
+        };
+            return View(model);
         }
         public IActionResult Contact()
         {

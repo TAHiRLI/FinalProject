@@ -77,6 +77,8 @@ builder.Services.AddScoped<LayoutService>();
 builder.Services.AddScoped<ISettingRepository, SettingRepository>();
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<IValueRepository, ValueRepository>();
+builder.Services.AddScoped<IAmenityImageRepository, AmenityImageRepository>();
 
 //Doctor
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
@@ -119,3 +121,11 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
+
+
+// Cli Commands
+// cd Medlab.Data
+// dotnet ef  --startup-project ..\MedlabApi migrations  add 
+// dotnet ef  --startup-project ..\MedlabApi database update

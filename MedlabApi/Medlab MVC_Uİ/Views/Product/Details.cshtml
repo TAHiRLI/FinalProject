@@ -51,11 +51,11 @@
                             <!-- Slide For -->
                             <div class="product-block-galery-main productMainImgSlider">
                                 <!-- MainSlide -->
-                                  <div class="productMainImgSlider_item">
+                                  <div class="productMainImgSlider_item ">
                                     <img src="~/Assets/Uploads/Products/@Model.Product.ProductImages?.FirstOrDefault(x=> x.IsMain == true)?.ImageUrl"
                                      alt="/@Model.Product.Name"
                                      class="product-zoom"
-                                     data-magnify-src="~/Assets/Uploads/Products/@Model.Product.ProductImages?.FirstOrDefault(x=> x.IsMain == true)?.ImageUrl" />
+                                     data-magnify-src="../../../Assets/Uploads/Products/@Model.Product.ProductImages?.FirstOrDefault(x=> x.IsMain == true)?.ImageUrl" />
                                 </div>
 
                                 @foreach (var image in Model.Product.ProductImages.Where(x=> !x.IsMain).ToList())
@@ -63,9 +63,9 @@
                                  <!-- Slide -->
                                 <div class="productMainImgSlider_item">
                                     <img src="~/Assets/Uploads/Products/@image.ImageUrl"
-                                     alt="/@Model.Product.Name"
+                                     alt="/@image.ImageUrl"
                                      class="product-zoom"
-                                     data-magnify-src="~/Assets/Uploads/Products/@image.ImageUrl" />
+                                     data-magnify-src="../../../Assets/Uploads/Products/@image.ImageUrl" />
                                 </div>
                             }
 
@@ -80,7 +80,7 @@
                                 <!-- Main Image -->
                                 <div class="productNavImgSlider_item col-4 mx-2">
                                 <img src="~/Assets/Uploads/Products/@Model.Product.ProductImages?.FirstOrDefault(x=> x.IsMain == true)?.ImageUrl"
-                                     alt=""
+                                     alt="main"
                                      class="" />
                                 </div>
 
@@ -90,7 +90,7 @@
                                  <!-- Slide -->
                                 <div class="productNavImgSlider_item col-4 mx-2">
                                     <img src="~/Assets/Uploads/Products/@image.ImageUrl"
-                                     alt=""
+                                     alt="else-@image.Id"
                                      class="" />
                                 </div>
                             }
