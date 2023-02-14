@@ -16,12 +16,14 @@ namespace Medlab_MVC_Uİ.Controllers
         private readonly ISliderRepository _sliderRepository;
         private readonly ISettingRepository _settingRepository;
         private readonly IValueRepository _valueRepository;
+        private readonly IAmenityImageRepository _amenityImageRepository;
 
-        public HomeController( ISliderRepository sliderRepository, ISettingRepository settingRepository, IValueRepository valueRepository )
+        public HomeController( ISliderRepository sliderRepository, ISettingRepository settingRepository, IValueRepository valueRepository, IAmenityImageRepository amenityImageRepository )
         {
             this._sliderRepository = sliderRepository;
             this._settingRepository = settingRepository;
             this._valueRepository = valueRepository;
+            this._amenityImageRepository = amenityImageRepository;
         }
 
 
@@ -37,8 +39,9 @@ namespace Medlab_MVC_Uİ.Controllers
         {
             AboutUsViewModel model = new AboutUsViewModel
             {
-                Values = _valueRepository.GetAll(x => true).Take(20).ToList()
-        };
+                Values = _valueRepository.GetAll(x => true).Take(20).ToList(),
+                AmenityImages = _amenityImageRepository.GetAll(x => true).ToList()
+         };
             return View(model);
         }
         public IActionResult Contact()

@@ -129,25 +129,20 @@
 
                     </p>
                 </div>
-                <div class="col-lg-8 bg-danger">
+                <div class="col-lg-8 ">
+
 
                     <div class="galery galerySliderFor position-relative">
-                        <div class="galery_img  bg-warning">
-                            <img src="/Assets/Images/slider-gallery-00.jpg" alt="" class="w-100">
-                        </div>
 
-                        <div class="galery_img  bg-danger">
-                            <img src="/Assets/Images/slider-gallery-01.jpg" alt="" class="w-100">
-                        </div>
-                        <div class="galery_img  bg-warning">
-                            <img src="/Assets/Images/slider-gallery-02.jpg" alt="" class="w-100">
-                        </div>
-                        <div class="galery_img  bg-warning">
-                            <img src="/Assets/Images/slider-gallery-03.jpg" alt="" class="w-100">
-                        </div>
-                        <div class="galery_img  bg-warning">
-                            <img src="/Assets/Images/slider-gallery-04.jpg" alt="" class="w-100">
-                        </div>
+                       @foreach (var amenity in Model.AmenityImages)
+                        {
+                            <!--Amenity Image-->
+                            <div class="galery_img  bg-warning">
+                                <img src="/Assets/Uploads/AmenityImages/@amenity.ImageUrl" alt="@amenity.ImageUrl" class="w-100">
+                            </div>
+
+                        }
+                            <!--End-->
 
                     </div>
 
@@ -156,21 +151,17 @@
                     <div class="position-relative">
 
                         <div class="galeryNav galerySliderNav mt-4 position-relative">
-                            <div class="galeryNav_img col-3 mx-2">
-                                <img src="/Assets/Images/slider-gallery-00.jpg" alt="" class="w-100">
-                            </div>
-                            <div class="galeryNav_img col-3 mx-2">
-                                <img src="/Assets/Images/slider-gallery-02.jpg" alt="" class="w-100">
-                            </div>
-                            <div class="galeryNav_img col-3 mx-2">
-                                <img src="/Assets/Images/slider-gallery-03.jpg" alt="" class="w-100">
-                            </div>
-                            <div class="galeryNav_img col-3 mx-2">
-                                <img src="/Assets/Images/slider-gallery-04.jpg" alt="" class="w-100">
-                            </div>
-                            <div class="galeryNav_img col-3 mx-2">
-                                <img src="/Assets/Images/slider-gallery-05.jpg" alt="" class="w-100">
-                            </div>
+
+                              @foreach (var amenity in Model.AmenityImages)
+                        {
+                            <!--Amenity Image-->
+                                <div class="galeryNav_img col-3 mx-2">
+                                    <img src="/Assets/Uploads/AmenityImages/@amenity.ImageUrl" alt="@amenity.ImageUrl" class="w-100">
+                                </div>
+
+                        }
+                            <!--END-->
+
                         </div>
 
 
