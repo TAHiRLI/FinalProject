@@ -3,6 +3,8 @@
     Layout = null;
 }
 
+@model LoginViewModel
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,24 +27,28 @@
                 <div class="login-form-context border border-dark bg-light  rounded-5 p-4">
                     <img src="~/Assets/Images/logo/logo.png" alt="" class="m-auto d-block mb-3">
                     <h2 class="text-center title pt-3">Log in</h2>
-                    <form action="" id="login-form" class="mt-4">
+                    <form asp-action="login" asp-controller="account" method="post" id="login-form" class="mt-4">
                         <div class="my-2">
                             <label for="" class="form-label">Username</label>
-                            <input type="text" placeholder="" class="form-control rounded-pill ">    
-                        </div>
+                            <input asp-for="Username" type="text" placeholder="" class="form-control rounded-pill ">
+                                <span class=" fs-09 d-block text-danger" asp-validation-for="Username"></span>
+
+                            </div>
                         <div class="my-2">
                             <label for="" class="form-label">Password</label>
-                            <input type="text" placeholder="" class="form-control rounded-pill ">  
+                            <input asp-for="Password" type="password" placeholder="" class="form-control rounded-pill "> 
+                           <span class="fs-09 d-block text-danger" asp-validation-for="Password"></span>
                             <a href="#" class="text-decoration-none link-base"> <small>Forgot password?</small></a>  
                         </div>
                         
                         <div class="">
-                            <input type="checkbox" checked class="form-check-inline" name="" id="">
-                            <label for="">Remember me</label>
+                            <input type="checkbox" asp-for="RememberMe"  checked class="form-check-inline" id="rememberme">
+                                <label for="rememberme">Remember me</label>
                         </div>
                     </form>
+                    <div asp-validation-summary="ModelOnly" class="fs-09 text-danger"></div>
                     <div class="text-center mt-2 ">
-                        <button class=" submit-btn m-auto">Log In</button>
+                        <button class=" submit-btn m-auto" type="submit" form="login-form">Log In</button>
                     </div>
                         <a asp-action="register" asp-controller="account" class="text-decoration-none link-base my-2 text-center d-block">Don't have an account? <span class="h6 link-hover-base">Register</span> </a>
                     <p class="text-center my-2 or "> OR</p>

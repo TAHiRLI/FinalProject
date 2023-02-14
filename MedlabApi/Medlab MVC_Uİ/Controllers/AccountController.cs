@@ -1,7 +1,11 @@
-﻿using Medlab.Core.Entities;
+﻿using FluentValidation;
+using Medlab.Core.Entities;
+using Medlab_MVC_Uİ.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace Medlab_MVC_Uİ.Controllers
@@ -16,9 +20,48 @@ namespace Medlab_MVC_Uİ.Controllers
             this._signInManager = signInManager;
             this._userManager = userManager;
         }
-        public IActionResult Login()
+        public IActionResult Login(string? ReturnUrl = null)
         {
             return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult>  Login(LoginViewModel LoginVM )
+        {
+
+            if (!ModelState.IsValid)
+                return View(LoginVM);
+
+            var user = await _userManager.FindByNameAsync(LoginVM.Username);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Username or password is incorrect");
+                return View(LoginVM);
+            }
+
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            if (!userRoles.Contains("Member"))
+            {
+                ModelState.AddModelError("", "Username or password is incorrect");
+                return View(LoginVM);
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(user, LoginVM.Password, LoginVM.RememberMe, true);
+
+
+            if (result.IsLockedOut)
+            {
+                ModelState.AddModelError("", "Too Many Attempts, Please Try Again");
+                return View(LoginVM);
+            }
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Username or password is incorrect");
+                return View(LoginVM);
+            }
+
+            return RedirectToAction("index", "home");
         }
 
         public IActionResult GoogleLogin()
@@ -75,7 +118,51 @@ namespace Medlab_MVC_Uİ.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult>  Register(RegisterViewModel RegisterVm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(RegisterVm);
+            }
 
+            if(await _userManager.FindByNameAsync(RegisterVm.Username) != null)
+            {
+                ModelState.AddModelError("Username", "This Username Is Already Taken");
+                return View(RegisterVm);
+            }
+            if (await _userManager.FindByEmailAsync(RegisterVm.Email) != null)
+            {
+                ModelState.AddModelError("Emai", "This Email Has been Used");
+                return View(RegisterVm);
+            }
+
+
+            AppUser newUser = new AppUser
+            {
+                UserName = RegisterVm.Username,
+                Fullname = RegisterVm.Fullname, 
+                PhoneNumber = RegisterVm.PhoneNumber,
+                PhoneNumberConfirmed = false,
+                Email = RegisterVm.Email,
+                EmailConfirmed = false,
+            };
+
+            var result = await _userManager.CreateAsync(newUser, RegisterVm.Password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(RegisterVm);
+            }
+
+            await _userManager.AddToRoleAsync(newUser,"Visitor");
+
+            return Ok(RegisterVm);
+        }
         // Profile
         public IActionResult Profile()
         {

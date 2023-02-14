@@ -1,6 +1,7 @@
 ﻿using Medlab.Core.Entities;
 using Medlab.Core.Repositories;
 using Medlab_MVC_Uİ.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography.X509Certificates;
 
@@ -44,6 +45,7 @@ namespace Medlab_MVC_Uİ.Controllers
             ViewBag.BlogCategoryId = BlogCategoryId;
             return View(model);
         }
+        [Authorize]
         public async Task<IActionResult>  Details(int id)
         {
 

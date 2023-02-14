@@ -1,23 +1,24 @@
-﻿using Medlab.Core.Entities;
+﻿using FluentValidation.AspNetCore;
+using Medlab.Core.Entities;
 using Medlab.Core.Repositories;
 using Medlab.Data.DAL;
 using Medlab.Data.Repositories;
 using Medlab_MVC_Uİ.Services;
+using Medlab_MVC_Uİ.ViewModels;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.WebSockets;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Dynamic;
 
 
 
-
-//       Content
+//--------------------------
+//         Content
 //--------------------------
 // 1 Database
 // 2 Identity
 // 3 Google Auth
 // 4 Custom Services
+// 5 Fluent Validation
 
 
 
@@ -29,7 +30,12 @@ using System.Dynamic;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddNewtonsoftJson(opt =>
+                          opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<LoginVmValidator>());
+
+
 
 //===================
 // 1 Database
@@ -42,6 +48,7 @@ builder.Services.AddDbContext<MedlabDbContext>(opt =>
 });
 
 
+
 //===================
 // 2 Identity
 //===================
@@ -52,6 +59,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
     opt.Password.RequireNonAlphanumeric = false;
     opt.Password.RequireUppercase = false;
     opt.Password.RequiredLength = 8;
+    
 
 }).AddDefaultTokenProviders().AddEntityFrameworkStores<MedlabDbContext>();
 
@@ -91,12 +99,18 @@ builder.Services.AddScoped<IBlogRepostiory, BlogRepository>();
 //Product
 builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
-builder.Services.AddScoped<IProductTagRepository, ProductTagRepository>();  
+builder.Services.AddScoped<IProductTagRepository, ProductTagRepository>();
 builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 
+//===================
+// 5 Fluent Validation
+//===================
 
+//builder.Services.AddValidatorsFromAssemblyContaining<LoginVmValidator>();
+
+//builder.Services.AddScoped<IValidator<LoginViewModel>, LoginVmValidator>();
 
 var app = builder.Build();
 
