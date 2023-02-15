@@ -45,7 +45,6 @@ namespace Medlab_MVC_Uİ.Controllers
             ViewBag.BlogCategoryId = BlogCategoryId;
             return View(model);
         }
-        [Authorize]
         public async Task<IActionResult>  Details(int id)
         {
 

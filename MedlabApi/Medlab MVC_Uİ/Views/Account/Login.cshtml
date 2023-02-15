@@ -45,11 +45,17 @@
                             <input type="checkbox" asp-for="RememberMe"  checked class="form-check-inline" id="rememberme">
                                 <label for="rememberme">Remember me</label>
                         </div>
+                            <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" />
                     </form>
                     <div asp-validation-summary="ModelOnly" class="fs-09 text-danger"></div>
+                    
                     <div class="text-center mt-2 ">
                         <button class=" submit-btn m-auto" type="submit" form="login-form">Log In</button>
                     </div>
+                        @if (ViewBag.VerificationLink != null)
+                        {
+                            <a class="text-center d-block" asp-action="resendMail" asp-controller="account" asp-route-to="@ViewBag.Email" asp-route-subject="Email Verification" asp-route-message="<a href'@ViewBag.VerificationLink'></a> here to verify your Account">Resend Link</a>
+                        }
                         <a asp-action="register" asp-controller="account" class="text-decoration-none link-base my-2 text-center d-block">Don't have an account? <span class="h6 link-hover-base">Register</span> </a>
                     <p class="text-center my-2 or "> OR</p>
 

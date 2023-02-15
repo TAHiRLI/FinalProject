@@ -4,9 +4,12 @@ using Medlab_MVC_Uİ.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Mail;
 using System.Security.Claims;
+
 
 namespace Medlab_MVC_Uİ.Controllers
 {
@@ -22,12 +25,15 @@ namespace Medlab_MVC_Uİ.Controllers
         }
         public IActionResult Login(string? ReturnUrl = null)
         {
+            ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult>  Login(LoginViewModel LoginVM )
-        {
+        [ValidateAntiForgeryToken]
 
+        public async Task<IActionResult>  Login(LoginViewModel LoginVM, string? ReturnUrl = null)
+        {
+            ViewBag.ReturnUrl = ReturnUrl;
             if (!ModelState.IsValid)
                 return View(LoginVM);
 
@@ -44,6 +50,17 @@ namespace Medlab_MVC_Uİ.Controllers
             if (!userRoles.Contains("Member"))
             {
                 ModelState.AddModelError("", "Username or password is incorrect");
+                return View(LoginVM);
+            }
+            if (!user.EmailConfirmed)
+            {
+
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var url = Url.Action(nameof(ConfirmEmail), "account", new { token = token, email = user.Email }, Request.Scheme);
+
+                ModelState.AddModelError("", $"Please Verify Your Account");
+                ViewBag.VerificationLink = url;
+                ViewBag.Email = user.Email;
                 return View(LoginVM);
             }
 
@@ -89,7 +106,8 @@ namespace Medlab_MVC_Uİ.Controllers
                     Email = info.Principal.FindFirst(ClaimTypes.Email).Value,
                     UserName = info.Principal.FindFirst(ClaimTypes.Email).Value,
                     EmailConfirmed = true,
-                    Fullname = info.Principal.FindFirst(ClaimTypes.Email).Value
+                    Fullname = info.Principal.FindFirst(ClaimTypes.Email).Value,
+                    PhoneNumber = info.Principal.FindFirst(ClaimTypes.MobilePhone).Value
 
                 };
                 IdentityResult identityResult = await _userManager.CreateAsync(user);
@@ -119,6 +137,8 @@ namespace Medlab_MVC_Uİ.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult>  Register(RegisterViewModel RegisterVm)
         {
             if (!ModelState.IsValid)
@@ -161,13 +181,71 @@ namespace Medlab_MVC_Uİ.Controllers
 
             await _userManager.AddToRoleAsync(newUser,"Visitor");
 
-            return Ok(RegisterVm);
+            // Send Email Verification
+
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
+            var url = Url.Action(nameof(ConfirmEmail), "account", new { token = token, email = newUser.Email }, Request.Scheme);
+
+            SendMail(newUser.Email, "Email Verification", $"Click <a href=\"{url}\" >here</a> to verify your email");
+
+            return RedirectToAction("index" , "home");
         }
         // Profile
         public IActionResult Profile()
         {
             return View();
         }
+        public void SendMail( string To,string subject, string message)
+        {
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new System.Net.NetworkCredential("tahirtahirli2002@gmail.com", "jgauwtdjhnwgxaib");
+            smtpClient.EnableSsl = true;
 
+            // message
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("tahirtahirli2002@gmail.com");
+            mailMessage.To.Add(To);
+            mailMessage.Subject = subject;
+            mailMessage.Body = message;
+
+            
+            smtpClient.Send(mailMessage);
+        }
+
+        public IActionResult ResendMail(string To, string subject, string message)
+        {
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new System.Net.NetworkCredential("tahirtahirli2002@gmail.com", "jgauwtdjhnwgxaib");
+            smtpClient.EnableSsl = true;
+
+            // message
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("tahirtahirli2002@gmail.com");
+            mailMessage.To.Add(To);
+            mailMessage.Subject = subject;
+            mailMessage.Body = message;
+
+
+            smtpClient.Send(mailMessage);
+            return RedirectToAction(nameof(Login));
+        }
+
+        public async Task<IActionResult>  ConfirmEmail(string token, string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+                return NotFound();
+
+           var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (!result.Succeeded)
+                return NotFound();
+            await _userManager.RemoveFromRoleAsync(user, "Visitor");
+            await _userManager.AddToRoleAsync(user, "Member");
+
+
+            return RedirectToAction(nameof(Login));
+        }
     }
 }

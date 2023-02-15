@@ -59,7 +59,8 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
     opt.Password.RequireNonAlphanumeric = false;
     opt.Password.RequireUppercase = false;
     opt.Password.RequiredLength = 8;
-    
+    opt.User.RequireUniqueEmail = true;
+    opt.SignIn.RequireConfirmedEmail = true;
 
 }).AddDefaultTokenProviders().AddEntityFrameworkStores<MedlabDbContext>();
 

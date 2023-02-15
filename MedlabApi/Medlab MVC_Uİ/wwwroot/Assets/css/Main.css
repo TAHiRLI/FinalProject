@@ -11333,6 +11333,9 @@ footer .footerWrap_contact_title::before, footer .footerWrap_blogs_title::before
 .menuBox_link a:hover {
   color: #3368c6;
 }
+  a.active{
+        color: #3368c6;
+    }
 
 .cartMini {
   background-color: red;

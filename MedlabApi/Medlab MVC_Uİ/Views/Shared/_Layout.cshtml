@@ -6,7 +6,20 @@
     var setting = _layoutService.GetSetting();
 }
 
+@{
+    // To show active link in navbar
+    // returns active class when given controller name and action name matches
+    string getClass(string actionName, string controllerName)
+    {
+        string action = ViewContext.RouteData.Values["Action"].ToString();
+        string controller = ViewContext.RouteData.Values["Controller"].ToString();
+        if (controller == controllerName && action == actionName)
+            return "active";
+        return "";
 
+
+    }
+}
 
 
 
@@ -44,26 +57,24 @@
             <div class="d-flex">
                 <div class="navbar_container_menuBox position-relative d-none d-lg-block">
                     <ul class="d-flex menuBox">
-                        <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
-                            <a asp-action="AboutUs" asp-controller="home"> About us</a>
+                        <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block ">
+                            <a asp-action="AboutUs" asp-controller="home" class="@getClass("AboutUs", "Home")"> About us</a>
                         </li>
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
-                            <a asp-action="index" asp-controller="service"> Services </a>
+                            <a asp-action="index" asp-controller="service" class="@getClass("Index", "Service")"> Services </a>
                         </li>
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
-                            <a asp-action="index" asp-controller="shop"> Shop </a>
+                            <a asp-action="index" asp-controller="shop" class="@getClass("Index", "Shop")">  Shop </a>
                         </li>
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
-                            <a asp-action="index" asp-controller="doctor"> Our specialists</a>
+                            <a asp-action="index" asp-controller="doctor" class="@getClass("Index", "Doctor")"> Our specialists</a>
+                        </li>
+                      
+                        <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                            <a asp-action="index" asp-controller="blog" class="@getClass("Index", "Blog")"> Blog </a>
                         </li>
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
-                            <a href="#"> Testimonials </a>
-                        </li>
-                        <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
-                            <a asp-action="index" asp-controller="blog"> Blog </a>
-                        </li>
-                        <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
-                            <a asp-action="contact" asp-controller="home"> Contact </a>
+                            <a asp-action="contact" asp-controller="home" class="@getClass("Contact", "Home")"> Contact </a>
                         </li>
                         <li class="menuBox_link d-inline-block searchBox bg-light">
                             <input class="bg-light" type="text" placeholder="Search..." />
@@ -134,11 +145,18 @@
                     </div>
 
                     <div class="navbar_container_widgetBox_profile p-3 d-none d-lg-block">
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+                        {
                         <a asp-action="profile" asp-controller="account"> <i class="fa-solid fa-user"></i></a>
-
-                        <button class="btn btn-outline-dark d-none rounded-1">
+                        }
+                        else{   
+                            
+                            <a asp-action="login" asp-controller="account" class="btn btn-outline-dark rounded-1">
                             Sign In
-                        </button>
+                        </a>
+
+                        }
+                     
                     </div>
 
                     <div class="navbar_container_widgetBox_mobileMenu mobileBars d-md-block d-lg-none">
@@ -151,25 +169,23 @@
         <div class="mobile mobileTop d-block d-lg-none">
             <ul class="mobileNav">
                 <li class="mobileNav_item active">
-                    <a href="#" class="nav-link">Home</a>
+                    <a href="#" class="nav-link @getClass("Index", "Home")">Home</a>
                 </li>
                 <li class="mobileNav_item">
-                    <a href="#" class="nav-link">About Us</a>
+                    <a href="#" class="nav-link @getClass("AboutUs", "Home")">About Us</a>
                 </li>
                 <li class="mobileNav_item">
-                    <a asp-action="index" asp-controller="service" class="nav-link">Services</a>
+                    <a asp-action="index" asp-controller="service" class="nav-link @getClass("Index", "Service")">Services</a>
                 </li>
                 <li class="mobileNav_item">
-                    <a asp-action="index" asp-controller="doctor" class="nav-link">Our Specialists</a>
+                    <a asp-action="index" asp-controller="doctor" class="nav-link @getClass("Index", "Doctor")">Our Specialists</a>
                 </li>
-                <li class="mobileNav_item">
-                    <a href="#" class="nav-link">Testimonials</a>
-                </li>
+              
                 <li class="mobileNav_item dropdown">
-                    <a asp-action="index" asp-controller="blog" class="nav-link">Blogs</a>
+                    <a asp-action="index" asp-controller="blog" class="nav-link @getClass("Index", "Blog")">Blogs</a>
                 </li>
                 <li class="mobileNav_item">
-                    <a asp-action="contact" asp-controller="home" class="nav-link">Contacts</a>
+                    <a asp-action="contact" asp-controller="home" class="nav-link @getClass("Contact", "Home")">Contacts</a>
                 </li>
             </ul>
         </div>
@@ -180,7 +196,7 @@
             <div class="navbar_container_logoBox ms-lg-5">
                 <div>
                     <a asp-action="index" asp-controller="home">
-                        <img src="~/Assets/Images/logo/logo.png" alt="" />
+                        <img src="~/Assets/Images/logo/@setting["header_logo"]" alt="" />
                     </a>
                 </div>
             </div>
@@ -188,25 +204,23 @@
                 <div class="navbar_container_menuBox position-relative d-none d-lg-block">
                     <ul class="d-flex menuBox">
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
-                            <a asp-action="AboutUs" asp-controller="home"> About us</a>
+                            <a asp-action="AboutUs" asp-controller="home" class="@getClass("AboutUs", "Home")"> About us</a>
                         </li>
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
-                            <a asp-action="index" asp-controller="service"> Services </a>
+                            <a asp-action="index" asp-controller="service" class="@getClass("Index", "Service")"> Services </a>
                         </li>
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
-                            <a asp-action="index" asp-controller="shop"> Shop </a>
+                            <a asp-action="index" asp-controller="shop" class="@getClass("Index", "Shop")"> Shop </a>
                         </li>
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
-                            <a asp-action="index" asp-controller="doctor"> Our specialists</a>
+                            <a asp-action="index" asp-controller="doctor" class="@getClass("Index", "Doctor")"> Our specialists</a>
+                        </li>
+                     
+                        <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
+                            <a asp-action="index" asp-controller="blog" class="@getClass("Index", "Blog")"> Blog </a>
                         </li>
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
-                            <a href="#"> Testimonials </a>
-                        </li>
-                        <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
-                            <a asp-action="index" asp-controller="blog"> Blog </a>
-                        </li>
-                        <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
-                            <a asp-action="contact" asp-controller="home"> Contact </a>
+                            <a asp-action="contact" asp-controller="home" class="@getClass("Contact", "Home")"> Contact </a>
                         </li>
                         <li class="menuBox_link d-inline-block searchBox bg-light">
                             <input class="bg-light" type="text" placeholder="Search..." />
@@ -295,26 +309,24 @@
 
         <div class="mobile mobileScroll d-block d-lg-none">
             <ul class="mobileNav">
-                <li class="mobileNav_item active">
-                    <a href="#" class="nav-link">Home</a>
+                <li class="mobileNav_item ">
+                    <a asp-action="index" asp-controller="home" class="nav-link @getClass("Index", "Home")">Home</a>
                 </li>
                 <li class="mobileNav_item">
-                    <a href="#" class="nav-link">About Us</a>
+                    <a asp-action="AboutUs" asp-controller="home" class="nav-link @getClass("AboutUs", "Home")">About Us</a>
                 </li>
                 <li class="mobileNav_item">
-                    <a asp-action="index" asp-controller="service" class="nav-link">Services</a>
+                    <a asp-action="index" asp-controller="service" class="nav-link @getClass("Index", "Service")">Services</a>
                 </li>
                 <li class="mobileNav_item">
-                    <a asp-action="index" asp-controller="doctor" class="nav-link">Our Specialists</a>
+                    <a asp-action="index" asp-controller="doctor" class="nav-link @getClass("Index", "Doctor")">Our Specialists</a>
                 </li>
-                <li class="mobileNav_item">
-                    <a href="#" class="nav-link">Testimonials</a>
-                </li>
+            
                 <li class="mobileNav_item dropdown">
-                    <a asp-action="index" asp-controller="blog" class="nav-link">Blogs</a>
+                    <a asp-action="index" asp-controller="blog" class="nav-link @getClass("Index", "Bolg")">Blogs</a>
                 </li>
                 <li class="mobileNav_item">
-                    <a asp-action="contact" asp-controller="home" class="nav-link">Contacts</a>
+                    <a asp-action="contact" asp-controller="home" class="nav-link @getClass("Contact", "Home")">Contacts</a>
                 </li>
             </ul>
         </div>
