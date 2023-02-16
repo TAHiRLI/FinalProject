@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "WWVNMHDeGE+oVepsazYHivydaidtuca7t3D5/kgIi41siST40Eicv0KreBAXSi2j4IGsi8WwWMshVHjCphzuSg==",
+  "dgSpecHash": "DA9SsC+2twqFgr5Ijc4MTSk74BuiisMzLoVbeHwgkN6F1Bj/ueTY8vSb+I4kmjvMKpdKdrbklVrgQQOzKZ7ICw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\Medlab MVC_Uİ.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Hp\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\Hp\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\fluentvalidation\\11.5.0\\fluentvalidation.11.5.0.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.2.2\\fluentvalidation.aspnetcore.11.2.2.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.0\\fluentvalidation.dependencyinjectionextensions.11.5.0.nupkg.sha512",

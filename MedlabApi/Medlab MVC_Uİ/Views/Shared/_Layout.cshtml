@@ -169,10 +169,10 @@
         <div class="mobile mobileTop d-block d-lg-none">
             <ul class="mobileNav">
                 <li class="mobileNav_item active">
-                    <a href="#" class="nav-link @getClass("Index", "Home")">Home</a>
+                    <a asp-action="index" asp-controller="home" class="nav-link @getClass("Index", "Home")">Home</a>
                 </li>
                 <li class="mobileNav_item">
-                    <a href="#" class="nav-link @getClass("AboutUs", "Home")">About Us</a>
+                    <a asp-action="aboutus" asp-controller="home" class="nav-link @getClass("AboutUs", "Home")">About Us</a>
                 </li>
                 <li class="mobileNav_item">
                     <a asp-action="index" asp-controller="service" class="nav-link @getClass("Index", "Service")">Services</a>
@@ -186,6 +186,9 @@
                 </li>
                 <li class="mobileNav_item">
                     <a asp-action="contact" asp-controller="home" class="nav-link @getClass("Contact", "Home")">Contacts</a>
+                </li>
+                <li class="mobileNav_item">
+                    <a asp-action="profile" asp-controller="account" class="nav-link @getClass("Profile", "Account")">Profile</a>
                 </li>
             </ul>
         </div>
@@ -226,6 +229,7 @@
                             <input class="bg-light" type="text" placeholder="Search..." />
                             <i id="search-icon" class="fas fa-search"></i>
                         </li>
+
                     </ul>
                 </div>
 
@@ -292,11 +296,18 @@
                     </div>
 
                     <div class="navbar_container_widgetBox_profile p-3 d-none d-lg-block">
-                        <a asp-action="profile" asp-controller="account"> <i class="fa-solid fa-user"></i></a>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+                        {
+                            <a asp-action="profile" asp-controller="account"> <i class="fa-solid fa-user"></i></a>
+                        }
+                        else
+                        {
 
-                        <button class="btn btn-outline-dark d-none rounded-1">
-                            Sign In
-                        </button>
+                            <a asp-action="login" asp-controller="account" class="btn btn-outline-dark rounded-1">
+                                Sign In
+                            </a>
+
+                        }
                     </div>
 
                     <div class="navbar_container_widgetBox_mobileMenu mobileBars scroll d-md-block d-lg-none">
@@ -327,6 +338,9 @@
                 </li>
                 <li class="mobileNav_item">
                     <a asp-action="contact" asp-controller="home" class="nav-link @getClass("Contact", "Home")">Contacts</a>
+                </li>
+                <li class="mobileNav_item">
+                    <a asp-action="profile" asp-controller="account" class="nav-link @getClass("Profile", "Account")">Profile</a>
                 </li>
             </ul>
         </div>

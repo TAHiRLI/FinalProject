@@ -2,11 +2,11 @@
 @{
     ViewData["Title"] = "Profile";
 }
-
+@model ProfileViewModel
 <!-- Bread crumb -->
 <div class="breadCrumb p-3 bg-light">
     <p class="container mb-0 px-5">
-        <a href="#">Home</a>/<a href="#">Profile</a>
+        <a asp-action="index" asp-controller="home">Home</a>/<a href="#">Profile</a>
     </p>
 </div>
 
@@ -68,87 +68,15 @@
                         <span class="d-none d-sm-inline"> Appointments</span>
                     </button>
 
-                    <button class="tab-btn" data-bs-toggle="tab">
+                    <a asp-action="logout" asp-controller="account" class="tab-btn btn">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span class="d-none d-sm-inline"> Log Out</span>
-                    </button>
+                    </a>
                 </div>
 
                 <div class="tab-content p-2 border-gray col-lg-10 col-12 col-sm-9">
                     <!--Profile tab -->
-                    <div class="tab-pane p-2 tab-content-profile bg-light fade show active "
-                         id="tab-account"
-                         role="tabpanel"
-                         aria-labelledby="account-tab"
-                         tabindex="0">
-                        <div class="d-flex align-items-center justify-content-center position-relative ">
-                            <div class="user-photo position-relative">
-                                <img src="~/Assets/Uploads/Users/DEFAULT-USER.jpg"
-                                     alt=""
-                                     class="w-100 h-100" />
-                                <input id="user-photo-input" type="file" hidden />
-                                <i class="fas fa-pen add-photo"></i>
-
-
-                            </div>
-                            <button class="my-custom-btn edit-btn position-top-right py-1 px-3  ">
-                                <i class="fas fa-pencil me-2"></i>
-                                Edit
-                            </button>
-
-                            <button type="submit" form="profile-edit-form" class="save-btn position-top-right my-custom-btn py-1 px-2 d-none">
-                                <i class="fas fa-save me-2"></i>
-                                Save
-                            </button>
-                        </div>
-
-
-
-                        <form id="profile-edit-form" action="" class="row">
-                            <div class="col-md-6 d-flex flex-column align-items-center">
-                                <div class="my-3">
-                                    <label class="form-label" for="">Fullname</label>
-                                    <input class="form-control user-input"
-                                           disabled
-                                           type="text"
-                                           value="Tahir Tahirli" />
-                                </div>
-                                <div class="my-3">
-                                    <label class="form-label" for="">Email</label>
-                                    <input class="form-control user-input"
-                                           disabled
-                                           type="email"
-                                           value="tahirlitahir@gmail.com" />
-                                </div>
-                                <div class="my-3">
-                                    <label class="form-label" for="">Phone</label>
-                                    <input class="form-control user-input"
-                                           disabled
-                                           type="text"
-                                           value="+994 77 5474948" />
-                                </div>
-                            </div>
-                            <div class="col-md-6 d-flex flex-column align-items-center">
-                                <div class="my-3">
-                                    <label class="form-label" for="">Username</label>
-                                    <input class="form-control user-input"
-                                           disabled
-                                           type="text"
-                                           value="User1234" />
-                                </div>
-                                <div class="my-3">
-                                    <label class="form-label" for="">Password</label>
-                                    <input class="form-control user-input"
-                                           disabled type="password" />
-                                </div>
-                                <div class="my-3">
-                                    <label class="form-label" for="">Confirm Password</label>
-                                    <input class="form-control user-input"
-                                           disabled type="password" />
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                    @await Html.PartialAsync("_AccountProfileTabPartial",Model.EditProfileViewModel)
                     <!-- Orders tab  -->
                     <div class="tab-pane bg-light p-2 tab-content-orders fade "
                          id="tab-order"

@@ -349,3 +349,5 @@ C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\Medlab MVC_Uİ\bin\
 C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\Medlab MVC_Uİ\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
 C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\Medlab MVC_Uİ\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
 C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\Medlab MVC_Uİ\obj\Debug\net6.0\Medlab MVC_Uİ.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\Medlab MVC_Uİ\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\Medlab MVC_Uİ\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

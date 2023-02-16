@@ -61,7 +61,14 @@ namespace Medlab.Data.Migrations
 
                     b.Property<string>("Fullname")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ImageUrl")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasDefaultValue("DEFAULT-USER.jpg");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");

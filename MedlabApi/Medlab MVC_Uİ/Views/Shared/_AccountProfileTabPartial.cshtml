@@ -1,0 +1,99 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model EditProfileViewModel
+
+<div class="tab-pane p-2 tab-content-profile bg-light fade show active "
+     id="tab-account"
+     role="tabpanel"
+     aria-labelledby="account-tab"
+     tabindex="0">
+    <div class="d-flex align-items-center justify-content-center position-relative ">
+        <div class="user-photo position-relative">
+            <img src="~/Assets/Uploads/Users/@Model.ImageUrl"
+                 alt=""
+                 class="w-100 h-100" />
+            <input class="user-input " id="user-photo-input" type="file" form="profile-edit-form" hidden disabled  asp-for="ImageFile" />
+            <i class="fas fa-pen add-photo"></i>
+            <span class="fs-09 text-danger d-block" asp-validation-for="ImageFile"></span>
+
+        </div>
+        <button class="my-custom-btn edit-btn position-top-right py-1 px-3  ">
+            <i class="fas fa-pencil me-2"></i>
+            Edit
+        </button>
+
+        <button type="submit" form="profile-edit-form" class="save-btn position-top-right my-custom-btn py-1 px-2 d-none">
+            <i class="fas fa-save me-2"></i>
+            Save
+        </button>
+    </div>
+
+
+
+    <form id="profile-edit-form" asp-action="profile" method="post" asp-controller="account" class="row" enctype="multipart/form-data">
+        <div class="col-md-6 d-flex flex-column align-items-center">
+            <div class="my-3">
+                <label class="form-label" asp-for="Fullname">Fullname</label>
+                <input asp-for="Fullname" class="form-control user-input"
+                       disabled
+                       type="text" />
+                <span class="fs-09 text-danger" asp-validation-for="Fullname"></span>
+            </div>
+            <div class="my-3">
+                <label class="form-label" asp-for="Email">Email</label>
+                <input asp-for="Email" class="form-control user-input"
+                       disabled
+                       type="email" />
+                <span class="fs-09 text-danger" asp-validation-for="Email"></span>
+
+            </div>
+            <div class="my-3">
+                <label class="form-label" asp-for="PhoneNumber">Phone</label>
+                <input asp-for="PhoneNumber" class="form-control user-input"
+                       disabled
+                       type="text"
+                       placeholder="+994 77 5474948" />
+                <span class="fs-09 text-danger" asp-validation-for="PhoneNumber"></span>
+
+            </div>
+
+            <p class="mt-4 d-none d-md-block "> <strong>Note:</strong> If you don't want to update <br /> password, leave empty.</p>
+        </div>
+        <div class="col-md-6 d-flex flex-column align-items-center">
+            <div class="my-3">
+                <label class="form-label" asp-for="UserName">Username</label>
+                <input asp-for="UserName" class="form-control user-input"
+                       disabled
+                       type="text" />
+                <span class="fs-09 text-danger" asp-validation-for="UserName"></span>
+
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" asp-for="Password">Password</label>
+                <input asp-for="Password" class="form-control user-input"
+                       disabled type="password" />
+                <span class="fs-09 text-danger" asp-validation-for="Password"></span>
+
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" asp-for="NewPassword">New Password</label>
+                <input asp-for="NewPassword" class="form-control user-input"
+                       disabled type="password" />
+                <span class="fs-09 text-danger" asp-validation-for="NewPassword"></span>
+
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" asp-for="ConfirmPassword">Confirm Password</label>
+                <input asp-for="ConfirmPassword" class="form-control user-input"
+                       disabled type="password" />
+                <span class="fs-09 text-danger" asp-validation-for="ConfirmPassword"></span>
+
+            </div>
+        </div>
+        <div asp-validation-summary="ModelOnly" class="fs-09 text-danger text-center"></div>
+    </form>
+</div>

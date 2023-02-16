@@ -1,9 +1,14 @@
-﻿using FluentValidation;
+﻿using AutoMapper;
+using AutoMapper.Execution;
+using FluentValidation;
 using Medlab.Core.Entities;
+using Medlab.Data.DAL;
+using Medlab_MVC_Uİ.Helpers;
 using Medlab_MVC_Uİ.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -17,11 +22,17 @@ namespace Medlab_MVC_Uİ.Controllers
     {
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IMapper _mapper;
+        private readonly MedlabDbContext _context; // for begin transaction
+        private readonly IWebHostEnvironment _env;
 
-        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
+        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IMapper mapper, MedlabDbContext context, IWebHostEnvironment env )
         {
             this._signInManager = signInManager;
             this._userManager = userManager;
+            _mapper = mapper;
+            _context = context;
+            _env = env;
         }
         public IActionResult Login(string? ReturnUrl = null)
         {
@@ -31,7 +42,7 @@ namespace Medlab_MVC_Uİ.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult>  Login(LoginViewModel LoginVM, string? ReturnUrl = null)
+        public async Task<IActionResult> Login(LoginViewModel LoginVM, string? ReturnUrl = null)
         {
             ViewBag.ReturnUrl = ReturnUrl;
             if (!ModelState.IsValid)
@@ -41,17 +52,13 @@ namespace Medlab_MVC_Uİ.Controllers
 
             if (user == null)
             {
-                ModelState.AddModelError("", "Username or password is incorrect");
+                ModelState.AddModelError("", "UserName or password is incorrect");
                 return View(LoginVM);
             }
 
 
             var userRoles = await _userManager.GetRolesAsync(user);
-            if (!userRoles.Contains("Member"))
-            {
-                ModelState.AddModelError("", "Username or password is incorrect");
-                return View(LoginVM);
-            }
+          
             if (!user.EmailConfirmed)
             {
 
@@ -61,6 +68,11 @@ namespace Medlab_MVC_Uİ.Controllers
                 ModelState.AddModelError("", $"Please Verify Your Account");
                 ViewBag.VerificationLink = url;
                 ViewBag.Email = user.Email;
+                return View(LoginVM);
+            } 
+            if (!userRoles.Contains("Member"))
+            {
+                ModelState.AddModelError("", "UserName or password is incorrect");
                 return View(LoginVM);
             }
 
@@ -74,7 +86,7 @@ namespace Medlab_MVC_Uİ.Controllers
             }
             if (!result.Succeeded)
             {
-                ModelState.AddModelError("", "Username or password is incorrect");
+                ModelState.AddModelError("", "UserName or password is incorrect");
                 return View(LoginVM);
             }
 
@@ -83,7 +95,7 @@ namespace Medlab_MVC_Uİ.Controllers
 
         public IActionResult GoogleLogin()
         {
-            string redirectUrl = Url.Action("GoogleResponse", "Home");
+            string redirectUrl = Url.Action("GoogleResponse", "Account");
             var properties = _signInManager.ConfigureExternalAuthenticationProperties("Google", redirectUrl);
             return new ChallengeResult("Google", properties);
         }
@@ -107,7 +119,6 @@ namespace Medlab_MVC_Uİ.Controllers
                     UserName = info.Principal.FindFirst(ClaimTypes.Email).Value,
                     EmailConfirmed = true,
                     Fullname = info.Principal.FindFirst(ClaimTypes.Email).Value,
-                    PhoneNumber = info.Principal.FindFirst(ClaimTypes.MobilePhone).Value
 
                 };
                 IdentityResult identityResult = await _userManager.CreateAsync(user);
@@ -139,16 +150,16 @@ namespace Medlab_MVC_Uİ.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult>  Register(RegisterViewModel RegisterVm)
+        public async Task<IActionResult> Register(RegisterViewModel RegisterVm)
         {
             if (!ModelState.IsValid)
             {
                 return View(RegisterVm);
             }
 
-            if(await _userManager.FindByNameAsync(RegisterVm.Username) != null)
+            if (await _userManager.FindByNameAsync(RegisterVm.Username) != null)
             {
-                ModelState.AddModelError("Username", "This Username Is Already Taken");
+                ModelState.AddModelError("UserName", "This UserName Is Already Taken");
                 return View(RegisterVm);
             }
             if (await _userManager.FindByEmailAsync(RegisterVm.Email) != null)
@@ -157,11 +168,11 @@ namespace Medlab_MVC_Uİ.Controllers
                 return View(RegisterVm);
             }
 
-
+            //^ use mapper
             AppUser newUser = new AppUser
             {
                 UserName = RegisterVm.Username,
-                Fullname = RegisterVm.Fullname, 
+                Fullname = RegisterVm.Fullname,
                 PhoneNumber = RegisterVm.PhoneNumber,
                 PhoneNumberConfirmed = false,
                 Email = RegisterVm.Email,
@@ -179,7 +190,7 @@ namespace Medlab_MVC_Uİ.Controllers
                 return View(RegisterVm);
             }
 
-            await _userManager.AddToRoleAsync(newUser,"Visitor");
+            await _userManager.AddToRoleAsync(newUser, "Visitor");
 
             // Send Email Verification
 
@@ -188,18 +199,169 @@ namespace Medlab_MVC_Uİ.Controllers
 
             SendMail(newUser.Email, "Email Verification", $"Click <a href=\"{url}\" >here</a> to verify your email");
 
-            return RedirectToAction("index" , "home");
+            return RedirectToAction("login");
         }
+
+
         // Profile
-        public IActionResult Profile()
+        [Authorize(Roles = "Member, Visitor")]
+        public async Task<IActionResult> Profile()
         {
-            return View();
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return NotFound();
+
+
+            ProfileViewModel model = new ProfileViewModel();
+            model.EditProfileViewModel = _mapper.Map<EditProfileViewModel>(user);
+
+
+            return View(model);
         }
-        public void SendMail( string To,string subject, string message)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Profile(EditProfileViewModel ProfileVm)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return NotFound();
+
+
+            ProfileViewModel model = new ProfileViewModel();
+            model.EditProfileViewModel = ProfileVm;
+            model.EditProfileViewModel.ImageUrl = user.ImageUrl;
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+
+                var isEmailChanged = false;
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+
+            IdentityResult isPasswordUpdated = IdentityResult.Success;
+            IdentityResult isUserUpdated = IdentityResult.Success;
+
+            if (ProfileVm.Email.ToLower() != user.Email.ToLower())
+            {
+
+                if (await _userManager.FindByEmailAsync(ProfileVm.Email) == null)
+                {
+                   
+                    // Send Email Verification
+                    user.Email = ProfileVm.Email;
+                    user.EmailConfirmed = false;
+                    isEmailChanged = true;
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var url = Url.Action(nameof(ConfirmEmail), "account", new { token = token, email = user.Email }, Request.Scheme);
+
+                    SendMail(user.Email, "Email Verification", $"Click <a href=\"{url}\" >here</a> to verify your email");
+
+                }
+                else
+                {
+                    ModelState.AddModelError("Email", "This Email Has Been Used");
+                }
+
+            }
+
+            if (ProfileVm.UserName.ToLower() != user.UserName.ToLower())
+            {
+                if (await _userManager.FindByNameAsync(ProfileVm.UserName) == null)
+                    user.UserName = ProfileVm.UserName;
+                else
+                {
+                    ModelState.AddModelError("UserName", "This Username Is Already Taken");
+
+                }
+            }
+
+            if (ProfileVm.Password != null)
+            {
+                    if(ProfileVm.NewPassword ==null || ProfileVm.ConfirmPassword == null)
+                    {
+                        ModelState.AddModelError("Password", "Fill To Change Password");
+                        ModelState.AddModelError("NewPassword", "Fill To Change Password");
+                        ModelState.AddModelError("ConfirmPassword", "Fill To Change Password");
+                        return View(model);
+                    }
+                isPasswordUpdated = await _userManager.ChangePasswordAsync(user, ProfileVm.Password, ProfileVm.NewPassword);
+                if (!isPasswordUpdated.Succeeded)
+                {
+
+                    foreach (var error in isPasswordUpdated.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+
+            if(ProfileVm.ImageFile != null)
+            {
+                if (user.ImageUrl != "DEFAULT-USER.jpg")
+                    FileManager.Delete(_env.WebRootPath, "Assets/Uploads/Users", user.ImageUrl);
+
+                user.ImageUrl = FileManager.Save(ProfileVm.ImageFile, _env.WebRootPath, "Assets/Uploads/Users", 200);
+            }
+
+
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+
+            user.Fullname = ProfileVm.Fullname;
+            user.PhoneNumber = ProfileVm.PhoneNumber;
+
+            isUserUpdated = await _userManager.UpdateAsync(user);
+
+
+
+                if (isUserUpdated.Succeeded && isPasswordUpdated.Succeeded)
+                {
+                    _context.SaveChanges();
+                    transaction.Commit();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "something went wrong");
+                    return View(model);
+                }
+
+            }
+
+
+
+
+
+
+
+
+            if (isEmailChanged)
+                await _signInManager.SignOutAsync();
+
+
+            return View(model);
+        }
+
+
+        public async Task<IActionResult>  Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("index", "home");
+        }
+
+
+        // Functions
+        public void SendMail(string To, string subject, string message)
         {
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
             smtpClient.UseDefaultCredentials = false;
-            smtpClient.Credentials = new System.Net.NetworkCredential("tahirtahirli2002@gmail.com", "jgauwtdjhnwgxaib");
+            smtpClient.Credentials = new System.Net.NetworkCredential("tahirtahirli2002@gmail.com", "lsieytvhoimyzhbi");
             smtpClient.EnableSsl = true;
 
             // message
@@ -209,7 +371,7 @@ namespace Medlab_MVC_Uİ.Controllers
             mailMessage.Subject = subject;
             mailMessage.Body = message;
 
-            
+
             smtpClient.Send(mailMessage);
         }
 
@@ -217,7 +379,7 @@ namespace Medlab_MVC_Uİ.Controllers
         {
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
             smtpClient.UseDefaultCredentials = false;
-            smtpClient.Credentials = new System.Net.NetworkCredential("tahirtahirli2002@gmail.com", "jgauwtdjhnwgxaib");
+            smtpClient.Credentials = new System.Net.NetworkCredential("tahirtahirli2002@gmail.com", "lsieytvhoimyzhbi");
             smtpClient.EnableSsl = true;
 
             // message
@@ -232,13 +394,13 @@ namespace Medlab_MVC_Uİ.Controllers
             return RedirectToAction(nameof(Login));
         }
 
-        public async Task<IActionResult>  ConfirmEmail(string token, string email)
+        public async Task<IActionResult> ConfirmEmail(string token, string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
                 return NotFound();
 
-           var result = await _userManager.ConfirmEmailAsync(user, token);
+            var result = await _userManager.ConfirmEmailAsync(user, token);
             if (!result.Succeeded)
                 return NotFound();
             await _userManager.RemoveFromRoleAsync(user, "Visitor");
