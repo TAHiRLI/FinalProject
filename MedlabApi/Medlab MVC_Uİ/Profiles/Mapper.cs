@@ -9,6 +9,7 @@ namespace Medlab_MVC_Uİ.Profiles
         public Mapper()
         {
             CreateMap<AppUser, EditProfileViewModel>().ReverseMap();
+            CreateMap<ProductReviewViewModel, ProductReview>().ReverseMap();
         }
        
     }

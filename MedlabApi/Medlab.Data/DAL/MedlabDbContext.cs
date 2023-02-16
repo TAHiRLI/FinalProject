@@ -27,6 +27,7 @@ namespace Medlab.Data.DAL
         public DbSet<Product> Products { get; set; }
         public DbSet<Value> Values { get; set; }
         public DbSet<AmenityImage> AmenityImages { get; set; }
+        public DbSet<ProductReview> ProductReviews { get; set; }
 
         
 

@@ -1,0 +1,35 @@
+﻿@model ProductReviewViewModel
+
+<div class="post-review mt-5">
+    <form id="review-form" asp-action="ReviewProduct" asp-controller="Product"  method="post"
+          class="d-flex p-1 rounded-pill align-items-center mt-5">
+        <div class="photo d-flex align-items-center">
+            <img src="~/Assets/Uploads/Users/@(Model.ImageUrl !=null?$"{Model.ImageUrl}":"DEFAULT-USER.jpg")"
+                 alt=""
+                 class="w-100" />
+        </div>
+        <div class="col ms-1 position-relative">
+            <input type="hidden" asp-for="ProductId"/>
+            <input type="text"
+                   asp-for="Text"
+                   class="rounded-pill form-control "
+                   placeholder="@(Model.UserName !=null?$"Post your review as {Model.UserName}":"Only Logged In users can review product")" />
+            <input type="hidden" id="reviewRate" value="0" asp-for="Rate" />
+            <div class="star-rating text-center"></div>
+
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+            {
+                <button class="submitBtn btn" type="submit">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            }
+            else
+            {
+                <a asp-action="login" asp-controller="account" class="submitBtn btn" type="submit">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </a>
+            }
+
+        </div>
+    </form>
+</div>

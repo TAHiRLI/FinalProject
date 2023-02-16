@@ -1,0 +1,30 @@
+﻿
+
+@model List<ProductReview>
+
+
+
+    @foreach (var review in Model.Take(3).ToList())
+    {
+        <!-- review -->
+        <div class="reviews_item  my-2">
+            <p class="reviews_item_username h6 mb-0">@review.AppUser?.UserName</p>
+            <span class="stars col-2 text-base">
+                @for (int i = 0; i < 5; i++)
+                {
+                    if (i >= review.Rate)
+                    {
+                        <i class="text-base fa-regular fa-star"></i>
+                    }
+                    else
+                    {
+                        <i class="text-base fa-solid fa-star"></i>
+
+                    }
+                }
+            </span>
+            <p class="reviews_item_text">
+                @review.Text
+            </p>
+        </div>
+    }

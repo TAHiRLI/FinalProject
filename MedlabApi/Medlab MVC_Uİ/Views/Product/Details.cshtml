@@ -51,16 +51,16 @@
                             <!-- Slide For -->
                             <div class="product-block-galery-main productMainImgSlider">
                                 <!-- MainSlide -->
-                                  <div class="productMainImgSlider_item ">
+                                <div class="productMainImgSlider_item ">
                                     <img src="~/Assets/Uploads/Products/@Model.Product.ProductImages?.FirstOrDefault(x=> x.IsMain == true)?.ImageUrl"
                                      alt="/@Model.Product.Name"
                                      class="product-zoom"
                                      data-magnify-src="../../../Assets/Uploads/Products/@Model.Product.ProductImages?.FirstOrDefault(x=> x.IsMain == true)?.ImageUrl" />
                                 </div>
 
-                                @foreach (var image in Model.Product.ProductImages.Where(x=> !x.IsMain).ToList())
+                            @foreach (var image in Model.Product.ProductImages.Where(x => !x.IsMain).ToList())
                             {
-                                 <!-- Slide -->
+                                <!-- Slide -->
                                 <div class="productMainImgSlider_item">
                                     <img src="~/Assets/Uploads/Products/@image.ImageUrl"
                                      alt="/@image.ImageUrl"
@@ -70,24 +70,24 @@
                             }
 
 
-                                 <!-- End -->
-                               
+                            <!-- End -->
 
-                            </div>
 
-                            <!-- Slide Nav -->
-                            <div class="product-block-navImages productNavImgSlider mt-4 py-3">
-                                <!-- Main Image -->
-                                <div class="productNavImgSlider_item col-4 mx-2">
+                        </div>
+
+                        <!-- Slide Nav -->
+                        <div class="product-block-navImages productNavImgSlider mt-4 py-3">
+                            <!-- Main Image -->
+                            <div class="productNavImgSlider_item col-4 mx-2">
                                 <img src="~/Assets/Uploads/Products/@Model.Product.ProductImages?.FirstOrDefault(x=> x.IsMain == true)?.ImageUrl"
                                      alt="main"
                                      class="" />
-                                </div>
+                            </div>
 
 
-                                @foreach (var image in Model.Product.ProductImages.Where(x=> !x.IsMain).ToList())
+                            @foreach (var image in Model.Product.ProductImages.Where(x => !x.IsMain).ToList())
                             {
-                                 <!-- Slide -->
+                                <!-- Slide -->
                                 <div class="productNavImgSlider_item col-4 mx-2">
                                     <img src="~/Assets/Uploads/Products/@image.ImageUrl"
                                      alt="else-@image.Id"
@@ -97,12 +97,12 @@
 
                             <!-- End -->
 
-                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6 product-info px-4">
-                        <div class="product-info_header mt-3">
-                            <span class="stars col-2 text-base">
+                </div>
+                <div class="col-md-6 product-info px-4">
+                    <div class="product-info_header mt-3">
+                        <span class="stars col-2 text-base">
                             @for (int i = 0; i < 5; i++)
                             {
                                 if (i >= Model.Product.AvgRating)
@@ -115,60 +115,60 @@
 
                                 }
                             }
-                            </span>
-                            <span class="col mb-0 mx-4 bg-danger">2 customer reviews</span>
+                        </span>
+                        <span class="col mb-0 mx-4 ">@Model.ProductReviews.Count() customer reviews</span>
+                    </div>
+
+                    <h1 class="product-info_title h2 mt-3 pe-lg-5">
+                        @Model.Product.Name
+                    </h1>
+                    <div class="product-info_price text-base mt-2">$@(Model.Product.SalePrice * (100 - Model.Product.DiscoutPercent) / 100)</div>
+
+                    <div class="product-info_table pt-lg-5 mt-5">
+                        <table class="w-100">
+                            <tbody>
+                                <tr>
+                                    <td class="py-3">
+                                        <i class="fa-sharp fa-solid fa-check text-base mx-2"></i>
+                                        Category
+                                    </td>
+                                    <td class="py-3">@Model.Product.ProductCategory?.Name</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3">
+                                        <i class="fa-sharp fa-solid fa-check text-base mx-2"></i>
+                                        Stock Status
+                                    </td>
+                                    <td class="py-3">@(Model.Product.StockStatus ? "In Stock" : "Out Of Stock")</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3">
+                                        <i class="fa-sharp fa-solid fa-check text-base mx-2"></i>
+                                        Quantity Sold:
+                                    </td>
+                                    <td class="py-3">@(Model.Product.IsSoldIndividual ? "Sold Individually" : "Sold In Packages")</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="product-info_button row align-items-center justify-content-evenly justify-content-lg-center my-1 px-2">
+                        <div class="product-info_button_counter rounded-pill">
+                            <span class="decrement counter-btn m-0 pointer btn link-hover">-</span>
+                            <input type="number" value="0" class="add-count" />
+                            <span class="increment counter-btn m-0 pointer btn link-hover">+</span>
                         </div>
-
-                        <h1 class="product-info_title h2 mt-3 pe-lg-5">
-                            @Model.Product.Name
-                        </h1>
-                        <div class="product-info_price text-base mt-2">$@(Model.Product.SalePrice*(100-Model.Product.DiscoutPercent)/100)</div>
-
-                        <div class="product-info_table pt-lg-5 mt-5">
-                            <table class="w-100">
-                                <tbody>
-                                    <tr>
-                                        <td class="py-3">
-                                            <i class="fa-sharp fa-solid fa-check text-base mx-2"></i>
-                                            Category
-                                        </td>
-                                        <td class="py-3">@Model.Product.ProductCategory?.Name</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-3">
-                                            <i class="fa-sharp fa-solid fa-check text-base mx-2"></i>
-                                            Stock Status
-                                        </td>
-                                        <td class="py-3">@(Model.Product.StockStatus? "In Stock":"Out Of Stock")</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-3">
-                                            <i class="fa-sharp fa-solid fa-check text-base mx-2"></i>
-                                            Quantity Sold:
-                                        </td>
-                                        <td class="py-3">@(Model.Product.IsSoldIndividual? "Sold Individually":"Sold In Packages")</td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="product-info_button row align-items-center justify-content-evenly justify-content-lg-center my-1 px-2">
-                            <div class="product-info_button_counter rounded-pill">
-                                <span class="decrement counter-btn m-0 pointer btn link-hover">-</span>
-                                <input type="number" value="0" class="add-count" />
-                                <span class="increment counter-btn m-0 pointer btn link-hover">+</span>
-                            </div>
-                            <button class="addToCartBtn rounded-pill m-0 ms-lg-5 m-1">
-                                <i class="fa-solid fa-bag-shopping mx-2"></i>Add to cart
-                            </button>
-                        </div>
+                        <button class="addToCartBtn rounded-pill m-0 ms-lg-5 m-1">
+                            <i class="fa-solid fa-bag-shopping mx-2"></i>Add to cart
+                        </button>
                     </div>
                 </div>
+            </div>
 
-                <div class="details mt-5">
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <button class="details_tab-btn"
+            <div class="details mt-5">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="details_tab-btn active"
                             id="desc-tab"
                             data-bs-toggle="tab"
                             data-bs-target="#tab-desc"
@@ -176,139 +176,77 @@
                             role="tab"
                             aria-controls="tab-desc"
                             aria-selected="true">
-                            Description
-                        </button>
-                        <button class="details_tab-btn active bg-danger"
+                        Description
+                    </button>
+                    <button class="details_tab-btn "
                             id="review-tab"
                             data-bs-toggle="tab"
                             data-bs-target="#tab-review"
                             type="button"
                             role="tab"
                             aria-controls="tab-review"
-                            aria-selected="true">
-                            Reviews (2)
-                        </button>
-                    </div>
+                            aria-selected="false">
+                        Reviews (@Model.ProductReviews.Count())
+                    </button>
+                </div>
 
-                    <div class="tab-content p-md-5 px-3 pb-md-0" id="nav-tabContent">
-                        <!-- Description -->
+                <div class="tab-content p-md-5 px-3 pb-md-0" id="nav-tabContent">
+                    <!-- Description -->
                     <div class="tab-pane details_description fade show active"
                          id="tab-desc"
                          role="tabpanel"
                          aria-labelledby="desc-tab"
                          tabindex="0">
-                            <p>
-                             @Html.Raw(Model.Product.Desc)
-                            </p>
-                        </div>
-                        <!-- Reviews -->
+                        <p>
+                            @Html.Raw(Model.Product.Desc)
+                        </p>
+                    </div>
+                    <!-- Reviews -->
 
-                        <div class="tab-pane details_reviews fade  "
+                    <div class="tab-pane details_reviews fade  "
                          id="tab-review"
                          role="tabpanel"
                          aria-labelledby="review-tab"
                          tabindex="0">
-                            <div class="reviews ">
-                                <!-- review -->
-                                <div class="reviews_item  my-2">
-                                    <p class="reviews_item_username h6 mb-0">Tahir Tahirli</p>
-                                    <span class="stars col-2 text-base">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </span>
-                                    <p class="reviews_item_text">
-                                        Excellent clinic which has looked after my families dental
-                                        healthcare for many years. Last year I received private
-                                        treatment for a tooth implant and the whole process was
-                                        professionally managed and delivered.
-                                    </p>
-                                </div>
+                        <!--Reviews-->
+                        <div class="reviews " id="review-container">
+                            @await Html.PartialAsync("_ReviewsPartial", Model.ProductReviews)
 
-                                <!-- review -->
-                                <div class="reviews_item  my-2">
-                                    <p class="reviews_item_username h6 mb-0">Tahir Tahirli</p>
-                                    <span class="stars col-2 text-base">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </span>
-                                    <p class="reviews_item_text">
-                                        Excellent clinic which has looked after my families dental
-                                        healthcare for many years. Last year I received private
-                                        treatment for a tooth implant and the whole process was
-                                        professionally managed and delivered.
-                                    </p>
-                                </div>
-                                <!-- review -->
-                                <div class="reviews_item  my-2">
-                                    <p class="reviews_item_username h6 mb-0">Tahir Tahirli</p>
-                                    <span class="stars col-2 text-base">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </span>
-                                    <p class="reviews_item_text">
-                                        Excellent clinic which has looked after my families dental
-                                        healthcare for many years. Last year I received private
-                                        treatment for a tooth implant and the whole process was
-                                        professionally managed and delivered.
-                                    </p>
-                                </div>
-
-                                <div>
-                                    <button class="loadmore-btn m-auto mt-5 rounded-pill py-2 text-center">Load More</button>
-                                </div>
-
-                                <!-- End -->
-                            </div>
-
-                            <div class="post-review mt-5">
-                                <form id="review-form"
-                                  class="d-flex p-1 rounded-pill align-items-center mt-5">
-                                    <div class="photo d-flex align-items-center">
-                                        <img src="~/Assets/Uploads/Users/DEFAULT-USER.jpg"
-                                         alt=""
-                                         class="w-100" />
-                                    </div>
-                                    <div class="col ms-1 position-relative">
-                                        <input type="text"
-                                           class="rounded-pill form-control "
-                                           placeholder=" Review as Tahir Tahirli" />
-                                        <input type="hidden" id="reviewRate" value="0" />
-                                        <div class="star-rating text-center"></div>
-
-                                        <button class="submitBtn btn" type="submit">
-                                            <i class="fa-solid fa-paper-plane"></i>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+                            <!-- End -->
                         </div>
+
+                        @if (Model.ProductReviews.Count > 3)
+                        {
+
+                            <div>
+                                <a asp-action="GetReviews" asp-controller="Product" asp-route-id="@Model.Product.Id" commentCount="@Model.ProductReviews.Count" takeCount="3" skipCount="3" class="loadmore-btn btn m-auto mt-5 rounded-pill py-2 text-center">Load More</a>
+                            </div>
+                        }
+                        @if (!Model.IsUserReviewed)
+                        {
+                            @await Html.PartialAsync("_ReviewPostPartial", Model.ProductReviewViewModel)
+
+                        }
+
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="Similar-products_Section" class="py-5">
+    <section id="Similar-products_Section" class="py-5">
 
-            <div class="sectionTitle">
-                <h2 class="h1 position-relative text-center  text-dark title_underlined mb-5">
-                    Similar Products
-                </h2>
-            </div>
-            <div class="container">
-                <div class=" similarPrd similarPrdSlider px-lg-5">
+        <div class="sectionTitle">
+            <h2 class="h1 position-relative text-center  text-dark title_underlined mb-5">
+                Similar Products
+            </h2>
+        </div>
+        <div class="container">
+            <div class=" similarPrd similarPrdSlider px-lg-5">
 
-                    @foreach (var product in Model.SimilarProducts)
+                @foreach (var product in Model.SimilarProducts)
                 {
-                            <!-- Item -->
+                    <!-- Item -->
                     <div class="product  text-center mx-3">
                         <div class="product-img">
                             <a asp-action="details" asp-controller="product" asp-route-id="@product.Id" class="w-100 h-100 d-block">
@@ -320,7 +258,7 @@
                         </div>
                         <div class="product-footer p-2">
                             <h1 class="product-name h6 text-dark mt-3">
-                                <a asp-action="details" asp-controller="product" asp-route-id="@product.Id"  class="link-base text-decoration-none">@product.Name</a>
+                                <a asp-action="details" asp-controller="product" asp-route-id="@product.Id" class="link-base text-decoration-none">@product.Name</a>
                             </h1>
                             @if (product.DiscoutPercent > 0)
                             {
@@ -334,20 +272,20 @@
 
 
                             </p>
-                         
+
                             <div class="product-stars text-center">
                                 @for (int i = 0; i < 5; i++)
-                            {
-                                if (i >= Model.Product.AvgRating)
                                 {
-                                    <i class="text-base fa-regular fa-star"></i>
-                                }
-                                else
-                                {
-                                    <i class="text-base fa-solid fa-star"></i>
+                                    if (i >= Model.Product.AvgRating)
+                                    {
+                                        <i class="text-base fa-regular fa-star"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="text-base fa-solid fa-star"></i>
 
+                                    }
                                 }
-                            }
                             </div>
                             <button class="product-addToCart btn rounded-pill text-base my-3">
                                 <i class="fa-sharp fa-solid fa-bag-shopping mx-2"></i>
@@ -356,18 +294,18 @@
                         </div>
                     </div>
                 }
-            
-                  
-                    <!-- End -->
 
-                </div>
+
+                <!-- End -->
+
             </div>
+        </div>
 
-        </section>
-    </main>
+    </section>
+</main>
 
-    <!-- Content end -->
-    @section Scripts{
+<!-- Content end -->
+@section Scripts{
     <!-- ========================= CDNs =============================== -->
     <!-- Magnify Js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnify/2.3.3/js/jquery.magnify.min.js"
@@ -396,7 +334,8 @@
 
     <!-- Star Rating Setting -->
     <script src="~/Assets/Js/star-rating.js"></script>
-
+    <!-- Loadmore btn Js -->
+    <script src="~/Assets/Js/LoadMore.js"></script>
     <!-- MAIN Js -->
     <script src="~/Assets/Js/main.js"></script>
                             }
