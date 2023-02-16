@@ -5,11 +5,13 @@ using Medlab.Core.Entities;
 using Medlab.Data.DAL;
 using Medlab_MVC_Uİ.Helpers;
 using Medlab_MVC_Uİ.ViewModels;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
@@ -93,6 +95,8 @@ namespace Medlab_MVC_Uİ.Controllers
             return RedirectToAction("index", "home");
         }
 
+
+        // Google Login
         public IActionResult GoogleLogin()
         {
             string redirectUrl = Url.Action("GoogleResponse", "Account");
@@ -138,6 +142,54 @@ namespace Medlab_MVC_Uİ.Controllers
 
 
             return NotFound();
+        }
+
+
+        // facebook login
+        [AllowAnonymous]
+        public IActionResult FacebookLogin()
+        {
+            string redirectUrl = Url.Action("FacebookResponse", "Account");
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties("Facebook", redirectUrl);
+            return new ChallengeResult("Facebook", properties);
+        }
+
+
+        [AllowAnonymous]
+        public async Task<IActionResult> FacebookResponse()
+        {
+            ExternalLoginInfo info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+                return RedirectToAction(nameof(Login));
+
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false);
+
+            if (result.Succeeded)
+                return RedirectToAction(nameof(Index), "home");
+            else
+            {
+                AppUser user = new AppUser
+                {
+                    Email = info.Principal.FindFirst(ClaimTypes.Email).Value,
+                    UserName = info.Principal.FindFirst(ClaimTypes.Email).Value,
+                    EmailConfirmed = true,
+                    Fullname = info.Principal.FindFirst(ClaimTypes.Email).Value,
+
+                };
+                IdentityResult identityResult = await _userManager.CreateAsync(user);
+                if (identityResult.Succeeded)
+                {
+                    identityResult = await _userManager.AddLoginAsync(user, info);
+                    if (identityResult.Succeeded)
+                    {
+                        await _userManager.AddToRoleAsync(user, "Member");
+                        await _signInManager.SignInAsync(user, false);
+                        return RedirectToAction(nameof(Index), "home");
+                    }
+                }
+            }
+
+            return RedirectToAction("index" ,"home") ;
         }
 
 

@@ -64,6 +64,10 @@
               "target": "Package",
               "version": "[11.5.0, )"
             },
+            "Microsoft.AspNetCore.Authentication.Facebook": {
+              "target": "Package",
+              "version": "[6.0.13, )"
+            },
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
               "version": "[6.0.12, )"

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DA9SsC+2twqFgr5Ijc4MTSk74BuiisMzLoVbeHwgkN6F1Bj/ueTY8vSb+I4kmjvMKpdKdrbklVrgQQOzKZ7ICw==",
+  "dgSpecHash": "MxpWba/7GGXX4PVwVYCf0/6f4J0QEOs/8+dhTJXCP0tJ696IhTjVQlBfpukNT9r6Tv+qyH0C9yN/20C6D8jROg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\Medlab MVC_Uİ.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnetcore.authentication.cookies\\2.2.0\\microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
+    "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnetcore.authentication.facebook\\6.0.13\\microsoft.aspnetcore.authentication.facebook.6.0.13.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\6.0.12\\microsoft.aspnetcore.authentication.google.6.0.12.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.12\\microsoft.aspnetcore.cryptography.internal.6.0.12.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.12\\microsoft.aspnetcore.cryptography.keyderivation.6.0.12.nupkg.sha512",

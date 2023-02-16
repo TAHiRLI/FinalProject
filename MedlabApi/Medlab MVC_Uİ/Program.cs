@@ -9,6 +9,7 @@ using Medlab_MVC_Uİ.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Dynamic;
+using Microsoft.AspNetCore.Http;
 
 
 
@@ -76,6 +77,12 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 // 3 Google auth
 //===================
 builder.Services.AddAuthentication()
+                   .AddFacebook(options =>
+                   {
+                       options.AppId = "1552827238569987";
+                       options.AppSecret = "82a47b6dd3d803510f2c580d728a803e";
+                       options.Scope.Add("email");
+                   })
                .AddGoogle(options =>
                {
                    options.ClientId = "233219007455-ga7paq7j1l8e8uq2h6d8ndfjupd505fj.apps.googleusercontent.com";

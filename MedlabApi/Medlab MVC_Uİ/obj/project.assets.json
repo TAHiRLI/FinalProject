@@ -205,6 +205,22 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Authentication.Facebook/6.0.13": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.Facebook.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.Facebook.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.AspNetCore.Authentication.Google/6.0.12": {
         "type": "package",
         "compile": {
@@ -4300,6 +4316,21 @@
         "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Core.xml",
         "microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
         "microsoft.aspnetcore.authentication.core.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.Facebook/6.0.13": {
+      "sha512": "pIgxV8LYUjiNGSu3I16n15AJF72dRF1KLjp0/Ak01wH9yAnhbZ9AXbt8qoaJyrfZTw09VfNXsjGC9qNvMkCDTw==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.facebook/6.0.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net6.0/Microsoft.AspNetCore.Authentication.Facebook.dll",
+        "lib/net6.0/Microsoft.AspNetCore.Authentication.Facebook.xml",
+        "microsoft.aspnetcore.authentication.facebook.6.0.13.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.facebook.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authentication.Google/6.0.12": {
@@ -11086,6 +11117,7 @@
       "FluentValidation.AspNetCore >= 11.2.2",
       "FluentValidation.DependencyInjectionExtensions >= 11.5.0",
       "Medlab.Data >= 1.0.0",
+      "Microsoft.AspNetCore.Authentication.Facebook >= 6.0.13",
       "Microsoft.AspNetCore.Authentication.Google >= 6.0.12",
       "Microsoft.AspNetCore.Identity >= 2.2.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.12",
@@ -11155,6 +11187,10 @@
           "FluentValidation.DependencyInjectionExtensions": {
             "target": "Package",
             "version": "[11.5.0, )"
+          },
+          "Microsoft.AspNetCore.Authentication.Facebook": {
+            "target": "Package",
+            "version": "[6.0.13, )"
           },
           "Microsoft.AspNetCore.Authentication.Google": {
             "target": "Package",
