@@ -37,7 +37,7 @@ namespace Medlab_MVC_Uİ.Controllers
             {
                 query = query.Where(x => x.SalePrice * (100 - x.DiscoutPercent) / 100 >= minPrice && x.SalePrice * (100 - x.DiscoutPercent) / 100 <= maxPrice);
             }
-
+            query = query.OrderBy(x => x.StockStatus == true);
             switch (sort)
             {
                 case "HighToLow":

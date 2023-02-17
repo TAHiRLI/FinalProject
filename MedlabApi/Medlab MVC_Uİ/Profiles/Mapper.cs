@@ -10,6 +10,7 @@ namespace Medlab_MVC_Uİ.Profiles
         {
             CreateMap<AppUser, EditProfileViewModel>().ReverseMap();
             CreateMap<ProductReviewViewModel, ProductReview>().ReverseMap();
+            CreateMap<BasketItemViewModel, BasketItem>().ReverseMap();
         }
        
     }

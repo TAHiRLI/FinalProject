@@ -39,8 +39,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Fluent Validation
 //===================
 builder.Services.AddControllersWithViews()
-    .AddNewtonsoftJson(opt =>
-                          opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+   .AddJsonOptions(options =>
+   {
+       options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+   })
+      .AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+
     .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<LoginVmValidator>());
 
 
@@ -118,7 +123,7 @@ builder.Services.AddScoped<IProductTagRepository, ProductTagRepository>();
 builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductReviewRepository, ProductReviewRepository>();
-
+builder.Services.AddScoped<IBasketItemRepository, BasketItemRepository>();
 
 
 

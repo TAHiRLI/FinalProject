@@ -5,9 +5,9 @@ using System.Reflection;
 
 namespace Medlab.Data.DAL
 {
-    public class MedlabDbContext:IdentityDbContext<AppUser>
+    public class MedlabDbContext : IdentityDbContext<AppUser>
     {
-        public MedlabDbContext(DbContextOptions<MedlabDbContext> options):base(options)
+        public MedlabDbContext(DbContextOptions<MedlabDbContext> options) : base(options)
         {
 
         }
@@ -28,8 +28,8 @@ namespace Medlab.Data.DAL
         public DbSet<Value> Values { get; set; }
         public DbSet<AmenityImage> AmenityImages { get; set; }
         public DbSet<ProductReview> ProductReviews { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
 
-        
 
         //===================
         // Fluent Validation
@@ -37,12 +37,12 @@ namespace Medlab.Data.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());  
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
         }
 
 
     }
 
-    
+
 }

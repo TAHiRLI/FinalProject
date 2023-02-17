@@ -116,6 +116,33 @@ namespace Medlab.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Medlab.Core.Entities.BasketItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("BasketItems");
+                });
+
             modelBuilder.Entity("Medlab.Core.Entities.Blog", b =>
                 {
                     b.Property<int>("Id")
@@ -727,6 +754,25 @@ namespace Medlab.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Medlab.Core.Entities.BasketItem", b =>
+                {
+                    b.HasOne("Medlab.Core.Entities.AppUser", "AppUser")
+                        .WithMany("BasketItems")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Medlab.Core.Entities.Product", "Product")
+                        .WithMany("BasketItems")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Medlab.Core.Entities.Blog", b =>
                 {
                     b.HasOne("Medlab.Core.Entities.BlogCategory", "BlogCategory")
@@ -778,13 +824,13 @@ namespace Medlab.Data.Migrations
             modelBuilder.Entity("Medlab.Core.Entities.ProductReview", b =>
                 {
                     b.HasOne("Medlab.Core.Entities.AppUser", "AppUser")
-                        .WithMany()
+                        .WithMany("ProductReviews")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Medlab.Core.Entities.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductReviews")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -864,6 +910,13 @@ namespace Medlab.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Medlab.Core.Entities.AppUser", b =>
+                {
+                    b.Navigation("BasketItems");
+
+                    b.Navigation("ProductReviews");
+                });
+
             modelBuilder.Entity("Medlab.Core.Entities.BlogCategory", b =>
                 {
                     b.Navigation("Blogs");
@@ -881,7 +934,11 @@ namespace Medlab.Data.Migrations
 
             modelBuilder.Entity("Medlab.Core.Entities.Product", b =>
                 {
+                    b.Navigation("BasketItems");
+
                     b.Navigation("ProductImages");
+
+                    b.Navigation("ProductReviews");
 
                     b.Navigation("ProductTags");
                 });

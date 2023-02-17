@@ -11396,7 +11396,7 @@ footer .footerWrap_contact_title::before, footer .footerWrap_blogs_title::before
   color: white;
 }
 .cartMini.active {
-  max-height: 500px;
+  max-height: 600px;
   padding: 1.7rem 1rem 0.7rem 1rem;
   top: 2.5rem;
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);

@@ -3,6 +3,8 @@
     ViewData["Title"] = "Index";
 }
 
+@model BasketViewModel
+
 <!-- Bread crumb -->
 <div class="breadCrumb p-3 bg-light">
     <p class="container mb-0 px-5">
@@ -21,110 +23,36 @@
             <div class="row">
                 <div class=" col-lg-8 p-lg-4 p-md-3 p-2 ">
                     <div class="cart-product scrollable pe-3 container">
-
-                        <!-- Item -->
+                        @foreach (var item in Model.BasketItems)
+                        {
+                            <!-- Item -->
                         <div class="cart-product_item my-3  p-4 row position-relative">
                             <div class="cart-product_item_photo d-flex align-items-center justify-content-center mb-3 mb-md-0 col-sm-3 p-0">
-                                <img  src="~/Assets/Uploads/Products/prd-4.jpg" alt="" class="">
+                                <img  src="~/Assets/Uploads/Products/@item.Product.ProductImages.FirstOrDefault(x=> x.IsMain).ImageUrl" alt="@item.Product.Name" class="">
                             </div>
                             <div class="cart-product_item_info col-sm-9 ">
                                 <i class="fa-solid fa-x position-absolute pointer link-base remove-btn"></i>
                                 <h3 class="cart-product-title fw-semibold h5">
-                                    <a href="" class="link-base text-decoration-none">
-                                        Activated Charcoal Teeth Whitening Toothpaste MINT
-                                        Flavor
+                                    <a asp-action="details" asp-controller="product" asp-route-id="@item.Product.Id" class="link-base text-decoration-none">
+                                        @item.Product.Name
                                     </a>
                                 </h3>
-                                <p class="text-decoration-line-through m-0">$112.2 </p>
-                                <p class="my-1 cart-product-price text-base">$68.5 / 4</p>
+                                @if(item.Product.DiscoutPercent >0){
+                                <p class="text-decoration-line-through m-0">$@item.Product.SalePrice</p>
+                                }
+                                    <p class="my-1 cart-product-price text-base">
+                                        $@((item.Product.SalePrice * (100 - item.Product.DiscoutPercent) / 100).ToString("0.00"))</p>
 
                                 <div class="cart-product_counter rounded-pill mt-4">
                                     <span class="decrement counter-btn m-0 pointer btn link-hover">-</span>
-                                    <input type="number" value="0" class="add-count text-end" />
+                                    <input type="number" value="@item.Count" class="add-count text-end" />
                                     <span class="increment counter-btn m-0 pointer btn link-hover">+</span>
                                 </div>
                             </div>
 
                         </div>
 
-
-                        <!-- Item -->
-                        <div class="cart-product_item my-3  p-4 row position-relative">
-                            <div class="cart-product_item_photo d-flex align-items-center justify-content-center mb-3 mb-md-0 col-sm-3 p-0">
-                                <img  src="~/Assets/Uploads/Products/prd-4.jpg" alt="" class="">
-                            </div>
-                            <div class="cart-product_item_info col-sm-9 ">
-                                <i class="fa-solid fa-x position-absolute pointer link-base remove-btn"></i>
-                                <h3 class="cart-product-title fw-semibold h5">
-                                    <a href="" class="link-base text-decoration-none">
-                                        Activated Charcoal Teeth Whitening Toothpaste MINT
-                                        Flavor
-                                    </a>
-                                </h3>
-                                <p class="text-decoration-line-through m-0">$112.2 </p>
-                                <p class="my-1 cart-product-price text-base">$68.5 / 4</p>
-
-                                <div class="cart-product_counter rounded-pill mt-4">
-                                    <span class="decrement counter-btn m-0 pointer btn link-hover">-</span>
-                                    <input type="number" value="0" class="add-count text-end" />
-                                    <span class="increment counter-btn m-0 pointer btn link-hover">+</span>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <!-- Item -->
-                        <div class="cart-product_item my-3  p-4 row position-relative">
-                            <div class="cart-product_item_photo d-flex align-items-center justify-content-center mb-3 mb-md-0 col-sm-3 p-0">
-                                <img  src="~/Assets/Uploads/Products/prd-4.jpg" alt="" class="">
-                            </div>
-                            <div class="cart-product_item_info col-sm-9 ">
-                                <i class="fa-solid fa-x position-absolute pointer link-base remove-btn"></i>
-                                <h3 class="cart-product-title fw-semibold h5">
-                                    <a href="" class="link-base text-decoration-none">
-                                        Activated Charcoal Teeth Whitening Toothpaste MINT
-                                        Flavor
-                                    </a>
-                                </h3>
-                                <p class="text-decoration-line-through m-0">$112.2 </p>
-                                <p class="my-1 cart-product-price text-base">$68.5 / 4</p>
-
-                                <div class="cart-product_counter rounded-pill mt-4">
-                                    <span class="decrement counter-btn m-0 pointer btn link-hover">-</span>
-                                    <input type="number" value="0" class="add-count text-end" />
-                                    <span class="increment counter-btn m-0 pointer btn link-hover">+</span>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <!-- Item -->
-                        <div class="cart-product_item my-3  p-4 row position-relative">
-                            <div class="cart-product_item_photo d-flex align-items-center justify-content-center mb-3 mb-md-0 col-sm-3 p-0">
-                                <img  src="~/Assets/Uploads/Products/prd-4.jpg" alt="" class="">
-                            </div>
-                            <div class="cart-product_item_info col-sm-9 ">
-                                <i class="fa-solid fa-x position-absolute pointer link-base remove-btn"></i>
-                                <h3 class="cart-product-title fw-semibold h5">
-                                    <a href="" class="link-base text-decoration-none">
-                                        Activated Charcoal Teeth Whitening Toothpaste MINT
-                                        Flavor
-                                    </a>
-                                </h3>
-                                <p class="text-decoration-line-through m-0">$112.2 </p>
-                                <p class="my-1 cart-product-price text-base">$68.5 / 4</p>
-
-                                <div class="cart-product_counter rounded-pill mt-4">
-                                    <span class="decrement counter-btn m-0 pointer btn link-hover">-</span>
-                                    <input type="number" value="0" class="add-count text-end" />
-                                    <span class="increment counter-btn m-0 pointer btn link-hover">+</span>
-                                </div>
-                            </div>
-
-                        </div>
-
+                        }
 
 
                         <!-- end -->
@@ -142,19 +70,16 @@
                             <tbody>
                                 <tr>
                                     <td>Sub-total</td>
-                                    <td class="text-end">$208.32</td>
+                                    <td class="text-end">$@Model.SubTotal</td>
                                 </tr>
                                 <tr>
                                     <td>Discounted</td>
-                                    <td class="text-end">55.25</td>
+                                    <td class="text-end">$@(Model.SubTotal  - Model.Total)</td>
                                 </tr>
-                                <tr>
-                                    <td>Delivery</td>
-                                    <td class="text-end">0</td>
-                                </tr>
+                               
                                 <tr>
                                     <td>Total</td>
-                                    <td class="text-end">$182.5</td>
+                                    <td class="text-end">$@Model.Total</td>
                                 </tr>
                             </tbody>
                         </table>

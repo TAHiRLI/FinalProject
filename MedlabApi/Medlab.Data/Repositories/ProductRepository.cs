@@ -19,7 +19,7 @@ namespace Medlab.Data.Repositories
             this._context = context;
         }
 
-        public async Task<Product> GetProductForDetails(int id)
+        public async Task<Product?> GetProductForDetails(int id)
         {
             return await _context.Products
                 .Include(x=> x.ProductImages)
@@ -29,5 +29,6 @@ namespace Medlab.Data.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
 
         }
+
     }
 }

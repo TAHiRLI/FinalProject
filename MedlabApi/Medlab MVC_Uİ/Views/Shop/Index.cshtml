@@ -119,7 +119,7 @@
                 <div class="shop_products col-lg-9 col-md-8  p-3">
                     <div class="shop_products_sorting row justify-content-between align-items-center">
                         <div class="col-sm-4 my-2 ">
-                            <select name="sort" form="filter_form" class="js-select2" >
+                            <select name="sort" onchange="this.form.submit()" form="filter_form" class="js-select2">
                                 <option selected="@(ViewBag.Sort == "HighToLow" ? "selected" : null)" value="HighToLow">High To Low</option>
                                 <option selected="@(ViewBag.Sort == "LowToHigh" ? "selected" : null)" value="LowToHigh">Low To High</option>
                                 <option selected="@(ViewBag.Sort == "AZ" ? "selected" : null)" value="AZ">A-Z</option>
@@ -188,10 +188,18 @@
                                             }
 
                                         </div>
-                                        <button class="product-addToCart text-nowrap btn rounded-pill text-base my-3">
+                                        @if(product.StockStatus){
+                                            <a asp-action="addtobasket" asp-controller="basket" asp-route-id="@product.Id" class="product-addToCart add-to-cart btn text-decoration-none text-nowrap btn rounded-pill text-base my-3">
                                             <i class="fa-sharp fa-solid fa-bag-shopping mx-2"></i>
                                             Add To Cart
-                                        </button>
+                                        </a>
+                                        }else{
+                                            <button disabled  class="product-addToCart add-to-cart btn text-decoration-none text-nowrap btn rounded-pill text-base my-3">
+                                                <i class="fa-solid fa-store-slash"></i>
+                                               Out Of Stock
+                                            </button>
+                                        }
+                                     
                                     </div>
                                 </div>
                             </div>
@@ -220,7 +228,8 @@
     <!-- ========================= Custom =============================== -->
     <!-- Select 2 -->
     <script src="/Assets/Js/selectBox.js"></script>
-
+    <!--AddToCart Button-->
+    <script src="~/Assets/Js/AddToCart.js"></script>
     <!-- jquery Ui slider -->
 
     <script>

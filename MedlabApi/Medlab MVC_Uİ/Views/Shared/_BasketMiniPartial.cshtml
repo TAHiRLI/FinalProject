@@ -1,0 +1,34 @@
+﻿
+
+@model BasketViewModel
+
+    <ul class="cartMini_list p-0">
+        @foreach (var item in Model.BasketItems.Take(3))
+        {
+             <!--Item-->
+        <li class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0">
+            <i class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"></i>
+
+            <div class="cartMini_list_item_image mx-2">
+                  <img src="~/Assets/Uploads/Products/@item.Product.ProductImages.FirstOrDefault(x=> x.IsMain).ImageUrl"
+                     alt="@item.Product" />
+            </div>
+
+            <div class="me-2">
+                <span class="cartMini_list_item_title mb-0 pe-4">
+                    <a asp-action="details" asp-controller="product" asp-route-id="@item.Product.Id">@item.Product.Name</a>
+                </span>
+                <p class="cartMini_list_item_price mb-0 mt-2">$@((item.Count * item.Product.SalePrice *(100-item.Product.DiscoutPercent)/100).ToString("0.00"))  x  @item.Count</p>
+            </div>
+        </li>
+        }
+
+    </ul>
+
+    <hr />
+    <div class="cartMini_footer py-2">
+        <div class="d-flex justify-content-between fs-4 mb-2 ">
+            <span>Total:</span> <span>$@Model.Total</span>
+        </div>
+        <a asp-action="index" asp-controller="basket" class="checkoutBtn text-decoration-none rounded-pill py-1">CheckOut</a>
+    </div>
