@@ -24,7 +24,7 @@ namespace Medlab_MVC_Uİ.Controllers
             _mapper = mapper;
             _basketItemRepository = basketItemRepository;
         }
-        public async Task<IActionResult>  Index()
+        public async Task<IActionResult> Index()
         {
             AppUser user = null;
             if (User.Identity.IsAuthenticated)
@@ -32,7 +32,7 @@ namespace Medlab_MVC_Uİ.Controllers
 
             BasketViewModel BasketVm = new BasketViewModel();
 
-            if(user != null)
+            if (user != null)
             {
                 var basketItems = _basketItemRepository.GetBasketItemsWithProduct().Where(x => x.AppUserId == user.Id).ToList();
 
@@ -79,7 +79,7 @@ namespace Medlab_MVC_Uİ.Controllers
 
         public async Task<IActionResult> AddToBasket(int id, int count = 1)
         {
-         
+
 
             AppUser user = null;
             if (User.Identity.IsAuthenticated)
@@ -166,6 +166,9 @@ namespace Medlab_MVC_Uİ.Controllers
 
         }
 
+        //=======================
+        // Add to Basket
+        //=======================
         public async Task<IActionResult> RemoveFromBasket(int id)
         {
             BasketViewModel BasketVm = new BasketViewModel();
@@ -174,7 +177,7 @@ namespace Medlab_MVC_Uİ.Controllers
             if (User.Identity.IsAuthenticated)
                 user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            if(user != null)
+            if (user != null)
             {
                 var existBasketiItem = await _basketItemRepository.GetAsync(x => x.ProductId == id);
                 if (existBasketiItem == null)
@@ -185,7 +188,104 @@ namespace Medlab_MVC_Uİ.Controllers
 
                 //now form the basket vm
 
+                var basketItems = _basketItemRepository.GetBasketItemsWithProduct().Where(x => x.AppUserId == user.Id).ToList();
+
+                foreach (var item in basketItems)
+                {
+                    BasketItemViewModel BasketItemVm = _mapper.Map<BasketItemViewModel>(item);
+                    BasketVm.BasketItems.Add(BasketItemVm);
+                    BasketVm.Total += item.Count * (item.Product.SalePrice * (100 - item.Product.DiscoutPercent) / 100);
+                    BasketVm.SubTotal += item.Count * item.Product.SalePrice;
+                }
             }
+            else
+            {
+                List<BasketCookieViewModel> BasketCookieItems = new List<BasketCookieViewModel>();
+                var basket = HttpContext.Request.Cookies["Basket"];
+                if (basket != null)
+                    BasketCookieItems = JsonConvert.DeserializeObject<List<BasketCookieViewModel>>(basket);
+                var basketItem = BasketCookieItems.FirstOrDefault(x => x.ProductId == id);
+                if (basketItem != null)
+                    BasketCookieItems.Remove(basketItem);
+
+                HttpContext.Response.Cookies.Append("Basket", JsonConvert.SerializeObject(BasketCookieItems));
+
+                foreach (var item in BasketCookieItems)
+                {
+                    Product cookieProdut = await _productRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
+
+                    BasketItemViewModel basketItemViewModel = new BasketItemViewModel
+                    {
+                        Product = cookieProdut,
+                        Count = item.Count,
+                    };
+
+                    BasketVm.BasketItems.Add(basketItemViewModel);
+                    BasketVm.Total += item.Count * (cookieProdut.SalePrice * (100 - cookieProdut.DiscoutPercent) / 100);
+                    BasketVm.SubTotal += item.Count * cookieProdut.SalePrice;
+                }
+            }
+
+            return PartialView("_BasketMiniPartial", BasketVm);
+        }
+
+
+        //=======================
+        // Get Basket Totat, SubTotal, Count
+        //=======================
+
+        public async Task<ObjectResult> GetBasketInfo()
+        {
+            AppUser user = null;
+            if (User.Identity.IsAuthenticated)
+                user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            BasketViewModel BasketVm = new BasketViewModel();
+
+            if (user != null)
+            {
+                var basketItems = _basketItemRepository.GetBasketItemsWithProduct().Where(x => x.AppUserId == user.Id).ToList();
+
+                foreach (var item in basketItems)
+                {
+                    BasketItemViewModel BasketItemVm = _mapper.Map<BasketItemViewModel>(item);
+                    BasketVm.BasketItems.Add(BasketItemVm);
+                    BasketVm.Total += item.Count * (item.Product.SalePrice * (100 - item.Product.DiscoutPercent) / 100);
+                    BasketVm.SubTotal += item.Count * item.Product.SalePrice;
+                }
+            }
+            else
+            {
+                List<BasketCookieViewModel> BasketCookieItems = new List<BasketCookieViewModel>();
+
+                var basket = HttpContext.Request.Cookies["Basket"];
+                if (basket != null)
+                    BasketCookieItems = JsonConvert.DeserializeObject<List<BasketCookieViewModel>>(basket);
+
+                foreach (var item in BasketCookieItems)
+                {
+                    Product cookieProdut = await _productRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
+
+                    BasketItemViewModel basketItemViewModel = new BasketItemViewModel
+                    {
+                        Product = cookieProdut,
+                        Count = item.Count,
+                    };
+
+                    BasketVm.BasketItems.Add(basketItemViewModel);
+                    BasketVm.Total += item.Count * (cookieProdut.SalePrice * (100 - cookieProdut.DiscoutPercent) / 100);
+                    BasketVm.SubTotal += item.Count * cookieProdut.SalePrice;
+                }
+            }
+
+            BasketInfoViewModel BasketInfo = new BasketInfoViewModel
+            {
+                Total = BasketVm.Total,
+                Subtotal = BasketVm.SubTotal,
+                Count = BasketVm.BasketItems.Count()
+            };
+            return Ok(BasketInfo);
         }
     }
 }
+

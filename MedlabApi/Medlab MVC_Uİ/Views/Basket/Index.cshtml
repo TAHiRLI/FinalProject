@@ -31,7 +31,7 @@
                                 <img  src="~/Assets/Uploads/Products/@item.Product.ProductImages.FirstOrDefault(x=> x.IsMain).ImageUrl" alt="@item.Product.Name" class="">
                             </div>
                             <div class="cart-product_item_info col-sm-9 ">
-                                <i class="fa-solid fa-x position-absolute pointer link-base remove-btn"></i>
+                                <a asp-action="RemoveFromBasket" asp-controller="Basket" asp-route-id="@item.Product.Id" class="fa-solid fa-x position-absolute text-decoration-none pointer x-btn reload link-base remove-btn"></a>
                                 <h3 class="cart-product-title fw-semibold h5">
                                     <a asp-action="details" asp-controller="product" asp-route-id="@item.Product.Id" class="link-base text-decoration-none">
                                         @item.Product.Name
@@ -44,9 +44,9 @@
                                         $@((item.Product.SalePrice * (100 - item.Product.DiscoutPercent) / 100).ToString("0.00"))</p>
 
                                 <div class="cart-product_counter rounded-pill mt-4">
-                                    <span class="decrement counter-btn m-0 pointer btn link-hover">-</span>
+                                        <a asp-action="addtobasket" asp-controller="basket" asp-route-id="@item.Product.Id" asp-route-count="-1" class="decrement decrement-cart counter-btn m-0 text-decoration-none pointer btn link-hover">-</a>
                                     <input type="number" value="@item.Count" class="add-count text-end" />
-                                    <span class="increment counter-btn m-0 pointer btn link-hover">+</span>
+                                        <a asp-action="addtobasket" asp-controller="basket" asp-route-id="@item.Product.Id" asp-route-count="1" class="increment increment-cart counter-btn m-0 text-decoration-none pointer btn link-hover">+</a>
                                 </div>
                             </div>
 
@@ -70,16 +70,16 @@
                             <tbody>
                                 <tr>
                                     <td>Sub-total</td>
-                                    <td class="text-end">$@Model.SubTotal</td>
+                                    <td class="text-end sub-total">$@Model.SubTotal</td>
                                 </tr>
                                 <tr>
                                     <td>Discounted</td>
-                                    <td class="text-end">$@(Model.SubTotal  - Model.Total)</td>
+                                    <td class="text-end discounted">$@(Model.SubTotal  - Model.Total)</td>
                                 </tr>
                                
                                 <tr>
                                     <td>Total</td>
-                                    <td class="text-end">$@Model.Total</td>
+                                    <td class="text-end total">$@Model.Total</td>
                                 </tr>
                             </tbody>
                         </table>

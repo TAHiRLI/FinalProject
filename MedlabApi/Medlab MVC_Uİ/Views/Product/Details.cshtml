@@ -159,9 +159,18 @@
                             <input type="number" value="0" class="add-count" />
                             <span class="increment counter-btn m-0 pointer btn link-hover">+</span>
                         </div>
-                        <button class="addToCartBtn rounded-pill m-0 ms-lg-5 m-1">
-                            <i class="fa-solid fa-bag-shopping mx-2"></i>Add to cart
-                        </button>
+                        @if (Model.Product.StockStatus)
+                        {
+                            <a asp-action="addToBasket" asp-controller="basket" asp-route-id="@Model.Product.Id" class="addToCartBtn addToCartWithCount rounded-pill btn text-decoration-none m-0 ms-lg-5 m-1">
+                                <i class="fa-solid fa-bag-shopping mx-2"></i>Add to cart
+                            </a>
+                        }else{
+                            <button disabled  class="addToCartBtn rounded-pill btn text-decoration-none m-0 ms-lg-5 m-1">
+                                <i class="fa-solid fa-store-slash"></i>
+                                Out Of Stock
+                            </button>
+                        }
+
                     </div>
                 </div>
             </div>
@@ -287,10 +296,20 @@
                                     }
                                 }
                             </div>
-                            <button class="product-addToCart btn rounded-pill text-base my-3">
-                                <i class="fa-sharp fa-solid fa-bag-shopping mx-2"></i>
-                                Add To Cart
-                            </button>
+                            @if (product.StockStatus)
+                            {
+                                <a asp-action="addtobasket" asp-controller="basket" asp-route-id="@product.Id" class="product-addToCart add-to-cart btn text-decoration-none text-nowrap btn rounded-pill text-base my-3">
+                                    <i class="fa-sharp fa-solid fa-bag-shopping mx-2"></i>
+                                    Add To Cart
+                                </a>
+                            }
+                            else
+                            {
+                                <button disabled class="product-addToCart add-to-cart btn text-decoration-none text-nowrap btn rounded-pill text-base my-3">
+                                    <i class="fa-solid fa-store-slash"></i>
+                                    Out Of Stock
+                                </button>
+                            }
                         </div>
                     </div>
                 }

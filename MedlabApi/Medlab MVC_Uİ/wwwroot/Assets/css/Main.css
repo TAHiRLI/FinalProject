@@ -12339,7 +12339,7 @@ footer .copyright a:hover {
   border-radius: 25px;
   border: 1px solid #d5d5d5;
 }
-#Product-detail_Section .product-info_button_counter span {
+#Product-detail_Section .product-info_button_counter span  {
   text-align: center;
   line-height: 49px;
   font-size: 24px;
@@ -12513,7 +12513,7 @@ footer .copyright a:hover {
   border-radius: 25px;
   border: 1px solid #d5d5d5;
 }
-.cart-product_counter span {
+.cart-product_counter a {
   text-align: center;
   line-height: 49px;
   font-size: 24px;

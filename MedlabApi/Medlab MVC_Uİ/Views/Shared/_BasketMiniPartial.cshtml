@@ -7,7 +7,7 @@
         {
              <!--Item-->
         <li class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0">
-            <i class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"></i>
+            <a asp-action="removeFromBasket" asp-controller="basket" asp-route-id="@item.Product.Id" class="las la-times p-1 text-decoration-none cartMini_list_item_close x-btn position-absolute top-0 end-0"></a>
 
             <div class="cartMini_list_item_image mx-2">
                   <img src="~/Assets/Uploads/Products/@item.Product.ProductImages.FirstOrDefault(x=> x.IsMain).ImageUrl"
