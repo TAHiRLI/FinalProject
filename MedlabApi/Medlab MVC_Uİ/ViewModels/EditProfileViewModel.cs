@@ -14,6 +14,7 @@ namespace Medlab_MVC_Uİ.ViewModels
         public string? NewPassword { get; set; }
         public string? Password { get; set; }
         public string? ConfirmPassword { get; set; }
+        public bool IsExternalUser { get; set; }
     }
     public class EditProfileVmValidator : AbstractValidator<EditProfileViewModel>
     {

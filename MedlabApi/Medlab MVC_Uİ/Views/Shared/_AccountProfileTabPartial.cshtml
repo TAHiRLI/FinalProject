@@ -13,7 +13,7 @@
             <img src="~/Assets/Uploads/Users/@Model.ImageUrl"
                  alt=""
                  class="w-100 h-100" />
-            <input class="user-input " id="user-photo-input" type="file" form="profile-edit-form" hidden disabled  asp-for="ImageFile" />
+            <input class="user-input " id="user-photo-input" type="file" form="profile-edit-form" hidden disabled asp-for="ImageFile" />
             <i class="fas fa-pen add-photo"></i>
             <span class="fs-09 text-danger d-block" asp-validation-for="ImageFile"></span>
 
@@ -57,8 +57,10 @@
                 <span class="fs-09 text-danger" asp-validation-for="PhoneNumber"></span>
 
             </div>
-
-            <p class="mt-4 d-none d-md-block "> <strong>Note:</strong> If you don't want to update <br /> password, leave empty.</p>
+            @if (!Model.IsExternalUser)
+            {
+                <p class="mt-4 d-none d-md-block "> <strong>Note:</strong> If you don't want to update <br /> password, leave empty.</p>
+            }
         </div>
         <div class="col-md-6 d-flex flex-column align-items-center">
             <div class="my-3">
@@ -69,30 +71,34 @@
                 <span class="fs-09 text-danger" asp-validation-for="UserName"></span>
 
             </div>
+            @if (!Model.IsExternalUser)
+            {
 
-            <div class="my-3">
-                <label class="form-label" asp-for="Password">Password</label>
-                <input asp-for="Password" class="form-control user-input"
+                <div class="my-3">
+                    <label class="form-label" asp-for="Password">Password</label>
+                    <input asp-for="Password" class="form-control user-input"
                        disabled type="password" />
-                <span class="fs-09 text-danger" asp-validation-for="Password"></span>
+                    <span class="fs-09 text-danger" asp-validation-for="Password"></span>
 
-            </div>
+                </div>
 
-            <div class="my-3">
-                <label class="form-label" asp-for="NewPassword">New Password</label>
-                <input asp-for="NewPassword" class="form-control user-input"
+                <div class="my-3">
+                    <label class="form-label" asp-for="NewPassword">New Password</label>
+                    <input asp-for="NewPassword" class="form-control user-input"
                        disabled type="password" />
-                <span class="fs-09 text-danger" asp-validation-for="NewPassword"></span>
+                    <span class="fs-09 text-danger" asp-validation-for="NewPassword"></span>
 
-            </div>
+                </div>
 
-            <div class="my-3">
-                <label class="form-label" asp-for="ConfirmPassword">Confirm Password</label>
-                <input asp-for="ConfirmPassword" class="form-control user-input"
+                <div class="my-3">
+                    <label class="form-label" asp-for="ConfirmPassword">Confirm Password</label>
+                    <input asp-for="ConfirmPassword" class="form-control user-input"
                        disabled type="password" />
-                <span class="fs-09 text-danger" asp-validation-for="ConfirmPassword"></span>
+                    <span class="fs-09 text-danger" asp-validation-for="ConfirmPassword"></span>
 
-            </div>
+                </div>
+            }
+
         </div>
         <div asp-validation-summary="ModelOnly" class="fs-09 text-danger text-center"></div>
     </form>

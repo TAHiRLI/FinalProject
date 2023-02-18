@@ -270,6 +270,8 @@ namespace Medlab_MVC_Uİ.Controllers
             ProfileViewModel model = new ProfileViewModel();
             model.EditProfileViewModel = _mapper.Map<EditProfileViewModel>(user);
             model.DoctorAppointments = _doctorAppointmentRepository.GetAll(x => x.AppUserId == user.Id, "Doctor").OrderByDescending(x=> x.CreatedAt).Take(20).ToList();
+            if (user.PasswordHash == null)
+                model.EditProfileViewModel.IsExternalUser = true;
 
             return View(model);
         }
@@ -286,6 +288,8 @@ namespace Medlab_MVC_Uİ.Controllers
             model.EditProfileViewModel = ProfileVm;
             model.EditProfileViewModel.ImageUrl = user.ImageUrl;
             model.DoctorAppointments = _doctorAppointmentRepository.GetAll(x => x.AppUserId == user.Id, "Doctor").OrderByDescending(x => x.CreatedAt).Take(20).ToList();
+            if (user.PasswordHash == null)
+                model.EditProfileViewModel.IsExternalUser = true;
 
             if (!ModelState.IsValid)
             {
@@ -401,7 +405,7 @@ namespace Medlab_MVC_Uİ.Controllers
                 await _signInManager.SignOutAsync();
 
 
-            return View(model);
+            return RedirectToAction("profile");
         }
 
 
