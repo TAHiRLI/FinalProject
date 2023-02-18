@@ -228,7 +228,7 @@
                         {
 
                             <div>
-                                <a asp-action="GetReviews" asp-controller="Product" asp-route-id="@Model.Product.Id" commentCount="@Model.ProductReviews.Count" takeCount="3" skipCount="3" class="loadmore-btn btn m-auto mt-5 rounded-pill py-2 text-center">Load More</a>
+                                <a asp-action="GetReviews" asp-controller="Product" asp-route-id="@Model.Product.Id" commentCount="@Model.ProductReviews.Count" takeCount="3" skipCount="0" class="loadmore-btn btn m-auto mt-5 rounded-pill py-2 text-center">Load More</a>
                             </div>
                         }
                         @if (!Model.IsUserReviewed)

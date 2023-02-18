@@ -12,7 +12,7 @@ $(document).on("click", ".loadmore-btn", function (e) {
     if (newSkipCount + takeCount >= commentCount) {
         e.target.classList.add("d-none");
     }
-    link += "&skipCount=" + `${newSkipCount}`
+    link += "?&skipCount=" + `${newSkipCount}`
 
 
 

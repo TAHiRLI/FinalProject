@@ -139,14 +139,34 @@ namespace Medlab_MVC_Uİ.Controllers
         // 3 Get Reviews / Load More
         //======================
 
-        public IActionResult GetReviews(int ProductId, int count = 3, int skipCount = 3)
+        public async Task<IActionResult>  GetReviews(int id, int count = 3, int skipCount = 3)
         {
-            List<ProductReview> productReviews = _productReviewRepository
-                .GetAll(x=> x.ProductId == ProductId && x.IsApproved == true, "AppUser")
-                .Skip(skipCount)
-                .OrderByDescending(x => x.CreatedAt)
-                .Take(count)
-                .ToList();
+            List<ProductReview> productReviews = new List<ProductReview>();
+            if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+            {
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                if (user == null)
+                    return NotFound();
+
+                 productReviews = _productReviewRepository
+               .GetAll(x => x.ProductId == id && x.IsApproved == true || x.ProductId == id && x.AppUserId == user.Id, "AppUser")
+               .Skip(skipCount)
+               .OrderByDescending(x => x.CreatedAt)
+               .Take(count)
+               .ToList();
+                return PartialView("_ReviewsPartial", productReviews);
+
+            }
+            else
+            {
+                productReviews = _productReviewRepository
+               .GetAll(x => x.ProductId == id && x.IsApproved == true, "AppUser")
+               .Skip(skipCount)
+               .OrderByDescending(x => x.CreatedAt)
+               .Take(count)
+               .ToList();
+            }
+           
             return PartialView("_ReviewsPartial", productReviews);
         }
     }
