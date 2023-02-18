@@ -10,18 +10,18 @@
             <a asp-action="removeFromBasket" asp-controller="basket" asp-route-id="@item.Product.Id" class="las la-times p-1 text-decoration-none cartMini_list_item_close x-btn position-absolute top-0 end-0"></a>
 
             <div class="cartMini_list_item_image mx-2">
-                  <img src="~/Assets/Uploads/Products/@item.Product.ProductImages.FirstOrDefault(x=> x.IsMain).ImageUrl"
-                     alt="@item.Product" />
+                <img src="~/Assets/Uploads/Products/@item.Product.ProductImages.FirstOrDefault(x=> x.IsMain).ImageUrl"
+                 alt="@item.Product" />
             </div>
 
             <div class="me-2">
                 <span class="cartMini_list_item_title mb-0 pe-4">
                     <a asp-action="details" asp-controller="product" asp-route-id="@item.Product.Id">@item.Product.Name</a>
                 </span>
-                <p class="cartMini_list_item_price mb-0 mt-2">$@((item.Count * item.Product.SalePrice *(100-item.Product.DiscoutPercent)/100).ToString("0.00"))  x  @item.Count</p>
+                <p class="cartMini_list_item_price mb-0 mt-2">$@((item.Count * item.Product.SalePrice * (100 - item.Product.DiscoutPercent) / 100).ToString("0.00"))  x  @item.Count</p>
             </div>
         </li>
-        }
+    }
 
     </ul>
 

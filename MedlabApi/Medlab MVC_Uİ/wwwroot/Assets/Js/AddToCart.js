@@ -31,6 +31,15 @@
         .catch(error => {
             console.log(error)
         })
+        .finally(() => {
+            let infolink = "/basket/getbasketinfo"
+            fetch(infolink)
+                .then(res => res.json())
+                .then(data => {
+                    $(".cartCount").html(data.count)
+                    console.log(data)
+                })
+        })
 
 
 })

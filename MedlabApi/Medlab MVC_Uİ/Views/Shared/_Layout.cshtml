@@ -4,11 +4,12 @@
 @inject LayoutService _layoutService
 @{
     var setting = _layoutService.GetSetting();
-}
+    BasketViewModel basketVm = await _layoutService.GetBasket();
 
-@{
+
+
     // To show active link in navbar
-    // returns active class when given controller name and action name matches
+    // Desc:  returns active class when given controller name and action name matches
     string getClass(string actionName, string controllerName)
     {
         string action = ViewContext.RouteData.Values["Action"].ToString();
@@ -35,9 +36,9 @@
           href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
-           
 
-          @RenderSection("Styles", required:false)
+
+    @RenderSection("Styles", required:false)
 
     <link rel="stylesheet" href="~/Assets/css/Main.css" />
     <title>Medlab</title>
@@ -49,7 +50,7 @@
         <div class="navbar_container px-xl-5 px-lg-2 mx-xl-3 mx-lg-1">
             <div class="navbar_container_logoBox ms-lg-5">
                 <div>
-                    <a asp-action="index" asp-controller="home" >
+                    <a asp-action="index" asp-controller="home">
                         <img src="~/Assets/Images/logo/@setting["header_logo"]" alt="" />
                     </a>
                 </div>
@@ -69,7 +70,7 @@
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
                             <a asp-action="index" asp-controller="doctor" class="@getClass("Index", "Doctor")"> Our specialists</a>
                         </li>
-                      
+
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
                             <a asp-action="index" asp-controller="blog" class="@getClass("Index", "Blog")"> Blog </a>
                         </li>
@@ -86,60 +87,38 @@
                 <div class="navbar_container_widgetBox d-flex align-items-center">
                     <div class="navbar_container_widgetBox_cart mx-3 position-relative p-2">
                         <i class="fa-sharp fa-solid fa-bag-shopping"></i>
-                        <span class="cartCount rounded-pill">12</span>
+                        <span class="cartCount rounded-pill">@basketVm.BasketItems.Count</span>
                         <div class="cartMini cartMiniTop position-absolute BasketMiniPartialHolder">
                             <ul class="cartMini_list p-0">
-                                <li class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0">
-                                    <i class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"></i>
 
-                                    <div class="cartMini_list_item_image mx-2">
-                                        <img src="~/Assets/Images/logo/@setting["header_logo"]"
-                                             alt="" />
-                                    </div>
+                                @foreach (var item in basketVm.BasketItems.Take(3))
+                                {
+                                    <!--Item-->
+                                    <li class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0">
+                                        <a asp-action="removeFromBasket" asp-controller="basket" asp-route-id="@item.Product.Id" class="las la-times p-1 text-decoration-none cartMini_list_item_close x-btn position-absolute top-0 end-0"></a>
 
-                                    <div class="me-2">
-                                        <span class="cartMini_list_item_title mb-0 pe-4">
-                                            <a href="">Active Wow Teeth tasty Charcoal Powder</a>
-                                        </span>
-                                        <p class="cartMini_list_item_price mb-0 mt-2">$38</p>
-                                    </div>
-                                </li>
-                                <li class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0">
-                                    <i class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"></i>
+                                        <div class="cartMini_list_item_image mx-2">
+                                            <img src="~/Assets/Uploads/Products/@item.Product.ProductImages.FirstOrDefault(x=> x.IsMain).ImageUrl"
+                                             alt="@item.Product" />
+                                        </div>
 
-                                    <div class="cartMini_list_item_image mx-2">
-                                        <img src="~/Assets/Images/logo/@setting["header_logo"]" alt="" />
-                                    </div>
+                                        <div class="me-2">
+                                            <span class="cartMini_list_item_title mb-0 pe-4">
+                                                <a asp-action="details" asp-controller="product" asp-route-id="@item.Product.Id">@item.Product.Name</a>
+                                            </span>
+                                            <p class="cartMini_list_item_price mb-0 mt-2">$@((item.Count * item.Product.SalePrice * (100 - item.Product.DiscoutPercent) / 100).ToString("0.00"))  x  @item.Count</p>
+                                        </div>
+                                    </li>
+                                }
 
-                                    <div class="me-2">
-                                        <span class="cartMini_list_item_title mb-0 pe-4">
-                                            <a href="">Active Wow Teeth tasty Charcoal Powder</a>
-                                        </span>
-                                        <p class="cartMini_list_item_price mb-0 mt-2">$38</p>
-                                    </div>
-                                </li>
-                                <li class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0">
-                                    <i class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"></i>
-                                    <div class="cartMini_list_item_image mx-2">
-                                        <img src="~/Assets/Uploads/Products/prd-sm-2.jpg"
-                                             alt="" />
-                                    </div>
-
-                                    <div class="me-2">
-                                        <span class="cartMini_list_item_title mb-0 pe-4">
-                                            <a href="">Active Wow Teeth tasty Charcoal Powder</a>
-                                        </span>
-                                        <p class="cartMini_list_item_price mb-0 mt-2">$38.25</p>
-                                    </div>
-                                </li>
                             </ul>
 
                             <hr />
-                            <div class="cartMini_footer">
-                                <div class="d-flex justify-content-between fs-4 mb-2">
-                                    <span>Total:</span> <span>$78.85</span>
+                            <div class="cartMini_footer py-2">
+                                <div class="d-flex justify-content-between fs-4 mb-2 ">
+                                    <span>Total:</span> <span>$@basketVm.Total</span>
                                 </div>
-                                <a asp-action="index" asp-controller="basket" class="checkoutBtn text-decoration-none rounded-pill">CheckOut</a>
+                                <a asp-action="index" asp-controller="basket" class="checkoutBtn text-decoration-none rounded-pill py-1">CheckOut</a>
                             </div>
                         </div>
                     </div>
@@ -147,16 +126,17 @@
                     <div class="navbar_container_widgetBox_profile p-3 d-none d-lg-block">
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
                         {
-                        <a asp-action="profile" asp-controller="account"> <i class="fa-solid fa-user"></i></a>
+                            <a asp-action="profile" asp-controller="account"> <i class="fa-solid fa-user"></i></a>
                         }
-                        else{   
-                            
+                        else
+                        {
+
                             <a asp-action="login" asp-controller="account" class="btn btn-outline-dark rounded-1">
-                            Sign In
-                        </a>
+                                Sign In
+                            </a>
 
                         }
-                     
+
                     </div>
 
                     <div class="navbar_container_widgetBox_mobileMenu mobileBars d-md-block d-lg-none">
@@ -180,7 +160,7 @@
                 <li class="mobileNav_item">
                     <a asp-action="index" asp-controller="doctor" class="nav-link @getClass("Index", "Doctor")">Our Specialists</a>
                 </li>
-              
+
                 <li class="mobileNav_item dropdown">
                     <a asp-action="index" asp-controller="blog" class="nav-link @getClass("Index", "Blog")">Blogs</a>
                 </li>
@@ -218,7 +198,7 @@
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
                             <a asp-action="index" asp-controller="doctor" class="@getClass("Index", "Doctor")"> Our specialists</a>
                         </li>
-                     
+
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
                             <a asp-action="index" asp-controller="blog" class="@getClass("Index", "Blog")"> Blog </a>
                         </li>
@@ -236,61 +216,36 @@
                 <div class="navbar_container_widgetBox d-flex align-items-center">
                     <div class="navbar_container_widgetBox_cart mx-2 position-relative p-2">
                         <i class="fa-sharp fa-solid fa-bag-shopping scroll"></i>
-                        <span class="cartCount rounded-pill">12</span>
+                        <span class="cartCount rounded-pill">@basketVm.BasketItems.Count</span>
                         <div class="cartMini cartMiniScroll position-absolute BasketMiniPartialHolder ">
                             <ul class="cartMini_list p-0">
-                                <li class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0">
-                                    <i class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"></i>
+                                @foreach (var item in basketVm.BasketItems.Take(3))
+                                {
+                                    <!--Item-->
+                                    <li class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0">
+                                        <a asp-action="removeFromBasket" asp-controller="basket" asp-route-id="@item.Product.Id" class="las la-times p-1 text-decoration-none cartMini_list_item_close x-btn position-absolute top-0 end-0"></a>
 
-                                    <div class="cartMini_list_item_image mx-2">
-                                        <img src="~/Assets/Uploads/Products/prd-sm-1.jpg"
-                                             alt="" />
-                                    </div>
+                                        <div class="cartMini_list_item_image mx-2">
+                                            <img src="~/Assets/Uploads/Products/@item.Product.ProductImages.FirstOrDefault(x=> x.IsMain).ImageUrl"
+                                             alt="@item.Product" />
+                                        </div>
 
-                                    <div class="me-2">
-                                        <span class="cartMini_list_item_title mb-0 pe-4">
-                                            <a href="">Active Wow Teeth tasty Charcoal Powder</a>
-                                        </span>
-                                        <p class="cartMini_list_item_price mb-0 mt-2">$38</p>
-                                    </div>
-                                </li>
-                                <li class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0">
-                                    <i class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"></i>
-
-                                    <div class="cartMini_list_item_image mx-2">
-                                        <img src="~/Assets/Images/logo/logo.png" alt="" />
-                                    </div>
-
-                                    <div class="me-2">
-                                        <span class="cartMini_list_item_title mb-0 pe-4">
-                                            <a href="">Active Wow Teeth tasty Charcoal Powder</a>
-                                        </span>
-                                        <p class="cartMini_list_item_price mb-0 mt-2">$38</p>
-                                    </div>
-                                </li>
-                                <li class="cartMini_list_item mt-2 position-relative align-items-center me-0 ms-0">
-                                    <i class="las la-times p-1 cartMini_list_item_close position-absolute top-0 end-0"></i>
-                                    <div class="cartMini_list_item_image mx-2">
-                                        <img src="~/Assets/Uploads/Products/prd-sm-2.jpg"
-                                             alt="" />
-                                    </div>
-
-                                    <div class="me-2">
-                                        <span class="cartMini_list_item_title mb-0 pe-4">
-                                            <a href="">Active Wow Teeth tasty Charcoal Powder</a>
-                                        </span>
-                                        <p class="cartMini_list_item_price mb-0 mt-2">$38.25</p>
-                                    </div>
-                                </li>
+                                        <div class="me-2">
+                                            <span class="cartMini_list_item_title mb-0 pe-4">
+                                                <a asp-action="details" asp-controller="product" asp-route-id="@item.Product.Id">@item.Product.Name</a>
+                                            </span>
+                                            <p class="cartMini_list_item_price mb-0 mt-2">$@((item.Count * item.Product.SalePrice * (100 - item.Product.DiscoutPercent) / 100).ToString("0.00"))  x  @item.Count</p>
+                                        </div>
+                                    </li>
+                                }
                             </ul>
 
                             <hr />
-                            <div class="cartMini_footer">
-                                <div class="d-flex justify-content-between fs-4 mb-2">
-                                    <span>Total:</span> <span>$78.85</span>
+                            <div class="cartMini_footer py-2">
+                                <div class="d-flex justify-content-between fs-4 mb-2 ">
+                                    <span>Total:</span> <span>$@basketVm.Total</span>
                                 </div>
-                                <a asp-action="index" asp-controller="basket" class="checkoutBtn text-decoration-none rounded-pill">CheckOut</a>
-
+                                <a asp-action="index" asp-controller="basket" class="checkoutBtn text-decoration-none rounded-pill py-1">CheckOut</a>
                             </div>
                         </div>
                     </div>
@@ -332,7 +287,7 @@
                 <li class="mobileNav_item">
                     <a asp-action="index" asp-controller="doctor" class="nav-link @getClass("Index", "Doctor")">Our Specialists</a>
                 </li>
-            
+
                 <li class="mobileNav_item dropdown">
                     <a asp-action="index" asp-controller="blog" class="nav-link @getClass("Index", "Bolg")">Blogs</a>
                 </li>
@@ -349,7 +304,7 @@
     <!-- main Section -->
     @RenderBody()
 
-  
+
     <!-- footer -->
     <footer class="bg-light">
         <div class="footerWrap pb-2">
@@ -490,7 +445,6 @@
     </footer>
 
     <!-- Content end -->
-
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!--Sweet Alert-->
