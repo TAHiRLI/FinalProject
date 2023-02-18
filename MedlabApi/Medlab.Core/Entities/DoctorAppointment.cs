@@ -13,7 +13,7 @@ namespace Medlab.Core.Entities
         public Doctor? Doctor { get; set; }
         public string? AppUserId { get; set; }
         public AppUser? AppUser { get; set; }
-        public bool IsApproved { get; set; }
+        public bool? IsApproved { get; set; }
         public decimal TotalPaid { get; set; }
         public DateTime? StartedAt { get; set; }
         public DateTime? FinishedAt { get; set; }

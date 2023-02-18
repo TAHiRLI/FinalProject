@@ -295,50 +295,9 @@
                             <!-- END -->
                         </div>
                     </div>
+
                     <!-- Appointments tab  -->
-                    <div class="tab-pane bg-light p-2 tab-content-appointment fade "
-                         id="tab-appointment"
-                         role="tabpanel"
-                         aria-labelledby="appointment-tab"
-                         tabindex="0">
-                        <div class="appointments-container container scrollable">
-                            <!-- Item -->
-                            <div class=" d-flex align-items-center justify-content-between border-gray p-3 my-2">
-                                <div class="">
-                                    <h2 class="h5"><a href="#" class="text-decoration-none link-base fw-bold">Dr Tahir Tahirli</a></h2>
-                                    <p class="appointment-date"><span class="fw-semibold">Date : </span> <span> 17 Jan 2023 15:00</span></p>
-                                    <p><span class="fw-semibold"> Status:</span> <span class="badge bg-success">Approved</span></p>
-                                </div>
-                                <div class=" ">
-                                    <button class="call-btn d-flex align-items-center">
-                                        <i class="fa-solid fa-video mx-2"></i>
-                                        <span class="d-none d-sm-inline"> Call</span>
-
-                                    </button>
-
-                                </div>
-                            </div>
-
-                            <!-- Item -->
-                            <div class=" d-flex align-items-center justify-content-between border-gray p-3 my-2">
-                                <div class="">
-                                    <h2 class="h5"><a href="#" class="text-decoration-none link-base fw-bold">Dr Tahir Tahirli</a></h2>
-                                    <p class="appointment-date"><span class="fw-semibold">Date : </span> <span> 17 Jan 2023 15:00</span></p>
-                                    <p><span class="fw-semibold"> Status:</span> <span class="badge bg-warning">Pending</span></p>
-                                </div>
-                                <div class=" ">
-                                    <button class="cancel-btn d-flex align-items-center">
-                                        <i class="fa-solid fa-xmark mx-2"></i>
-                                        <span class="d-none d-sm-inline">Cancel</span>
-
-                                    </button>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
+                    @await Html.PartialAsync("_AppointmentsTabPartial", Model.DoctorAppointments)
                     <!-- End -->
                 </div>
             </div>

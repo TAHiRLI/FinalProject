@@ -2,6 +2,7 @@
 using AutoMapper.Execution;
 using FluentValidation;
 using Medlab.Core.Entities;
+using Medlab.Core.Repositories;
 using Medlab.Data.DAL;
 using Medlab_MVC_Uİ.Helpers;
 using Medlab_MVC_Uİ.ViewModels;
@@ -27,14 +28,16 @@ namespace Medlab_MVC_Uİ.Controllers
         private readonly IMapper _mapper;
         private readonly MedlabDbContext _context; // for begin transaction
         private readonly IWebHostEnvironment _env;
+        private readonly IDoctorAppointmentRepository _doctorAppointmentRepository;
 
-        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IMapper mapper, MedlabDbContext context, IWebHostEnvironment env )
+        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IMapper mapper, MedlabDbContext context, IWebHostEnvironment env, IDoctorAppointmentRepository doctorAppointmentRepository )
         {
             this._signInManager = signInManager;
             this._userManager = userManager;
             _mapper = mapper;
             _context = context;
             _env = env;
+            _doctorAppointmentRepository = doctorAppointmentRepository;
         }
         public IActionResult Login(string? ReturnUrl = null)
         {
@@ -266,7 +269,7 @@ namespace Medlab_MVC_Uİ.Controllers
 
             ProfileViewModel model = new ProfileViewModel();
             model.EditProfileViewModel = _mapper.Map<EditProfileViewModel>(user);
-
+            model.DoctorAppointments = _doctorAppointmentRepository.GetAll(x => x.AppUserId == user.Id, "Doctor").OrderByDescending(x=> x.CreatedAt).Take(20).ToList();
 
             return View(model);
         }
@@ -282,6 +285,7 @@ namespace Medlab_MVC_Uİ.Controllers
             ProfileViewModel model = new ProfileViewModel();
             model.EditProfileViewModel = ProfileVm;
             model.EditProfileViewModel.ImageUrl = user.ImageUrl;
+            model.DoctorAppointments = _doctorAppointmentRepository.GetAll(x => x.AppUserId == user.Id, "Doctor").OrderByDescending(x => x.CreatedAt).Take(20).ToList();
 
             if (!ModelState.IsValid)
             {

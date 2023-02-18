@@ -17,6 +17,7 @@ namespace Medlab.Data.Configurations
             builder.Property(x => x.DoctorId).IsRequired(false);
             builder.Property(x => x.StartedAt).IsRequired(false);
             builder.Property(x => x.FinishedAt).IsRequired(false);
+            builder.Property(x=> x.IsApproved).IsRequired(false);
             builder.Property(x => x.TotalPaid).HasColumnType("decimal(18,2)");
             builder.HasOne(x => x.AppUser).WithMany(x => x.DoctorAppointments).OnDelete(DeleteBehavior.SetNull);
             builder.HasOne(x => x.Doctor).WithMany(x => x.DoctorAppointments).OnDelete(DeleteBehavior.SetNull);

@@ -28,8 +28,6 @@ namespace Medlab_MVC_Uİ.Controllers
         // Index 
         //======================
 
-        DateTime startDate = new DateTime(2023, 02, 18, 08, 00, 00);
-        DateTime endDate = new DateTime(2023, 02, 18, 20, 00, 00);
         public IActionResult Index(int? departmentId = null)
         {
             DoctorsViewModel model = new DoctorsViewModel();
@@ -93,6 +91,8 @@ namespace Medlab_MVC_Uİ.Controllers
             if (doctor == null)
                 return NotFound();
 
+            
+
             DoctorDetailsViewModel model = new DoctorDetailsViewModel
             {
                 Doctor = doctor,
@@ -105,6 +105,13 @@ namespace Medlab_MVC_Uİ.Controllers
                 }
             };
 
+
+            if (AppointmentVm.Date.Date + AppointmentVm.Time.TimeOfDay < DateTime.UtcNow.AddHours(4))
+            {
+                ModelState.AddModelError("Date", "Please Select Valid Date");
+                ModelState.AddModelError("Time", "Please Select Valid Time");
+            }
+
             if (!ModelState.IsValid)
                 return View("Details", model);
 
@@ -112,7 +119,7 @@ namespace Medlab_MVC_Uİ.Controllers
             {
                 AppUserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
                 DoctorId = AppointmentVm.DoctorId,
-                IsApproved = false,
+                IsApproved = null,
                 MeetingDate = AppointmentVm.Date.Date + AppointmentVm.Time.TimeOfDay
             };
 
@@ -138,6 +145,15 @@ namespace Medlab_MVC_Uİ.Controllers
 
             List<DateTime> TodaysMeetings = appointments.Select(x => x.MeetingDate).ToList();
 
+
+            DateTime startDate = new DateTime(2023, 02, 18, 00, 00, 00);
+            DateTime endDate = new DateTime(2023, 02, 18, 20, 00, 00);
+
+            if (year == DateTime.UtcNow.Year && month == DateTime.UtcNow.Month && day == DateTime.UtcNow.Day && DateTime.UtcNow.AddHours(4).Hour > 8)
+            {
+                startDate = DateTime.UtcNow.AddHours(4);
+
+            }
             List<DateTime> AvailableTimes = GetDateTimeIntervals(startDate, endDate)
             .Where(interval => !TodaysMeetings.Any(appointment =>
           appointment.TimeOfDay >= interval.TimeOfDay &&
