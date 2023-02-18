@@ -1,4 +1,10 @@
-﻿$(document).on("click", ".add-to-cart", function (e) {
+﻿
+
+
+toastr.options = {
+    "positionClass": "toast-bottom-right",
+}
+$(document).on("click", ".add-to-cart", function (e) {
     e.preventDefault();
     let link = $(this).attr("href");
 
@@ -18,13 +24,7 @@
             return response.text();
         })
         .then(data => {
-            //Swal.fire({
-            //    position: 'center',
-            //    icon: 'success',
-            //    title: 'Added',
-            //    showConfirmButton: false,
-            //    timer: 1200
-            //})
+            toastr["success"]("Product Added")
             $(".BasketMiniPartialHolder").html(data);
             console.log(data)
         })
@@ -55,25 +55,25 @@ $(document).on("click", ".x-btn", function (e) {
     fetch(link)
         .then(response => {
             if (!response.ok) {
-                //Swal.fire({
-                //    title: 'Error!',
-                //    text: 'This product is out of stock',
-                //    icon: 'error',
-                //    confirmButtonText: 'Ok'
-                //})
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'This product is out of stock',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
                 throw new Error("product not found in basket");
                 return;
             }
             return response.text();
         })
         .then(data => {
-            //Swal.fire({
-            //    position: 'center',
-            //    icon: 'success',
-            //    title: 'Added',
-            //    showConfirmButton: false,
-            //    timer: 1200
-            //})
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Item Removed',
+                showConfirmButton: false,
+                timer: 1200
+            })
             $(".BasketMiniPartialHolder").html(data);
         })
         .catch(error => {
@@ -101,25 +101,18 @@ $(document).on("click", ".increment-cart", function (e) {
     fetch(link)
         .then(response => {
             if (!response.ok) {
-                //Swal.fire({
-                //    title: 'Error!',
-                //    text: 'This product is out of stock',
-                //    icon: 'error',
-                //    confirmButtonText: 'Ok'
-                //})
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'This product is out of stock',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
                 throw new Error("product out of stock");
                 return;
             }
             return response.text();
         })
         .then(data => {
-            //Swal.fire({
-            //    position: 'center',
-            //    icon: 'success',
-            //    title: 'Added',
-            //    showConfirmButton: false,
-            //    timer: 1200
-            //})
             $(".BasketMiniPartialHolder").html(data);
             console.log(data)
         })
@@ -152,6 +145,12 @@ $(document).on("click", ".decrement-cart", function (e) {
         fetch(link)
             .then(response => {
                 if (!response.ok) {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Something went wrong',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
                     return;
                 }
                 return response.text();
@@ -177,6 +176,12 @@ $(document).on("click", ".decrement-cart", function (e) {
         fetch(link)
             .then(response => {
                 if (!response.ok) {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Something went wrong',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
                     return;
                 }
                 return response.text();
@@ -216,11 +221,24 @@ $(document).on("click", ".addToCartWithCount", function (e) {
         fetch(link)
             .then(response => {
                 if (!response.ok) {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Something went wrong',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
                     return;
                 }
                 return response.text();
             })
             .then(data => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Product Added',
+                    showConfirmButton: false,
+                    timer: 1200
+                })
                 $(".BasketMiniPartialHolder").html(data);
                 console.log(data)
             })
