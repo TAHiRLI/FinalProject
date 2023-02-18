@@ -111,6 +111,7 @@ builder.Services.AddScoped<IAmenityImageRepository, AmenityImageRepository>();
 //Doctor
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IDoctorAppointmentRepository, DoctorAppointmentRepository>();
 
 //Blog
 builder.Services.AddScoped<IBlogCategoryRepository, BlogCategoryRepository>();
@@ -165,3 +166,9 @@ app.Run();
 // cd Medlab.Data
 // dotnet ef  --startup-project ..\MedlabApi migrations  add 
 // dotnet ef  --startup-project ..\MedlabApi database update
+
+//var obj = JsonConvert.SerializeObject(r, Formatting.None,
+//            new JsonSerializerSettings()
+//            {
+//                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+//            });

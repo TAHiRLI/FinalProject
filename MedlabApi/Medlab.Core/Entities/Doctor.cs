@@ -27,13 +27,14 @@ namespace Medlab.Core.Entities
         public string? Instagram { get; set;}
         public string? Facebook { get; set;}
         public string? Twitter { get; set;}
-        public DateTime CreatedAt { get; set;}
-        public DateTime UpdatedAt { get; set;}
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow.AddHours(4);
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow.AddHours(4);
 
 
         public Department? Department { get; set; }
         public int? DepartmentId { get; set; }
         public List<Blog> Blogs { get; set; } = new List<Blog>();
+        public List<DoctorAppointment> DoctorAppointments { get; set; } = new List<DoctorAppointment>();
 
     }
 }

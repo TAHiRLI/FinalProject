@@ -1,0 +1,51 @@
+﻿@model SetAppointmentViewModel
+
+<div class="">
+    <!-- Modal -->
+    <div class="modal fade"
+         id="setAppointment"
+         tabindex="-1"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Set Online Appointment
+                    </h1>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="SetAppointment" method="post" id="set-appointment-form">
+                        <div class="my-2">
+                            <label asp-for="Date">Date</label>
+                            <input asp-for="Date" type="date" class="form-control" id="dateInput" />
+                            <span asp-validation-for="Date" class="fs-09 text-danger"></span>
+                        </div>
+                        <div class="my-2">
+                            <label asp-for="Time">Time</label>
+                            <select asp-for="Time" class="form-control" doctorId="@Model.DoctorId" id="timeIntervalSelecBox">
+                            </select>
+                            <span asp-validation-for="Time" class="fs-09 text-danger"></span>
+
+                        </div>
+                        <input  type="hidden" value="@Model.DoctorId" asp-for="DoctorId"/>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-danger py-1"
+                            data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" form="set-appointment-form" class="btn btn-success py-1">
+                        Send Request
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

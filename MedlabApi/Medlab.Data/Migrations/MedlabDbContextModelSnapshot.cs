@@ -308,6 +308,50 @@ namespace Medlab.Data.Migrations
                     b.ToTable("Doctors");
                 });
 
+            modelBuilder.Entity("Medlab.Core.Entities.DoctorAppointment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("FinishedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("MeetingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("StartedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("TotalPaid")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("DoctorAppointments");
+                });
+
             modelBuilder.Entity("Medlab.Core.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -800,6 +844,23 @@ namespace Medlab.Data.Migrations
                     b.Navigation("Department");
                 });
 
+            modelBuilder.Entity("Medlab.Core.Entities.DoctorAppointment", b =>
+                {
+                    b.HasOne("Medlab.Core.Entities.AppUser", "AppUser")
+                        .WithMany("DoctorAppointments")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Medlab.Core.Entities.Doctor", "Doctor")
+                        .WithMany("DoctorAppointments")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Doctor");
+                });
+
             modelBuilder.Entity("Medlab.Core.Entities.Product", b =>
                 {
                     b.HasOne("Medlab.Core.Entities.ProductCategory", "ProductCategory")
@@ -914,6 +975,8 @@ namespace Medlab.Data.Migrations
                 {
                     b.Navigation("BasketItems");
 
+                    b.Navigation("DoctorAppointments");
+
                     b.Navigation("ProductReviews");
                 });
 
@@ -930,6 +993,8 @@ namespace Medlab.Data.Migrations
             modelBuilder.Entity("Medlab.Core.Entities.Doctor", b =>
                 {
                     b.Navigation("Blogs");
+
+                    b.Navigation("DoctorAppointments");
                 });
 
             modelBuilder.Entity("Medlab.Core.Entities.Product", b =>

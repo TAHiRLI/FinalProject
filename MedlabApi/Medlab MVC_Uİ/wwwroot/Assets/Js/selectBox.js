@@ -3,4 +3,6 @@ $(document).ready(function() {
         minimumResultsForSearch: -1
 
     });
-  });
+});
+
+

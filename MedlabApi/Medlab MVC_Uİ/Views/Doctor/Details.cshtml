@@ -9,6 +9,8 @@
     <link rel="stylesheet"
       type="text/css"
       href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  
+
 }
 
 
@@ -61,11 +63,12 @@
                                 <h3 class="h6 text-base">@Model.Doctor.Positon</h3>
                             </div>
                             <div class="col-4 col-lg-5 d-flex flex-column justify-content-end align-items-center">
-                                <button class="my-custom-btn py-2 px-2  w-100">
-                                    <i class="fa-solid fa-video me-2"></i>
-                                    <span class="d-none d-md-inline">   Set Meeting</span>
-
-                                </button>
+                            <button data-bs-toggle="modal"
+                                    data-bs-target="#setAppointment"
+                                    class="my-custom-btn py-2 px-2 w-100">
+                                <i class="fa-solid fa-video me-2"></i>
+                                <span class="d-none d-md-inline"> Set Meeting</span>
+                            </button>
                                 <div class="links text-nowrap ">
                                     <a href="@Model.Doctor.Facebook" class="fs-5 mx-2 link-hover-base">
                                         <i class="fa-brands fa-facebook-f"></i>
@@ -212,6 +215,8 @@
             </div>
         </section>
 
+
+    @await Html.PartialAsync("_SetAppointmentPartial", Model.SetAppointmentVm);
     </main>
 
 
@@ -221,7 +226,14 @@
     <script type="text/javascript"
         src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
+    <!-- Bootstrap -->
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map"></script>
+
+
     <!-- ========================= Custom =============================== -->
     <!-- Slick Settings -->
     <script type="module" src="~/Assets/Js/slider.js"></script>
+    <!-- Calendar Setting -->
+    <script src="~/Assets/Js/GetDoctorTimeInterval.js"></script>
 }
