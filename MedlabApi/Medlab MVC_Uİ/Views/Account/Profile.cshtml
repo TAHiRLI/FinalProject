@@ -115,9 +115,9 @@
                          tabindex="0">
                             <div class="container">
                                 <div class="w-100 d-flex justify-content-end">
-                                    <button class="my-custom-btn btn py-1">
+                                    <a asp-action="create" asp-controller="blog" class="my-custom-btn btn py-1">
                                         Add New Blog
-                                    </button>
+                                    </a>
                                 </div>
                                 <div class="cart-products">
                                     @foreach (var blog in Model.Doctor.Blogs)
@@ -137,6 +137,9 @@
                                                 </h3>
                                                 <p class="mb-0">@blog.PrevText</p>
                                             </div>
+                                                <a asp-action="edit" asp-controller="Blog" asp-route-id="@blog.Id" class="my-custom-btn m-1 px-2 py-1 position-absolute position-top-right">
+                                                    <i class="fas fa-pencil"></i>
+                                                </a>
                                         </div>
 
                                     }
