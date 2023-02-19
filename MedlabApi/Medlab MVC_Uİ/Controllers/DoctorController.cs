@@ -145,15 +145,17 @@ namespace Medlab_MVC_Uİ.Controllers
 
             List<DateTime> TodaysMeetings = appointments.Select(x => x.MeetingDate).ToList();
 
+            DateTime startDate = DateTime.UtcNow.Date.AddHours(8);
 
-            DateTime startDate = new DateTime(2023, 02, 18, 00, 00, 00);
-            DateTime endDate = new DateTime(2023, 02, 18, 20, 00, 00);
-
-            if (year == DateTime.UtcNow.Year && month == DateTime.UtcNow.Month && day == DateTime.UtcNow.Day && DateTime.UtcNow.AddHours(4).Hour > 8)
+            if (year == DateTime.UtcNow.Year && month == DateTime.UtcNow.Month && day == DateTime.UtcNow.Day)
             {
-                startDate = DateTime.UtcNow.AddHours(4);
+                 startDate = DateTime.UtcNow.AddHours(4).AddMinutes(30 - DateTime.UtcNow.Minute % 30); ;
 
             }
+
+            DateTime endDate = DateTime.UtcNow.Date.AddHours(20);
+
+
             List<DateTime> AvailableTimes = GetDateTimeIntervals(startDate, endDate)
             .Where(interval => !TodaysMeetings.Any(appointment =>
           appointment.TimeOfDay >= interval.TimeOfDay &&
