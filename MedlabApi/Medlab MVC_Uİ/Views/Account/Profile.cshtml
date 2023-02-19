@@ -361,8 +361,15 @@
                     </div>
 
                    
-                    <!-- Appointments tab  -->
-                    @await Html.PartialAsync("_AppointmentsTabPartial", Model.DoctorAppointments)
+                     @if (User.IsInRole("Doctor"))
+                    {
+                        <!-- Appointments tab  -->
+                        @await Html.PartialAsync("_AppointmentsTabPartial", Model.Doctor.DoctorAppointments)
+                    }
+                    else{
+                        <!-- Appointments tab  -->
+                        @await Html.PartialAsync("_AppointmentsTabPartial", Model.DoctorAppointments)
+                    }
                     <!-- End -->
                 </div>
             </div>

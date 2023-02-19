@@ -9,5 +9,6 @@ namespace Medlab.Core.Repositories
 {
     public interface IDoctorRepository:IEntityRepository<Doctor>
     {
+        Doctor? GetDoctor(int id);
     }
 }

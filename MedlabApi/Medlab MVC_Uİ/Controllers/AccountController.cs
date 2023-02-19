@@ -277,7 +277,8 @@ namespace Medlab_MVC_Uİ.Controllers
             //If user Is Doctor then, Get doctor Blogs
             if (User.IsInRole("Doctor"))
             {
-                var doctor = await _doctorRepository.GetAsync(x => x.Id == user.DoctorId, "Blogs", "DoctorAppointments");
+                int doctorId = user.DoctorId ?? 0;
+                var doctor = _doctorRepository.GetDoctor(doctorId);
                 if (doctor == null)
                     return NotFound();
 

@@ -73,7 +73,7 @@
                                 <span class="d-none d-sm-inline"> Call</span>
                             </button>
                         }
-                        else if (appointment.IsApproved == null || appointment.IsApproved == true && (appointment.MeetingDate - DateTime.UtcNow.AddHours(4)).TotalMinutes > 60)
+                        else if (appointment.IsApproved == null && (appointment.MeetingDate - DateTime.UtcNow.AddHours(4)).TotalMinutes > 60 && appointment.MeetingDate > DateTime.UtcNow.AddHours(4))
                         {
                             <button class="cancel-btn d-flex align-items-center">
                                 <i class="fa-solid fa-xmark mx-2"></i>
