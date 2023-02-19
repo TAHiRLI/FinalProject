@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Profile";
 }
 @model ProfileViewModel
@@ -21,7 +20,9 @@
         <div class="container py-5">
             <div class="mt-md-5 row ">
                 <div class="tab-buttons bg-light d-flex nav flex-row flex-sm-column col-lg-2 col-3 p-0  align-items-center justify-content-sm-start justify-content-evenly">
-                    <button class="tab-btn active"
+                    @if (!User.IsInRole("Doctor"))
+                    {
+                        <button class="tab-btn active"
                             id="account-tab"
                             data-bs-toggle="tab"
                             data-bs-target="#tab-account"
@@ -29,9 +30,29 @@
                             role="tab"
                             aria-controls="tab-account"
                             aria-selected="true">
-                        <i class="fa-solid fa-user"></i>
-                        <span class="d-none d-sm-inline"> Account</span>
-                    </button>
+                            <i class="fa-solid fa-user"></i>
+                            <span class="d-none d-sm-inline"> Account</span>
+                        </button>
+
+                    }
+                    else if (User.IsInRole("Doctor"))
+                    {
+                        <button class="tab-btn active"
+                            id="blogs-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#tab-blogs"
+                            type="button"
+                            role="tab"
+                            aria-controls="tab-blogs"
+                            aria-selected="true">
+                            <i class="fa-solid fa-video"></i>
+                            <span class="d-none d-sm-inline"> My Blogs</span>
+                        </button>
+
+                    }
+
+
+
                     <button class="tab-btn"
                             id="order-tab"
                             data-bs-toggle="tab"
@@ -56,6 +77,8 @@
                         <span class="d-none d-sm-inline"> Medical Examinations</span>
                     </button>
 
+
+
                     <button class="tab-btn"
                             id="appointment-tab"
                             data-bs-toggle="tab"
@@ -68,6 +91,8 @@
                         <span class="d-none d-sm-inline"> Appointments</span>
                     </button>
 
+                  
+
                     <a asp-action="logout" asp-controller="account" class="tab-btn btn">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span class="d-none d-sm-inline"> Log Out</span>
@@ -75,8 +100,47 @@
                 </div>
 
                 <div class="tab-content p-2 border-gray col-lg-10 col-12 col-sm-9">
-                    <!--Profile tab -->
-                    @await Html.PartialAsync("_AccountProfileTabPartial",Model.EditProfileViewModel)
+                    @if (!User.IsInRole("Doctor"))
+                    {
+                        <!--Profile tab -->
+                        @await Html.PartialAsync("_AccountProfileTabPartial",Model.EditProfileViewModel)
+                    }
+                    @if (User.IsInRole("Doctor"))
+                    {
+                        <!-- Blogs tab  -->
+                        <div class="tab-pane bg-light p-2 tab-content-blogs fade show active "
+                         id="tab-blogs"
+                         role="tabpanel"
+                         aria-labelledby="blogs-tab"
+                         tabindex="0">
+                            <div class="container">
+                                <div class="cart-products">
+                                    @foreach (var blog in Model.Doctor.Blogs)
+                                    {
+                                        <!-- Item -->
+                                        <div class="cart-product_item bgi my-3 p-2  row position-relative">
+                                            <div class="cart-product_item_photo d-flex align-items-center justify-content-center col-md-2 mb-3 mb-md-0 p-0">
+                                                <img src="~/Assets/Uploads/Blogs/@blog.ImageUrl"
+                                             alt=""
+                                             class="" />
+                                            </div>
+                                            <div class="cart-product_item_info col-md-10">
+                                                <h3 class="cart-product-title fw-semibold h5">
+                                                    <a asp-action="details" asp-controller="blog" asp-route-id="@blog.Id" class="link-base text-decoration-none">
+                                                        @blog.Title
+                                                    </a>
+                                                </h3>
+                                                <p class="mb-0">@blog.PrevText</p>
+                                            </div>
+                                        </div>
+
+                                    }
+
+                                    <!-- End -->
+                                </div>
+                            </div>
+                        </div>
+                    }
                     <!-- Orders tab  -->
                     <div class="tab-pane bg-light p-2 tab-content-orders fade "
                          id="tab-order"
@@ -296,6 +360,7 @@
                         </div>
                     </div>
 
+                   
                     <!-- Appointments tab  -->
                     @await Html.PartialAsync("_AppointmentsTabPartial", Model.DoctorAppointments)
                     <!-- End -->
@@ -307,8 +372,6 @@
 
 @section Scripts{
     <!-- ========================= CDNs =============================== -->
-
-
     <!-- Bootsrap js -->
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map"></script>

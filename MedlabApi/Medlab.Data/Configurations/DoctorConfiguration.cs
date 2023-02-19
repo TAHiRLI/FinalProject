@@ -36,6 +36,7 @@ namespace Medlab.Data.Configurations
             builder.Property(x => x.MeetingPrice).HasColumnType("decimal(18,2)");
 
             builder.Property(x => x.DepartmentId).IsRequired(false);
+            builder.Property(x=> x.AppUserId).IsRequired(false);
             builder.HasOne(x => x.Department).WithMany(x => x.Doctors).OnDelete(DeleteBehavior.SetNull);
         }
     }

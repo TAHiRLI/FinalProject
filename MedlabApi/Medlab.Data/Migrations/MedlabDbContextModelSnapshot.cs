@@ -52,6 +52,9 @@ namespace Medlab.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DoctorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -235,6 +238,9 @@ namespace Medlab.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -302,6 +308,10 @@ namespace Medlab.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique()
+                        .HasFilter("[AppUserId] IS NOT NULL");
 
                     b.HasIndex("DepartmentId");
 
@@ -836,10 +846,16 @@ namespace Medlab.Data.Migrations
 
             modelBuilder.Entity("Medlab.Core.Entities.Doctor", b =>
                 {
+                    b.HasOne("Medlab.Core.Entities.AppUser", "AppUser")
+                        .WithOne("Doctor")
+                        .HasForeignKey("Medlab.Core.Entities.Doctor", "AppUserId");
+
                     b.HasOne("Medlab.Core.Entities.Department", "Department")
                         .WithMany("Doctors")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Department");
                 });
@@ -974,6 +990,8 @@ namespace Medlab.Data.Migrations
             modelBuilder.Entity("Medlab.Core.Entities.AppUser", b =>
                 {
                     b.Navigation("BasketItems");
+
+                    b.Navigation("Doctor");
 
                     b.Navigation("DoctorAppointments");
 

@@ -36,5 +36,9 @@ namespace Medlab.Core.Entities
         public List<Blog> Blogs { get; set; } = new List<Blog>();
         public List<DoctorAppointment> DoctorAppointments { get; set; } = new List<DoctorAppointment>();
 
+
+        public string AppUserId { get; set; }
+        public AppUser? AppUser { get; set; }
+
     }
 }

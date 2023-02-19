@@ -168,6 +168,18 @@ namespace Medlab_MVC_Uİ.Controllers
         }
 
 
+        //======================
+        // Show Doctor Blogs
+        //======================
+
+        [Authorize(Roles ="Doctor")]
+        public async Task<IActionResult> GetDoctorBlogs(int id )
+        {
+            return Ok();
+        }
+
+       
+
 
         // Custom functions
         private static List<DateTime> GetDateTimeIntervals(DateTime startTime, DateTime endTime)

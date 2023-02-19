@@ -29,8 +29,9 @@ namespace Medlab_MVC_Uİ.Controllers
         private readonly MedlabDbContext _context; // for begin transaction
         private readonly IWebHostEnvironment _env;
         private readonly IDoctorAppointmentRepository _doctorAppointmentRepository;
+        private readonly IDoctorRepository _doctorRepository;
 
-        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IMapper mapper, MedlabDbContext context, IWebHostEnvironment env, IDoctorAppointmentRepository doctorAppointmentRepository )
+        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IMapper mapper, MedlabDbContext context, IWebHostEnvironment env, IDoctorAppointmentRepository doctorAppointmentRepository, IDoctorRepository doctorRepository)
         {
             this._signInManager = signInManager;
             this._userManager = userManager;
@@ -38,6 +39,7 @@ namespace Medlab_MVC_Uİ.Controllers
             _context = context;
             _env = env;
             _doctorAppointmentRepository = doctorAppointmentRepository;
+            _doctorRepository = doctorRepository;
         }
         public IActionResult Login(string? ReturnUrl = null)
         {
@@ -63,7 +65,7 @@ namespace Medlab_MVC_Uİ.Controllers
 
 
             var userRoles = await _userManager.GetRolesAsync(user);
-          
+
             if (!user.EmailConfirmed)
             {
 
@@ -74,7 +76,7 @@ namespace Medlab_MVC_Uİ.Controllers
                 ViewBag.VerificationLink = url;
                 ViewBag.Email = user.Email;
                 return View(LoginVM);
-            } 
+            }
             if (!userRoles.Contains("Member"))
             {
                 ModelState.AddModelError("", "UserName or password is incorrect");
@@ -192,7 +194,7 @@ namespace Medlab_MVC_Uİ.Controllers
                 }
             }
 
-            return RedirectToAction("index" ,"home") ;
+            return RedirectToAction("index", "home");
         }
 
 
@@ -266,12 +268,21 @@ namespace Medlab_MVC_Uİ.Controllers
             if (user == null)
                 return NotFound();
 
-
             ProfileViewModel model = new ProfileViewModel();
             model.EditProfileViewModel = _mapper.Map<EditProfileViewModel>(user);
-            model.DoctorAppointments = _doctorAppointmentRepository.GetAll(x => x.AppUserId == user.Id, "Doctor").OrderByDescending(x=> x.CreatedAt).Take(20).ToList();
+            model.DoctorAppointments = _doctorAppointmentRepository.GetAll(x => x.AppUserId == user.Id, "Doctor", "AppUser").OrderByDescending(x => x.CreatedAt).Take(20).ToList();
             if (user.PasswordHash == null)
                 model.EditProfileViewModel.IsExternalUser = true;
+
+            //If user Is Doctor then, Get doctor Blogs
+            if (User.IsInRole("Doctor"))
+            {
+                var doctor = await _doctorRepository.GetAsync(x => x.Id == user.DoctorId, "Blogs", "DoctorAppointments");
+                if (doctor == null)
+                    return NotFound();
+
+                model.Doctor = doctor;
+            }
 
             return View(model);
         }
@@ -282,6 +293,7 @@ namespace Medlab_MVC_Uİ.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
                 return NotFound();
+
 
 
             ProfileViewModel model = new ProfileViewModel();
@@ -297,87 +309,87 @@ namespace Medlab_MVC_Uİ.Controllers
             }
 
 
-                var isEmailChanged = false;
+            var isEmailChanged = false;
             using (var transaction = _context.Database.BeginTransaction())
             {
 
-            IdentityResult isPasswordUpdated = IdentityResult.Success;
-            IdentityResult isUserUpdated = IdentityResult.Success;
+                IdentityResult isPasswordUpdated = IdentityResult.Success;
+                IdentityResult isUserUpdated = IdentityResult.Success;
 
-            if (ProfileVm.Email.ToLower() != user.Email.ToLower())
-            {
-
-                if (await _userManager.FindByEmailAsync(ProfileVm.Email) == null)
+                if (ProfileVm.Email.ToLower() != user.Email.ToLower())
                 {
-                   
-                    // Send Email Verification
-                    user.Email = ProfileVm.Email;
-                    user.EmailConfirmed = false;
-                    isEmailChanged = true;
-                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var url = Url.Action(nameof(ConfirmEmail), "account", new { token = token, email = user.Email }, Request.Scheme);
 
-                    SendMail(user.Email, "Email Verification", $"Click <a href=\"{url}\" >here</a> to verify your email");
+                    if (await _userManager.FindByEmailAsync(ProfileVm.Email) == null)
+                    {
+
+                        // Send Email Verification
+                        user.Email = ProfileVm.Email;
+                        user.EmailConfirmed = false;
+                        isEmailChanged = true;
+                        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var url = Url.Action(nameof(ConfirmEmail), "account", new { token = token, email = user.Email }, Request.Scheme);
+
+                        SendMail(user.Email, "Email Verification", $"Click <a href=\"{url}\" >here</a> to verify your email");
+
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Email", "This Email Has Been Used");
+                    }
 
                 }
-                else
+
+                if (ProfileVm.UserName.ToLower() != user.UserName.ToLower())
                 {
-                    ModelState.AddModelError("Email", "This Email Has Been Used");
+                    if (await _userManager.FindByNameAsync(ProfileVm.UserName) == null)
+                        user.UserName = ProfileVm.UserName;
+                    else
+                    {
+                        ModelState.AddModelError("UserName", "This Username Is Already Taken");
+
+                    }
                 }
 
-            }
-
-            if (ProfileVm.UserName.ToLower() != user.UserName.ToLower())
-            {
-                if (await _userManager.FindByNameAsync(ProfileVm.UserName) == null)
-                    user.UserName = ProfileVm.UserName;
-                else
+                if (ProfileVm.Password != null)
                 {
-                    ModelState.AddModelError("UserName", "This Username Is Already Taken");
-
-                }
-            }
-
-            if (ProfileVm.Password != null)
-            {
-                    if(ProfileVm.NewPassword ==null || ProfileVm.ConfirmPassword == null)
+                    if (ProfileVm.NewPassword == null || ProfileVm.ConfirmPassword == null)
                     {
                         ModelState.AddModelError("Password", "Fill To Change Password");
                         ModelState.AddModelError("NewPassword", "Fill To Change Password");
                         ModelState.AddModelError("ConfirmPassword", "Fill To Change Password");
                         return View(model);
                     }
-                isPasswordUpdated = await _userManager.ChangePasswordAsync(user, ProfileVm.Password, ProfileVm.NewPassword);
-                if (!isPasswordUpdated.Succeeded)
-                {
-
-                    foreach (var error in isPasswordUpdated.Errors)
+                    isPasswordUpdated = await _userManager.ChangePasswordAsync(user, ProfileVm.Password, ProfileVm.NewPassword);
+                    if (!isPasswordUpdated.Succeeded)
                     {
-                        ModelState.AddModelError("", error.Description);
+
+                        foreach (var error in isPasswordUpdated.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
                     }
                 }
-            }
 
-            if(ProfileVm.ImageFile != null)
-            {
-                if (user.ImageUrl != "DEFAULT-USER.jpg")
-                    FileManager.Delete(_env.WebRootPath, "Assets/Uploads/Users", user.ImageUrl);
+                if (ProfileVm.ImageFile != null)
+                {
+                    if (user.ImageUrl != "DEFAULT-USER.jpg")
+                        FileManager.Delete(_env.WebRootPath, "Assets/Uploads/Users", user.ImageUrl);
 
-                user.ImageUrl = FileManager.Save(ProfileVm.ImageFile, _env.WebRootPath, "Assets/Uploads/Users", 200);
-            }
-
+                    user.ImageUrl = FileManager.Save(ProfileVm.ImageFile, _env.WebRootPath, "Assets/Uploads/Users", 200);
+                }
 
 
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
 
 
-            user.Fullname = ProfileVm.Fullname;
-            user.PhoneNumber = ProfileVm.PhoneNumber;
+                user.Fullname = ProfileVm.Fullname;
+                user.PhoneNumber = ProfileVm.PhoneNumber;
 
-            isUserUpdated = await _userManager.UpdateAsync(user);
+                isUserUpdated = await _userManager.UpdateAsync(user);
 
 
 
@@ -409,7 +421,7 @@ namespace Medlab_MVC_Uİ.Controllers
         }
 
 
-        public async Task<IActionResult>  Logout()
+        public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("index", "home");
@@ -469,5 +481,10 @@ namespace Medlab_MVC_Uİ.Controllers
 
             return RedirectToAction(nameof(Login));
         }
+
+
+
+
+
     }
 }
