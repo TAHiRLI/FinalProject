@@ -90,11 +90,14 @@ namespace Medlab_MVC_Uİ.Controllers
         [Authorize(Roles = "Member")]
         public async Task<IActionResult> SetAppointment(SetAppointmentViewModel AppointmentVm)
         {
-            var doctor = await _doctorRepository.GetAsync(x => x.Id == AppointmentVm.DoctorId, "DoctorAppointments");
+            var doctor = await _doctorRepository.GetAsync(x => x.Id == AppointmentVm.DoctorId, "DoctorAppointments", "Blogs");
             if (doctor == null)
                 return NotFound();
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null)
+                return NotFound();
 
-            
+
 
             DoctorDetailsViewModel model = new DoctorDetailsViewModel
             {
@@ -115,12 +118,15 @@ namespace Medlab_MVC_Uİ.Controllers
                 ModelState.AddModelError("Time", "Please Select Valid Time");
             }
 
+            if (user.DoctorId == doctor.Id)
+                ModelState.AddModelError("Date", "Get Dərdini güzgüyə anlat :)");
+
             if (!ModelState.IsValid)
                 return View("Details", model);
 
             DoctorAppointment doctorAppointment = new DoctorAppointment
             {
-                AppUserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                AppUserId = user.Id,
                 DoctorId = AppointmentVm.DoctorId,
                 IsApproved = null,
                 MeetingDate = AppointmentVm.Date.Date + AppointmentVm.Time.TimeOfDay
@@ -144,7 +150,7 @@ namespace Medlab_MVC_Uİ.Controllers
 
         public IActionResult GetAvailableTime(int id, int year, int month, int day)
         {
-            List<DoctorAppointment> appointments = _doctorAppointmentRepository.GetAll(x => x.DoctorId == id && x.MeetingDate.Day == day && x.MeetingDate.Month == month && x.MeetingDate.Year == year && x.IsApproved == true).ToList();
+            List<DoctorAppointment> appointments = _doctorAppointmentRepository.GetAll(x => x.DoctorId == id && x.MeetingDate.Day == day && x.MeetingDate.Month == month && x.MeetingDate.Year == year && x.IsApproved != false).ToList();
 
             List<DateTime> TodaysMeetings = appointments.Select(x => x.MeetingDate).ToList();
 
