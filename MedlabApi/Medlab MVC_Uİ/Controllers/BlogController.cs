@@ -94,7 +94,6 @@ namespace Medlab_MVC_Uİ.Controllers
         [HttpPost]
         [Authorize(Roles = "Doctor")]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Create(BlogCreateViewModel BlogVm)
         {
             if (!ModelState.IsValid)
@@ -127,5 +126,65 @@ namespace Medlab_MVC_Uİ.Controllers
 
             return RedirectToAction("profile", "account");
         }
+
+
+        //================================
+        // Edit Blog
+        //================================
+
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult>  Edit(int id)
+        {
+            var blog = await _blogRepostiory.GetAsync(x => x.Id == id);
+            if (blog == null)
+                return NotFound();
+
+
+            BlogEditViewModel Model = new BlogEditViewModel
+            {
+                Id = blog.Id,
+                Title = blog.Title,
+                CategoryId = blog.BlogCategoryId,
+                MainContent = blog.Text,
+                PrevContent = blog.PrevText
+            };
+
+            ViewBag.Categories = _blogCategoryRepository.GetAll(x => true).ToList();
+            return View(Model);
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Doctor")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(BlogEditViewModel BlogVm)
+        {
+            var existBlog =await _blogRepostiory.GetAsync(x=> x.Id == BlogVm.Id);
+            if (existBlog == null)
+                return NotFound();
+
+
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = _blogCategoryRepository.GetAll(x => true).ToList();
+                return View(BlogVm);
+            }
+
+            if(BlogVm.ImageFile  != null)
+            {
+                FileManager.Delete(_env.WebRootPath, "Assets/Uploads/Blogs", existBlog.ImageUrl);
+                existBlog.ImageUrl = FileManager.Save(BlogVm.ImageFile, _env.WebRootPath, "Assets/Uploads/Blogs", 200);
+            }
+            existBlog.Title = BlogVm.Title;
+            existBlog.BlogCategoryId = BlogVm.CategoryId;
+            existBlog.Text = BlogVm.MainContent;
+            existBlog.PrevText = BlogVm.PrevContent;
+
+            _blogCategoryRepository.Commit();
+
+            return RedirectToAction("Profile", "Account");
+        }
+
     }
 }

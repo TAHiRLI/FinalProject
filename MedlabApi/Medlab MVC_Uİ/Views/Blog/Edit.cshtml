@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+}
+@model BlogEditViewModel
+<main>
+    <section class="py-5">
+
+        <div class="container">
+            <form asp-action="edit" asp-controller="Blog" method="post" enctype="multipart/form-data">
+
+                <div class="my-2 col-12">
+                    <label asp-for="Title" class="form-label">Title<sup>*</sup></label>
+                    <input asp-for="Title" type="text" class="form-control " />
+                    <span class="fs-09 text-danger" asp-validation-for="Title"></span>
+                </div>
+                <div class=" row">
+                    <div class="my-2 col-6">
+                        <label asp-for="ImageFile" class="form-label">Image<sup>*</sup></label>
+                        <input asp-for="ImageFile" type="file" class="form-control " />
+                        <span class="fs-09 text-danger" asp-validation-for="ImageFile"></span>
+                    </div>
+                    <div class="my-2 col-6">
+                        <label asp-for="CategoryId" class="form-label">Category<sup>*</sup></label>
+                        <select asp-for="CategoryId" class="form-control" asp-items=@(new SelectList(ViewBag.Categories, nameof(BlogCategory.Id), nameof(BlogCategory.Name)))>
+                        </select>
+                        <span class="fs-09 text-danger" asp-validation-for="CategoryId"></span>
+
+                    </div>
+                </div>
+
+
+
+                <div class="mt-4">
+                    <label asp-for="MainContent" class="form-label">Main Content<sup>*</sup></label>
+                    <textarea asp-for="MainContent" id="BodyEditor"></textarea>
+                    <span class="fs-09 text-danger" asp-validation-for="MainContent"></span>
+
+                </div>
+                <div class="mt-4">
+                    <label asp-for="PrevContent" class="form-label">Preview Content<sup>*</sup></label>
+                    <textarea asp-for="PrevContent" id="PrevEditor" class="form-control"></textarea>
+                    <span class="fs-09 text-danger" asp-validation-for="PrevContent"></span>
+
+                </div>
+                <div class="fs-09 text-danger" asp-validation-summary="ModelOnly"></div>
+
+                <button type="submit" class="my-custom-btn m-0 mt-5">Save</button>
+                <input type="hidden" asp-for="Id" />
+            </form>
+        </div>
+
+    </section>
+</main>
+
+@section Scripts{
+    <!--Ck Edtior-->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#BodyEditor'))
+            .catch(error => {
+                console.error(error);
+            });
+
+    </script>
+
+}
+
+
+
