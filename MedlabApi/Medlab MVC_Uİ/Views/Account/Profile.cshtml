@@ -114,6 +114,11 @@
                          aria-labelledby="blogs-tab"
                          tabindex="0">
                             <div class="container">
+                                <div class="w-100 d-flex justify-content-end">
+                                    <button class="my-custom-btn btn py-1">
+                                        Add New Blog
+                                    </button>
+                                </div>
                                 <div class="cart-products">
                                     @foreach (var blog in Model.Doctor.Blogs)
                                     {
@@ -364,7 +369,7 @@
                      @if (User.IsInRole("Doctor"))
                     {
                         <!-- Appointments tab  -->
-                        @await Html.PartialAsync("_AppointmentsTabPartial", Model.Doctor.DoctorAppointments)
+                        @await Html.PartialAsync("_AppointmentsTabPartial", Model.Doctor.DoctorAppointments.OrderByDescending(x=> x.CreatedAt).ToList())
                     }
                     else{
                         <!-- Appointments tab  -->

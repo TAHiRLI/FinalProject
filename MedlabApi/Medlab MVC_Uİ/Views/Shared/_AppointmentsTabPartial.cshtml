@@ -32,13 +32,13 @@
 
                         @if (appointment.IsApproved == null && appointment.MeetingDate > DateTime.UtcNow.AddHours(5))
                         {
-                            <a class=" btn d-flex align-items-center">
+                            <a asp-action="reject" asp-controller="doctor" asp-route-id="@appointment.Id" class=" btn btn-danger d-flex align-items-center mb-2">
                                 <i class="fa-solid fa-xmark mx-2"></i>
                                 <span class="d-none d-sm-inline">ReJect</span>
 
                             </a>
-                            <a class=" btn d-flex align-items-center">
-                                <i class="fa-solid fa-xmark mx-2"></i>
+                            <a asp-action="approve" asp-controller="doctor" asp-route-id="@appointment.Id" class=" btn btn-success d-flex align-items-center">
+                                <i class="fa-solid fa-check mx-2"></i>
                                 <span class="d-none d-sm-inline">Approve</span>
 
                             </a>

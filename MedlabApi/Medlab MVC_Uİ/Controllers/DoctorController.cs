@@ -2,6 +2,7 @@
 using Medlab.Core.Repositories;
 using Medlab_MVC_Uİ.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
@@ -15,13 +16,15 @@ namespace Medlab_MVC_Uİ.Controllers
         private readonly IDepartmentRepository _departmentRepository;
         private readonly IBlogRepostiory _blogRepostiory;
         private readonly IDoctorAppointmentRepository _doctorAppointmentRepository;
+        private readonly UserManager<AppUser> _userManager;
 
-        public DoctorController(IDoctorRepository doctorRepository, IDepartmentRepository departmentRepository, IBlogRepostiory blogRepostiory, IDoctorAppointmentRepository doctorAppointmentRepository)
+        public DoctorController(IDoctorRepository doctorRepository, IDepartmentRepository departmentRepository, IBlogRepostiory blogRepostiory, IDoctorAppointmentRepository doctorAppointmentRepository, UserManager<AppUser> userManager)
         {
             this._doctorRepository = doctorRepository;
             this._departmentRepository = departmentRepository;
             this._blogRepostiory = blogRepostiory;
             _doctorAppointmentRepository = doctorAppointmentRepository;
+            _userManager = userManager;
         }
 
         //======================
@@ -139,9 +142,9 @@ namespace Medlab_MVC_Uİ.Controllers
         // Set Appointment 
         //======================
 
-        public async Task<IActionResult> GetAvailableTime(int id, int year, int month, int day)
+        public IActionResult GetAvailableTime(int id, int year, int month, int day)
         {
-            List<DoctorAppointment> appointments = _doctorAppointmentRepository.GetAll(x => x.DoctorId == id && x.MeetingDate.Day == day && x.MeetingDate.Month == month && x.MeetingDate.Year == year).ToList();
+            List<DoctorAppointment> appointments = _doctorAppointmentRepository.GetAll(x => x.DoctorId == id && x.MeetingDate.Day == day && x.MeetingDate.Month == month && x.MeetingDate.Year == year && x.IsApproved == true).ToList();
 
             List<DateTime> TodaysMeetings = appointments.Select(x => x.MeetingDate).ToList();
 
@@ -169,16 +172,68 @@ namespace Medlab_MVC_Uİ.Controllers
 
 
         //======================
-        // Show Doctor Blogs
+        // Approve Appointment
         //======================
 
         [Authorize(Roles ="Doctor")]
-        public async Task<IActionResult> GetDoctorBlogs(int id )
+        public async Task<IActionResult> Approve(int id )
         {
-            return Ok();
+            var appointment = await _doctorAppointmentRepository.GetAsync(x => x.Id == id);
+            if (appointment == null)
+                return NotFound();
+
+            // check if appointment is doctors appointment
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null) return NotFound();
+            if (appointment.DoctorId != user.DoctorId)
+                return RedirectToAction("login", "account");
+
+
+
+            if (appointment.IsApproved == false)
+                return NotFound();
+
+            if (appointment.MeetingDate < DateTime.UtcNow.AddHours(4))
+                return NotFound();
+
+            appointment.IsApproved = true;
+            //^ signalr send message 
+
+            _doctorAppointmentRepository.Commit();
+
+
+            return RedirectToAction("profile", "account");
         }
 
-       
+        //======================
+        // Reject Appointment
+        //======================
+
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> Reject(int id)
+        {
+            var appointment = await _doctorAppointmentRepository.GetAsync(x => x.Id == id);
+            if (appointment == null)
+                return NotFound();
+
+            // check if appointment is doctors appointment
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null) return NotFound();
+            if (appointment.DoctorId != user.DoctorId)
+                return RedirectToAction("login", "account");
+
+            if (appointment.MeetingDate < DateTime.UtcNow.AddHours(4))
+                return NotFound();
+
+            appointment.IsApproved = false;
+            //^ signalr send message 
+
+            _doctorAppointmentRepository.Commit();
+
+
+
+            return RedirectToAction("profile", "account");
+        }
 
 
         // Custom functions
