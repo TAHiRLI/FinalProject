@@ -52,6 +52,10 @@ namespace Medlab.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ConnectionId")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
@@ -90,6 +94,10 @@ namespace Medlab.Data.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PeerId")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -107,6 +115,10 @@ namespace Medlab.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DoctorId")
+                        .IsUnique()
+                        .HasFilter("[DoctorId] IS NOT NULL");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -239,7 +251,7 @@ namespace Medlab.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -308,10 +320,6 @@ namespace Medlab.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId")
-                        .IsUnique()
-                        .HasFilter("[AppUserId] IS NOT NULL");
 
                     b.HasIndex("DepartmentId");
 
@@ -808,6 +816,16 @@ namespace Medlab.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Medlab.Core.Entities.AppUser", b =>
+                {
+                    b.HasOne("Medlab.Core.Entities.Doctor", "Doctor")
+                        .WithOne("AppUser")
+                        .HasForeignKey("Medlab.Core.Entities.AppUser", "DoctorId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Doctor");
+                });
+
             modelBuilder.Entity("Medlab.Core.Entities.BasketItem", b =>
                 {
                     b.HasOne("Medlab.Core.Entities.AppUser", "AppUser")
@@ -846,16 +864,10 @@ namespace Medlab.Data.Migrations
 
             modelBuilder.Entity("Medlab.Core.Entities.Doctor", b =>
                 {
-                    b.HasOne("Medlab.Core.Entities.AppUser", "AppUser")
-                        .WithOne("Doctor")
-                        .HasForeignKey("Medlab.Core.Entities.Doctor", "AppUserId");
-
                     b.HasOne("Medlab.Core.Entities.Department", "Department")
                         .WithMany("Doctors")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("AppUser");
 
                     b.Navigation("Department");
                 });
@@ -991,8 +1003,6 @@ namespace Medlab.Data.Migrations
                 {
                     b.Navigation("BasketItems");
 
-                    b.Navigation("Doctor");
-
                     b.Navigation("DoctorAppointments");
 
                     b.Navigation("ProductReviews");
@@ -1010,6 +1020,8 @@ namespace Medlab.Data.Migrations
 
             modelBuilder.Entity("Medlab.Core.Entities.Doctor", b =>
                 {
+                    b.Navigation("AppUser");
+
                     b.Navigation("Blogs");
 
                     b.Navigation("DoctorAppointments");

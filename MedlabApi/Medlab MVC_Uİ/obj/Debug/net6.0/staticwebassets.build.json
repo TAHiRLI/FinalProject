@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "t2L8PJWUad8dnpgVlknXKQ15980FcdKNJD/69i1x7+M=",
+  "Hash": "zwXMeyjr0FV+M8a+JaroqQ+ajzgaVAy3eJDoLaGZ1TI=",
   "Source": "Medlab MVC_Uİ",
   "BasePath": "_content/Medlab MVC_Uİ",
   "Mode": "Default",
@@ -610,6 +610,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Assets\\Js\\selectBox.js"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Js\\signalr.js",
+      "SourceId": "Medlab MVC_Uİ",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\",
+      "BasePath": "_content/Medlab MVC_Uİ",
+      "RelativePath": "Assets/Js/signalr.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Assets\\Js\\signalr.js"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Js\\signalr.min.js",
+      "SourceId": "Medlab MVC_Uİ",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\",
+      "BasePath": "_content/Medlab MVC_Uİ",
+      "RelativePath": "Assets/Js/signalr.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Assets\\Js\\signalr.min.js"
     },
     {
       "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Js\\slider.js",

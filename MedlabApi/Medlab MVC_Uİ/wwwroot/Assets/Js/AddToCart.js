@@ -73,16 +73,16 @@ $(document).on("click", ".x-btn", function (e) {
                 title: 'Item Removed',
                 showConfirmButton: false,
                 timer: 1200
-            })
+            }).then(() => {
             $(".BasketMiniPartialHolder").html(data);
+                if (e.target.classList.contains("reload"))
+                    window.location.reload();
+            })
         })
         .catch(error => {
             console.log(error)
         })
-        .finally(() => {
-            if (e.target.classList.contains("reload"))
-                window.location.reload();
-        })
+        
 
 })
 

@@ -1,0 +1,200 @@
+﻿@model CallRoomViewModel
+
+<h1>@ViewBag.roomId</h1>
+@*<h1>Doctor: @Model.Doctor.Fullname, Doctor UserId : @Model.Doctor.AppUser?.Id</h1>*@
+<div video-grid></div>
+
+<video id="localVideo" autoplay> </video>
+
+
+
+<button id="startStreamButton">Play Video</button>
+<button id="stopStreamButton">stop Video</button>
+
+
+
+
+
+
+
+@section Scripts {
+
+
+
+    <script>
+        const ROOM_ID = "@ViewBag.roomId"
+        let userId = null;
+        let localStream = null;
+        const Peers = {};
+
+        const myPeer = new Peer()
+
+
+        const connection = new signalR.HubConnectionBuilder().withUrl("/meetingHub").build();
+
+
+        myPeer.on('open', (id) => {
+            userId = id;
+
+            const startSignalR = async () => {
+                await connection.start();
+                await connection.invoke("JoinRoom", ROOM_ID, userId);
+                await connection.invoke("setPeerId", userId);
+            }
+            startSignalR();
+        })
+
+        const videoGrid = document.querySelector('[video-grid]')
+        const myVideo = document.createElement("video");
+        myVideo.muted = true;
+
+        navigator.mediaDevices.getUserMedia({
+            audio: true,
+            video: true
+        }).then(stream => {
+            addVideoStream(myVideo, stream);
+            localStream = stream;
+        })
+
+
+
+        connection.on("user-connected", (id) => {
+            if (userId === id) return;
+            console.log(`user connected : ${id}`)
+            connectNewUser(id, localStream)
+        })
+
+        connection.on("user-disconnected", (id) => {
+            console.log(`user disconnected : ${id}`);
+
+            if (Peers[id])
+                Peers[id].close();
+        })
+
+        myPeer.on("call", (call) => {
+            call.answer(localStream);
+
+            const userVideo = document.createElement("video");
+            call.on('stream', (userVideoSream) => {
+                addVideoStream(userVideo, userVideoSream)
+            })
+        })
+
+
+        const addVideoStream = (video, stream) => {
+            video.srcObject = stream;
+            video.addEventListener("loadedmetadata", () => {
+                video.play()
+            })
+
+            videoGrid.appendChild(video);
+
+        }
+
+
+
+
+        const connectNewUser = (userId, localStream) => {
+            const userVideo = document.createElement("video");
+            const call = myPeer.call(userId, localStream);
+            call.on("stream", (userVideoStream) => {
+                addVideoStream(userVideo, userVideoStream)
+            })
+            call.on("close", () => {
+                userVideo.remove();
+            })
+
+            Peers[userId] = call
+            console.log(Peers);
+
+
+        }
+
+        document.getElementById("startStreamButton").addEventListener("click", () => {
+
+        })
+
+
+
+    </script>
+
+
+    @*   <script>
+        var localStream;
+        var isStreamOpen = false;
+        var peer;
+
+        var startStreamButton = document.getElementById('startStreamButton');
+        var stopStreamButton = document.getElementById('stopStreamButton');
+
+        startStreamButton.addEventListener('click', function () {
+            if (!isStreamOpen) {
+                navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+                    .then(function (stream) {
+                        localStream = stream;
+                        document.getElementById('localVideo').srcObject = stream;
+
+                        // Start streaming the video to the other peer
+                        startStream();
+                        isStreamOpen = true;
+                        startStreamButton.disabled = true;
+                        stopStreamButton.disabled = false;
+                    })
+                    .catch(function (err) {
+                        console.log('Failed to get local stream', err);
+                    });
+            }
+        });
+
+        stopStreamButton.addEventListener('click', function () {
+            if (isStreamOpen) {
+                // Stop streaming the video to the other peer
+                stopStream();
+                localStream.getTracks().forEach(function (track) {
+                    track.stop();
+                });
+                document.getElementById('localVideo').srcObject = null;
+                isStreamOpen = false;
+                startStreamButton.disabled = false;
+                stopStreamButton.disabled = true;
+            }
+        });
+
+        function startStream() {
+            peer = new Peer();
+
+            peer.on('open', function (id) {
+                console.log('My peer ID is: ' + id);
+            });
+
+            var conn = peer.connect('another-peers-id');
+
+            conn.on('open', function () {
+                conn.send('hi!');
+            });
+
+            peer.on('connection', function (conn) {
+                conn.on('data', function (data) {
+                    console.log(data);
+                });
+            });
+
+            var call = peer.call('another-peers-id', localStream);
+
+            call.on('stream', function (remoteStream) {
+                document.getElementById('remoteVideo').srcObject = remoteStream;
+            });
+
+            peer.on('error', function (err) {
+                console.log(err);
+            });
+        }
+
+        function stopStream() {
+            peer.destroy();
+        }
+
+
+    </script>*@
+    }
+

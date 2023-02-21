@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Details";
 }
 
@@ -9,7 +8,7 @@
     <link rel="stylesheet"
       type="text/css"
       href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-  
+
 
 }
 
@@ -49,46 +48,50 @@
                                 </tr>
                                 <tr class="py-1">
                                     <td class="py-3">Gender</td>
-                                    <td class="py-3">@((Model.Doctor.Gender)?"Male":"Felmale")</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                    <td class="py-3">@((Model.Doctor.Gender) ? "Male" : "Felmale")</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                    <div class="doctorDetails_info col-lg-8 col-md-9  mt-4 mt-md-0">
-                        <div class="doctorDetails_info_name row align-items-baseline justify-content-between">
-                            <div class="col-8 col-md-6">
+                <div class="doctorDetails_info col-lg-8 col-md-9  mt-4 mt-md-0">
+                    <div class="doctorDetails_info_name row align-items-baseline justify-content-between">
+                        <div class="col-8 col-md-6">
 
-                                <h1 class="h2">@Model.Doctor.Fullname</h1>
-                                <h3 class="h6 text-base">@Model.Doctor.Positon</h3>
-                            </div>
-                            <div class="col-4 col-lg-5 d-flex flex-column justify-content-end align-items-center">
-                            <button data-bs-toggle="modal"
+                            <h1 class="h2">@Model.Doctor.Fullname</h1>
+                            <h3 class="h6 text-base">@Model.Doctor.Positon</h3>
+                        </div>
+                        <div class="col-4 col-lg-5 d-flex flex-column justify-content-end align-items-center">
+                            @if (!User.IsInRole("Doctor"))
+                            {
+                                <button data-bs-toggle="modal"
                                     data-bs-target="#setAppointment"
                                     class="my-custom-btn py-2 px-2 w-100">
-                                <i class="fa-solid fa-video me-2"></i>
-                                <span class="d-none d-md-inline"> Set Meeting</span>
-                            </button>
-                                <div class="links text-nowrap ">
-                                    <a href="@Model.Doctor.Facebook" class="fs-5 mx-2 link-hover-base">
-                                        <i class="fa-brands fa-facebook-f"></i>
-                                    </a>
-                                    <a href="@Model.Doctor.Instagram" class="fs-5 mx-2 link-hover-base">
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </a>
-                                </div>
+                                    <i class="fa-solid fa-video me-2"></i>
+                                    <span class="d-none d-md-inline"> Set Meeting</span>
+                                </button>
+                            }
+
+                            <div class="links text-nowrap ">
+                                <a href="@Model.Doctor.Facebook" class="fs-5 mx-2 link-hover-base">
+                                    <i class="fa-brands fa-facebook-f"></i>
+                                </a>
+                                <a href="@Model.Doctor.Instagram" class="fs-5 mx-2 link-hover-base">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
                             </div>
                         </div>
-                        <div class="doctorDetails_info_desc mt-4">
-                            <p>
-                                    @Html.Raw(Model.Doctor.DetailedDesc)
-                            </p>
-                        </div>
-                        <div class="doctorDetails_info_blogs mt-4 ">
-                            <h3 class="text-base my-3">Latest Blogs</h3>
-                            <ul class="">
+                    </div>
+                    <div class="doctorDetails_info_desc mt-4">
+                        <p>
+                            @Html.Raw(Model.Doctor.DetailedDesc)
+                        </p>
+                    </div>
+                    <div class="doctorDetails_info_blogs mt-4 ">
+                        <h3 class="text-base my-3">Latest Blogs</h3>
+                        <ul class="">
 
-                                @foreach (var blog in Model.Blogs)
+                            @foreach (var blog in Model.Blogs)
                             {
                                 <!-- blog -->
                                 <li class="blogs_item my-2 row">
@@ -105,33 +108,34 @@
                                     </div>
                                 </li>
                             }
-                       
 
-                                <!-- END -->
-                            </ul>
-                        </div>
+
+                            <!-- END -->
+                        </ul>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Other Doctors -->
+    <!-- Other Doctors -->
 
 
-        <section id="Doctors_Section" class="py-5">
-            <span class="sectionName text-center d-block mb-4">Perfect Team</span>
-            <div class="sectionTitle">
-                <h2 class="h1 position-relative text-center double-title text-dark title_underlined"
+    <section id="Doctors_Section" class="py-5">
+        <span class="sectionName text-center d-block mb-4">Perfect Team</span>
+        <div class="sectionTitle">
+            <h2 class="h1 position-relative text-center double-title text-dark title_underlined"
                 data-title="Specialists">
-                    Our Specialists
-                </h2>
-            </div>
+                Our Specialists
+            </h2>
+        </div>
 
-            <div class="doctors mt-5">
-                <div class="container">
-                    <div class="doctorSlider d-flex mx-5">
+        <div class="doctors mt-5">
+            <div class="container">
+                <div class="doctorSlider d-flex mx-5">
 
-                        @if(Model.Doctors.Count <3 ){
+                    @if (Model.Doctors.Count < 3)
+                    {
 
                         @foreach (var doctor in Model.Doctors)
                         {
@@ -170,8 +174,8 @@
                             </div>
 
                         }
-                        }
-                        @foreach (var doctor in Model.Doctors)
+                    }
+                    @foreach (var doctor in Model.Doctors)
                     {
                         <!-- slide -->
                         <div class="doctor_box mx-3">
@@ -209,15 +213,18 @@
 
                     }
 
-                        <!-- END -->
-                    </div>
+                    <!-- END -->
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
+    @if (!User.IsInRole("Doctor"))
+    {
+        @await Html.PartialAsync("_SetAppointmentPartial", Model.SetAppointmentVm);
 
-    @await Html.PartialAsync("_SetAppointmentPartial", Model.SetAppointmentVm);
-    </main>
+    }
+</main>
 
 
 @section Scripts{

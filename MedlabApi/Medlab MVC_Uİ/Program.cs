@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Dynamic;
 using Microsoft.AspNetCore.Http;
+using Medlab_MVC_Uİ.Hubs;
 
 
 
@@ -22,6 +23,7 @@ using Microsoft.AspNetCore.Http;
 // 3 Google Auth
 // 4 Custom Services
 // 5 Mapper
+// 6 SignalR
 
 
 
@@ -129,10 +131,15 @@ builder.Services.AddScoped<IBasketItemRepository, BasketItemRepository>();
 
 
 //======================
-// 6 Mapper
+// 5 Mapper
 //======================
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+//======================
+// 6 SignalR
+//======================
+builder.Services.AddSignalR();
 
 
 var app = builder.Build();
@@ -152,6 +159,8 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.MapHub<MeetingHub>("/MeetingHub");
 
 app.MapControllerRoute(
     name: "default",

@@ -37,6 +37,8 @@ namespace Medlab.Data.Configurations
 
             builder.Property(x => x.DepartmentId).IsRequired(false);
             builder.Property(x=> x.AppUserId).IsRequired(false);
+
+            builder.HasOne(x=> x.AppUser).WithOne(x=> x.Doctor).HasForeignKey<AppUser>(u => u.DoctorId).OnDelete(DeleteBehavior.SetNull);
             builder.HasOne(x => x.Department).WithMany(x => x.Doctors).OnDelete(DeleteBehavior.SetNull);
         }
     }

@@ -456,7 +456,50 @@
     <!--Toastr-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <!--SignalR-->
+    <script src="~/Assets/Js/signalr.min.js"></script>
+    <!--Peer js-->
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+
+
+    @if( ViewContext.RouteData.Values["Controller"].ToString() != "Meeting"){
+    <script>
+        const connection = new signalR.HubConnectionBuilder().withUrl("/meetingHub").build();
+        let myPeerId = null;
+        const myPeer = new Peer()
+
+
+
+
+
+        myPeer.on('open', (id) => {
+            myPeerId = id;
+
+            const startSignalR = async () => {
+                await connection.start();
+                await connection.invoke("SetPeerId", myPeerId)
+            }
+            startSignalR();
+        })
+
+            connection.on("RecieveRing", ( id, doctorId)=> {
+                if(confirm("Ansver call")){
+                    let link = `meeting/${id}?doctorId=${doctorId}`;
+                    location.replace(link);
+                }
+                else{
+
+                }
+            })
+
+
+    </script>
+    }
+  
+
     @RenderSection("Scripts", required:false)
+
+   
 
     <!--AddToCart-->
     <script src="~/Assets/Js/AddToCart.js"></script>

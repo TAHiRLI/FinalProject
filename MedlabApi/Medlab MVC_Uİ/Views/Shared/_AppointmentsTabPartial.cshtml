@@ -30,7 +30,7 @@
                 </div>
                 <div class=" ">
 
-                        @if (appointment.IsApproved == null && appointment.MeetingDate > DateTime.UtcNow.AddHours(5))
+                        @if (appointment.IsApproved == null && appointment.MeetingDate > DateTime.UtcNow.AddHours(4))
                         {
                             <a asp-action="reject" asp-controller="doctor" asp-route-id="@appointment.Id" class=" btn btn-danger d-flex align-items-center mb-2">
                                 <i class="fa-solid fa-xmark mx-2"></i>
@@ -66,14 +66,14 @@
                     </div>
                     <div class=" ">
 
-                        @if (appointment.IsApproved == true && (appointment.MeetingDate - DateTime.UtcNow.AddHours(4)).TotalMinutes < 60 && appointment.MeetingDate > DateTime.UtcNow.AddHours(4))
+                        @if (appointment.IsApproved == true && (DateTime.UtcNow.AddHours(4) - appointment.MeetingDate).TotalMinutes < 30 && (DateTime.UtcNow.AddHours(4) - appointment.MeetingDate).TotalMinutes > 0)
                         {
-                            <button class="call-btn d-flex align-items-center">
+                            <a asp-action="index" asp-controller="Meeting" asp-route-doctorId="@appointment.DoctorId" class="call-btn btn d-flex align-items-center">
                                 <i class="fa-solid fa-video mx-2"></i>
                                 <span class="d-none d-sm-inline"> Call</span>
-                            </button>
+                            </a>
                         }
-                        else if (appointment.IsApproved == null && (appointment.MeetingDate - DateTime.UtcNow.AddHours(4)).TotalMinutes > 60 && appointment.MeetingDate > DateTime.UtcNow.AddHours(4))
+                        else if (appointment.IsApproved == null && (appointment.MeetingDate - DateTime.UtcNow.AddHours(4)).TotalMinutes > 30 && appointment.MeetingDate > DateTime.UtcNow.AddHours(4))
                         {
                             <button class="cancel-btn d-flex align-items-center">
                                 <i class="fa-solid fa-xmark mx-2"></i>
