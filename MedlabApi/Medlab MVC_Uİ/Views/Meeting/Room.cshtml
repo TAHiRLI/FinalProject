@@ -1,15 +1,13 @@
 ﻿@model CallRoomViewModel
 
-<h1>@ViewBag.roomId</h1>
 @*<h1>Doctor: @Model.Doctor.Fullname, Doctor UserId : @Model.Doctor.AppUser?.Id</h1>*@
 <div video-grid></div>
-
+<h1>@Model.AppointmentId</h1>
 <video id="localVideo" autoplay> </video>
 
+<button id="hangup" class="btn  btn-danger">Close</button>
+<button id="end" class="btn  btn-danger">end time</button>
 
-
-<button id="startStreamButton">Play Video</button>
-<button id="stopStreamButton">stop Video</button>
 
 
 
@@ -25,6 +23,7 @@
         const ROOM_ID = "@ViewBag.roomId"
         let userId = null;
         let localStream = null;
+        let appointmentId = "@Model.AppointmentId";
         const Peers = {};
 
         const myPeer = new Peer()
@@ -38,7 +37,7 @@
 
             const startSignalR = async () => {
                 await connection.start();
-                await connection.invoke("JoinRoom", ROOM_ID, userId);
+                await connection.invoke("JoinRoom", ROOM_ID, userId, appointmentId);
                 await connection.invoke("setPeerId", userId);
             }
             startSignalR();
@@ -61,7 +60,9 @@
         connection.on("user-connected", (id) => {
             if (userId === id) return;
             console.log(`user connected : ${id}`)
-            connectNewUser(id, localStream)
+            connectNewUser(id, localStream);
+          
+
         })
 
         connection.on("user-disconnected", (id) => {
@@ -101,7 +102,9 @@
                 addVideoStream(userVideo, userVideoStream)
             })
             call.on("close", () => {
+                SetEndTIme(appointmentId);
                 userVideo.remove();
+                document.location.replace("/") ;
             })
 
             Peers[userId] = call
@@ -110,91 +113,26 @@
 
         }
 
-        document.getElementById("startStreamButton").addEventListener("click", () => {
-
+        $("#hangup").on("click", ()=>{
+            document.location.replace("/");
+           
         })
+        $("#end").on("click", ()=>{
+            SetEndTIme(appointmentId)
+        })
+
+     
+        async function SetEndTIme(appointmentId) {
+
+            await connection.invoke("SetEndTime", appointmentId);
+        }
+
 
 
 
     </script>
 
 
-    @*   <script>
-        var localStream;
-        var isStreamOpen = false;
-        var peer;
 
-        var startStreamButton = document.getElementById('startStreamButton');
-        var stopStreamButton = document.getElementById('stopStreamButton');
-
-        startStreamButton.addEventListener('click', function () {
-            if (!isStreamOpen) {
-                navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-                    .then(function (stream) {
-                        localStream = stream;
-                        document.getElementById('localVideo').srcObject = stream;
-
-                        // Start streaming the video to the other peer
-                        startStream();
-                        isStreamOpen = true;
-                        startStreamButton.disabled = true;
-                        stopStreamButton.disabled = false;
-                    })
-                    .catch(function (err) {
-                        console.log('Failed to get local stream', err);
-                    });
-            }
-        });
-
-        stopStreamButton.addEventListener('click', function () {
-            if (isStreamOpen) {
-                // Stop streaming the video to the other peer
-                stopStream();
-                localStream.getTracks().forEach(function (track) {
-                    track.stop();
-                });
-                document.getElementById('localVideo').srcObject = null;
-                isStreamOpen = false;
-                startStreamButton.disabled = false;
-                stopStreamButton.disabled = true;
-            }
-        });
-
-        function startStream() {
-            peer = new Peer();
-
-            peer.on('open', function (id) {
-                console.log('My peer ID is: ' + id);
-            });
-
-            var conn = peer.connect('another-peers-id');
-
-            conn.on('open', function () {
-                conn.send('hi!');
-            });
-
-            peer.on('connection', function (conn) {
-                conn.on('data', function (data) {
-                    console.log(data);
-                });
-            });
-
-            var call = peer.call('another-peers-id', localStream);
-
-            call.on('stream', function (remoteStream) {
-                document.getElementById('remoteVideo').srcObject = remoteStream;
-            });
-
-            peer.on('error', function (err) {
-                console.log(err);
-            });
-        }
-
-        function stopStream() {
-            peer.destroy();
-        }
-
-
-    </script>*@
     }
 

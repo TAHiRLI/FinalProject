@@ -1,6 +1,4 @@
-﻿
-
-@model List<DoctorAppointment>
+﻿@model List<DoctorAppointment>
 
 
 
@@ -11,24 +9,27 @@
      tabindex="0">
     <div class="appointments-container container scrollable">
 
-      
 
-        @if(User.IsInRole("Doctor")){
+
+        @if (User.IsInRole("Doctor"))
+        {
             foreach (var appointment in Model)
             {
                 <!-- Item -->
-            <div class=" d-flex align-items-center justify-content-between border-gray p-3 my-2">
-                <div class="">
-                    <h2 class="h5"><span  class="text-decoration-none  fw-bold">User: @appointment.AppUser.Fullname</span></h2>
-                    <h2 class="h5"><span  class="text-decoration-none  fw-bold">Email: @appointment.AppUser.Email</span></h2>
-                    <p class="appointment-date"><span class="fw-semibold">Date : </span> <span> @appointment.MeetingDate.ToString("dddd, dd MMMM yyyy HH:mm")</span></p>
-                    <p><span class="fw-semibold"> Status:</span> <span class="badge @(appointment.IsApproved==true?"bg-success":appointment.IsApproved==false?"bg-danger":"bg-warning")">
-                        
-                        @(appointment.IsApproved == true ? "Approved" : appointment.IsApproved == false ? "Rejected" : "Pending")
-                        
-                    </span></p>
-                </div>
-                <div class=" ">
+                <div class=" d-flex align-items-center justify-content-between border-gray p-3 my-2">
+                    <div class="">
+                        <h2 class="h5"><span class="text-decoration-none  fw-bold">User: @appointment.AppUser.Fullname</span></h2>
+                        <h2 class="h5"><span class="text-decoration-none  fw-bold">Email: @appointment.AppUser.Email</span></h2>
+                        <p class="appointment-date"><span class="fw-semibold">Date : </span> <span> @appointment.MeetingDate.ToString("dddd, dd MMMM yyyy HH:mm")</span></p>
+                        <p>
+                            <span class="fw-semibold"> Status:</span> <span class="badge @(appointment.IsApproved==true?"bg-success":appointment.IsApproved==false?"bg-danger":"bg-warning")">
+
+                                @(appointment.IsApproved == true ? "Approved" : appointment.IsApproved == false ? "Rejected" : "Pending")
+
+                            </span>
+                        </p>
+                    </div>
+                    <div class=" ">
 
                         @if (appointment.IsApproved == null && appointment.MeetingDate > DateTime.UtcNow.AddHours(4))
                         {
@@ -43,14 +44,16 @@
 
                             </a>
                         }
-                
 
+
+                    </div>
                 </div>
-            </div>
 
-                
+
             }
-        }else{
+        }
+        else
+        {
             foreach (var appointment in Model)
             {
                 <!-- Item -->
@@ -68,9 +71,14 @@
 
                         @if (appointment.IsApproved == true && (DateTime.UtcNow.AddHours(4) - appointment.MeetingDate).TotalMinutes < 30 && (DateTime.UtcNow.AddHours(4) - appointment.MeetingDate).TotalMinutes > 0)
                         {
-                            <a asp-action="index" asp-controller="Meeting" asp-route-doctorId="@appointment.DoctorId" class="call-btn btn d-flex align-items-center">
+                            <a asp-action="index" asp-controller="Meeting" asp-route-doctorId="@appointment.DoctorId" asp-route-appointmentId="@appointment.Id" class="
+                               call-@appointment.Doctor.AppUser.Id
+                            @(appointment.Doctor.AppUser?.ConnectionId !=null? "call-btn":"btn-secondary disabled ")
+                            btn d-flex align-items-center
+
+                            ">
                                 <i class="fa-solid fa-video mx-2"></i>
-                                <span class="d-none d-sm-inline"> Call</span>
+                                <span class="d-none d-sm-inline"> Call @appointment.Id</span>
                             </a>
                         }
                         else if (appointment.IsApproved == null && (appointment.MeetingDate - DateTime.UtcNow.AddHours(4)).TotalMinutes > 30 && appointment.MeetingDate > DateTime.UtcNow.AddHours(4))
@@ -90,6 +98,6 @@
         }
 
 
-        
+
     </div>
 </div>

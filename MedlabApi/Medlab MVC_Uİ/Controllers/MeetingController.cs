@@ -19,15 +19,15 @@ namespace Medlab_MVC_Uİ.Controllers
             _doctorRepository = doctorRepository;
             _hubContext = hubContext;
         }
-        public IActionResult Index( int doctorId)
+        public IActionResult Index( int doctorId, int appointmentId)
         {
             var roomId = Guid.NewGuid().ToString();
-            return RedirectToAction("Room", new { roomId = roomId, doctorId = doctorId });
+            return RedirectToAction("Room", new { roomId = roomId, doctorId = doctorId, appointmentId = appointmentId });
         }
 
 
         [HttpGet("meeting/{roomId}")]
-        public async Task<IActionResult>  Room(string roomId, int doctorId)
+        public async Task<IActionResult>  Room(string roomId, int doctorId, int appointmentId)
         {
             ViewBag.roomId = roomId;
             ViewBag.doctorId = doctorId;
@@ -41,13 +41,14 @@ namespace Medlab_MVC_Uİ.Controllers
             CallRoomViewModel model = new CallRoomViewModel
             {
                 Doctor = doctor,
+                AppointmentId = appointmentId
             };
 
             if (!User.IsInRole("Doctor"))
             {
                 if (doctor.AppUser.ConnectionId == null)
                     return NotFound();
-            await _hubContext.Clients.Client(doctor.AppUser.ConnectionId).SendAsync("RecieveRing", roomId, doctorId);
+            await _hubContext.Clients.Client(doctor.AppUser.ConnectionId).SendAsync("RecieveRing", roomId, doctorId, appointmentId);
             }
 
 

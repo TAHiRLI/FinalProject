@@ -91,7 +91,7 @@
                         <span class="d-none d-sm-inline"> Appointments</span>
                     </button>
 
-                  
+
 
                     <a asp-action="logout" asp-controller="account" class="tab-btn btn">
                         <i class="fa-solid fa-right-from-bracket"></i>
@@ -137,9 +137,9 @@
                                                 </h3>
                                                 <p class="mb-0">@blog.PrevText</p>
                                             </div>
-                                                <a asp-action="edit" asp-controller="Blog" asp-route-id="@blog.Id" class="my-custom-btn m-1 px-2 py-1 position-absolute position-top-right">
-                                                    <i class="fas fa-pencil"></i>
-                                                </a>
+                                            <a asp-action="edit" asp-controller="Blog" asp-route-id="@blog.Id" class="my-custom-btn m-1 px-2 py-1 position-absolute position-top-right">
+                                                <i class="fas fa-pencil"></i>
+                                            </a>
                                         </div>
 
                                     }
@@ -368,13 +368,14 @@
                         </div>
                     </div>
 
-                   
-                     @if (User.IsInRole("Doctor"))
+
+                    @if (User.IsInRole("Doctor"))
                     {
                         <!-- Appointments tab  -->
-                        @await Html.PartialAsync("_AppointmentsTabPartial", Model.Doctor.DoctorAppointments.OrderByDescending(x=> x.CreatedAt).ToList())
+                        @await Html.PartialAsync("_AppointmentsTabPartial", Model.Doctor.DoctorAppointments.OrderByDescending(x=> x.CreatedAt).Take(30).ToList())
                     }
-                    else{
+                    else
+                    {
                         <!-- Appointments tab  -->
                         @await Html.PartialAsync("_AppointmentsTabPartial", Model.DoctorAppointments)
                     }
@@ -391,6 +392,21 @@
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map"></script>
 
+    <script>
+        connection.on("setAsOnline", userId => {
+            console.log(userId);
+
+            $(`.call-${userId}`).removeClass("btn-secondary, disabled");
+
+            $(`.call-${userId}`).addClass("call-btn");
+        })
+
+        connection.on("setAsOffline", userId => {
+            $(`.call-${userId}`).addClass("btn-secondary, disabled");
+
+            $(`.call-${userId}`).removeClass("call-btn");
+        })
+    </script>
     <!-- ========================= Custom =============================== -->
 
     <script src="~/Assets/Js/hidden-file-input.js"></script>

@@ -37,7 +37,7 @@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
 
-  
+
 
     @RenderSection("Styles", required:false)
 
@@ -462,44 +462,53 @@
     <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
 
 
-    @if( ViewContext.RouteData.Values["Controller"].ToString() != "Meeting"){
-    <script>
-        const connection = new signalR.HubConnectionBuilder().withUrl("/meetingHub").build();
-        let myPeerId = null;
-        const myPeer = new Peer()
+    @if (ViewContext.RouteData.Values["Controller"].ToString() != "Meeting")
+    {
+        <script>
+            const connection = new signalR.HubConnectionBuilder().withUrl("/meetingHub").build();
+            let myPeerId = null;
+            const myPeer = new Peer()
 
 
 
 
 
-        myPeer.on('open', (id) => {
-            myPeerId = id;
+            myPeer.on('open', (id) => {
+                myPeerId = id;
 
-            const startSignalR = async () => {
-                await connection.start();
-                await connection.invoke("SetPeerId", myPeerId)
-            }
-            startSignalR();
-        })
-
-            connection.on("RecieveRing", ( id, doctorId)=> {
-                if(confirm("Ansver call")){
-                    let link = `meeting/${id}?doctorId=${doctorId}`;
-                    location.replace(link);
+                const startSignalR = async () => {
+                    await connection.start();
+                    await connection.invoke("SetPeerId", myPeerId)
                 }
-                else{
+                startSignalR();
+            })
 
-                }
+            connection.on("RecieveRing", (id, doctorId, appointmentId) => {
+              
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let link = `/meeting/${id}?doctorId=${doctorId}&&appointmentId=${appointmentId}`;
+                        location.replace(link);
+                    }
+                })
             })
 
 
-    </script>
+        </script>
     }
-  
+
 
     @RenderSection("Scripts", required:false)
 
-   
+
 
     <!--AddToCart-->
     <script src="~/Assets/Js/AddToCart.js"></script>
