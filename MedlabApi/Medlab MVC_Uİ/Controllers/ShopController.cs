@@ -1,8 +1,11 @@
-﻿using Medlab.Core.Repositories;
+﻿using Medlab.Core.Entities;
+using Medlab.Core.Repositories;
+using Medlab_MVC_Uİ.Helpers;
 using Medlab_MVC_Uİ.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 using Microsoft.EntityFrameworkCore.Query.Internal;
+using System.Drawing.Printing;
 
 namespace Medlab_MVC_Uİ.Controllers
 {
@@ -17,6 +20,8 @@ namespace Medlab_MVC_Uİ.Controllers
             this._productRepository = productRepository;
         }
         public IActionResult Index(
+            int? page = 1,
+             int pageSize = 6,
             string? search = null,
             List<int>? CategoryIds = null,
             decimal? minPrice = null,
@@ -61,9 +66,9 @@ namespace Medlab_MVC_Uİ.Controllers
             model.Categories = _productCategoryRepository.GetAll(x => x.Products.Count > 0, "Products").ToList();
             model.FeaturedProducts = _productRepository.GetAll(x => x.IsFeatured == true, "ProductImages").OrderByDescending(x => x.CreatedAt).Take(3).ToList();
 
-
-
-
+            Pagination<Product> paginatedList = new Pagination<Product>();
+            ViewBag.Products = paginatedList.GetPagedNames(model.Products, page, pageSize);
+            ViewBag.SelectedPageSize = pageSize;
 
 
             decimal min = _productRepository.GetAll(x => true).Min(x => x.SalePrice * (100 - x.DiscoutPercent) / 100);

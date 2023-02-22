@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zm2zqwa4eZFWV7WsfnXMRNZTpdG9WACHTaMwjoGEchanGQ3dBdi0eWr/syPFNNOTUi7YCBltCOFE+KLFx+Gx3Q==",
+  "dgSpecHash": "WE9UYH/F1DR0WQD4Bl+on6em5UtXux5LAG/mZDEo5CCu78GSTdWC4RoplQ7ll490+9lQR5MKeoxnYP5N/UOKxg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\Medlab MVC_Uİ.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\Hp\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.2.2\\fluentvalidation.aspnetcore.11.2.2.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.0\\fluentvalidation.dependencyinjectionextensions.11.5.0.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
+    "C:\\Users\\Hp\\.nuget\\packages\\jetbrains.annotations\\2022.3.1\\jetbrains.annotations.2022.3.1.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",
@@ -208,7 +209,9 @@
     "C:\\Users\\Hp\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\Hp\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\Hp\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\Hp\\.nuget\\packages\\x.pagedlist\\8.4.6\\x.pagedlist.8.4.6.nupkg.sha512",
+    "C:\\Users\\Hp\\.nuget\\packages\\x.pagedlist.mvc.core\\8.4.5\\x.pagedlist.mvc.core.8.4.5.nupkg.sha512"
   ],
   "logs": []
 }

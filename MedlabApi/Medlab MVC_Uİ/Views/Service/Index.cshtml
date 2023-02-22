@@ -2,11 +2,26 @@
 
 
 
-@model List<Service>
+@using X.PagedList
+
+@{
+    var pagedList = (IPagedList)ViewBag.Services;
+}
 
 
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList.Mvc.Core.Fluent;
+@using X.PagedList.Web.Common;
 
 
+@section Styles{
+    <!-- Pagination -->
+    <link rel="stylesheet"
+      type="text/css"
+      href="~/Assets/css/PagedList.css" />
+
+}
 
 
 <!-- Bread crumb -->
@@ -28,7 +43,7 @@
 
         <div class="container px-lg-5">
             <div class="services  my-5">
-                @foreach (var service in Model)
+                @foreach (var service in ViewBag.Services)
                 {
                 <!-- card -->
 
@@ -50,7 +65,7 @@
                             </div>
                             <div class="services_card_desc">
                                 <p>
-                                   @Html.Raw(service.Description);
+                                   @Html.Raw(service.Description)
                                 </p>
                             </div>
                         </div>
@@ -60,6 +75,24 @@
                 }
 
              
+            </div>
+            <div class="paginationContainer">
+                @Html.PagedListPager(pagedList, page =>
+                Url.Action("Index", new {
+                page = page,
+                pageSize = ViewBag.SelectedPageSize
+                }),
+
+                new PagedListRenderOptions {
+                //LiElementClasses = new string[] { "page-item" },
+                //PageClasses = new string[] { "page-link" },
+                MaximumPageNumbersToDisplay = 5
+                //ContainerDivClasses = new [] { "ltn__pagination" },
+                //ClassToApplyToLastListItemInPager = "d-none",
+                //LinkToPreviousPageFormat = "<i class=\"fas fa-angle-double-left\"></i>",
+                //LinkToNextPageFormat = "<i class=\"fas fa-angle-double-right\"></i>",
+                }
+                )
             </div>
         </div>
     </section>

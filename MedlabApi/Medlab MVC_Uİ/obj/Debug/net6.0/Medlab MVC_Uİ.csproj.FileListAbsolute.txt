@@ -353,3 +353,6 @@ C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\Medlab MVC_Uİ\bin\
 C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\Medlab MVC_Uİ\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\Medlab MVC_Uİ\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Facebook.dll
 C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\Medlab MVC_Uİ\bin\Debug\net6.0\libman.json
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\Medlab MVC_Uİ\bin\Debug\net6.0\JetBrains.Annotations.dll
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\Medlab MVC_Uİ\bin\Debug\net6.0\X.PagedList.dll
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\Medlab MVC_Uİ\bin\Debug\net6.0\X.PagedList.Mvc.Core.dll

@@ -87,6 +87,14 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.12, )"
+            },
+            "X.PagedList": {
+              "target": "Package",
+              "version": "[8.4.6, )"
+            },
+            "X.PagedList.Mvc.Core": {
+              "target": "Package",
+              "version": "[8.4.5, )"
             }
           },
           "imports": [

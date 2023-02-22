@@ -1,5 +1,18 @@
 ﻿@model ShopViewModel
 
+@using X.PagedList
+
+@{
+    var pagedList = (IPagedList)ViewBag.Products;
+}
+
+
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList.Mvc.Core.Fluent;
+@using X.PagedList.Web.Common;
+
+
 @section Styles{
     <!--  jquery Ui -->
     <link rel="stylesheet"
@@ -8,6 +21,12 @@
     <!-- Select 2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
       rel="stylesheet" />
+
+    <!-- Pagination -->
+    <link rel="stylesheet"
+      type="text/css"
+      href="~/Assets/css/PagedList.css" />
+
 }
 
 
@@ -140,7 +159,7 @@
 
                     <div class="shop_products_cards mt-2 row gy-5 flex-grow-1">
 
-                        @foreach (var product in Model.Products)
+                        @foreach (Product product in ViewBag.Products)
                         {
                             <!-- Item -->
                             <div class=" col-lg-4 col-md-6">
@@ -207,6 +226,29 @@
 
 
                         <!-- End -->
+                    </div>
+                    <div class="paginationContainer">
+                        @Html.PagedListPager(pagedList, page =>
+                        Url.Action("Index", new {
+                        page = page,
+                        pageSize = ViewBag.SelectedPageSize,
+                        minPrice =  ViewBag.selectedMin,
+                        maxPrice =  ViewBag.selectedMax,
+                        CategoryIds = ViewBag.CategoryIds,
+                        search =ViewBag.Search,
+                        sort = ViewBag.Sort
+                        }),
+
+                        new PagedListRenderOptions {
+                        //LiElementClasses = new string[] { "page-item" },
+                        //PageClasses = new string[] { "page-link" },
+                        MaximumPageNumbersToDisplay = 5
+                        //ContainerDivClasses = new [] { "ltn__pagination" },
+                        //ClassToApplyToLastListItemInPager = "d-none",
+                        //LinkToPreviousPageFormat = "<i class=\"fas fa-angle-double-left\"></i>",
+                        //LinkToNextPageFormat = "<i class=\"fas fa-angle-double-right\"></i>",
+                        }
+                        )
                     </div>
                 </div>
             </div>

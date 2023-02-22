@@ -1,5 +1,6 @@
 ﻿using Medlab.Core.Entities;
 using Medlab.Core.Repositories;
+using Medlab_MVC_Uİ.Helpers;
 using Medlab_MVC_Uİ.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
 using System.Security.Claims;
+using X.PagedList;
 
 namespace Medlab_MVC_Uİ.Controllers
 {
@@ -31,8 +33,11 @@ namespace Medlab_MVC_Uİ.Controllers
         // Index 
         //======================
 
-        public IActionResult Index(int? departmentId = null)
+        public IActionResult Index(int? page, int pageSize = 6, int? departmentId = null)
         {
+
+
+
             DoctorsViewModel model = new DoctorsViewModel();
 
             if (departmentId != null && !_departmentRepository.Any(x => x.Id == departmentId))
@@ -48,10 +53,22 @@ namespace Medlab_MVC_Uİ.Controllers
             {
                 model.Doctors = _doctorRepository.GetAll(x => x.DepartmentId == departmentId).ToList();
             }
-            model.Deparments = _departmentRepository.GetAll(x => true).ToList();
+            model.Deparments = _departmentRepository.GetAll(x => x.Doctors.Count>0).ToList();
 
 
-            ViewBag.departmentId = departmentId;
+            Pagination<Doctor> paginatedList = new Pagination<Doctor>();
+
+            ViewBag.Doctors = paginatedList.GetPagedNames(model.Doctors, page, pageSize);
+            ViewBag.SelectedPageSize = pageSize;
+            ViewBag.DepartmentId = departmentId;
+            ViewBag.PageNumber = (page ?? 1);
+            ViewBag.PageSize = pageSize;
+            if (ViewBag.Doctors == null)
+                return NotFound();
+
+
+
+
             return View(model);
         }
 

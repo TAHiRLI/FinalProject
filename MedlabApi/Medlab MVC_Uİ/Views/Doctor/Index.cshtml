@@ -1,8 +1,17 @@
-﻿
+﻿@using X.PagedList
+
+@{
+    var pagedList = (IPagedList)ViewBag.Doctors;
+}
+
+
 @model DoctorsViewModel
 
 
-
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList.Mvc.Core.Fluent;
+@using X.PagedList.Web.Common;
 
 
 
@@ -12,96 +21,130 @@
       type="text/css"
       href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 
+
+    <!-- Pagination -->
+    <link rel="stylesheet"
+      type="text/css"
+      href="~/Assets/css/PagedList.css" />
+
 }
 
 
 
 
-<!-- Bread crumb -->
-<div class="breadCrumb p-3 bg-light">
-    <p class="container mb-0 px-5">
-        <a asp-action="index" asp-controller="home">Home</a>/<a asp-action="index" asp-controller="doctor">Doctors</a>
-    </p>
-</div>
+    <!-- Bread crumb -->
+    <div class="breadCrumb p-3 bg-light">
+        <p class="container mb-0 px-5">
+            <a asp-action="index" asp-controller="home">Home</a>/<a asp-action="index" asp-controller="doctor">Doctors</a>
+        </p>
+    </div>
 
-<main>
-    <section id="AllDoctors_Section" class="py-5">
-        <span class="sectionName text-center d-block">Meet the Team</span>
-        <div class="sectionTitle">
-            <h2 class="h1 position-relative text-center text-dark title_underlined"
+    <main>
+        <section id="AllDoctors_Section" class="py-5">
+            <span class="sectionName text-center d-block">Meet the Team</span>
+            <div class="sectionTitle">
+                <h2 class="h1 position-relative text-center text-dark title_underlined"
                 data-title="Services">
-                Our Specialists
-            </h2>
-        </div>
+                    Our Specialists
+                </h2>
+            </div>
 
-        <div class="container px-lg-5  mt-5">
-            <!-- Departments -->
+            <div class="container px-lg-5  mt-5">
+                <!-- Departments -->
 
-            <div class="departments departmentsSlider py-4">
+                <div class="departments departmentsSlider py-4 d-flex flex-wrap   gap-2">
 
                     <!-- Department -->
-                    <div class="departments_item rounded-pill text-nowrap mx-2 btn">
-                        <a class="link-base text-decoration-none" asp-action="index" asp-controller="doctor" >All</a>
-                    </div>
+                    <a asp-action="index" asp-controller="doctor">
 
-                 @foreach (var department in Model.Deparments)
+                        <div class="departments_item rounded-pill text-nowrap mx-2 btn @(ViewBag.DepartmentId == null?"active":"")">
+                            <span class="link-base text-decoration-none">All</span>
+                        </div>
+                    </a>
+
+                @foreach (var department in Model.Deparments)
                 {
-                 <!-- Department -->
-                    <div class="departments_item rounded-pill text-nowrap mx-2 btn"
-                     >
-                       <a class="link-base text-decoration-none" asp-action="index" asp-controller="doctor" asp-route-departmentId="@department.Id">@department.Name</a>
-                    </div>
+                    <!-- Department -->
+                    <a asp-action="index" asp-controller="doctor" asp-route-departmentId="@department.Id">
+
+                        <div class="departments_item @(department.Id == ViewBag.DepartmentId?"active":"") rounded-pill text-nowrap mx-2 btn">
+                            <span class="link-base text-decoration-none ">@department.Name</span>
+                        </div>
+                    </a>
                 }
-                
-             
+
+
             </div>
 
 
 
             <!-- Doctors -->
             <div class="all-doctors  row">
-                @foreach (var doctor in Model.Doctors)
+                @foreach (Doctor doctor in ViewBag.Doctors)
                 {
                     <!-- card -->
-                    <div class="all-doctors_card col-lg-4 col-md-6 mt-5 Endodontics bg-light">
-                        <div class="all-doctors_card_photo">
-                            <a asp-action="details" asp-controller="doctor" asp-route-id="@doctor.Id" class="d-block w-100">
-                                <img src="~/Assets/Uploads/Doctors/@doctor.ImageUrl"
-                                 alt=""
-                                 class="w-100" />
-                            </a>
-                        </div>
-                        <div class="p-4">
-                            <div class="all-doctors_card_name mb-4">
-                                <a asp-action="details" asp-controller="doctor" asp-route-id="@doctor.Id" class="text-decoration-none link-base">
+                    <div class="all-doctors_card col-lg-4 col-md-6 mt-5 d-flex flex-column justify-content-between bg-light">
+                        <div class="all-doctors_card_photo flex-column">
+                            <div>
+
+                                <a asp-action="details" asp-controller="doctor" asp-route-id="@doctor.Id" class="d-block w-100">
+                                    <img src="~/Assets/Uploads/Doctors/@doctor.ImageUrl"
+                                     alt=""
+                                     class="w-100" />
+                                </a>
+                            </div>
+                            <div class="all-doctors_card_name mt-4">
+                                  <a asp-action="details" asp-controller="doctor" asp-route-id="@doctor.Id" class="text-decoration-none link-base">
                                     <h2 class="h4 position-relativ text-center">
                                         @doctor.Fullname
                                     </h2>
-                                </a>
-                                <p class="all-doctors_card_position text-base text-center">
+                                  </a>
+                                   <p class="all-doctors_card_position text-base text-center mb-0">
                                     @doctor.Positon
-                                </p>
+                                   </p>
                             </div>
+                        </div>
+                        <div class="p-4 h-100 d-flex flex-column justify-content-between">
                             <div class="all-doctors_card_desc">
                                 <p class="text-center">
                                     @doctor.Desc
                                 </p>
-                                <p class="text-center text-base fw-bold">$@doctor.MeetingPrice / 10 min</p>
                             </div>
                             <div class="all-doctors_card_links mt-4">
-                                <div class="set_meeting rounded-pill w-100 m-0">
+                                <p class="text-center text-base fw-bold">$@doctor.MeetingPrice / 10 min</p>
+                                <a asp-action="details" asp-controller="doctor" asp-route-id="@doctor.Id" asp class="set_meeting btn rounded-pill w-100 m-0">
                                     <i class="fa-solid fa-video me-2"></i>
                                     Online Appointment
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
                 }
 
 
-           
-                
+
+
                 <!-- END -->
+            </div>
+
+            <div class="paginationContainer">
+                @Html.PagedListPager(pagedList, page =>
+                Url.Action("Index", new {
+                page = page,
+                DepartmentId =  ViewBag.DepartmentId,
+                pageSize = ViewBag.SelectedPageSize
+                }),
+
+                new PagedListRenderOptions {
+                //LiElementClasses = new string[] { "page-item" },
+                //PageClasses = new string[] { "page-link" },
+                MaximumPageNumbersToDisplay = 5
+                //ContainerDivClasses = new [] { "ltn__pagination" },
+                //ClassToApplyToLastListItemInPager = "d-none",
+                //LinkToPreviousPageFormat = "<i class=\"fas fa-angle-double-left\"></i>",
+                //LinkToNextPageFormat = "<i class=\"fas fa-angle-double-right\"></i>",
+                }
+                )
             </div>
         </div>
     </section>

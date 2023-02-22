@@ -5,7 +5,6 @@
 // 3  Doctors slider                  / Index
 // 4 Core Values Slider               / About Us 
 // 5 Office slider                    / About Us 
-// 6 Departments Slider               / Doctors 
 // 7 Product Images Slider            /Details
 // 8 Similar Products Slider          / Product-Details
 
@@ -213,48 +212,6 @@ $(document).ready(function () {
         
         ]
     });
-
-
-
-
-
-//=================================
-// 6 Departments Slider  / Doctors 
-//=================================
-
-$('.departmentsSlider').slick({
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  autoplay: false,
-  centerMode:true,
-  autoplaySpeed: 4000,
-  arrows:false,
-  draggabe:true,
-  focusOnSelect: true,
-  responsive: [
-     
-    {
-      breakpoint: 992,
-      settings: {
-        slidesToShow: 4,
-      }
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 2,
-      }
-    },
-    {
-      breakpoint: 560,
-      settings: {
-        slidesToShow: 1,
-      }
-    }
-
-  
-  ]
-});
 
 
 

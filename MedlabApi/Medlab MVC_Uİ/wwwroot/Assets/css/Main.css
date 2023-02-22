@@ -12156,10 +12156,15 @@ footer .copyright a:hover {
 #AllDoctors_Section .departments_item {
   border: 2px solid #444;
 }
-#AllDoctors_Section .slick-current {
-  border: 2px solid #3368c6;
-  color: #3368c6;
-}
+
+    #AllDoctors_Section .departments_item.active {
+        border: 2px solid #3368c6;
+        color: #3368c6;
+    }
+        #AllDoctors_Section .departments_item.active a {
+            color: #3368c6;
+        }
+
 #AllDoctors_Section .all-doctors_card {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
