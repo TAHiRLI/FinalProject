@@ -5,7 +5,7 @@
 @{
     var setting = _layoutService.GetSetting();
     BasketViewModel basketVm = await _layoutService.GetBasket();
-
+    List<Blog> Blogs = _layoutService.GetRecentBlogs();
 
 
     // To show active link in navbar
@@ -30,7 +30,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="stylesheet"
           type="text/css"
           href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
@@ -45,6 +44,7 @@
     <!--Toasty-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link rel="icon" href="~/Assets/Images/favicon.png" type="image/x-icon" />
     <title>Medlab</title>
 </head>
 <body id="indexPage"
@@ -368,47 +368,26 @@
             <div class="footerWrap_blogs">
                 <p class="footerWrap_blogs_title">Blogs</p>
 
-                <!-- Blog -->
+                    @foreach (var blog in Blogs)
+                {
+                                    <!-- Blog -->
                 <div class="footerWrap_blogs_item row align-items-center">
                     <div class="footerWrap_blogs_item_imageWrapper">
-                        <img src="~/Assets/Uploads/Blogs/footer-post-author-01.jpg"
-                             alt="" />
+                        <img src="~/Assets/Uploads/Blogs/@blog.ImageUrl"
+                             alt="@blog.Title"
+                             width="50px"
+                             height="50px" />
                     </div>
                     <div class="footerWrap_blogs_item_info col">
-                        <a href="#" class="blogTitle">
-                            The doctor’s guide to healthy break...
+                        <a asp-action="details" asp-controller="blog" asp-route-id="@blog.Id" class="blogTitle">
+                            @blog.Title
                         </a>
-                        <small>September 26, 2018</small>
+                            <small>@blog.CreatedAt.ToString("dddd, dd MMMM yyyy")</small>
                     </div>
                 </div>
 
-                <!-- Blog -->
-                <div class="footerWrap_blogs_item row align-items-center">
-                    <div class="footerWrap_blogs_item_imageWrapper">
-                        <img src="~/Assets/Uploads/Blogs/footer-post-author-01.jpg"
-                             alt="" />
-                    </div>
-                    <div class="footerWrap_blogs_item_info col">
-                        <a href="#" class="blogTitle">
-                            The doctor’s guide to healthy break...
-                        </a>
-                        <small>September 26, 2018</small>
-                    </div>
-                </div>
-
-                <!-- Blog -->
-                <div class="footerWrap_blogs_item row align-items-center">
-                    <div class="footerWrap_blogs_item_imageWrapper">
-                        <img src="~/Assets/Uploads/Blogs/footer-post-author-01.jpg"
-                             alt="" />
-                    </div>
-                    <div class="footerWrap_blogs_item_info col">
-                        <a href="#" class="blogTitle">
-                            The doctor’s guide to healthy break...
-                        </a>
-                        <small>September 26, 2018</small>
-                    </div>
-                </div>
+                }
+        <!--End-->
             </div>
 
             <div class="footerWrap_contact">

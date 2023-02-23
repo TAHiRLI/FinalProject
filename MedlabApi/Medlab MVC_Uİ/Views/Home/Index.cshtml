@@ -232,7 +232,7 @@
                                     <img src="~/Assets/Uploads/Blogs/@blog.ImageUrl" alt="@blog.Title" />
                                 </div>
                                 <div class="blogs_item col pe-5">
-                                    <span class="blogs_item_info_date">Mar 12 2020</span>
+                                    <span class="blogs_item_info_date">@blog.CreatedAt.ToString("dddd, dd MMMM yyyy")</span>
                                     <p class="blogs_item_info_title">
                                         <a asp-action="details" asp-controller="blog" asp-route-id="@blog.Id" class="text-decoration-none">
                                            @blog.Title

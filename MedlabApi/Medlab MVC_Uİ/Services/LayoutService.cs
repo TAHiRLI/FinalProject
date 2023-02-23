@@ -15,14 +15,16 @@ namespace Medlab_MVC_Uİ.Services
         private readonly IProductRepository _productRepository;
         private readonly IHttpContextAccessor _httpAccessor;
         private readonly IMapper _mapper;
+        private readonly IBlogRepostiory _blogRepostiory;
 
-        public LayoutService(IHttpContextAccessor httpContext,IMapper mapper, ISettingRepository settingRepository, IBasketItemRepository basketItemRepository, IProductRepository productRepository)
+        public LayoutService(IHttpContextAccessor httpContext,IMapper mapper, IBlogRepostiory blogRepostiory, ISettingRepository settingRepository, IBasketItemRepository basketItemRepository, IProductRepository productRepository)
         {
             this._settingRepository = settingRepository;
             _basketItemRepository = basketItemRepository;
             _productRepository = productRepository;
             _httpAccessor = httpContext;
             _mapper = mapper;
+            _blogRepostiory = blogRepostiory;
         }
 
         public Dictionary<string,string> GetSetting()
@@ -74,5 +76,9 @@ namespace Medlab_MVC_Uİ.Services
             return BasketVm;
         }
 
+        public List<Blog> GetRecentBlogs()
+        {
+            return _blogRepostiory.GetAll(x => true).OrderByDescending(x => x.CreatedAt).Take(3).ToList();
+        }
     }
 }
