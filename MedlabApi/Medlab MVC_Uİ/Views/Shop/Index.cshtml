@@ -22,10 +22,6 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
       rel="stylesheet" />
 
-    <!-- Pagination -->
-    <link rel="stylesheet"
-      type="text/css"
-      href="~/Assets/css/PagedList.css" />
 
 }
 
@@ -227,7 +223,7 @@
 
                         <!-- End -->
                     </div>
-                    <div class="paginationContainer">
+                    <div class="paginationContainer mt-5">
                         @Html.PagedListPager(pagedList, page =>
                         Url.Action("Index", new {
                         page = page,
@@ -240,13 +236,13 @@
                         }),
 
                         new PagedListRenderOptions {
-                        //LiElementClasses = new string[] { "page-item" },
+                        //LiElementClasses = new string[] { "page-link" },
                         //PageClasses = new string[] { "page-link" },
-                        MaximumPageNumbersToDisplay = 5
-                        //ContainerDivClasses = new [] { "ltn__pagination" },
-                        //ClassToApplyToLastListItemInPager = "d-none",
-                        //LinkToPreviousPageFormat = "<i class=\"fas fa-angle-double-left\"></i>",
-                        //LinkToNextPageFormat = "<i class=\"fas fa-angle-double-right\"></i>",
+                        MaximumPageNumbersToDisplay = 5,
+                        ContainerDivClasses = new [] { "justify-content-center d-flex" },
+                        ClassToApplyToLastListItemInPager = "d-none",
+                        LinkToPreviousPageFormat = "<i class=\"fas fa-angle-double-left\"></i>",
+                        LinkToNextPageFormat = "<i class=\"fas fa-angle-double-right\"></i>",
                         }
                         )
                     </div>

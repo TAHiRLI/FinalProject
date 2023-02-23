@@ -30,7 +30,7 @@ namespace Medlab_MVC_Uİ.Controllers
         // Index
         //================================
 
-        public IActionResult Index(int? BlogCategoryId = null)
+        public IActionResult Index(int? page, int pageSize = 3, int? BlogCategoryId = null)
         {
             BlogViewModel model = new BlogViewModel();
 
@@ -55,7 +55,16 @@ namespace Medlab_MVC_Uİ.Controllers
             model.RecentBlogs = _blogRepostiory.GetAll(x => true, "Doctor").OrderByDescending(x => x.CreatedAt).Take(3).ToList();
 
 
+            Pagination<Blog> paginatedList = new Pagination<Blog>();
+
+            ViewBag.Blogs = paginatedList.GetPagedNames(model.Blogs, page, pageSize);
+            ViewBag.SelectedPageSize = pageSize;
             ViewBag.BlogCategoryId = BlogCategoryId;
+            ViewBag.PageNumber = (page ?? 1);
+            ViewBag.PageSize = pageSize;
+            if (ViewBag.Blogs == null)
+                return NotFound();
+
             return View(model);
         }
 

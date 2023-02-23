@@ -82,7 +82,7 @@
                             <a asp-action="contact" asp-controller="home" class="@getClass("Contact", "Home")"> Contact </a>
                         </li>
                         <li class="menuBox_link d-inline-block searchBox bg-light">
-                            <input class="bg-light" type="text" placeholder="Search..." />
+                            <input class="bg-light search-input" type="text"  placeholder="Search..." />
                             <i class="fas fa-search"></i>
                         </li>
                     </ul>
@@ -176,7 +176,19 @@
                 </li>
             </ul>
         </div>
+         <!--Search result Box-->
+      <div
+        class="search-result bg-light  py-3 px-3 position-absolute position-bottom-right"
+      >
+        <div class="container">
+          <div id="search-holder">
+
+          </div>
+        </div>
+      </div>
     </nav>
+       
+    
     <!--Navbar Scroll  -->
     <nav id="navbarScroll" class="navbarScroll p-1 bg-light">
         <div class="navbar_container px-xl-5 px-lg-2 mx-xl-3 mx-lg-1 m-auto">
@@ -209,10 +221,7 @@
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
                             <a asp-action="contact" asp-controller="home" class="@getClass("Contact", "Home")"> Contact </a>
                         </li>
-                        <li class="menuBox_link d-inline-block searchBox bg-light">
-                            <input class="bg-light" type="text" placeholder="Search..." />
-                            <i id="search-icon" class="fas fa-search"></i>
-                        </li>
+                      
 
                     </ul>
                 </div>

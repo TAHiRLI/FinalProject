@@ -169,5 +169,16 @@ namespace Medlab_MVC_Uİ.Controllers
            
             return PartialView("_ReviewsPartial", productReviews);
         }
+
+        //======================
+        // 3 Get search recommendation / Search Navbar
+        //======================
+
+        public IActionResult GetSearchRecommendation(string search)
+        {
+            List<Product> products = _productRepository.GetAll(x => x.Name.Contains(search), "ProductImages").OrderByDescending(x=> x.IsFeatured).ThenByDescending(x=> x.CreatedAt).ToList();
+            return  PartialView("_SearchResultPartial", products);
+        }
+
     }
 }

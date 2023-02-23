@@ -1,0 +1,32 @@
+﻿@model List<Product>
+
+@if (Model.Count > 0)
+{
+    <p class="fw-semibold mt-3">@Model.Count Results found</p>
+}
+<div class="mb-3">
+
+
+    @foreach (Product product in Model.Take(3).ToList())
+    {
+        <!-- item -->
+        <div class="search-result_item  my-2 ">
+            <div class="search-result_item_photo  col-3 p-0 ">
+                <a asp-action="details" asp-controller="product" asp-route-id="@product.Id">
+                    <img src="/Assets/Uploads/Products/@product.ProductImages.FirstOrDefault(x=> x.IsMain).ImageUrl"
+                     alt=""
+                     class="w-100 h-100" />
+                </a>
+            </div>
+            <div class="search-result_item_info  col-9 p-2 px-3 d-flex flex-column justify-content-evenly">
+                <span>
+                    <a asp-action="details" asp-controller="product" asp-route-id="@product.Id"
+                   class="fw-semibold text-decoration-none link-base ">@product.Name</a>
+                </span>
+                <span class="fw-semibold mt-2 ">$@((product.SalePrice * (100 - product.DiscoutPercent) / 100).ToString("0.00"))</span>
+            </div>
+        </div>
+    }
+    <!-- End -->
+</div>
+

@@ -1,5 +1,11 @@
-﻿@{
-    ViewData["Title"] = "Index";
+﻿@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+@using X.PagedList.Mvc.Core.Fluent;
+@using X.PagedList.Web.Common;
+
+
+@{
+    var pagedList = (IPagedList)ViewBag.Blogs;
 }
 @model BlogViewModel
 
@@ -24,11 +30,12 @@
 
                 <div class="blogs col-lg-9 px-md-3">
 
-                    @foreach (Blog blog in Model.Blogs)
+                    @foreach (Blog blog in ViewBag.BLogs)
                     {
 
                      <!-- blog -->
-                    <div class="blogs_item mb-5 border-gray p-3">
+
+                        <div class="blogs_item mb-5 border-gray p-3 bg-light">
                         <div class="blogs_item_body_header row flex-nowrap ps-lg-4">
                             <div class="post-date  col-2 d-flex flex-column align-items-center justify-content-center">
                                 <span class="fs-3 day">@blog.CreatedAt.Day</span>
@@ -72,6 +79,26 @@
                   
 
                     <!-- end -->
+
+                    <div class="paginationContainer my-5">
+                        @Html.PagedListPager(pagedList, page =>
+                        Url.Action("Index", new {
+                        page = page,
+                        BlogCategoryId =  ViewBag.BlogCategoryId,
+                        pageSize = ViewBag.SelectedPageSize
+                        }),
+
+                        new PagedListRenderOptions {
+                        //LiElementClasses = new string[] { "page-link" },
+                        //PageClasses = new string[] { "page-link" },
+                        MaximumPageNumbersToDisplay = 5,
+                        ContainerDivClasses = new [] { "justify-content-center d-flex" },
+                        ClassToApplyToLastListItemInPager = "d-none",
+                        LinkToPreviousPageFormat = "<i class=\"fas fa-angle-double-left\"></i>",
+                        LinkToNextPageFormat = "<i class=\"fas fa-angle-double-right\"></i>",
+                        }
+                        )
+                    </div>
                 </div>
 
                 <div class="col-lg-3  bg-light h-min py-3 px-4 ">
