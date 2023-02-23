@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Medlab.Core.Repositories
 {
-    public interface ISettingRepository:IEntityRepository<Setting>
+    public interface ISettingRepository:EntityRepository<Setting>
     {
         Dictionary<string, string> GetSettingDictionary();
     }

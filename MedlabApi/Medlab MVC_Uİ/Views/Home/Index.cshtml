@@ -15,7 +15,7 @@
             <!-- slide  -->
             <div class="mainSlider_item d-flex justify-content-center">
                 <div class="holder">
-                    <img src="/Assets/Uploads/Sliders/@slide.ImageUrl"
+                    <img src="~/Assets/Uploads/Sliders/@slide.ImageUrl"
                          alt=""
                          class="mainSlider_item_image" />
                 </div>
@@ -46,75 +46,34 @@
 
             <div class="aboutUs row  justify-content-center align-items-center my-5 ">
                 <div class="aboutUs_values col-lg-6 row  justify-content-center"
-                     style="background-image: url('Assets/Images/bg-department.png')">
-                    <!-- Value -->
-                    <div class="col-6 p-0 px-2 py-2">
-                        <div class="aboutUs_values_item p-2 p-md-3 p-lg-4 px-lg-5 d-flex flex-column align-items-start">
-                            <i class="valueIcon las la-file-medical-alt mb-3"></i>
-                            <p class="valueName position-relative">Latest Equipment</p>
+                     style="background-image: url('../../wwwroot/Assets/Images/bg-department.png')">
+                     @foreach (var value in Model.Values)
+                    {
+                        <!-- Value -->
+                        <div class="col-6 p-0 px-2 py-2">
+                            <div class="aboutUs_values_item p-2 p-md-3 p-lg-4 px-lg-5 d-flex flex-column align-items-start">
+                                <i class="valueIcon @value.Icon mb-3"></i>
+                                <p class="valueName position-relative">@value.Name</p>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Value -->
-                    <div class="col-6 p-0 px-2 py-2">
-                        <div class="aboutUs_values_item p-2 p-md-3 p-lg-4 px-lg-5 d-flex flex-column align-items-start">
-                            <i class="valueIcon las la-file-medical-alt mb-3"></i>
-                            <p class="valueName position-relative">Latest Equipment</p>
-                        </div>
-                    </div>
-
-                    <!-- Value -->
-                    <div class="col-6 p-0 px-2 py-2">
-                        <div class="aboutUs_values_item p-2 p-md-3 p-lg-4 px-lg-5 d-flex flex-column align-items-start">
-                            <i class="valueIcon las la-file-medical-alt mb-3"></i>
-                            <p class="valueName position-relative">Latest Equipment</p>
-                        </div>
-                    </div>
-
-                    <!-- Value -->
-                    <div class="col-6 p-0 px-2 py-2">
-                        <div class="aboutUs_values_item p-2 p-md-3 p-lg-4 px-lg-5 d-flex flex-column align-items-start">
-                            <i class="valueIcon las la-file-medical-alt mb-3"></i>
-                            <p class="valueName position-relative">Latest Equipment</p>
-                        </div>
-                    </div>
+                    }
 
                     <!-- End -->
                 </div>
                 <div class="aboutUs_info col-lg-6 mt-lg-0 mt-3">
                     <span class="aboutUs_info_sectionName sectionName">About Us</span>
                     <p class="aboutUs_info_title">
-                        Personal Licensed
-                        <br />
-
-                        Diagnostic <span> Lab Services </span>
+                       @Model.Setting["home_aboutUs_title"]
                     </p>
                     <div class="aboutUs_info_desc">
-                        We pride ourselves on the trained skills needed for the
-                        preparation of diversified testing. We are of the sound belief
-                        that timely diagnosis could cast off the scar of many of the
-                        grave diseases. It can be made possible if you consult your
-                        doctor for suspected diseases.
+                        @Model.Setting["home_aboutUs_desc1"]
                         <br />
                         <br />
-                        <ul>
-                            <li>
-                                <i class="las la-check-square"></i>
-                                All reports for clients are made simple and easy to
-                                understand
-                            </li>
-                            <li>
-                                <i class="las la-check-square"></i>
-                                User- friendly website offers custom settings for each
-                                physician
-                            </li>
-                            <li>
-                                <i class="las la-check-square"></i>
-                                We customize panels to meet physician’s needs.
-                            </li>
-                        </ul>
+                        @Html.Raw(Model.Setting["home_aboutUs_desc2"]) 
+
                     </div>
 
-                    <a href="#" class="aboutUs_info_button rounded-pill col-5">Make an appointment</a>
+                    <a href=" @Model.Setting["home_aboutUs_btnUrl"]" class="aboutUs_info_button rounded-pill col-5">@Model.Setting["home_aboutUs_btnText"]</a>
                 </div>
             </div>
         </div>
@@ -133,264 +92,53 @@
                 <!-- Slider Nav -->
                 <div class="mt-4 px-lg-5">
                     <div class="tests_slider tests_sliderNav">
-                        <!-- Item -->
-                        <a class="tests_slider_item border-gray mx-2 d-block text-decoration-none">
-                            <div class="tests_slider_item_icon my-2">
-                                <i class="fa-solid fa-flask-vial"></i>
+                        @foreach (var service in Model.Services)
+                        {
+                            <!-- Item -->
+                            <div class="tests_slider_item border-gray mx-2 d-block text-decoration-none">
+                                <div class="tests_slider_item_icon my-2">
+                                    <i class="@service.Icon"></i>
+                                </div>
+                                <span class="tests_slider_item_title d-block mt-3">@service.Name</span>
                             </div>
-                            <span class="tests_slider_item_title d-block mt-3">Naturopathic Tests 1</span>
-                        </a>
-
-                        <!-- Item -->
-                        <a class="tests_slider_item mx-2 d-block text-decoration-none">
-                            <div class="tests_slider_item_icon my-2">
-                                <i class="fa-solid fa-vial"></i>
-                            </div>
-                            <span class="tests_slider_item_title d-block mt-3">Naturopathic Tests2</span>
-                        </a>
-
-                        <!-- Item -->
-                        <a class="tests_slider_item mx-2 d-block text-decoration-none">
-                            <div class="tests_slider_item_icon my-2">
-                                <i class="fa-solid fa-dna"></i>
-                            </div>
-                            <span class="tests_slider_item_title d-block mt-3">Naturopathic Tests3</span>
-                        </a>
-
-                        <!-- Item -->
-                        <a class="tests_slider_item mx-2 d-block text-decoration-none">
-                            <div class="tests_slider_item_icon my-2">
-                                <i class="fa-solid fa-flask-vial"></i>
-                            </div>
-                            <span class="tests_slider_item_title d-block mt-3">Naturopathic Tests4</span>
-                        </a>
-
-                        <!-- Item -->
-                        <a class="tests_slider_item mx-2 d-block text-decoration-none">
-                            <div class="tests_slider_item_icon my-2">
-                                <i class="fa-solid fa-flask-vial"></i>
-                            </div>
-                            <span class="tests_slider_item_title d-block mt-3">Naturopathic Tests5</span>
-                        </a>
-                        <!-- Item -->
-                        <a class="tests_slider_item mx-2 d-block text-decoration-none">
-                            <div class="tests_slider_item_icon my-2">
-                                <i class="fa-solid fa-flask-vial"></i>
-                            </div>
-                            <span class="tests_slider_item_title d-block mt-3">Naturopathic Tests6</span>
-                        </a>
+                        }
+                  
+                        <!--End-->
                     </div>
                 </div>
 
                 <!-- Slider Display -->
                 <div class="tests_sliderFor ">
-                    <!-- Slide Item  -->
-                    <div>
-                        <div class="row tests_content px-lg-5 mt-4"
+
+                    @foreach (var service in Model.Services)
+                    {
+                        <!-- Slide Item  -->
+                        <div>
+                            <div class="row tests_content px-lg-5 mt-4"
                              style="
-                    background-image: url('Assets/Images/bg-department.png');
+                    background-image: url('../../wwwroot/Assets/Images/bg-department.png');
                   ">
-                            <div class="tests_content_image col-lg-6">
-                                <div class="tests_content_image_holder">
-                                    <img src="/Assets/Images/index-img-01-2.jpg"
-                                         alt=""
+                                <div class="tests_content_image col-lg-6">
+                                    <div class="tests_content_image_holder">
+                                        <img src="~/Assets/Uploads/Services/@service.ImageUrl"
+                                         alt="@service.Name"
                                          class="w-100 h-100" />
+                                    </div>
+                                </div>
+                                <div class="tests_content_info bg-light col-lg-6 mt-lg-0 mt-3">
+                                    <h2 class="tests_content_info_title h3">
+                                        @service.Name
+                                    </h2>
+
+                                    <p class="tests_content_info_desc">
+                                        @Html.Raw(service.DetailedDesc)
+                                 </p>
+                                    <a href="#" class="tests_content_info_button rounded-pill">Order Test</a>
                                 </div>
                             </div>
-                            <div class="tests_content_info bg-light col-lg-6 mt-lg-0 mt-3">
-                                <h2 class="tests_content_info_title h3">
-                                    Molecular Testing & Oncology 1
-                                </h2>
-
-                                <p class="tests_content_info_desc">
-                                    Our comprehensive and highly sensitive and specific range
-                                    of tests can detect genetic alterations that drive tumor
-                                    growth in all types of cancer. We are highly experienced
-                                    in characterizing mechanisms of action of targeted
-                                    therapies, particularly against epidermal growth factor
-                                    receptor (EGFR), as well as other tyrosine kinase
-                                    inhibitors. We perform:
-                                </p>
-
-                                <ul>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Mutation analysis in tumor tissue and blood
-                                    </li>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Gene amplification and translocation testing
-                                    </li>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Immunohistochemistry (IHC)
-                                    </li>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Gene expression
-                                    </li>
-                                </ul>
-
-                                <a href="#" class="tests_content_info_button rounded-pill">Order Test</a>
-                            </div>
                         </div>
-                    </div>
-
-                    <!-- Slide Item  -->
-                    <div>
-                        <div class="row tests_content px-lg-5 mt-4"
-                             style="
-                    background-image: url('Assets/Images/bg-department.png');
-                  ">
-                            <div class="tests_content_image col-lg-6">
-                                <div class="tests_content_image_holder">
-                                    <img src="/Assets/Images/index-img-01-5.jpg"
-                                         alt=""
-                                         class="w-100 h-100" />
-                                </div>
-                            </div>
-                            <div class="tests_content_info col-lg-6 mt-lg-0 mt-3">
-                                <h2 class="tests_content_info_title h3">
-                                    Molecular Testing & Oncology 2
-                                </h2>
-
-                                <p class="tests_content_info_desc">
-                                    Our comprehensive and highly sensitive and specific range
-                                    of tests can detect genetic alterations that drive tumor
-                                    growth in all types of cancer. We are highly experienced
-                                    in characterizing mechanisms of action of targeted
-                                    therapies, particularly against epidermal growth factor
-                                    receptor (EGFR), as well as other tyrosine kinase
-                                    inhibitors. We perform:
-                                </p>
-
-                                <ul>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Mutation analysis in tumor tissue and blood
-                                    </li>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Gene amplification and translocation testing
-                                    </li>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Immunohistochemistry (IHC)
-                                    </li>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Gene expression
-                                    </li>
-                                </ul>
-
-                                <a href="#" class="tests_content_info_button rounded-pill">Order Test</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide Item  -->
-                    <div>
-                        <div class="row tests_content px-lg-5 mt-4"
-                             style="
-                    background-image: url('Assets/Images/bg-department.png');
-                  ">
-                            <div class="tests_content_image col-lg-6">
-                                <div class="tests_content_image_holder">
-                                    <img src="/Assets/Images/index-img-01-5.jpg"
-                                         alt=""
-                                         class="w-100 h-100" />
-                                </div>
-                            </div>
-                            <div class="tests_content_info col-lg-6 mt-lg-0 mt-3">
-                                <h2 class="tests_content_info_title h3">
-                                    Molecular Testing & Oncology 3
-                                </h2>
-
-                                <p class="tests_content_info_desc">
-                                    Our comprehensive and highly sensitive and specific range
-                                    of tests can detect genetic alterations that drive tumor
-                                    growth in all types of cancer. We are highly experienced
-                                    in characterizing mechanisms of action of targeted
-                                    therapies, particularly against epidermal growth factor
-                                    receptor (EGFR), as well as other tyrosine kinase
-                                    inhibitors. We perform:
-                                </p>
-
-                                <ul>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Mutation analysis in tumor tissue and blood
-                                    </li>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Gene amplification and translocation testing
-                                    </li>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Immunohistochemistry (IHC)
-                                    </li>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Gene expression
-                                    </li>
-                                </ul>
-
-                                <a href="#" class="tests_content_info_button rounded-pill">Order Test</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide Item  -->
-                    <div>
-                        <div class="row tests_content px-lg-5 mt-4"
-                             style="
-                    background-image: url('Assets/Images/bg-department.png');
-                  ">
-                            <div class="tests_content_image col-lg-6">
-                                <div class="tests_content_image_holder">
-                                    <img src="/Assets/Images/index-img-01-3.jpg"
-                                         alt=""
-                                         class="w-100 h-100" />
-                                </div>
-                            </div>
-                            <div class="tests_content_info col-lg-6 mt-lg-0 mt-3">
-                                <h2 class="tests_content_info_title h3">
-                                    Molecular Testing & Oncology 4
-                                </h2>
-
-                                <p class="tests_content_info_desc">
-                                    Our comprehensive and highly sensitive and specific range
-                                    of tests can detect genetic alterations that drive tumor
-                                    growth in all types of cancer. We are highly experienced
-                                    in characterizing mechanisms of action of targeted
-                                    therapies, particularly against epidermal growth factor
-                                    receptor (EGFR), as well as other tyrosine kinase
-                                    inhibitors. We perform:
-                                </p>
-
-                                <ul>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Mutation analysis in tumor tissue and blood
-                                    </li>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Gene amplification and translocation testing
-                                    </li>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Immunohistochemistry (IHC)
-                                    </li>
-                                    <li>
-                                        <i class="las la-check-square"></i>
-                                        Gene expression
-                                    </li>
-                                </ul>
-
-                                <a href="#" class="tests_content_info_button rounded-pill">Order Test</a>
-                            </div>
-                        </div>
-                    </div>
+                    }
+              
 
                     <!-- END -->
                 </div>
@@ -399,7 +147,7 @@
     </section>
     <!-- Featured Doctors -->
     <section id="Doctors_Section" class="py-5 ">
-        <span class="sectionName text-center d-block mb-2">Perfect Team</span>
+        <span class="sectionName text-center d-block mb-5">Perfect Team</span>
         <div class="sectionTitle">
             <h2 class="h1 position-relative text-center double-title text-dark title_underlined"
                 data-title="Professional ">
@@ -407,7 +155,7 @@
             </h2>
         </div>
 
-        <div class="doctor_search col-8 col-sm-6 col-md-4 col-lg-3">
+        <div class="doctor_search col-8 col-sm-6 col-md-4 col-lg-3 d-none">
             <div class="input-group my-5 ">
                 <input type="text"
                        class="form-control "
@@ -418,143 +166,46 @@
             </div>
         </div>
 
-        <div class="doctors">
+        <div class="doctors mt-5 pt-3">
             <div class="container">
                 <div class="doctorSlider d-flex px-lg-5">
-                    <!-- slide -->
-                    <div class="doctor_box mx-3  bg-light pb-3">
-                        <div class="doctor_box_photo position-relative">
-                            <a href="#" class="d-block w-100 h-100">
-                                <img src="Assets/Uploads/Doctors/doctor-01.jpg" alt="" />
-                            </a>
-                            <div class="doctor_box_photo_links bg-light position-absolute">
-                                <div class="p-2 text-center">
-                                    <a href="#" class="text-decoration-none text-base">
-                                        <i class="fa-brands fa-facebook-f"></i>
-                                    </a>
-                                </div>
-                                <div class="p-2 text-center">
-                                    <a href="#" class="text-decoration-none text-base">
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </a>
-                                </div>
-                                <div class="p-2 text-center">
-                                    <a href="#" class="text-decoration-none text-base">
-                                        <i class="fa-brands fa-twitter"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="doctor_box_footer">
-                            <h5 class="doctor_box_footer_name text-center my-3">
-                                <a href="#">Dr. Robert Rush</a>
-                            </h5>
-                            <div class="doctor_box_footer_position text-center">
-                                Psychiatrist
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- slide -->
-                    <div class="doctor_box mx-3 bg-light pb-3">
-                        <div class="doctor_box_photo position-relative">
-                            <a href="#" class="d-block w-100 h-100">
-                                <img src="Assets/Uploads/Doctors/doctor-02.jpg" alt="" />
-                            </a>
-                            <div class="doctor_box_photo_links bg-light position-absolute">
-                                <div class="p-2 text-center">
-                                    <a href="#" class="text-decoration-none text-base">
-                                        <i class="fa-brands fa-facebook-f"></i>
-                                    </a>
+                    @foreach (var doctor in Model.Doctors)
+                    {
+                        <!-- slide -->
+                        <div class="doctor_box mx-3  bg-light pb-3">
+                            <div class="doctor_box_photo position-relative">
+                                <a asp-action="details" asp-controller="doctor" asp-route-id="@doctor.Id" class="d-block w-100 h-100">
+                                    <img src="~/Assets/Uploads/Doctors/@doctor.ImageUrl" alt="@doctor.Fullname" />
+                                </a>
+                                <div class="doctor_box_photo_links bg-light position-absolute">
+                                    <div class="p-2 text-center">
+                                        <a href="@doctor.Facebook" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-facebook-f"></i>
+                                        </a>
+                                    </div>
+                                    <div class="p-2 text-center">
+                                        <a href="@doctor.Instagram" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-instagram"></i>
+                                        </a>
+                                    </div>
+                                    <div class="p-2 text-center">
+                                        <a href="@doctor.Twitter" class="text-decoration-none text-base">
+                                            <i class="fa-brands fa-twitter"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="p-2 text-center">
-                                    <a href="#" class="text-decoration-none text-base">
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </a>
-                                </div>
-                                <div class="p-2 text-center">
-                                    <a href="#" class="text-decoration-none text-base">
-                                        <i class="fa-brands fa-twitter"></i>
-                                    </a>
+                            </div>
+                            <div class="doctor_box_footer">
+                                <h5 class="doctor_box_footer_name text-center my-3">
+                                    <a asp-action="details" asp-controller="doctor" asp-route-id="@doctor.Id">@doctor.Fullname</a>
+                                </h5>
+                                <div class="doctor_box_footer_position text-center">
+                                   @doctor.Positon
                                 </div>
                             </div>
                         </div>
-                        <div class="doctor_box_footer">
-                            <h5 class="doctor_box_footer_name text-center my-3">
-                                <a href="#">Dr. Robert Rush</a>
-                            </h5>
-                            <div class="doctor_box_footer_position text-center">
-                                Psychiatrist
-                            </div>
-                        </div>
-                    </div>
-                    <!-- slide -->
-                    <div class="doctor_box mx-3 bg-light pb-3">
-                        <div class="doctor_box_photo position-relative">
-                            <a href="#" class="d-block w-100 h-100">
-                                <img src="Assets/Uploads/Doctors/doctor-03.jpg" alt="" />
-                            </a>
-                            <div class="doctor_box_photo_links bg-light position-absolute">
-                                <div class="p-2 text-center">
-                                    <a href="#" class="text-decoration-none text-base">
-                                        <i class="fa-brands fa-facebook-f"></i>
-                                    </a>
-                                </div>
-                                <div class="p-2 text-center">
-                                    <a href="#" class="text-decoration-none text-base">
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </a>
-                                </div>
-                                <div class="p-2 text-center">
-                                    <a href="#" class="text-decoration-none text-base">
-                                        <i class="fa-brands fa-twitter"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="doctor_box_footer">
-                            <h5 class="doctor_box_footer_name text-center my-3">
-                                <a href="#">Dr. Robert Rush</a>
-                            </h5>
-                            <div class="doctor_box_footer_position text-center">
-                                Psychiatrist
-                            </div>
-                        </div>
-                    </div>
-                    <!-- slide -->
-                    <div class="doctor_box mx-3 bg-light pb-3">
-                        <div class="doctor_box_photo position-relative">
-                            <a href="#" class="d-block w-100 h-100">
-                                <img src="Assets/Uploads/Doctors/doctor-04.jpg" alt="" />
-                            </a>
-                            <div class="doctor_box_photo_links bg-light position-absolute">
-                                <div class="p-2 text-center">
-                                    <a href="#" class="text-decoration-none text-base">
-                                        <i class="fa-brands fa-facebook-f"></i>
-                                    </a>
-                                </div>
-                                <div class="p-2 text-center">
-                                    <a href="#" class="text-decoration-none text-base">
-                                        <i class="fa-brands fa-instagram"></i>
-                                    </a>
-                                </div>
-                                <div class="p-2 text-center">
-                                    <a href="#" class="text-decoration-none text-base">
-                                        <i class="fa-brands fa-twitter"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="doctor_box_footer">
-                            <h5 class="doctor_box_footer_name text-center my-3">
-                                <a href="#">Dr. Robert Rush</a>
-                            </h5>
-                            <div class="doctor_box_footer_position text-center">
-                                Psychiatrist
-                            </div>
-                        </div>
-                    </div>
-
+                    }
                     <!-- END -->
                 </div>
             </div>
@@ -573,51 +224,23 @@
                     </div>
 
                     <ul class="">
-                        <!-- blog -->
-                        <li class="blogs_item my-2 row">
-                            <div class="blogs_item_photo">
-                                <img src="Assets/Uploads/Doctors/doctor-02.jpg" alt="" />
-                            </div>
-                            <div class="blogs_item col pe-5">
-                                <span class="blogs_item_info_date">Mar 12 2020</span>
-                                <p class="blogs_item_info_title">
-                                    <a href="" class="text-decoration-none">
-                                        Biochemical Receptor Reverses Bone Degradation Caused
-                                        by Osteoporosis
-                                    </a>
-                                </p>
-                            </div>
-                        </li>
-                        <!-- blog -->
-                        <li class="blogs_item my-2 row">
-                            <div class="blogs_item_photo">
-                                <img src="Assets/Uploads/Doctors/doctor-02.jpg" alt="" />
-                            </div>
-                            <div class="blogs_item col pe-5">
-                                <span class="blogs_item_info_date">Mar 12 2020</span>
-                                <p class="blogs_item_info_title">
-                                    <a href="" class="text-decoration-none">
-                                        Biochemical Receptor Reverses Bone Degradation Caused
-                                        by Osteoporosis
-                                    </a>
-                                </p>
-                            </div>
-                        </li>
-                        <!-- blog -->
-                        <li class="blogs_item my-2 row">
-                            <div class="blogs_item_photo">
-                                <img src="Assets/Uploads/Doctors/doctor-02.jpg" alt="" />
-                            </div>
-                            <div class="blogs_item col pe-5">
-                                <span class="blogs_item_info_date">Mar 12 2020</span>
-                                <p class="blogs_item_info_title">
-                                    <a href="" class="text-decoration-none">
-                                        Biochemical Receptor Reverses Bone Degradation Caused
-                                        by Osteoporosis
-                                    </a>
-                                </p>
-                            </div>
-                        </li>
+                        @foreach (var blog in Model.RecentBlogs)
+                        {
+                            <!-- blog -->
+                            <li class="blogs_item my-2 row">
+                                <div class="blogs_item_photo">
+                                    <img src="~/Assets/Uploads/Blogs/@blog.ImageUrl" alt="@blog.Title" />
+                                </div>
+                                <div class="blogs_item col pe-5">
+                                    <span class="blogs_item_info_date">Mar 12 2020</span>
+                                    <p class="blogs_item_info_title">
+                                        <a asp-action="details" asp-controller="blog" asp-route-id="@blog.Id" class="text-decoration-none">
+                                           @blog.Title
+                                        </a>
+                                    </p>
+                                </div>
+                            </li>
+                        }
 
                         <!-- END -->
                     </ul>
@@ -633,30 +256,30 @@
                     </div>
 
                     <div class="achievements_photo">
-                        <img src="Assets/Images/banner-right.jpg" alt="" class="w-100" />
+                        <img src="~/Assets/Images/banner-right.jpg" alt="" class="w-100" />
                     </div>
 
 
                     <div class="achievements_counter bg-base text-light d-flex p-3">
                         <div class="achievements_counter_1 col-4 text-center">
                             <p class="achievements_counter_number mb-0">
-                                <span class="counter "> 150</span> <sup class="">K</sup>
+                                <span class="counter "> @Model.AppointmentCount</span> <sup class="">K</sup>
                             </p>
-                            <p class="achievements_counter_title mb-0 text-center">Tests Performed</p>
+                            <p class="achievements_counter_title mb-0 text-center">Online Meeting</p>
                         </div>
 
                         <div class="achievements_counter_2 col-4 text-center">
                             <p class="achievements_counter_number mb-0">
-                                <span class="counter "> 250</span> <sup class="">+</sup>
+                                <span class="counter "> @Model.DoctorCount</span> <sup class="">+</sup>
                             </p>
                             <p class="achievements_counter_title mb-0 text-center">Permanent Staff</p>
                         </div>
 
                         <div class="achievements_counter_3 col-4 text-center">
                             <p class="achievements_counter_number mb-0">
-                                <span class="counter "> 50</span> <sup class="">+</sup>
+                                <span class="counter "> @Model.ServiceCount</span> <sup class="">+</sup>
                             </p>
-                            <p class="achievements_counter_title mb-0 text-center">Suppliers</p>
+                            <p class="achievements_counter_title mb-0 text-center">Services</p>
                         </div>
                     </div>
                 </div>
@@ -670,8 +293,8 @@
                 <div class="appointment_form col-lg-6">
                     <div class="sectionTitle mt-5">
                         <h2 class="h1 position-relative text-center text-dark double-title"
-                            data-title="Appointment">
-                            Make an <span class="text-base">Appointment</span>
+                            data-title="Contact">
+                            Get In Touch  <span class="text-base">With Us</span>
                         </h2>
                     </div>
 
@@ -679,36 +302,10 @@
                         We believe in providing the best possible care to all our
                         existing patients and welcome new patients to sample.
                     </p>
-                    <form action="" class="d-flex flex-column gap-3 mt-5">
-                        <input type="text"
-                               class="form-control w-100"
-                               placeholder="Your Fullname*" />
-                        <div class="row ">
-                            <div class="col-sm-6">
-                                <input type="text"
-                                       class="form-control"
-                                       placeholder="Your phone*" />
-                            </div>
-                            <div class="col-sm-6 mt-3 mt-sm-0">
-                                <input type="email"
-                                       class="form-control"
-                                       placeholder="Your Email*" />
-                            </div>
-                        </div>
-                        <textarea name=""
-                                  id=""
-                                  cols="30"
-                                  rows="4"
-                                  class="form-control"
-                                  placeholder="Message"></textarea>
-                        <button type="submit"
-                                class="appointment_form_submit rounded-pill align-self-center mt-4">
-                            Send Request
-                        </button>
-                    </form>
+                  @await Html.PartialAsync("_ContactMessageFormPartial", Model.ContactMesssageVm)
                 </div>
                 <div class="appointment_photo col-lg-6 d-lg-block d-none">
-                    <img src="Assets/Images/banner-appointment.png" alt="" />
+                    <img src="~/Assets/Images/banner-appointment.png" alt="" />
                 </div>
             </div>
         </div>
@@ -734,8 +331,8 @@
         <!-- ========================= Custom =============================== -->
 
         <!-- Slick Settings -->
-        <script type="module" src="Assets/Js/slider.js"></script>
+        <script type="module" src="~/Assets/Js/slider.js"></script>
  
         <!-- Counter -->
-        <script src="Assets/Js/counter.js"></script>
+        <script src="~/Assets/Js/counter.js"></script>
 }

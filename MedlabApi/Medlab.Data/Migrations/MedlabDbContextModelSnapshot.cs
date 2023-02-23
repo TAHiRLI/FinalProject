@@ -224,6 +224,50 @@ namespace Medlab.Data.Migrations
                     b.ToTable("BlogCategories");
                 });
 
+            modelBuilder.Entity("Medlab.Core.Entities.ContactMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("ContactMessages");
+                });
+
             modelBuilder.Entity("Medlab.Core.Entities.Department", b =>
                 {
                     b.Property<int>("Id")
@@ -551,6 +595,11 @@ namespace Medlab.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<string>("DetailedDesc")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
                     b.Property<string>("Icon")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -672,6 +721,9 @@ namespace Medlab.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("IsFeatured")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -862,6 +914,16 @@ namespace Medlab.Data.Migrations
                     b.Navigation("Doctor");
                 });
 
+            modelBuilder.Entity("Medlab.Core.Entities.ContactMessage", b =>
+                {
+                    b.HasOne("Medlab.Core.Entities.AppUser", "AppUser")
+                        .WithMany("ContactMessages")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("Medlab.Core.Entities.Doctor", b =>
                 {
                     b.HasOne("Medlab.Core.Entities.Department", "Department")
@@ -1002,6 +1064,8 @@ namespace Medlab.Data.Migrations
             modelBuilder.Entity("Medlab.Core.Entities.AppUser", b =>
                 {
                     b.Navigation("BasketItems");
+
+                    b.Navigation("ContactMessages");
 
                     b.Navigation("DoctorAppointments");
 

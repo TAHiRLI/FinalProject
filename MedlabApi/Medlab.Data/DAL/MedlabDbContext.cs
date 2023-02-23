@@ -30,6 +30,7 @@ namespace Medlab.Data.DAL
         public DbSet<ProductReview> ProductReviews { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<DoctorAppointment> DoctorAppointments { get; set; }
+        public DbSet<ContactMessage> ContactMessages { get; set; }
 
 
         //===================

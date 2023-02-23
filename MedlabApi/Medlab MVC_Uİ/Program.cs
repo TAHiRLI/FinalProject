@@ -109,6 +109,7 @@ builder.Services.AddScoped<ISliderRepository, SliderRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IValueRepository, ValueRepository>();
 builder.Services.AddScoped<IAmenityImageRepository, AmenityImageRepository>();
+builder.Services.AddScoped<IContactMessageRepository, ContactMessageRepository>();
 
 //Doctor
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();

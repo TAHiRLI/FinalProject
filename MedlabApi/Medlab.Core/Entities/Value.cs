@@ -11,5 +11,6 @@ namespace Medlab.Core.Entities
         public string Name { get; set; }
         public string Icon { get; set; }
         public string Desc { get; set; }
+        public bool IsFeatured { get; set; }
     }
 }

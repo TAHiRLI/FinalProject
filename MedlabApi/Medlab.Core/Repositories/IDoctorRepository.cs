@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Medlab.Core.Repositories
 {
-    public interface IDoctorRepository:IEntityRepository<Doctor>
+    public interface IDoctorRepository:EntityRepository<Doctor>
     {
         Doctor? GetDoctor(int id);
     }

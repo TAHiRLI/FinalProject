@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Medlab.Core.Repositories
 {
-    public interface IProductRepository:IEntityRepository<Product>
+    public interface IProductRepository:EntityRepository<Product>
     {
         Task<Product?> GetProductForDetails(int id);
     }

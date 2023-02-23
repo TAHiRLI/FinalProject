@@ -26,7 +26,7 @@
                         @foreach (var item in Model.BasketItems)
                         {
                             <!-- Item -->
-                        <div class="cart-product_item my-3  p-4 row position-relative">
+                        <div class="cart-product_item my-3  p-4 row position-relative bg-light">
                             <div class="cart-product_item_photo d-flex align-items-center justify-content-center mb-3 mb-md-0 col-sm-3 p-0">
                                 <img  src="~/Assets/Uploads/Products/@item.Product.ProductImages.FirstOrDefault(x=> x.IsMain).ImageUrl" alt="@item.Product.Name" class="">
                             </div>

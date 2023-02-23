@@ -20,6 +20,8 @@ namespace Medlab.Data.Configurations
                 .HasMaxLength(500);
             builder.Property(x => x.ImageUrl).IsRequired(true)
                 .HasMaxLength(200);
+            builder.Property(x => x.DetailedDesc).IsRequired(true)
+                .HasMaxLength(1000);
             builder.Property(x => x.Icon).IsRequired(true)
                 .HasMaxLength(100);
             

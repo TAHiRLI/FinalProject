@@ -11858,6 +11858,7 @@ footer .copyright a:hover {
   border-radius: 4px;
   text-align: center;
   transition: 0.3s;
+  height:170px;
 }
 .tests_slider_item_icon i {
   transition: 0.3s;

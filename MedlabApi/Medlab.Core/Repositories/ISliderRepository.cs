@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Medlab.Core.Repositories
 {
 
-    public interface ISliderRepository:IEntityRepository<Slider>
+    public interface ISliderRepository:EntityRepository<Slider>
     {
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Medlab.Core.Repositories
 {
-    public interface IBasketItemRepository:IEntityRepository<BasketItem>
+    public interface IBasketItemRepository:EntityRepository<BasketItem>
     {
         List<BasketItem> GetBasketItemsWithProduct();
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Medlab.Core.Repositories
 {
-    public interface ITagRepository:IEntityRepository<Tag>
+    public interface ITagRepository:EntityRepository<Tag>
     {
     }
 }

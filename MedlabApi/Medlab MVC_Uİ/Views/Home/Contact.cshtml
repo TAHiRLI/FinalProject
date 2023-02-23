@@ -1,7 +1,4 @@
-﻿
-@{
-    ViewData["Title"] = "Contact";
-}
+﻿@model ContactViewModel
 
 <!-- Bread crumb -->
 <div class="breadCrumb p-3 bg-light">
@@ -12,7 +9,7 @@
 
 <main>
     <section id="Contact-info_Section" class="">
-        <iframe src="https://maps.google.com/maps?q=40.37729659248599, 49.85392148513519&hl=es;z=14&amp;output=embed"
+        <iframe src="https://maps.google.com/maps?q=@Model.Setting["latitude"],@Model.Setting["longitude"]&hl=es;z=14&amp;output=embed"
                 width="100%"
                 height="400"
                 style="border: 0"
@@ -28,7 +25,7 @@
                             <i class="fa-solid fa-location-dot text-base"></i>
                         </div>
                         <p class="col ps-3">
-                            DentCo Dental Clinic 1560 Holden Street San Diego, CA 92139
+                          @Model.Setting["location"]
                         </p>
                     </div>
                 </div>
@@ -39,7 +36,7 @@
                             <i class="fa-solid fa-phone text-base"></i>
                         </div>
                         <div class="col ps-3">
-                            Phone: <span class="text-base">+994 77 547 49 48</span>
+                            Phone: <span class="text-base">  @Model.Setting["phone"]</span>
                         </div>
                     </div>
                     <div class="d-flex">
@@ -47,7 +44,7 @@
                             <i class="fa-solid fa-envelope text-base"></i>
                         </div>
                         <div class="col ps-3">
-                            tahirlitahirr@gmail.com
+                            @Model.Setting["email"]
                         </div>
                     </div>
                 </div>
@@ -60,15 +57,15 @@
                         <div class="col">
                             <div class="d-flex justify-content-between w-100">
                                 <span>Mon-Thu</span>
-                                <span class="text-base">08:00 - 20:00</span>
+                                <span class="text-base">   @Model.Setting["mon-thu"]</span>
                             </div>
                             <div class="d-flex justify-content-between w-100">
                                 <span>Friday</span>
-                                <span class="text-base">07:00 - 22:00</span>
+                                <span class="text-base">   @Model.Setting["friday"]</span>
                             </div>
                             <div class="d-flex justify-content-between w-100">
                                 <span>Saturday</span>
-                                <span class="text-base">08:00 - 18:00</span>
+                                <span class="text-base">   @Model.Setting["saturday"]</span>
                             </div>
                         </div>
 
@@ -92,30 +89,22 @@
                     <h5 class="my-4">Stay Connected</h5>
 
                     <div class="links d-flex">
-                        <a href="#" class="links_link d-flex align-items-center justify-content-center bg-light mx-1 link-base text-decoration-none">
+                        <a href="@Model.Setting["gmail"]" class="links_link d-flex align-items-center justify-content-center bg-light mx-1 link-base text-decoration-none">
                             <i class="fa-brands fa-google"></i>
                         </a>
-                        <a href="#" class="links_link d-flex align-items-center justify-content-center bg-light mx-1 link-base text-decoration-none">
+                        <a href="@Model.Setting["instagram"]" class="links_link d-flex align-items-center justify-content-center bg-light mx-1 link-base text-decoration-none">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
-                        <a href="#" class="links_link d-flex align-items-center justify-content-center bg-light mx-1 link-base text-decoration-none">
+                        <a href="@Model.Setting["facebook"]" class="links_link d-flex align-items-center justify-content-center bg-light mx-1 link-base text-decoration-none">
                             <i class="fa-brands fa-facebook"></i>
                         </a>
-                        <a href="#" class="links_link d-flex align-items-center justify-content-center bg-light mx-1 link-base text-decoration-none">
+                        <a href="@Model.Setting["twitter"]" class="links_link d-flex align-items-center justify-content-center bg-light mx-1 link-base text-decoration-none">
                             <i class="fa-brands fa-twitter"></i>
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-7">
-                    <form action="">
-
-                        <input type="text" class="form-control " placeholder="Your fullname">
-                        <input type="email" class="form-control " placeholder="Email">
-                        <input type="text" class="form-control " placeholder="Your phone">
-                        <textarea name="" id="" class="form-control" placeholder="Message"></textarea>
-
-                        <button class="submitBtn rounded-pill mt-4">Send Message</button>
-                    </form>
+                  @await Html.PartialAsync("_ContactMessageFormPartial", Model.ContactMesssageVm)
                 </div>
             </div>
         </div>
