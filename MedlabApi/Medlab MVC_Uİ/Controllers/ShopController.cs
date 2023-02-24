@@ -19,6 +19,11 @@ namespace Medlab_MVC_Uİ.Controllers
             this._productCategoryRepository = productCategoryRepository;
             this._productRepository = productRepository;
         }
+
+        //=======================
+        // Index view
+        //=======================
+
         public IActionResult Index(
             int? page = 1,
              int pageSize = 6,

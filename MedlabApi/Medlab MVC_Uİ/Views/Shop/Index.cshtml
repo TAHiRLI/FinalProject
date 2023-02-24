@@ -86,8 +86,8 @@
                                 Price: <span class="amount">$@ViewBag.selectedMin.ToString("0.##") - $@ViewBag.selectedMax.ToString("0.##")</span>
                             </p>
 
-                            <input type="hidden" class="minPrice" name="minPrice" />
-                            <input type="hidden" class="maxPrice" name="maxPrice" />
+                            <input type="hidden" class="minPrice" name="minPrice" value="@ViewBag.selectedMin" />
+                            <input type="hidden" class="maxPrice" name="maxPrice" value="@ViewBag.selectedMax" />
                             <div class="price-slider"></div>
                         </div>
                         <hr />

@@ -81,6 +81,16 @@ $(document).on("click", ".x-btn", function (e) {
         })
         .catch(error => {
             console.log(error)
+
+        })
+        .finally(() => {
+            let infolink = "/basket/getbasketinfo"
+            fetch(infolink)
+                .then(res => res.json())
+                .then(data => {
+                    $(".cartCount").html(data.count)
+                    console.log(data)
+                })
         })
         
 
@@ -244,6 +254,15 @@ $(document).on("click", ".addToCartWithCount", function (e) {
             })
             .catch(error => {
                 console.log(error)
+            })
+            .finally(() => {
+                let infolink = "/basket/getbasketinfo"
+                fetch(infolink)
+                    .then(res => res.json())
+                    .then(data => {
+                        $(".cartCount").html(data.count)
+                        console.log(data)
+                    })
             })
 
     }
