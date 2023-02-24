@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Medlab.Core.Repositories
 {
-    public interface EntityRepository<TEntity>
+    public interface IEntityRepository<TEntity>
     {
         Task AddAsync(TEntity eentity);
         IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> exp, params string[] Includings);

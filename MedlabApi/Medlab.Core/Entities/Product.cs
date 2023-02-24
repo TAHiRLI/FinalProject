@@ -29,5 +29,6 @@ namespace Medlab.Core.Entities
         public List<ProductTag> ProductTags { get; set; } = new List<ProductTag>();
         public List<ProductReview> ProductReviews { get; set; } = new List<ProductReview>();    
         public List<BasketItem> BasketItems { get; set; } = new List<BasketItem>();
+        public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }
 }

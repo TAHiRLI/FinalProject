@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using AutoMapper.Execution;
-using FluentValidation;
 using Medlab.Core.Entities;
 using Medlab.Core.Repositories;
 using Medlab.Data.DAL;
 using Medlab_MVC_Uİ.Helpers;
 using Medlab_MVC_Uİ.ViewModels;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -30,8 +27,20 @@ namespace Medlab_MVC_Uİ.Controllers
         private readonly IWebHostEnvironment _env;
         private readonly IDoctorAppointmentRepository _doctorAppointmentRepository;
         private readonly IDoctorRepository _doctorRepository;
+        private readonly IOrderRepository _orderRepository;
+        private readonly IProductRepository _productRepository;
 
-        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IMapper mapper, MedlabDbContext context, IWebHostEnvironment env, IDoctorAppointmentRepository doctorAppointmentRepository, IDoctorRepository doctorRepository)
+        public AccountController(
+            SignInManager<AppUser> signInManager,
+            UserManager<AppUser> userManager,
+            MedlabDbContext context, 
+            IMapper mapper,
+            IWebHostEnvironment env,
+            IDoctorAppointmentRepository doctorAppointmentRepository,
+            IDoctorRepository doctorRepository,
+            IOrderRepository orderRepository,
+            IProductRepository productRepository
+            )
         {
             this._signInManager = signInManager;
             this._userManager = userManager;
@@ -40,7 +49,14 @@ namespace Medlab_MVC_Uİ.Controllers
             _env = env;
             _doctorAppointmentRepository = doctorAppointmentRepository;
             _doctorRepository = doctorRepository;
+            _orderRepository = orderRepository;
+            _productRepository = productRepository;
         }
+
+        //======================
+        // Login
+        //======================
+
         public IActionResult Login(string? ReturnUrl = null)
         {
             ViewBag.ReturnUrl = ReturnUrl;
@@ -100,8 +116,9 @@ namespace Medlab_MVC_Uİ.Controllers
             return RedirectToAction("index", "home");
         }
 
-
+        //======================
         // Google Login
+        //======================
         public IActionResult GoogleLogin()
         {
             string redirectUrl = Url.Action("GoogleResponse", "Account");
@@ -150,7 +167,9 @@ namespace Medlab_MVC_Uİ.Controllers
         }
 
 
+        //======================
         // facebook login
+        //======================
         [AllowAnonymous]
         public IActionResult FacebookLogin()
         {
@@ -199,10 +218,13 @@ namespace Medlab_MVC_Uİ.Controllers
 
 
 
+        //======================
         // Register
+        //======================
         public IActionResult Register()
         {
             return View();
+        //======================
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -260,7 +282,9 @@ namespace Medlab_MVC_Uİ.Controllers
         }
 
 
+        //======================
         // Profile
+        //======================
         [Authorize(Roles = "Member, Visitor")]
         public async Task<IActionResult> Profile()
         {
@@ -271,6 +295,12 @@ namespace Medlab_MVC_Uİ.Controllers
             ProfileViewModel model = new ProfileViewModel();
             model.EditProfileViewModel = _mapper.Map<EditProfileViewModel>(user);
             model.DoctorAppointments = _doctorAppointmentRepository.GetAppointmentsIncludingUsers(x => x.AppUserId == user.Id).OrderByDescending(x=> x.MeetingDate).Take(20).ToList();
+            model.Orders = _orderRepository.GetOrdersWithProducts(user.Id);
+            model.UserPhoto = $"Users/{user.ImageUrl}";
+            model.Fullname = user.Fullname;
+            // Getting user Orders
+
+
             if (user.PasswordHash == null)
                 model.EditProfileViewModel.IsExternalUser = true;
 
@@ -283,6 +313,7 @@ namespace Medlab_MVC_Uİ.Controllers
                     return NotFound();
 
                 model.Doctor = doctor;
+                model.UserPhoto =$"DoCtors/{doctor.ImageUrl}" ;
             }
 
             return View(model);
@@ -301,6 +332,8 @@ namespace Medlab_MVC_Uİ.Controllers
             model.EditProfileViewModel = ProfileVm;
             model.EditProfileViewModel.ImageUrl = user.ImageUrl;
             model.DoctorAppointments = _doctorAppointmentRepository.GetAppointmentsIncludingUsers(x => x.AppUserId == user.Id).OrderByDescending(x => x.MeetingDate).Take(20).ToList(); ;
+            model.Orders = _orderRepository.GetOrdersWithProducts(user.Id);
+
             if (user.PasswordHash == null)
                 model.EditProfileViewModel.IsExternalUser = true;
 
@@ -429,7 +462,9 @@ namespace Medlab_MVC_Uİ.Controllers
         }
 
 
+        //======================
         // Functions
+        //======================
         public void SendMail(string To, string subject, string message)
         {
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);

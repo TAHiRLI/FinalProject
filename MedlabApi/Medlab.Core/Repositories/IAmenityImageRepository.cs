@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Medlab.Core.Repositories
 {
-    public interface IAmenityImageRepository:EntityRepository<AmenityImage>
+    public interface IAmenityImageRepository:IEntityRepository<AmenityImage>
     {
     }
 }

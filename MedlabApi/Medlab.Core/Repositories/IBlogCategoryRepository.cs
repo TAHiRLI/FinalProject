@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Medlab.Core.Repositories
 {
-    public interface IBlogCategoryRepository:EntityRepository<BlogCategory>
+    public interface IBlogCategoryRepository:IEntityRepository<BlogCategory>
     {
     }
 }

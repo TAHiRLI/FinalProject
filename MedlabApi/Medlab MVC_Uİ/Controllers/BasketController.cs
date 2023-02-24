@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 
 namespace Medlab_MVC_Uİ.Controllers
@@ -16,17 +17,31 @@ namespace Medlab_MVC_Uİ.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
         private readonly IBasketItemRepository _basketItemRepository;
+        private readonly IOrderRepository _orderRepository;
 
-        public BasketController(IProductRepository productRepository, UserManager<AppUser> userManager, IMapper mapper, IBasketItemRepository basketItemRepository)
+        public BasketController(
+            IProductRepository productRepository, 
+            UserManager<AppUser> userManager,
+            IMapper mapper, 
+            IBasketItemRepository basketItemRepository,
+            IOrderRepository orderRepository
+            
+            )
         {
             _productRepository = productRepository;
             _userManager = userManager;
             _mapper = mapper;
             _basketItemRepository = basketItemRepository;
+            _orderRepository = orderRepository;
         }
+
+
+        //=======================
+        // Index View
+        //=======================
         public async Task<IActionResult> Index()
         {
-            AppUser user = null;
+            AppUser? user = null;
             if (User.Identity.IsAuthenticated)
                 user = await _userManager.FindByNameAsync(User.Identity.Name);
 
@@ -236,7 +251,7 @@ namespace Medlab_MVC_Uİ.Controllers
 
         public async Task<ObjectResult> GetBasketInfo()
         {
-            AppUser user = null;
+            AppUser? user = null;
             if (User.Identity.IsAuthenticated)
                 user = await _userManager.FindByNameAsync(User.Identity.Name);
 
@@ -285,6 +300,117 @@ namespace Medlab_MVC_Uİ.Controllers
                 Count = BasketVm.BasketItems.Count()
             };
             return Ok(BasketInfo);
+        }
+
+
+        //=======================
+        // Order form view
+        //=======================
+        public async Task<IActionResult> Order()
+        {
+            OrderViewModel model = new OrderViewModel();
+            if(User.Identity.IsAuthenticated)
+            {
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                if (user == null)
+                    return NotFound();
+                model.Fullname = user.Fullname;
+                model.Email = user.Email;
+                model.PhoneNumber = user.PhoneNumber;
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Order(OrderViewModel OrderVm)
+        {
+            if (!ModelState.IsValid)
+                return View(OrderVm);
+
+
+            Order NewOrder = new Order
+            {
+                Fullname = OrderVm.Fullname,
+                Email = OrderVm.Email,
+                PhoneNumber = OrderVm.PhoneNumber,
+                ZipCode = OrderVm.ZipCode,
+                Address1 = OrderVm.Address1,
+                Address2 = OrderVm.Address2,
+                Note = OrderVm.Note,
+
+            };
+
+
+            if(User.Identity.IsAuthenticated && User.IsInRole("Member"))
+            {
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                if (user == null)
+                    return NotFound();
+
+                NewOrder.AppUserId = user.Id;
+                NewOrder.Email = user.Email;
+                NewOrder.PhoneNumber = user.PhoneNumber;
+
+                List<BasketItem> basketItems = _basketItemRepository.GetAll(x => x.AppUserId == user.Id, "Product").ToList();
+
+                foreach (var item in basketItems)
+                {
+                    OrderItem orderItem = new OrderItem
+                    {
+                        ProductId = item.ProductId,
+                        Name = item.Product.Name,
+                        SalePrice = item.Product.SalePrice,
+                        CostPrice = item.Product.CostPrice,
+                        DiscountPercent = item.Product.DiscoutPercent,
+                        Count = item.Count
+                    };
+                    NewOrder.OrderItems.Add(orderItem);
+                    _basketItemRepository.Delete(item);
+
+                }
+                
+                _basketItemRepository.Commit();
+            }
+            else
+            {
+                List<BasketCookieViewModel> BasketCookieItems = new List<BasketCookieViewModel>();
+
+                var basket = HttpContext.Request.Cookies["Basket"];
+                if (basket != null)
+                    BasketCookieItems = JsonConvert.DeserializeObject<List<BasketCookieViewModel>>(basket);
+
+                foreach (var item in BasketCookieItems)
+                {
+                    Product cookieProduct = await _productRepository.GetAsync(x => x.Id == item.ProductId);
+
+                    if(cookieProduct!= null)
+                    {
+
+                        OrderItem orderItem = new OrderItem
+                        {
+                            ProductId = cookieProduct.Id,
+                            Name = cookieProduct.Name,
+                            SalePrice = cookieProduct.SalePrice,
+                            CostPrice = cookieProduct.CostPrice,
+                            DiscountPercent = cookieProduct.DiscoutPercent,
+                            Count = item.Count
+                        };
+                        NewOrder.OrderItems.Add(orderItem);
+                    }
+                }
+
+                BasketCookieItems = new List<BasketCookieViewModel>();
+
+                HttpContext.Response.Cookies.Append("Basket", JsonConvert.SerializeObject(BasketCookieItems));
+
+            }
+            await _orderRepository.AddAsync(NewOrder);
+
+            await _orderRepository.CommitAsync();
+            
+            return  RedirectToAction("index" , "Home");
         }
     }
 }

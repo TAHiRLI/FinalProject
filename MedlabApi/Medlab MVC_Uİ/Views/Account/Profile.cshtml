@@ -12,9 +12,9 @@
 <main class="position-relative">
     <section id="User-profile_Section" class="">
         <div class="user-greeting  position-relative">
-            <p class="h1 text-center text-light fs-1">Hi, Tahir Tahirli</p>
+            <p class="h1 text-center text-light fs-1">Hi, @Model.Fullname</p>
             <div class="user-greeting_user-photo position-absolute">
-                <img src="~/Assets/Uploads/Users/DEFAULT-USER.jpg" alt="" class="" />
+                <img src="~/Assets/Uploads/@Model.UserPhoto" alt="" class="" />
             </div>
         </div>
         <div class="container py-5">
@@ -157,134 +157,41 @@
                          tabindex="0">
                         <div class="container">
                             <div class="cart-products">
-                                <!-- Item -->
+                                @foreach (var order in Model.Orders)
+                                {
+                                    foreach (var orderItem in order.OrderItems)
+                                    {
+                                            <!-- Item -->
                                 <div class="cart-product_item bgi my-3 p-2  row position-relative">
                                     <div class="cart-product_item_photo d-flex align-items-center justify-content-center col-md-2 mb-3 mb-md-0 p-0">
-                                        <img src="~/Assets/Uploads/Products/prd-4.jpg"
-                                             alt=""
+                                        <img src="~/Assets/Uploads/Products/@orderItem?.Product?.ProductImages?.FirstOrDefault(x=> x.IsMain)?.ImageUrl"
+                                             alt="@orderItem?.Name"
                                              class="" />
                                     </div>
                                     <div class="cart-product_item_info col-md-10">
                                         <h3 class="cart-product-title fw-semibold h5">
-                                            <a href="" class="link-base text-decoration-none">
-                                                Activated Charcoal Teeth Whitening Toothpaste MINT
-                                                Flavor
+                                            <a asp-action="details" asp-controller="product" asp-route-id="@orderItem?.ProductId" class="link-base text-decoration-none">
+                                                @orderItem?.Name
                                             </a>
 
                                         </h3>
-                                        <p class="text-decoration-line-through m-0">$112.2</p>
+                                                <p class="text-decoration-line-through m-0">$@orderItem?.SalePrice</p>
                                         <p class="my-1 cart-product-price text-base">
-                                            $68.5 / 4
+                                                    $@((orderItem?.SalePrice * (100 - @orderItem?.DiscountPercent)/100)?.ToString("0.00"))
                                         </p>
-                                        <p class="mb-0">17.05.2022</p>
-                                        <p class="mb-0">Azerbaijan , baku</p>
-                                        <p class="mb-0">Suraxanı Nizami 12b</p>
-                                        <p class="mb-0">Aze4115</p>
+                                                <p class="mb-0">@order.CreatedAt.ToString("dddd, dd MMMM yyyy")</p>
+                                        <p class="mb-0">@order.Address1</p>
+                                        <p class="mb-0">@order.ZipCode</p>
+                                        <div>Status: <div class="badge @(order.OrderStatus == true?"bg-success": order.OrderStatus == false?"bg-danger":"bg-warning")">
+                                                        @(order.OrderStatus == true ? "Approved" : order.OrderStatus == false ? "Rejected" : "Pending")
+                                        </div> </div>
                                     </div>
                                 </div>
-                                <!-- Item -->
-                                <div class="cart-product_item my-3 p-2 row position-relative">
-                                    <div class="cart-product_item_photo d-flex align-items-center justify-content-center col-md-2 mb-3 mb-md-0 p-0">
-                                        <img src="~/Assets/Uploads/Products/prd-4.jpg"
-                                             alt=""
-                                             class="" />
-                                    </div>
-                                    <div class="cart-product_item_info col-md-10">
-                                        <h3 class="cart-product-title fw-semibold h5">
-                                            <a href="" class="link-base text-decoration-none">
-                                                Activated Charcoal Teeth Whitening Toothpaste MINT
-                                                Flavor
-                                            </a>
-
-                                        </h3>
-                                        <p class="text-decoration-line-through m-0">$112.2</p>
-                                        <p class="my-1 cart-product-price text-base">
-                                            $68.5 / 4
-                                        </p>
-                                        <p class="mb-0">17.05.2022</p>
-                                        <p class="mb-0">Azerbaijan , baku</p>
-                                        <p class="mb-0">Suraxanı Nizami 12b</p>
-                                        <p class="mb-0">Aze4115</p>
-                                    </div>
-                                </div>
-                                <!-- Item -->
-                                <div class="cart-product_item my-3 p-2 row position-relative">
-                                    <div class="cart-product_item_photo d-flex align-items-center justify-content-center col-md-2 mb-3 mb-md-0 p-0">
-                                        <img src="~/Assets/Uploads/Products/prd-4.jpg"
-                                             alt=""
-                                             class="" />
-                                    </div>
-                                    <div class="cart-product_item_info col-md-10">
-                                        <h3 class="cart-product-title fw-semibold h5">
-                                            <a href="" class="link-base text-decoration-none">
-                                                Activated Charcoal Teeth Whitening Toothpaste MINT
-                                                Flavor
-                                            </a>
-
-                                        </h3>
-                                        <p class="text-decoration-line-through m-0">$112.2</p>
-                                        <p class="my-1 cart-product-price text-base">
-                                            $68.5 / 4
-                                        </p>
-                                        <p class="mb-0">17.05.2022</p>
-                                        <p class="mb-0">Azerbaijan , baku</p>
-                                        <p class="mb-0">Suraxanı Nizami 12b</p>
-                                        <p class="mb-0">Aze4115</p>
-                                    </div>
-                                </div>
-                                <!-- Item -->
-                                <div class="cart-product_item my-3 p-2 row position-relative">
-                                    <div class="cart-product_item_photo d-flex align-items-center justify-content-center col-md-2 mb-3 mb-md-0 p-0">
-                                        <img src="~/Assets/Uploads/Products/prd-4.jpg"
-                                             alt=""
-                                             class="" />
-                                    </div>
-                                    <div class="cart-product_item_info col-md-10">
-                                        <h3 class="cart-product-title fw-semibold h5">
-                                            <a href="" class="link-base text-decoration-none">
-                                                Activated Charcoal Teeth Whitening Toothpaste MINT
-                                                Flavor
-                                            </a>
-
-                                        </h3>
-                                        <p class="text-decoration-line-through m-0">$112.2</p>
-                                        <p class="my-1 cart-product-price text-base">
-                                            $68.5 / 4
-                                        </p>
-                                        <p class="mb-0">17.05.2022</p>
-                                        <p class="mb-0">Azerbaijan , baku</p>
-                                        <p class="mb-0">Suraxanı Nizami 12b</p>
-                                        <p class="mb-0">Aze4115</p>
-                                    </div>
-                                </div>
-                                <!-- Item -->
-                                <div class="cart-product_item my-3 p-2 row position-relative">
-                                    <div class="cart-product_item_photo d-flex align-items-center justify-content-center col-md-2 mb-3 mb-md-0 p-0">
-                                        <img src="~/Assets/Uploads/Products/prd-4.jpg"
-                                             alt=""
-                                             class="" />
-                                    </div>
-                                    <div class="cart-product_item_info col-md-10">
-                                        <h3 class="cart-product-title fw-semibold h5">
-                                            <a href="" class="link-base text-decoration-none">
-                                                Activated Charcoal Teeth Whitening Toothpaste MINT
-                                                Flavor
-                                            </a>
-
-                                        </h3>
-                                        <p class="text-decoration-line-through m-0">$112.2</p>
-                                        <p class="my-1 cart-product-price text-base">
-                                            $68.5 / 4
-                                        </p>
-                                        <p class="mb-0">17.05.2022</p>
-                                        <p class="mb-0">Azerbaijan , baku</p>
-                                        <p class="mb-0">Suraxanı Nizami 12b</p>
-                                        <p class="mb-0">Aze4115</p>
-                                    </div>
-                                </div>
-
-
-
+                      
+                                    }
+                                    
+                                }
+                            
                                 <!-- End -->
                             </div>
                         </div>
@@ -390,7 +297,6 @@
     <!-- ========================= CDNs =============================== -->
     <!-- Bootsrap js -->
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map"></script>
 
     <script>
         connection.on("setAsOnline", userId => {

@@ -31,6 +31,9 @@ namespace Medlab.Data.DAL
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<DoctorAppointment> DoctorAppointments { get; set; }
         public DbSet<ContactMessage> ContactMessages { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+
 
 
         //===================

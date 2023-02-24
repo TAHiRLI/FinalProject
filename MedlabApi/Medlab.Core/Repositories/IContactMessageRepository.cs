@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Medlab.Core.Repositories
 {
-    public interface IContactMessageRepository:EntityRepository<ContactMessage>
+    public interface IContactMessageRepository:IEntityRepository<ContactMessage>
     {
     }
 }

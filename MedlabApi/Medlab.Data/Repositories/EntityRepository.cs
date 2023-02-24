@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Medlab.Data.Repositories
 {
-    public class EntityRepository<TEntity> : Core.Repositories.EntityRepository<TEntity> where TEntity : class
+    public class EntityRepository<TEntity> : Core.Repositories.IEntityRepository<TEntity> where TEntity : class
     {
         private readonly MedlabDbContext _context;
 

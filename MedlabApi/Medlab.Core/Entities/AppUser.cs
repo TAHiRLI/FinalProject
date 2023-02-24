@@ -17,6 +17,7 @@ namespace Medlab.Core.Entities
         public List<BasketItem> BasketItems { get; set; } = new List<BasketItem>();
         public List<DoctorAppointment> DoctorAppointments { get; set; } = new List<DoctorAppointment>();
         public List<ContactMessage> ContactMessages { get; set; } = new List<ContactMessage>();
+        public List<Order> Orders { get; set; } = new List<Order>();
 
         public int? DoctorId { get; set; }
         public Doctor? Doctor { get; set; }

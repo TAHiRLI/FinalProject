@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Medlab.Core.Repositories
 {
-    public interface IProductReviewRepository:EntityRepository<ProductReview>
+    public interface IProductReviewRepository:IEntityRepository<ProductReview>
     {
     }
 }

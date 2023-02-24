@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Medlab.Core.Repositories
 {
-    public interface IDoctorAppointmentRepository:EntityRepository<DoctorAppointment>
+    public interface IDoctorAppointmentRepository:IEntityRepository<DoctorAppointment>
     {
         List<DoctorAppointment> GetAppointmentsIncludingUsers(Expression<Func<DoctorAppointment, bool>> exp);
     }

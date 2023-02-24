@@ -1,0 +1,91 @@
+﻿
+@model OrderViewModel
+<!-- Bread crumb -->
+
+<div class="breadCrumb p-3 bg-light">
+    <p class="container mb-0 px-5">
+        <a asp-action="index" asp-controller="home" >Home</a>/<a href="#">Profile</a>
+    </p>
+</div>
+
+<main>
+    <section id="Payment_Section" class="py-5">
+        <span class="sectionName text-center d-block">Trusted Delivery</span>
+        <div class="sectionTitle mb-5">
+            <h2 class="h1 position-relative text-center text-dark title_underlined"
+                data-title="Services">
+                Delivery Information
+            </h2>
+        </div>
+        <div class="container">
+            <p class="text-center">
+                Online Payment for Patients. For your convenience MedLab now offers
+                the ability to make a secure payment online. <br />
+                Fill out the form below to pay your MedLab bill online.
+            </p>
+            <div class="">
+                <form asp-action="order" method="post" class="col-xl-6 col-lg-8 m-auto">
+                    <div class="my-3">
+                        <label class="form-label fs-09" asp-for="Fullname">Fullname<sup>*</sup></label>
+                        <input class="form-control fs-09" asp-for="Fullname" type="text" value="Tahir Tahirli" />
+                        <span class="fs-09 text-danger" asp-validation-for="Fullname"></span>
+                    </div>
+                    <div class="my-3">
+                        <label class="form-label fs-09" asp-for="Email">Email<sup>*</sup></label>
+                        <input
+                            asp-for="Email"
+                            readonly="@(User.Identity.IsAuthenticated)"
+                            class="form-control fs-09"
+                               type="email"
+                               placeholder="yourEmail@example.com" />
+                        <span class="fs-09 text-danger" asp-validation-for="Email"></span>
+
+                    </div>
+                    <div class="my-3 row">
+                        <div class="col-md-6">
+                            <label class="form-label fs-09"asp-for="PhoneNumber">Phone<sup>*</sup></label>
+                            <input
+                                readonly="@(User.Identity.IsAuthenticated)"
+                                   asp-for="PhoneNumber"
+                                class="form-control fs-09"
+                                   type="text"
+                                   placeholder="+111 123 45 67" />
+                            <span class="fs-09 text-danger" asp-validation-for="PhoneNumber"></span>
+
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fs-09" asp-for="ZipCode">Zip Code<sup>*</sup></label>
+                            <input class="form-control fs-09" asp-for="ZipCode" type="text" value="" />
+                            <span class="fs-09 text-danger" asp-validation-for="ZipCode"></span>
+
+                        </div>
+                    </div>
+                    <div class="my-3">
+                        <label class="form-label fs-09" asp-for="Address1">Address 1<sup>*</sup></label>
+                        <input class="form-control fs-09" type="text" asp-for="Address1" placeholder="City, street" />
+                        <span class="fs-09 text-danger" asp-validation-for="Address1"></span>
+                    </div>
+                    <div class="my-3">
+                        <label class="form-label fs-09"asp-for="Address2">Address 2</label>
+                        <input class="form-control fs-09" type="text" asp-for="Address2" placeholder="City, street" />
+                        <span class="fs-09 text-danger" asp-validation-for="Address2"></span>
+
+                    </div>
+
+                    <div class="my-3">
+                        <label class="form-label fs-09" asp-for="Note">Note</label>
+                        <textarea asp-for="Note"
+                                  cols="30"
+                                  rows="4"
+                                  placeholder="Message"
+                                  class="form-control fs-09"></textarea>
+                        <span class="fs-09 text-danger" asp-validation-for="Note"></span>
+                    </div>
+
+                    <button class="my-custom-btn rounded-pill m-auto mt-4">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
