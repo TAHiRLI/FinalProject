@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Dynamic;
 using Microsoft.AspNetCore.Http;
 using Medlab_MVC_Uİ.Hubs;
+using Microsoft.Build.Framework;
 
 
 
@@ -104,13 +105,13 @@ builder.Services.AddAuthentication()
 builder.Services.AddScoped<LayoutService>();
 
 //General
-builder.Services.AddScoped<ISettingRepository, SettingRepository>();
+builder.Services.AddScoped<IValueRepository, ValueRepository>();
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
-builder.Services.AddScoped<IValueRepository, ValueRepository>();
+builder.Services.AddScoped<ISettingRepository, SettingRepository>();
+builder.Services.AddScoped<ISubscriptionRepostiory, SubscriptionRepository>();
 builder.Services.AddScoped<IAmenityImageRepository, AmenityImageRepository>();
 builder.Services.AddScoped<IContactMessageRepository, ContactMessageRepository>();
-
 //Doctor
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
@@ -172,7 +173,7 @@ app.MapControllerRoute(
 app.Run();
 
 
-
+// Notes for frequent usage 
 
 // Cli Commands
 // cd Medlab.Data

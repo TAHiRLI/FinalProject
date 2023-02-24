@@ -1,0 +1,43 @@
+﻿@model ContactMesssageViewModel
+
+<form asp-action="SendContactRequest" asp-controller="home" class="d-flex flex-column gap-3 mt-5">
+    <input asp-for="FullName" type="text"
+           class="form-control w-100"
+           placeholder="Your Fullname*" />
+           <span class="fs-09 text-danger" asp-validation-for="FullName"></span>
+    <div class="row ">
+        <div class="col-sm-6">
+            <input
+                asp-for="PhoneNumber"
+                   readonly="@(User.Identity.IsAuthenticated)"
+                 type="text"
+                   class="form-control"
+                   placeholder="Your phone*" />
+            <span class="fs-09 text-danger" asp-validation-for="PhoneNumber"></span>
+
+        </div>
+        <div class="col-sm-6 mt-3 mt-sm-0">
+            <input
+                asp-for="Email"
+                   readonly="@(User.Identity.IsAuthenticated)"
+                   type="email"
+                   class="form-control"
+                   placeholder="Your Email*" />
+            <span class="fs-09 text-danger" asp-validation-for="Email"></span>
+
+        </div>
+    </div>
+    <textarea
+        asp-for="Message"
+              cols="30"
+              rows="4"
+              class="form-control"
+              placeholder="Message"></textarea>
+    <span class="fs-09 text-danger" asp-validation-for="Message"></span>
+
+    <div class="fs-09 text-danger" asp-validation-summary="ModelOnly"></div>
+    <button type="submit"
+            class="appointment_form_submit rounded-pill align-self-center mt-4">
+        Send Request
+    </button>
+</form>

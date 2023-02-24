@@ -1,6 +1,5 @@
 ﻿@using Medlab_MVC_Uİ.Services
 
-
 @inject LayoutService _layoutService
 @{
     var setting = _layoutService.GetSetting();
@@ -48,7 +47,7 @@
     <title>Medlab</title>
 </head>
 <body id="indexPage"
-      style="background-image: url('../Assets/Images/bg-bottom-right.png')">
+      style="background-image: url('../../Assets/Images/bg-bottom-right.png')">
     <!-- Navbar Main  -->
     <nav class="navbar py-3 bg-light">
         <div class="navbar_container px-xl-5 px-lg-2 mx-xl-3 mx-lg-1">
@@ -341,13 +340,18 @@
                 </div>
                 <div class="col-lg-12 col-md-6 col-sm-12">
                     <div class="footerWrap_info_input mt-sm-3 mt-lg-0">
-                        <form action="" class="">
-                            <input type="text"
+                        <form  asp-action="Subscribe" asp-controller="home" id="subscription-form" method="post" class="">
+                            <input
+                                  max="50"
+                                   name ="Email"
+                                   type="email"
                                    placeholder="Your Email"
                                    class="form-control" />
-                            <i class="fa-solid fa-envelope"></i>
+                           <i  onclick="document.forms['subscription-form'].submit()" class="fa-solid fa-envelope"></i>
                         </form>
+
                     </div>
+                        <span class="fs-09 text-danger">@TempData["ErrorMessage"]</span>
                     <div class="footerWrap_info_social d-flex">
                         <a href="@setting["gmail"]" class="footerWrap_info_social_link">
                             <i class="fa-brands fa-google"></i>

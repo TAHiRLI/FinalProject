@@ -33,6 +33,7 @@ namespace Medlab.Data.DAL
         public DbSet<ContactMessage> ContactMessages { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
 
 
 
