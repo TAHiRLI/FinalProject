@@ -438,10 +438,21 @@ namespace Medlab_MVC_Uİ.Controllers
             model.EditProfileViewModel.ImageUrl = user.ImageUrl;
             model.DoctorAppointments = _doctorAppointmentRepository.GetAppointmentsIncludingUsers(x => x.AppUserId == user.Id).OrderByDescending(x => x.MeetingDate).Take(20).ToList(); ;
             model.Orders = _orderRepository.GetOrdersWithProducts(user.Id);
-
+            model.UserPhoto = $"Users/{user.ImageUrl}";
+            model.Fullname = user.Fullname;
             if (user.PasswordHash == null)
                 model.EditProfileViewModel.IsExternalUser = true;
 
+            if (User.IsInRole("Doctor"))
+            {
+                int doctorId = user.DoctorId ?? 0;
+                var doctor = _doctorRepository.GetDoctor(doctorId);
+                if (doctor == null)
+                    return NotFound();
+
+                model.Doctor = doctor;
+                model.UserPhoto = $"DoCtors/{doctor.ImageUrl}";
+            }
             if (!ModelState.IsValid)
             {
                 return View(model);

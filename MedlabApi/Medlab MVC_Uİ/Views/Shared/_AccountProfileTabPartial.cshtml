@@ -33,28 +33,37 @@
 
     <form id="profile-edit-form" asp-action="profile" method="post" asp-controller="account" class="row" enctype="multipart/form-data">
         <div class="col-md-6 d-flex flex-column align-items-center">
-            <div class="my-3">
-                <label class="form-label" asp-for="Fullname">Fullname</label>
-                <input asp-for="Fullname" class="form-control user-input"
-                       disabled
-                       type="text" />
-                <span class="fs-09 text-danger" asp-validation-for="Fullname"></span>
+            <div class="my-3 d-flex flex-column align-items-center">
+                <div>
+                    <label class="form-label" asp-for="Fullname">Fullname</label>
+                    <input asp-for="Fullname" class="form-control user-input"
+                           disabled
+                           type="text" />
+                </div>
+                <span class="fs-09 text-danger w-50 d-block m-auto" asp-validation-for="Fullname"></span>
             </div>
-            <div class="my-3">
-                <label class="form-label" asp-for="Email">Email</label>
-                <input asp-for="Email" class="form-control user-input"
-                       disabled
-                       type="email" />
-                <span class="fs-09 text-danger" asp-validation-for="Email"></span>
+            <div class="my-3 d-flex flex-column align-items-center">
+                <div>
+
+                    <label class="form-label" asp-for="Email">Email</label>
+                    <input asp-for="Email" class="form-control user-input"
+                           disabled
+                           type="email" />
+                </div>
+                <span class="fs-09 text-danger w-50 d-block m-auto" asp-validation-for="Email"></span>
 
             </div>
-            <div class="my-3">
-                <label class="form-label" asp-for="PhoneNumber">Phone</label>
-                <input asp-for="PhoneNumber" class="form-control user-input"
-                       disabled
-                       type="text"
-                       placeholder="+994 77 5474948" />
-                <span class="fs-09 text-danger" asp-validation-for="PhoneNumber"></span>
+            <div class="my-3 d-flex flex-column align-items-center">
+                <div>
+
+
+                    <label class="form-label" asp-for="PhoneNumber">Phone</label>
+                    <input asp-for="PhoneNumber" class="form-control user-input"
+                           disabled
+                           type="text"
+                           placeholder="+994 77 5474948" />
+                </div>
+                <span class="fs-09 text-danger w-50 d-block m-auto" asp-validation-for="PhoneNumber"></span>
 
             </div>
             @if (!Model.IsExternalUser)
@@ -63,38 +72,53 @@
             }
         </div>
         <div class="col-md-6 d-flex flex-column align-items-center">
-            <div class="my-3">
-                <label class="form-label" asp-for="UserName">Username</label>
-                <input asp-for="UserName" class="form-control user-input"
-                       disabled
-                       type="text" />
-                <span class="fs-09 text-danger" asp-validation-for="UserName"></span>
+            <div class="my-3 d-flex flex-column align-items-center">
+                <div>
+
+
+                    <label class="form-label" asp-for="UserName">Username</label>
+                    <input asp-for="UserName" class="form-control user-input"
+                           disabled
+                           type="text" />
+                </div>
+                <span class="fs-09 text-danger w-50 d-block m-auto" asp-validation-for="UserName"></span>
 
             </div>
             @if (!Model.IsExternalUser)
             {
 
-                <div class="my-3">
+                <div class="my-3 d-flex flex-column align-items-center">
+                    <div>
+
+
                     <label class="form-label" asp-for="Password">Password</label>
                     <input asp-for="Password" class="form-control user-input"
                        disabled type="password" />
-                    <span class="fs-09 text-danger" asp-validation-for="Password"></span>
+                    </div>
+                    <span class="fs-09 text-danger w-50 d-block m-auto" asp-validation-for="Password"></span>
 
                 </div>
 
-                <div class="my-3">
+                <div class="my-3 d-flex flex-column align-items-center">
+                    <div>
+
+
                     <label class="form-label" asp-for="NewPassword">New Password</label>
                     <input asp-for="NewPassword" class="form-control user-input"
                        disabled type="password" />
-                    <span class="fs-09 text-danger" asp-validation-for="NewPassword"></span>
+                    </div>
+                    <span class="fs-09 text-danger w-50 d-block m-auto" asp-validation-for="NewPassword"></span>
 
                 </div>
 
-                <div class="my-3">
+                <div class="my-3 d-flex flex-column align-items-center">
+                    <div>
+
                     <label class="form-label" asp-for="ConfirmPassword">Confirm Password</label>
                     <input asp-for="ConfirmPassword" class="form-control user-input"
                        disabled type="password" />
-                    <span class="fs-09 text-danger" asp-validation-for="ConfirmPassword"></span>
+                    </div>
+                    <span class="fs-09 text-danger w-50 d-block m-auto" asp-validation-for="ConfirmPassword"></span>
 
                 </div>
             }
