@@ -77,6 +77,9 @@ namespace Medlab.Data.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasDefaultValue("DEFAULT-USER.jpg");
 
+                    b.Property<DateTime>("LastRequestedEmailAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 

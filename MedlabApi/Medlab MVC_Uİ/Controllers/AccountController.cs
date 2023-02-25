@@ -32,6 +32,7 @@ namespace Medlab_MVC_Uİ.Controllers
         private readonly IDoctorRepository _doctorRepository;
         private readonly IOrderRepository _orderRepository;
         private readonly IProductRepository _productRepository;
+        private readonly IConfiguration _configuration;
 
         public AccountController(
             SignInManager<AppUser> signInManager,
@@ -42,7 +43,8 @@ namespace Medlab_MVC_Uİ.Controllers
             IDoctorAppointmentRepository doctorAppointmentRepository,
             IDoctorRepository doctorRepository,
             IOrderRepository orderRepository,
-            IProductRepository productRepository
+            IProductRepository productRepository,
+            IConfiguration configuration
             )
         {
             this._signInManager = signInManager;
@@ -54,6 +56,7 @@ namespace Medlab_MVC_Uİ.Controllers
             _doctorRepository = doctorRepository;
             _orderRepository = orderRepository;
             _productRepository = productRepository;
+            _configuration = configuration;
         }
 
         //======================
@@ -574,7 +577,7 @@ namespace Medlab_MVC_Uİ.Controllers
         {
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
             smtpClient.UseDefaultCredentials = false;
-            smtpClient.Credentials = new System.Net.NetworkCredential("tahirtahirli2002@gmail.com", "lsieytvhoimyzhbi");
+            smtpClient.Credentials = new System.Net.NetworkCredential("tahirtahirli2002@gmail.com", _configuration.GetSection("GoogleAuth:AppPassword").Value);
             smtpClient.EnableSsl = true;
 
             // message
