@@ -10,9 +10,9 @@
                 <h2>Doctor: @Model.Doctor.Fullname</h2>
                 <p>Appointment ID: @Model.AppointmentId</p>
             </div>
-            <button id="hangup" class="btn btn-danger btn-block">Close</button>
-            <button id="VideoClose" class="btn btn-danger btn-block">Mic close</button>
-            <button id="MicClose" class="btn btn-danger btn-block">Video close</button>
+            <button id="hangup" class="btn btn-danger rounded-pill"><i class="fa-solid fa-phone-slash text-light"></i></button>
+            <button id="VideoClose" class="btn rounded-pill btn-dark"><i class="fa-solid fa-microphone-slash text-light"></i></button>
+            <button id="MicClose" class="btn rounded-pill btn-dark "><i class="fa-solid fa-video-slash text-light"></i></button>
         </div>
     </div>
 </div>
@@ -34,6 +34,12 @@
         let localStream = null;
         let appointmentId = "@Model.AppointmentId";
         const Peers = {};
+
+        let isAudioEnabled = true;
+        let isVideoEnabled = true;
+
+        $("#VideoClose").on("click", toggleAudio);
+        $("#MicClose").on("click", toggleVideo);
 
         const myPeer = new Peer()
 
@@ -125,7 +131,6 @@
 
         $("#hangup").on("click", ()=>{
             document.location.replace("/");
-           
         })
     
      
@@ -134,8 +139,20 @@
             await connection.invoke("SetEndTime", appointmentId);
         }
 
-
-
+        function toggleAudio() {
+            localStream.getAudioTracks().forEach(track => {
+                track.enabled = !isAudioEnabled;
+            });
+            isAudioEnabled = !isAudioEnabled;
+            $("#VideoClose").html(isAudioEnabled ? "<i class='fa-solid fa-microphone-slash text-light'></i>" : "<i class='fa-solid fa-microphone text-light'></i>");
+        }
+        function toggleVideo() {
+            localStream.getVideoTracks().forEach(track => {
+                track.enabled = !isVideoEnabled;
+            });
+            isVideoEnabled = !isVideoEnabled;
+            $("#MicClose").html(isVideoEnabled ? "<i class='fa-solid fa-video-slash text-light'></i>" : "<i class='fa-solid fa-video text-light'></i>");
+        }
 
     </script>
 

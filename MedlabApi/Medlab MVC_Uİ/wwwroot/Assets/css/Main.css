@@ -11436,7 +11436,8 @@ footer .footerWrap_contact_title::before, footer .footerWrap_blogs_title::before
 
 .video-container video:not(#myvideo){
     width:100%;
-    object-fit:contain;
+    height:80vh;
+    object-fit:cover;
 }
 #myvideo {
     position: absolute;
