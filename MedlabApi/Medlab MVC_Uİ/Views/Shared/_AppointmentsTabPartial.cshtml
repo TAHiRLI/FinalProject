@@ -18,8 +18,8 @@
                 <!-- Item -->
                 <div class=" d-flex align-items-center justify-content-between border-gray p-3 my-2">
                     <div class="">
-                        <h2 class="h5"><span class="text-decoration-none  fw-bold">User: @appointment.AppUser.Fullname</span></h2>
-                        <h2 class="h5"><span class="text-decoration-none  fw-bold">Email: @appointment.AppUser.Email</span></h2>
+                        <h2 class="h5"><span class="text-decoration-none  fw-bold">User: @appointment.AppUser?.Fullname</span></h2>
+                        <h2 class="h5"><span class="text-decoration-none  fw-bold">Email: @appointment.AppUser?.Email</span></h2>
                         <p class="appointment-date"><span class="fw-semibold">Date : </span> <span> @appointment.MeetingDate.ToString("dddd, dd MMMM yyyy HH:mm")</span></p>
                         <p>
                             <span class="fw-semibold"> Status:</span> <span class="badge @(appointment.IsApproved==true?"bg-success":appointment.IsApproved==false?"bg-danger":"bg-warning")">

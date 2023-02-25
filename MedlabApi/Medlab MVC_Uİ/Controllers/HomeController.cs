@@ -219,9 +219,12 @@ namespace Medlab_MVC_Uİ.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Subscribe(string Email)
         {
-            if (Email.Length > 50)
+            if (Email == null || Email.Length > 50)
             {
-                TempData["ErrorMessage"] = "Maximum Length is 50 characters";
+                if(Email == null)
+                    TempData["ErrorMessage"] = "Please Enter a valid Email";
+                else
+                    TempData["ErrorMessage"] = "Maximum Length is 50 characters";
                 HomeViewModel model = new HomeViewModel
                 {
                     Setting = _settingRepository.GetSettingDictionary(),

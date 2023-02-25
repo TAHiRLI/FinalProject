@@ -1,12 +1,21 @@
 ﻿@model CallRoomViewModel
 
-@*<h1>Doctor: @Model.Doctor.Fullname, Doctor UserId : @Model.Doctor.AppUser?.Id</h1>*@
-<div video-grid></div>
-<h1>@Model.AppointmentId</h1>
-<video id="localVideo" autoplay> </video>
-
-<button id="hangup" class="btn  btn-danger">Close</button>
-<button id="end" class="btn  btn-danger">end time</button>
+<div class="container position-relative">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="video-container" video-grid></div>
+        </div>
+        <div class="col-md-3">
+            <div class="appointment-info">
+                <h2>Doctor: @Model.Doctor.Fullname</h2>
+                <p>Appointment ID: @Model.AppointmentId</p>
+            </div>
+            <button id="hangup" class="btn btn-danger btn-block">Close</button>
+            <button id="VideoClose" class="btn btn-danger btn-block">Mic close</button>
+            <button id="MicClose" class="btn btn-danger btn-block">Video close</button>
+        </div>
+    </div>
+</div>
 
 
 
@@ -45,6 +54,7 @@
 
         const videoGrid = document.querySelector('[video-grid]')
         const myVideo = document.createElement("video");
+        myVideo.setAttribute("id", "myvideo")
         myVideo.muted = true;
 
         navigator.mediaDevices.getUserMedia({
@@ -117,10 +127,7 @@
             document.location.replace("/");
            
         })
-        $("#end").on("click", ()=>{
-            SetEndTIme(appointmentId)
-        })
-
+    
      
         async function SetEndTIme(appointmentId) {
 

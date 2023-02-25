@@ -11427,6 +11427,26 @@ footer .footerWrap_contact_title::before, footer .footerWrap_blogs_title::before
     -o-object-fit: contain;
     object-fit: contain;
 }
+/*Video Call*/
+
+.video-container {
+    min-height: 80vh;
+    background-color: gray;
+}
+
+.video-container video:not(#myvideo){
+    width:100%;
+    object-fit:contain;
+}
+#myvideo {
+    position: absolute;
+    width: 20%;
+    object-fit: contain;
+    left: 20px;
+    top: 20px;
+    border-radius: 20px;
+    border: 3px solid #3368c6;
+}
 
 /*Pagination custom*/
 
