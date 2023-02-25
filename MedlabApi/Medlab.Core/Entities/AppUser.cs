@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Medlab.Core.Entities
 {
-    public class AppUser:IdentityUser
+    public class AppUser : IdentityUser
     {
         public string Fullname { get; set; }
+        public DateTime LastRequestedEmailAt { get; set; }
         public string? ImageUrl { get; set; }
         public string? ConnectionId { get; set; }
         public string? PeerId { get; set; }

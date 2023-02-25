@@ -38,7 +38,7 @@
                             <label for="" class="form-label">Password</label>
                             <input asp-for="Password" type="password" placeholder="" class="form-control rounded-pill "> 
                            <span class="fs-09 d-block text-danger" asp-validation-for="Password"></span>
-                            <a href="#" class="text-decoration-none link-base"> <small>Forgot password?</small></a>  
+                            <a asp-action="forgotPassword" asp-controller="account" class="text-decoration-none link-base"> <small>Forgot password?</small></a>  
                         </div>
                         
                         <div class="">

@@ -7,13 +7,16 @@ using Medlab_MVC_Uİ.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
+using System.Security.Policy;
 
 
 namespace Medlab_MVC_Uİ.Controllers
@@ -33,7 +36,7 @@ namespace Medlab_MVC_Uİ.Controllers
         public AccountController(
             SignInManager<AppUser> signInManager,
             UserManager<AppUser> userManager,
-            MedlabDbContext context, 
+            MedlabDbContext context,
             IMapper mapper,
             IWebHostEnvironment env,
             IDoctorAppointmentRepository doctorAppointmentRepository,
@@ -224,7 +227,7 @@ namespace Medlab_MVC_Uİ.Controllers
         public IActionResult Register()
         {
             return View();
-        //======================
+            //======================
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -283,6 +286,105 @@ namespace Medlab_MVC_Uİ.Controllers
 
 
         //======================
+        // Forgot Password
+        //======================
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel PasswordVm)
+        {
+            if (!ModelState.IsValid)
+                return View(PasswordVm);
+
+
+            var user = await _userManager.FindByEmailAsync(PasswordVm.Email);
+            if (user == null)
+                return NotFound();
+
+            if(user.PasswordHash == null)
+            {
+                ModelState.AddModelError("Email", "this User Is logged in With Third Party Apps");
+                return View();
+            }
+
+            if(user.LastRequestedEmailAt.AddMinutes(1) <= DateTime.UtcNow.AddHours(4))
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var url = Url.Action("VerifyPasswordReset", "account", new { email = user.Email, token = token }, Request.Scheme);
+
+                SendMail(PasswordVm.Email, "Password Reset", $"Click <a href='{url}' >here</a> to verify your email");
+
+                user.LastRequestedEmailAt = DateTime.UtcNow.AddHours(4);
+                await _userManager.UpdateAsync(user);
+            }
+
+            return View();
+        }
+        //======================
+        // Verify password Reset
+        //======================
+
+        public async Task<IActionResult> VerifyPasswordReset(string email, string token)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null || !await _userManager.VerifyUserTokenAsync(user, _userManager.Options.Tokens.PasswordResetTokenProvider, "ResetPassword", token))
+                return NotFound();
+
+            TempData["Token"] = token;
+            TempData["Email"] = email;
+            return RedirectToAction("resetPassword");
+        }
+        //======================
+        // Reset Password
+        //======================
+        public IActionResult ResetPassword()
+        {
+            var email = TempData["Email"];
+            var token = TempData["Token"];
+
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordVeiwModel ResetVm)
+        {
+            if (ResetVm.Email == null || ResetVm.Token == null)
+                return NotFound();
+
+            if (!ModelState.IsValid)
+            {
+                TempData["Email"] = ResetVm.Email;
+                TempData["Token"] = ResetVm.Token;
+                return View();
+            }
+
+            var user = await _userManager.FindByEmailAsync(ResetVm.Email);
+
+            if (user == null)
+                return NotFound();
+            var result = await _userManager.ResetPasswordAsync(user, ResetVm.Token, ResetVm.Password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                TempData["Email"] = ResetVm.Email;
+                TempData["Token"] = ResetVm.Token;
+                return View();
+            }
+            return RedirectToAction("login");
+
+        }
+
+        //======================
         // Profile
         //======================
         [Authorize(Roles = "Member, Visitor")]
@@ -294,7 +396,7 @@ namespace Medlab_MVC_Uİ.Controllers
 
             ProfileViewModel model = new ProfileViewModel();
             model.EditProfileViewModel = _mapper.Map<EditProfileViewModel>(user);
-            model.DoctorAppointments = _doctorAppointmentRepository.GetAppointmentsIncludingUsers(x => x.AppUserId == user.Id).OrderByDescending(x=> x.MeetingDate).Take(20).ToList();
+            model.DoctorAppointments = _doctorAppointmentRepository.GetAppointmentsIncludingUsers(x => x.AppUserId == user.Id).OrderByDescending(x => x.MeetingDate).Take(20).ToList();
             model.Orders = _orderRepository.GetOrdersWithProducts(user.Id);
             model.UserPhoto = $"Users/{user.ImageUrl}";
             model.Fullname = user.Fullname;
@@ -313,7 +415,7 @@ namespace Medlab_MVC_Uİ.Controllers
                     return NotFound();
 
                 model.Doctor = doctor;
-                model.UserPhoto =$"DoCtors/{doctor.ImageUrl}" ;
+                model.UserPhoto = $"DoCtors/{doctor.ImageUrl}";
             }
 
             return View(model);
@@ -454,6 +556,9 @@ namespace Medlab_MVC_Uİ.Controllers
             return RedirectToAction("profile");
         }
 
+        //======================
+        // Log Out
+        //======================
 
         public async Task<IActionResult> Logout()
         {
