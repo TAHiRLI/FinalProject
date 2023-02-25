@@ -162,7 +162,7 @@ namespace Medlab_MVC_Uİ.Controllers
 
 
         //======================
-        // Set Appointment 
+        // Tet Availeble Tiem inverval
         //======================
 
         public IActionResult GetAvailableTime(int id, int year, int month, int day)
@@ -258,6 +258,26 @@ namespace Medlab_MVC_Uİ.Controllers
             return RedirectToAction("profile", "account");
         }
 
+
+        //======================
+        // Cancel Appointment
+        //======================
+        [Authorize(Roles ="Member")]
+        public async Task<IActionResult>  Cancel(int id)
+        {
+            var appointment = await _doctorAppointmentRepository.GetAsync(x => x.Id == id);
+            if (appointment == null)
+                return NotFound();
+
+            if (appointment.MeetingDate < DateTime.UtcNow.AddHours(4) || ( (appointment.MeetingDate - DateTime.UtcNow.AddHours(4)).TotalMinutes <60)&& appointment.IsApproved ==true)
+                return NotFound();
+
+            _doctorAppointmentRepository.Delete(appointment);
+            _doctorAppointmentRepository.Commit();
+
+            return RedirectToAction("profile", "account");
+
+        }
 
         // Custom functions
         private static List<DateTime> GetDateTimeIntervals(DateTime startTime, DateTime endTime)

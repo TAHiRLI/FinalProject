@@ -81,7 +81,7 @@
                             <a asp-action="contact" asp-controller="home" class="@getClass("Contact", "Home")"> Contact </a>
                         </li>
                         <li class="menuBox_link d-inline-block searchBox bg-light">
-                            <input class="bg-light search-input" type="text"  placeholder="Search..." />
+                            <input class="bg-light search-input" type="text" placeholder="Search..." />
                             <i class="fas fa-search"></i>
                         </li>
                     </ul>
@@ -178,19 +178,16 @@
                 </li>
             </ul>
         </div>
-         <!--Search result Box-->
-      <div
-        class="search-result bg-light  py-3 px-3 position-absolute position-bottom-right"
-      >
-        <div class="container">
-          <div id="search-holder">
-
-          </div>
+        <!--Search result Box-->
+        <div class="search-result bg-light  py-3 px-3 position-absolute position-bottom-right">
+            <div class="container">
+                <div id="search-holder">
+                </div>
+            </div>
         </div>
-      </div>
     </nav>
-       
-    
+
+
     <!--Navbar Scroll  -->
     <nav id="navbarScroll" class="navbarScroll p-1 bg-light">
         <div class="navbar_container px-xl-5 px-lg-2 mx-xl-3 mx-lg-1 m-auto">
@@ -223,7 +220,7 @@
                         <li class="menuBox_link py-3 px-xl-3 px-md-2 d-inline-block">
                             <a asp-action="contact" asp-controller="home" class="@getClass("Contact", "Home")"> Contact </a>
                         </li>
-                      
+
 
                     </ul>
                 </div>
@@ -296,7 +293,7 @@
                 <li class="mobileNav_item">
                     <a asp-action="AboutUs" asp-controller="home" class="nav-link @getClass("AboutUs", "Home")">About Us</a>
                 </li>
-                   <li class="mobileNav_item">
+                <li class="mobileNav_item">
                     <a asp-action="index" asp-controller="shop" class="nav-link @getClass("Index", "Shop")">Shop</a>
                 </li>
                 <li class="mobileNav_item">
@@ -340,18 +337,17 @@
                 </div>
                 <div class="col-lg-12 col-md-6 col-sm-12">
                     <div class="footerWrap_info_input mt-sm-3 mt-lg-0">
-                        <form  asp-action="Subscribe" asp-controller="home" id="subscription-form" method="post" class="">
-                            <input
-                                  max="50"
-                                   name ="Email"
+                        <form asp-action="Subscribe" asp-controller="home" id="subscription-form" method="post" class="">
+                            <input max="50"
+                                   name="Email"
                                    type="email"
                                    placeholder="Your Email"
                                    class="form-control" />
-                           <i  onclick="document.forms['subscription-form'].submit()" class="fa-solid fa-envelope"></i>
+                            <i onclick="document.forms['subscription-form'].submit()" class="fa-solid fa-envelope"></i>
                         </form>
 
                     </div>
-                        <span class="fs-09 text-danger">@TempData["ErrorMessage"]</span>
+                    <span class="fs-09 text-danger">@TempData["ErrorMessage"]</span>
                     <div class="footerWrap_info_social d-flex">
                         <a href="@setting["gmail"]" class="footerWrap_info_social_link">
                             <i class="fa-brands fa-google"></i>
@@ -372,26 +368,26 @@
             <div class="footerWrap_blogs">
                 <p class="footerWrap_blogs_title">Blogs</p>
 
-                    @foreach (var blog in Blogs)
+                @foreach (var blog in Blogs)
                 {
-                                    <!-- Blog -->
-                <div class="footerWrap_blogs_item row align-items-center">
-                    <div class="footerWrap_blogs_item_imageWrapper">
-                        <img src="~/Assets/Uploads/Blogs/@blog.ImageUrl"
+                    <!-- Blog -->
+                    <div class="footerWrap_blogs_item row align-items-center">
+                        <div class="footerWrap_blogs_item_imageWrapper">
+                            <img src="~/Assets/Uploads/Blogs/@blog.ImageUrl"
                              alt="@blog.Title"
                              width="50px"
                              height="50px" />
-                    </div>
-                    <div class="footerWrap_blogs_item_info col">
-                        <a asp-action="details" asp-controller="blog" asp-route-id="@blog.Id" class="blogTitle">
-                            @blog.Title
-                        </a>
+                        </div>
+                        <div class="footerWrap_blogs_item_info col">
+                            <a asp-action="details" asp-controller="blog" asp-route-id="@blog.Id" class="blogTitle">
+                                @blog.Title
+                            </a>
                             <small>@blog.CreatedAt.ToString("dddd, dd MMMM yyyy")</small>
+                        </div>
                     </div>
-                </div>
 
                 }
-        <!--End-->
+                <!--End-->
             </div>
 
             <div class="footerWrap_contact">
@@ -446,6 +442,10 @@
         </div>
     </footer>
 
+    <audio id="ringing-sound" loop>
+        <source src="~/Assets/Sounds/Ringing.mp3" type="audio/mpeg">
+    </audio>
+
     <!-- Content end -->
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -482,22 +482,33 @@
             })
 
             connection.on("RecieveRing", (id, doctorId, appointmentId) => {
-              
+
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
+                    title: 'A User Is Calling',
+                    text: "A User Is Calling For Meeting",
+                    html: '<img src="../../Assets/Images/8761-call.gif" width="80px" >',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        let link = `/meeting/${id}?doctorId=${doctorId}&&appointmentId=${appointmentId}`;
-                        location.replace(link);
+                    confirmButtonText: 'Answer',
+                    didOpen: () => {
+                        // Play the ringing sound
+                        const audio = document.getElementById('ringing-sound');
+                        audio.play();
+                    },
+                    preConfirm: () => {
+                        // Stop the ringing sound when the swal is confirmed
+                        const audio = document.getElementById('ringing-sound');
+                        audio.pause();
+                        audio.currentTime = 0;
                     }
-                })
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let link = `/meeting/${id}?doctorId=${doctorId}&&appointmentId=${appointmentId}`;
+                    location.replace(link);
+                }
             })
+                        })
 
 
         </script>

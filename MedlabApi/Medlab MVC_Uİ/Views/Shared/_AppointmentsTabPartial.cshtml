@@ -78,16 +78,16 @@
 
                             ">
                                 <i class="fa-solid fa-video mx-2"></i>
-                                <span class="d-none d-sm-inline"> Call @appointment.Id</span>
+                                <span class="d-none d-sm-inline"> Call</span>
                             </a>
                         }
-                        else if (appointment.IsApproved == null && (appointment.MeetingDate - DateTime.UtcNow.AddHours(4)).TotalMinutes > 30 && appointment.MeetingDate > DateTime.UtcNow.AddHours(4))
+                        else if (((appointment.IsApproved == null || (appointment.IsApproved == true && (appointment.MeetingDate - DateTime.UtcNow.AddHours(4)).TotalMinutes > 60)) && appointment.MeetingDate > DateTime.UtcNow.AddHours(4)))
                         {
-                            <button class="cancel-btn d-flex align-items-center">
+                            <a asp-action="cancel" asp-controller="doctor" asp-route-id="@appointment.Id" class="cancel-btn btn d-flex align-items-center">
                                 <i class="fa-solid fa-xmark mx-2"></i>
                                 <span class="d-none d-sm-inline">Cancel</span>
 
-                            </button>
+                            </a>
                         }
 
 
