@@ -12,15 +12,21 @@ namespace Medlab_MVC_Uİ.Controllers
     public class MeetingController : Controller
     {
         private readonly IDoctorRepository _doctorRepository;
+        private readonly IDoctorAppointmentRepository _doctorAppointmentRepository;
         private readonly IHubContext<MeetingHub> _hubContext;
 
-        public MeetingController(IDoctorRepository doctorRepository, IHubContext<MeetingHub> hubContext)
+        public MeetingController(IDoctorRepository doctorRepository, IDoctorAppointmentRepository doctorAppointmentRepository, IHubContext<MeetingHub> hubContext)
         {
             _doctorRepository = doctorRepository;
+            _doctorAppointmentRepository = doctorAppointmentRepository;
             _hubContext = hubContext;
         }
-        public IActionResult Index( int doctorId, int appointmentId)
+        public async Task<IActionResult>  Index( int doctorId, int appointmentId)
         {
+            var appointment = await _doctorAppointmentRepository.GetAsync(x => x.Id == appointmentId);
+            if(appointment == null )
+                return NotFound();
+
             var roomId = Guid.NewGuid().ToString();
             return RedirectToAction("Room", new { roomId = roomId, doctorId = doctorId, appointmentId = appointmentId });
         }

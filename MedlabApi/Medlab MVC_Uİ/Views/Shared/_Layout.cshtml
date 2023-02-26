@@ -481,6 +481,7 @@
                 startSignalR();
             })
 
+                        const audio = document.getElementById('ringing-sound'); 
             connection.on("RecieveRing", (id, doctorId, appointmentId) => {
 
                 Swal.fire({
@@ -493,7 +494,6 @@
                     confirmButtonText: 'Answer',
                     didOpen: () => {
                         // Play the ringing sound
-                        const audio = document.getElementById('ringing-sound');
                         audio.play();
                     },
                     preConfirm: () => {
@@ -502,15 +502,24 @@
                         audio.pause();
                         audio.currentTime = 0;
                     }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    let link = `/meeting/${id}?doctorId=${doctorId}&&appointmentId=${appointmentId}`;
-                    location.replace(link);
-                }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let link = `/meeting/${id}?doctorId=${doctorId}&&appointmentId=${appointmentId}`;
+                        location.replace(link);
+                    }
+                    else{
+                        audio.pause();
+                        audio.currentTime = 0;
+                        reject(appointmentId);
+                    }
+                })
             })
-                        })
 
 
+
+            async function reject(appointmentId){
+                await connection.invoke("RejectCall", appointmentId);
+            }
         </script>
     }
 

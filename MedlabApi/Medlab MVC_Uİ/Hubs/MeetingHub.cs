@@ -3,6 +3,7 @@ using Medlab.Core.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Medlab_MVC_Uİ.Hubs
 {
@@ -14,12 +15,16 @@ namespace Medlab_MVC_Uİ.Hubs
         private readonly IHttpContextAccessor _httpAccessor;
         private readonly UserManager<AppUser> _userManager;
         private readonly IDoctorAppointmentRepository _doctorAppointmentRepository;
+        private readonly IDoctorRepository _doctorRepository;
 
-        public MeetingHub(IHttpContextAccessor httpAccessor, UserManager<AppUser> userManager, IDoctorAppointmentRepository doctorAppointmentRepository)
+        public MeetingHub(IHttpContextAccessor httpAccessor, UserManager<AppUser> userManager,
+            IDoctorAppointmentRepository doctorAppointmentRepository,
+            IDoctorRepository doctorRepository)
         {
             _httpAccessor = httpAccessor;
             _userManager = userManager;
             _doctorAppointmentRepository = doctorAppointmentRepository;
+            _doctorRepository = doctorRepository;
         }
 
 
@@ -141,5 +146,32 @@ namespace Medlab_MVC_Uİ.Hubs
 
         }
 
+        //============================
+        // RejectCall
+        //============================
+        public async Task RejectCall(int appointmentId)
+        {
+            var appointment = await _doctorAppointmentRepository.GetAsync(x => x.Id == appointmentId, "AppUser", "Doctor");
+            if (appointment != null)
+            {
+                await Clients.Client(appointment.AppUser.ConnectionId).SendAsync("Rejected");
+            }
+
+        }
+
+        //============================
+        // RejectCall
+        //============================
+        public async Task CloseCall(string appointmentId)
+        {
+            var appointment = await _doctorAppointmentRepository.GetAsync(x => x.Id ==Int32.Parse(appointmentId) , "AppUser", "Doctor");
+            var doctor = _doctorRepository.GetDoctor(appointment.DoctorId??0);
+            
+            if (appointment != null && doctor != null)
+            {
+                await Clients.Client(appointment.AppUser.ConnectionId).SendAsync("CallClosed");
+                await Clients.Client(doctor.AppUser.ConnectionId).SendAsync("CallClosed");
+            }
+        }
     }
 }

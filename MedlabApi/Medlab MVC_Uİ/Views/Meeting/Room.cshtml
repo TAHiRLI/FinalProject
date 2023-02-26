@@ -23,7 +23,6 @@
 
 
 
-
 @section Scripts {
 
 
@@ -49,7 +48,7 @@
 
         myPeer.on('open', (id) => {
             userId = id;
-
+            console.log(userId);
             const startSignalR = async () => {
                 await connection.start();
                 await connection.invoke("JoinRoom", ROOM_ID, userId, appointmentId);
@@ -77,15 +76,14 @@
             if (userId === id) return;
             console.log(`user connected : ${id}`)
             connectNewUser(id, localStream);
-          
+
 
         })
 
         connection.on("user-disconnected", (id) => {
             console.log(`user disconnected : ${id}`);
-
             if (Peers[id])
-                Peers[id].close();
+                call.close();
         })
 
         myPeer.on("call", (call) => {
@@ -120,7 +118,7 @@
             call.on("close", () => {
                 SetEndTIme(appointmentId);
                 userVideo.remove();
-                document.location.replace("/") ;
+                document.location.replace("/");
             })
 
             Peers[userId] = call
@@ -129,14 +127,48 @@
 
         }
 
-        $("#hangup").on("click", ()=>{
-            document.location.replace("/");
+        $("#hangup").on("click", () => {
+            CloseCall(appointmentId);
         })
-    
-     
+        connection.on("Rejected", () => {
+            Swal.fire({
+                html: ` <div> <p class=" text-center h1 " style = "font-family:cursive;" > Doctor Rejected To Join</ p>
+                        <video playsinline autoplay muted loop class= "w-50 m-auto d-block" >
+                        <source src="../../Assets/Images/reject-phone-call.mp4" type = "video/mp4" />
+                        </video>
+                        </div> `,
+
+            }).then(()=>{
+                window.location.replace("/")
+            })
+        })
+
+        connection.on("CallClosed",()=>{
+
+            Swal.fire({
+                html: ` <div> <p class=" text-center h1 " style = "font-family:cursive;" >Call Ended </ p>
+                                <video playsinline autoplay muted loop class= "w-50 m-auto d-block" >
+                                        <source src="../../Assets/Images/handup.mp4" type = "video/mp4" />
+                                </video>
+                                </div> `,
+
+            }).then(() => {
+                window.location.replace("/")
+            })
+        })
+
+
+
         async function SetEndTIme(appointmentId) {
 
             await connection.invoke("SetEndTime", appointmentId);
+        }
+
+        async function CloseCall(appointmentId) {
+
+            await connection.invoke("CloseCall", appointmentId);
+            await connection.invoke("SetEndTime", appointmentId);
+
         }
 
         function toggleAudio() {

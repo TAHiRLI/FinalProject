@@ -418,7 +418,7 @@ namespace Medlab_MVC_Uİ.Controllers
                     return NotFound();
 
                 model.Doctor = doctor;
-                model.UserPhoto = $"DoCtors/{doctor.ImageUrl}";
+                model.UserPhoto = $"Doctors/{doctor.ImageUrl}";
             }
 
             return View(model);

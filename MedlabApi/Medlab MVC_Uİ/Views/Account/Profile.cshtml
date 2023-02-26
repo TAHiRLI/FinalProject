@@ -157,41 +157,56 @@
                          tabindex="0">
                         <div class="container">
                             <div class="cart-products">
-                                @foreach (var order in Model.Orders)
+                                @if (Model.Orders.Count > 0)
                                 {
-                                    foreach (var orderItem in order.OrderItems)
+
+                                    @foreach (var order in Model.Orders)
                                     {
+                                        foreach (var orderItem in order.OrderItems)
+                                        {
                                             <!-- Item -->
-                                <div class="cart-product_item bgi my-3 p-2  row position-relative">
-                                    <div class="cart-product_item_photo d-flex align-items-center justify-content-center col-md-2 mb-3 mb-md-0 p-0">
-                                        <img src="~/Assets/Uploads/Products/@orderItem?.Product?.ProductImages?.FirstOrDefault(x=> x.IsMain)?.ImageUrl"
+                                            <div class="cart-product_item bgi my-3 p-2  row position-relative">
+                                                <div class="cart-product_item_photo d-flex align-items-center justify-content-center col-md-2 mb-3 mb-md-0 p-0">
+                                                    <img src="~/Assets/Uploads/Products/@orderItem?.Product?.ProductImages?.FirstOrDefault(x=> x.IsMain)?.ImageUrl"
                                              alt="@orderItem?.Name"
                                              class="" />
-                                    </div>
-                                    <div class="cart-product_item_info col-md-10">
-                                        <h3 class="cart-product-title fw-semibold h5">
-                                            <a asp-action="details" asp-controller="product" asp-route-id="@orderItem?.ProductId" class="link-base text-decoration-none">
-                                                @orderItem?.Name
-                                            </a>
+                                                </div>
+                                                <div class="cart-product_item_info col-md-10">
+                                                    <h3 class="cart-product-title fw-semibold h5">
+                                                        <a asp-action="details" asp-controller="product" asp-route-id="@orderItem?.ProductId" class="link-base text-decoration-none">
+                                                            @orderItem?.Name
+                                                        </a>
 
-                                        </h3>
-                                                <p class="text-decoration-line-through m-0">$@orderItem?.SalePrice</p>
-                                        <p class="my-1 cart-product-price text-base">
-                                                    $@((orderItem?.SalePrice * (100 - @orderItem?.DiscountPercent)/100)?.ToString("0.00"))
-                                        </p>
-                                                <p class="mb-0">@order.CreatedAt.ToString("dddd, dd MMMM yyyy")</p>
-                                        <p class="mb-0">@order.Address1</p>
-                                        <p class="mb-0">@order.ZipCode</p>
-                                        <div>Status: <div class="badge @(order.OrderStatus == true?"bg-success": order.OrderStatus == false?"bg-danger":"bg-warning")">
-                                                        @(order.OrderStatus == true ? "Approved" : order.OrderStatus == false ? "Rejected" : "Pending")
-                                        </div> </div>
-                                    </div>
-                                </div>
-                      
+                                                    </h3>
+                                                    <p class="text-decoration-line-through m-0">$@orderItem?.SalePrice</p>
+                                                    <p class="my-1 cart-product-price text-base">
+                                                        $@((orderItem?.SalePrice * (100 - @orderItem?.DiscountPercent) / 100)?.ToString("0.00"))
+                                                    </p>
+                                                    <p class="mb-0">@order.CreatedAt.ToString("dddd, dd MMMM yyyy")</p>
+                                                    <p class="mb-0">@order.Address1</p>
+                                                    <p class="mb-0">@order.ZipCode</p>
+                                                    <div>
+                                                        Status: <div class="badge @(order.OrderStatus == true?"bg-success": order.OrderStatus == false?"bg-danger":"bg-warning")">
+                                                            @(order.OrderStatus == true ? "Approved" : order.OrderStatus == false ? "Rejected" : "Pending")
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        }
+
                                     }
-                                    
                                 }
-                            
+                                else{
+                                    <div>
+                                        <p class=" text-center h1 " style="font-family:cursive;">You Have not ordered yet</p>
+                                    <video playsinline autoplay muted loop class="w-50 m-auto d-block">
+                                        <source src="~/Assets/Images/empty-cart.mp4" type="video/mp4" />
+                                    </video>
+                                    </div>
+                                }
+
+
                                 <!-- End -->
                             </div>
                         </div>
@@ -274,7 +289,6 @@
                             <!-- END -->
                         </div>
                     </div>
-
 
                     @if (User.IsInRole("Doctor"))
                     {
