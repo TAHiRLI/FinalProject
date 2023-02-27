@@ -74,11 +74,24 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 //===================
 // 4 Custom Services
 //===================
-
 builder.Services.AddSingleton<IJwtService, JwtService>();
 builder.Services.AddScoped<ISettingRepository, SettingRepository>();
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
 
+
+//Product
+builder.Services.AddScoped<ITagRepository, TagRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductTagRepository, ProductTagRepository>();
+builder.Services.AddScoped<IBasketItemRepository, BasketItemRepository>();
+builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
+builder.Services.AddScoped<IProductReviewRepository, ProductReviewRepository>();
+builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+
+
+//Blogs
+builder.Services.AddScoped<IBlogRepostiory, BlogRepository>();
+builder.Services.AddScoped<IBlogCategoryRepository, BlogCategoryRepository>();
 
 //===================
 // 5 Swager 
@@ -150,7 +163,7 @@ builder.Services.AddCors();
 
 builder.Services.AddSingleton(provider => new MapperConfiguration(cfg =>
 {
-    cfg.AddProfile(new AdminMapper(provider.GetService<IHttpContextAccessor>()));
+    cfg.AddProfile(new AdminMapper(provider.GetService<IHttpContextAccessor>(), provider.GetService<IWebHostEnvironment>(), provider.GetService<IConfiguration>()));
 }).CreateMapper());
 
 

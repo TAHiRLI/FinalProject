@@ -27,6 +27,7 @@ namespace Medlab.Data.Configurations
                 .HasMaxLength(500);
             builder.Property(x => x.ZipCode).IsRequired(true)
                 .HasMaxLength(10);
+            builder.Property(x => x.OrderStatus).IsRequired(false);
             builder.HasOne(x=> x.AppUser).WithMany(x=> x.Orders).OnDelete(DeleteBehavior.SetNull);
 
         }

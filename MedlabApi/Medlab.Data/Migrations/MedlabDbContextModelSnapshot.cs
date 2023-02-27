@@ -454,7 +454,7 @@ namespace Medlab.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<bool>("OrderStatus")
+                    b.Property<bool?>("OrderStatus")
                         .HasColumnType("bit");
 
                     b.Property<string>("PhoneNumber")

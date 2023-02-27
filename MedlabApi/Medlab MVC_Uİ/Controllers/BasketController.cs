@@ -339,6 +339,7 @@ namespace Medlab_MVC_Uİ.Controllers
                 Address1 = OrderVm.Address1,
                 Address2 = OrderVm.Address2,
                 Note = OrderVm.Note,
+                OrderStatus = null
 
             };
 

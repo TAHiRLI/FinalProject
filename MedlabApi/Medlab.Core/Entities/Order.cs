@@ -16,7 +16,7 @@ namespace Medlab.Core.Entities
         public string PhoneNumber { get; set; }
         public string ZipCode { get; set; }
         public string? Note { get; set; }
-        public bool OrderStatus { get; set; }
+        public bool? OrderStatus { get; set; }
         public string? AppUserId { get; set; }
         public AppUser? AppUser { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow.AddHours(4);
