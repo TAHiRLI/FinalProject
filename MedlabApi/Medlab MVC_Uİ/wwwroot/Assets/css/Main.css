@@ -11227,6 +11227,18 @@ footer .footerWrap_contact_title::before, footer .footerWrap_blogs_title::before
   left: 0;
 }
 
+.position-bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.position-bottom-left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
 .fs-09 {
   font-size: 0.9rem;
 }

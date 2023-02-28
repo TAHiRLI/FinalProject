@@ -194,6 +194,26 @@ namespace Medlab_MVC_Uİ.Controllers
 
             return RedirectToAction("Profile", "Account");
         }
+        //=========================
+        // Delete
+        //=========================
+        [Authorize(Roles = "Doctor")]
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var blog = await _blogRepostiory.GetAsync(x => x.Id == id, "Doctor");
+            if (blog == null)
+                return NotFound();
+
+
+            FileManager.Delete(_env.WebRootPath, "Assets/Uploads/Blogs", blog.ImageUrl);
+
+            _blogRepostiory.Delete(blog);
+            _blogRepostiory.Commit();
+
+
+            return RedirectToAction("Profile", "Account");
+        }
 
     }
 }

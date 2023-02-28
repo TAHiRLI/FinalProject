@@ -136,10 +136,18 @@
                                                     </a>
                                                 </h3>
                                                 <p class="mb-0">@blog.PrevText</p>
+                                                <div class=" d-flex justify-content-end ">
+                                                    <a asp-action="edit" asp-controller="Blog" asp-route-id="@blog.Id" class="btn-primary btn m-1 px-2 py-1 fs-09 ">
+                                                        <i class="fas fa-pencil"></i>
+                                                    </a>
+                                                    <a asp-action="delete" asp-controller="Blog" asp-route-id="@blog.Id" class=" delete-blog btn-danger btn m-1 px-2 py-1 fs-09 ">
+                                                        <i style="pointer-events:none;" class="fas fa-trash pointer-event"></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <a asp-action="edit" asp-controller="Blog" asp-route-id="@blog.Id" class="my-custom-btn m-1 px-2 py-1 position-absolute position-top-right">
-                                                <i class="fas fa-pencil"></i>
-                                            </a>
+
+
+
                                         </div>
 
                                     }
@@ -197,12 +205,13 @@
 
                                     }
                                 }
-                                else{
+                                else
+                                {
                                     <div>
                                         <p class=" text-center h1 " style="font-family:cursive;">You Have not ordered yet</p>
-                                    <video playsinline autoplay muted loop class="w-50 m-auto d-block">
-                                        <source src="~/Assets/Images/empty-cart.mp4" type="video/mp4" />
-                                    </video>
+                                        <video playsinline autoplay muted loop class="w-50 m-auto d-block">
+                                            <source src="~/Assets/Images/empty-cart.mp4" type="video/mp4" />
+                                        </video>
                                     </div>
                                 }
 
@@ -312,6 +321,8 @@
     <!-- Bootsrap js -->
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
+
+    <!-- SignalR js -->
     <script>
         connection.on("setAsOnline", userId => {
             console.log(userId);
@@ -325,6 +336,52 @@
             $(`.call-${userId}`).addClass("btn-secondary, disabled");
 
             $(`.call-${userId}`).removeClass("call-btn");
+        })
+    </script>
+    <!-- SignalR js -->
+
+    <script>
+        $(document).on("click", ".delete-blog",(e)=> {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                  let link =   e.target.getAttribute("href");
+             
+                  fetch(link).then((res)=>{
+                      if(res.ok){
+
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            );
+                      }
+                      else{
+                            Swal.fire(
+                                'Errror!',
+                                'Something Went Wrong',
+                                'error'
+                            );
+                      }
+                  }).catch((e)=>{
+                    console.log(e);
+                  }).finally(()=>window.location.reload())
+
+
+                }
+
+            });
+
         })
     </script>
     <!-- ========================= Custom =============================== -->
