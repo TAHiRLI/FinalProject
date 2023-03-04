@@ -93,6 +93,13 @@ builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository
 builder.Services.AddScoped<IBlogRepostiory, BlogRepository>();
 builder.Services.AddScoped<IBlogCategoryRepository, BlogCategoryRepository>();
 
+//Doctors
+builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IDoctorAppointmentRepository, DoctorAppointmentRepository>();
+
+
+
 //===================
 // 5 Swager 
 //===================

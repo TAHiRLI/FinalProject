@@ -78,6 +78,7 @@ namespace MedlabApi.Controllers
                 return NotFound();
 
             review.IsApproved = true;
+            review.UpdatedAt = DateTime.UtcNow.AddHours(4);
             _productReviewRepository.Commit();
 
             var dto = _mapper.Map<ProductReviewGetDto>(review);

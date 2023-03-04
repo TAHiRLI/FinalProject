@@ -18,8 +18,11 @@ namespace Medlab.Data.Configurations
                 .HasMaxLength(300);
             builder.Property(x => x.CostPrice).IsRequired(true)
                 .HasColumnType("Decimal(18,2)");
+            builder.Property(x => x.DiscoutPercent).IsRequired(true)
+       .HasColumnType("Decimal(18,2)");
             builder.Property(x => x.SalePrice).IsRequired(true)
             .HasColumnType("Decimal(18,2)");
+          
             builder.HasOne(x => x.ProductCategory).WithMany(x => x.Products).OnDelete(DeleteBehavior.Cascade);
         }
     }

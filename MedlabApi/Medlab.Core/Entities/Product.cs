@@ -1,10 +1,4 @@
 ﻿using Medlab.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Medlab.Core.Entities
 {
@@ -15,7 +9,7 @@ namespace Medlab.Core.Entities
         public int AvgRating { get; set; }
         public decimal CostPrice { get; set; }
         public decimal SalePrice { get; set; }
-        public int DiscoutPercent { get; set; }
+        public decimal  DiscoutPercent { get; set; }
         public bool IsFeatured { get; set; }
         public bool StockStatus { get; set; }
         public bool IsSoldIndividual { get; set; }

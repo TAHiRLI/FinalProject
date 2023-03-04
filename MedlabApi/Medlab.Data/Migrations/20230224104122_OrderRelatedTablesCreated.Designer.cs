@@ -487,7 +487,7 @@ namespace Medlab.Data.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("DiscountPercent")
+                    b.Property<decimal>("DiscoutPercent")
                         .HasColumnType("Decimal(18,2)");
 
                     b.Property<string>("Name")

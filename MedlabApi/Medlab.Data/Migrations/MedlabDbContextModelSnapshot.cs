@@ -538,8 +538,8 @@ namespace Medlab.Data.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
-                    b.Property<int>("DiscoutPercent")
-                        .HasColumnType("int");
+                    b.Property<decimal>("DiscoutPercent")
+                        .HasColumnType("Decimal(18,2)");
 
                     b.Property<bool>("IsFeatured")
                         .HasColumnType("bit");
