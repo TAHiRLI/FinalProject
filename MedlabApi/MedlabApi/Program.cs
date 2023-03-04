@@ -74,9 +74,11 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 //===================
 // 4 Custom Services
 //===================
+
 builder.Services.AddSingleton<IJwtService, JwtService>();
-builder.Services.AddScoped<ISettingRepository, SettingRepository>();
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
+builder.Services.AddScoped<ISettingRepository, SettingRepository>();
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
 
 //Product

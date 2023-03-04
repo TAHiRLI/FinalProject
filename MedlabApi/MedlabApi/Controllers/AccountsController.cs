@@ -60,12 +60,6 @@ namespace MedlabApi.Controllers
 
 
 
-
-
-
-
-
-
         //[HttpGet("CreateRoles")]
         //public async Task<IActionResult> Create()
         //{

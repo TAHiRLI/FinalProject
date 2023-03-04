@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
 using Medlab.Core.Entities;
 using Medlab.Core.Repositories;
-using MedlabApi.Dtos.DepartmentDtos;
 using MedlabApi.Dtos.DoctorDtos;
+using MedlabApi.Dtos.ProductDtos;
 using MedlabApi.Helpers;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.JSInterop.Infrastructure;
+using System;
+using System.Net.Mail;
+using System.Text;
 
 namespace MedlabApi.Controllers
 {
@@ -20,14 +23,16 @@ namespace MedlabApi.Controllers
         private readonly IDoctorRepository _doctorRepository;
         private readonly IDepartmentRepository _departmentRepository;
         private readonly IHostEnvironment _env;
+        private readonly IConfiguration _configuration;
 
-        public DoctorsController(UserManager<AppUser> userManager,IMapper mapper, IDoctorRepository doctorRepository, IDepartmentRepository departmentRepository,IHostEnvironment env)
+        public DoctorsController(UserManager<AppUser> userManager, IMapper mapper, IDoctorRepository doctorRepository, IDepartmentRepository departmentRepository, IHostEnvironment env, IConfiguration configuration)
         {
             _mapper = mapper;
             _userManager = userManager;
             _doctorRepository = doctorRepository;
             _departmentRepository = departmentRepository;
             _env = env;
+            _configuration = configuration;
         }
 
         //=========================
@@ -37,7 +42,7 @@ namespace MedlabApi.Controllers
         [HttpGet("All")]
         public async Task<IActionResult> GetAll()
         {
-            var doctors =  _doctorRepository.GetAll(x => true, "Department", "AppUser", "Blogs").OrderByDescending(x=> x.CreatedAt).ToList();
+            var doctors = _doctorRepository.GetAll(x => true, "Department", "AppUser", "Blogs").OrderByDescending(x => x.CreatedAt).ToList();
             var dto = _mapper.Map<List<DoctorListItemDto>>(doctors);
 
             return Ok(dto);
@@ -58,12 +63,12 @@ namespace MedlabApi.Controllers
         // Create
         //=========================
         [HttpPost()]
-        public async Task<IActionResult> Create([FromForm]DoctorPostDto dto)
+        public async Task<IActionResult> Create([FromForm] DoctorPostDto dto)
         {
             if (await _userManager.FindByEmailAsync(dto.Email) != null)
                 return BadRequest(new { errors = new { Email = new[] { "This Email Has Already Been Used !!!" } } });
 
-         
+
             if (await _departmentRepository.GetAsync(x => x.Id == dto.DepartmentId) == null)
                 return BadRequest(new { errors = new { DepartmentId = new[] { "Department Does Not Exist !!!" } } });
 
@@ -81,16 +86,16 @@ namespace MedlabApi.Controllers
                 Twitter = dto.Twitter,
                 Instagram = dto.Instagram,
                 IsFeatured = dto.IsFeatured,
-                Gender = dto.Gender, 
+                Gender = dto.Gender,
                 DepartmentId = dto.DepartmentId,
                 Desc = dto.Desc,
                 DetailedDesc = dto.DetailedDesc,
                 ImageUrl = imageName,
-                Salary = dto.Salary, 
-                MeetingPrice = dto.MeetingPrice, 
+                Salary = dto.Salary,
+                MeetingPrice = dto.MeetingPrice,
                 Office = dto.Office,
                 Positon = dto.Positon,
-                
+
             };
 
             AppUser doctorUser = new AppUser
@@ -102,12 +107,99 @@ namespace MedlabApi.Controllers
                 Doctor = newDoctor,
             };
 
-           var userCreate =  await _userManager.CreateAsync(doctorUser);
+
+
+            var userCreate = await _userManager.CreateAsync(doctorUser, "doctor123");
+            await _userManager.AddToRoleAsync(doctorUser, "Doctor");
+            await _userManager.AddToRoleAsync(doctorUser, "Member");
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(doctorUser);
+            var link = $"{_configuration.GetSection("Mvc:Path").Value}Account/ForgotPassword";
+
+            SendMail(doctorUser.Email, "Set Your Medlab Password", $"You have been registered as doctor in Medlab.com.Click {link}\" to set your password.");
+
             await _doctorRepository.CommitAsync();
 
-            var result = _mapper.Map<DoctorGetDto>(newDoctor); 
+            var result = _mapper.Map<DoctorGetDto>(newDoctor);
 
             return Ok(result);
+        }
+
+        //=========================
+        // Edit
+        //=========================
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit(int id, [FromForm] DoctorPutDto dto)
+        {
+            var doctor = await _doctorRepository.GetAsync(x => x.Id == id, "AppUser");
+            if (doctor == null)
+                return NotFound();
+
+            if (doctor.Email?.ToLower() != dto.Email)
+            {
+                // ^send mail 
+                if (await _userManager.FindByEmailAsync(dto.Email) != null)
+                    return BadRequest(new { errors = new { Email = new[] { "This Email Has Already Been Used !!!" } } });
+
+                doctor.Email = dto.Email;
+                doctor.AppUser.Email = dto.Email;
+
+            }
+            if (!_departmentRepository.Any(x => x.Id == dto.DepartmentId))
+                return BadRequest(new { errors = new { DepartmentId = new[] { "Department Does Not Exist !!!" } } });
+            if (dto.Image != null)
+            {
+                // delete image
+
+                var mvcProjectDirectory = new DirectoryInfo(Path.Combine(_env.ContentRootPath, "..", "Medlab MVC_Uİ"));
+                var imagePath = Path.Combine(mvcProjectDirectory.FullName, "wwwroot", "Assets");
+
+                FileManager.Delete(imagePath, "Uploads/Doctors", doctor.ImageUrl);
+                doctor.ImageUrl = FileManager.Save(dto.Image, imagePath, "Uploads/Doctors", 200);
+                doctor.AppUser.ImageUrl = doctor.ImageUrl;
+            }
+
+
+
+
+            doctor.DepartmentId = dto.DepartmentId;
+            doctor.Fullname = dto.Fullname;
+            doctor.AppUser.Fullname = dto.Fullname;
+            doctor.Positon = dto.Positon;
+            doctor.Office = dto.Office;
+            doctor.Salary = dto.Salary;
+            doctor.MeetingPrice = dto.MeetingPrice;
+            doctor.IsFeatured = dto.IsFeatured;
+            doctor.Desc = dto.Desc;
+            doctor.DetailedDesc = dto.Desc;
+            doctor.Instagram = dto.Instagram;
+            doctor.Facebook = dto.Facebook;
+            doctor.Twitter = dto.Twitter;
+
+
+            await _doctorRepository.CommitAsync();
+            await _userManager.UpdateAsync(doctor.AppUser);
+
+
+            return Ok();
+        }
+
+        private void SendMail(string To, string subject, string message)
+        {
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new System.Net.NetworkCredential("tahirtahirli2002@gmail.com", _configuration.GetSection("GoogleAuth:AppPassword").Value);
+            smtpClient.EnableSsl = true;
+
+            // message
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("tahirtahirli2002@gmail.com");
+            mailMessage.To.Add(To);
+            mailMessage.Subject = subject;
+            mailMessage.Body = message;
+
+
+            smtpClient.Send(mailMessage);
         }
     }
 }

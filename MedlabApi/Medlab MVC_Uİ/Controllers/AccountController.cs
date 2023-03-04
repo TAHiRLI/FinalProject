@@ -84,9 +84,16 @@ namespace Medlab_MVC_Uİ.Controllers
                 ModelState.AddModelError("", "UserName or password is incorrect");
                 return View(LoginVM);
             }
-
+          
 
             var userRoles = await _userManager.GetRolesAsync(user);
+
+            if ( userRoles.Contains("Doctor") && await  _userManager.CheckPasswordAsync(user,"doctor123"))
+            {
+                ModelState.AddModelError("", "Click Forgot password to Set Your Password ");
+                return View(LoginVM);
+            }
+
 
             if (!user.EmailConfirmed)
             {
@@ -388,9 +395,59 @@ namespace Medlab_MVC_Uİ.Controllers
         }
 
         //======================
-        // Profile
+        // Set Password For Doctor view
         //======================
-        [Authorize(Roles = "Member, Visitor")]
+        public async Task<IActionResult> SetPassword(string Email, string token)
+        {
+            var user = await _userManager.FindByEmailAsync(Email);
+            if (user == null)
+                return NotFound();
+            ViewBag.Token = token;
+            ViewBag.Email = Email;
+            return View();
+        }
+        //======================
+        // Set Password For Doctor view
+        //======================
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SetPassword(ResetPasswordVeiwModel ResetVm)
+        {
+            if (ResetVm.Email == null || ResetVm.Token == null)
+                return NotFound();
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Email = ResetVm.Email;
+                ViewBag.Token = ResetVm.Token;
+                return View();
+            }
+
+            var user = await _userManager.FindByEmailAsync(ResetVm.Email);
+
+            if (user == null)
+                return NotFound();
+            ResetVm.Token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var result = await _userManager.ResetPasswordAsync(user, ResetVm.Token, ResetVm.Password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                ViewBag.Email = ResetVm.Email;
+                ViewBag.Token = ResetVm.Token;
+                return View();
+            }
+            return RedirectToAction("login");
+        }
+
+
+            //======================
+            // Profile
+            //======================
+            [Authorize(Roles = "Member, Visitor")]
         public async Task<IActionResult> Profile()
         {
             var user = await _userManager.GetUserAsync(User);
