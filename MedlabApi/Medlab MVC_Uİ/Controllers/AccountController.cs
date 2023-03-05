@@ -79,20 +79,22 @@ namespace Medlab_MVC_Uİ.Controllers
 
             var user = await _userManager.FindByNameAsync(LoginVM.Username);
 
+
             if (user == null)
             {
-                ModelState.AddModelError("", "UserName or password is incorrect");
+                ModelState.AddModelError("", "User Does not exist");
                 return View(LoginVM);
             }
-          
-
             var userRoles = await _userManager.GetRolesAsync(user);
 
-            if ( userRoles.Contains("Doctor") && await  _userManager.CheckPasswordAsync(user,"doctor123"))
+
+            if (userRoles.Contains("Doctor") && await _userManager.CheckPasswordAsync(user, "doctor123"))
             {
-                ModelState.AddModelError("", "Click Forgot password to Set Your Password ");
-                return View(LoginVM);
-            }
+               return  RedirectToAction("ForgotPassword");
+            }   
+
+
+
 
 
             if (!user.EmailConfirmed)

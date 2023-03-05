@@ -112,12 +112,11 @@ namespace MedlabApi.Controllers
             var userCreate = await _userManager.CreateAsync(doctorUser, "doctor123");
             await _userManager.AddToRoleAsync(doctorUser, "Doctor");
             await _userManager.AddToRoleAsync(doctorUser, "Member");
+            doctorUser.EmailConfirmed = true;
 
-            var token = await _userManager.GeneratePasswordResetTokenAsync(doctorUser);
-            var link = $"{_configuration.GetSection("Mvc:Path").Value}Account/ForgotPassword";
+            SendMail(doctorUser.Email, "Set Your Medlab Password", $"You have been registered as doctor in Medlab.com. Your Username is {doctorUser.Email}. For the firs login you will be redirected to Set Password page");
 
-            SendMail(doctorUser.Email, "Set Your Medlab Password", $"You have been registered as doctor in Medlab.com.Click {link}\" to set your password.");
-
+            await _userManager.UpdateAsync(doctorUser);
             await _doctorRepository.CommitAsync();
 
             var result = _mapper.Map<DoctorGetDto>(newDoctor);
@@ -137,9 +136,12 @@ namespace MedlabApi.Controllers
 
             if (doctor.Email?.ToLower() != dto.Email)
             {
-                // ^send mail 
                 if (await _userManager.FindByEmailAsync(dto.Email) != null)
                     return BadRequest(new { errors = new { Email = new[] { "This Email Has Already Been Used !!!" } } });
+             
+
+                SendMail(dto.Email, "Set Your Medlab Password", $"You have been registered as doctor in Medlab.com. Your Username is {dto.Email}. For the firs login you will be redirected to Set Password page");
+
 
                 doctor.Email = dto.Email;
                 doctor.AppUser.Email = dto.Email;
@@ -180,10 +182,42 @@ namespace MedlabApi.Controllers
             await _doctorRepository.CommitAsync();
             await _userManager.UpdateAsync(doctor.AppUser);
 
+            var result = _mapper.Map<DoctorGetDto>(doctor);
 
-            return Ok();
+            return Ok(result);
         }
+        //=========================
+        // Delete 
+        //=========================
+        [HttpDelete("Image/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var doctor = await _doctorRepository.GetAsync(x => x.Id == id);
+            if (doctor == null)
+                return NotFound();
 
+            var user = await _userManager.FindByEmailAsync(doctor.Email);
+            if (user == null)
+                return NotFound();
+
+            var mvcProjectDirectory = new DirectoryInfo(Path.Combine(_env.ContentRootPath, "..", "Medlab MVC_Uİ"));
+            var imagePath = Path.Combine(mvcProjectDirectory.FullName, "wwwroot", "Assets");
+
+
+            // delete doctor image 
+            FileManager.Delete(imagePath, "Uploads/Doctors", doctor.ImageUrl);
+
+            await _userManager.DeleteAsync(user);
+            _doctorRepository.Delete(doctor);
+
+            _doctorRepository.Commit();
+
+
+            return NoContent();
+        }
+        //=========================
+        // Functions
+        //=========================
         private void SendMail(string To, string subject, string message)
         {
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
