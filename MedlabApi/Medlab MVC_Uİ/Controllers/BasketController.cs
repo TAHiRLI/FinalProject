@@ -182,7 +182,7 @@ namespace Medlab_MVC_Uİ.Controllers
         }
 
         //=======================
-        // Add to Basket
+        // RemoveFromBasket
         //=======================
         public async Task<IActionResult> RemoveFromBasket(int id)
         {
@@ -279,7 +279,7 @@ namespace Medlab_MVC_Uİ.Controllers
 
                 foreach (var item in BasketCookieItems)
                 {
-                    Product cookieProdut = await _productRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
+                    Product cookieProdut = await _productRepository.GetAsync(x => x.Id == item.ProductId);
 
                     BasketItemViewModel basketItemViewModel = new BasketItemViewModel
                     {

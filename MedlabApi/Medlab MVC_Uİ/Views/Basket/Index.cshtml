@@ -45,7 +45,7 @@
 
                                 <div class="cart-product_counter rounded-pill mt-4">
                                         <a asp-action="addtobasket" asp-controller="basket" asp-route-id="@item.Product.Id" asp-route-count="-1" class="decrement decrement-cart counter-btn m-0 text-decoration-none pointer btn link-hover">-</a>
-                                    <input type="number" value="@item.Count" class="add-count text-end" />
+                                    <input type="number" readonly value="@item.Count" class="add-count text-end" />
                                         <a asp-action="addtobasket" asp-controller="basket" asp-route-id="@item.Product.Id" asp-route-count="1" class="increment increment-cart counter-btn m-0 text-decoration-none pointer btn link-hover">+</a>
                                 </div>
                             </div>

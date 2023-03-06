@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace Medlab.Core.Repositories
 {
-    public interface IOrderRepository:IEntityRepository<Order>
+    public interface IOrderRepository : IEntityRepository<Order>
     {
         List<Order> GetOrdersWithProducts(string userId);
+        Order? GetOrderById(int id);
     }
 }

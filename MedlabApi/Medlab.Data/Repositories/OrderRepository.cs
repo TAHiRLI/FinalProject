@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Medlab.Data.Repositories
 {
-    public class OrderRepository:EntityRepository<Order> , IOrderRepository
+    public class OrderRepository : EntityRepository<Order>, IOrderRepository
     {
         private readonly MedlabDbContext _context;
 
-        public OrderRepository(MedlabDbContext context):base(context)
+        public OrderRepository(MedlabDbContext context) : base(context)
         {
             _context = context;
         }
@@ -25,9 +25,18 @@ namespace Medlab.Data.Repositories
                 .Where(x => x.AppUserId == userId)
                 .Include(x => x.OrderItems)
                     .ThenInclude(x => x.Product)
-                    .ThenInclude(x=> x.ProductImages)
+                    .ThenInclude(x => x.ProductImages)
                 .ToList();
-             
         }
+        public Order? GetOrderById(int id)
+        {
+            return _context.Orders
+                .Include(x=> x.AppUser)
+                .Include(x => x.OrderItems)
+                .ThenInclude(x => x.Product)
+                .ThenInclude(x => x.ProductImages)
+                .FirstOrDefault(x => x.Id == id);
+        }
+
     }
 }

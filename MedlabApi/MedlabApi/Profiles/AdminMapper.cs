@@ -3,6 +3,7 @@ using Medlab.Core.Entities;
 using MedlabApi.Dtos.BlogDtos;
 using MedlabApi.Dtos.DepartmentDtos;
 using MedlabApi.Dtos.DoctorDtos;
+using MedlabApi.Dtos.OrderDtos;
 using MedlabApi.Dtos.ProductCategoryDtos;
 using MedlabApi.Dtos.ProductDtos;
 using MedlabApi.Dtos.ProductReviewDtos;
@@ -80,6 +81,14 @@ namespace MedlabApi.Profiles
                 .ForMember(x => x.BlogsCount, f => f.MapFrom(x => x.Blogs.Count));
             CreateMap<Department, DepartmentInDoctorGetDto>();
             CreateMap<AppUser, AppUserInDoctorGetDto>();
+
+            // Orders 
+            CreateMap<Order, OrderGetDto>();
+            CreateMap<AppUser, AppUserInOrderGetDto>();
+            CreateMap<OrderItem, OrderItemInOrderGetDto>();
+            CreateMap<Product, ProductInOrderItem>()
+                .ForMember(x=> x.Link , f=> f.MapFrom(x => $"{config.GetSection("Mvc:Path").Value}Product/Details/{x.Id}"))
+                .ForMember(x=> x.ImageUrl, f=> f.MapFrom(x => $"{config.GetSection("Mvc:Path").Value}Assets/Uploads/Products/{x.ProductImages.FirstOrDefault(x => x.IsMain).ImageUrl}"));
 
         }
     }

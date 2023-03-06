@@ -28,7 +28,7 @@
     <hr />
     <div class="cartMini_footer py-2">
         <div class="d-flex justify-content-between fs-4 mb-2 ">
-            <span>Total:</span> <span>$@Model.Total</span>
+            <span>Total:</span> <span>$@Model.Total.ToString("0.00")</span>
         </div>
         <a asp-action="index" asp-controller="basket" class="checkoutBtn text-decoration-none rounded-pill py-1">CheckOut</a>
     </div>

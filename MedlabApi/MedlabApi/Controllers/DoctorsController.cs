@@ -145,6 +145,7 @@ namespace MedlabApi.Controllers
 
                 doctor.Email = dto.Email;
                 doctor.AppUser.Email = dto.Email;
+                doctor.AppUser.UserName = dto.Email;
 
             }
             if (!_departmentRepository.Any(x => x.Id == dto.DepartmentId))
@@ -189,7 +190,7 @@ namespace MedlabApi.Controllers
         //=========================
         // Delete 
         //=========================
-        [HttpDelete("Image/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var doctor = await _doctorRepository.GetAsync(x => x.Id == id);
