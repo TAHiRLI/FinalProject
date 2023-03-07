@@ -11,6 +11,7 @@ namespace Medlab.Core.Entities
     {
         public string Fullname { get; set; }
         public DateTime LastRequestedEmailAt { get; set; }
+        public bool? IsAdmin { get; set; } = false;
         public string? ImageUrl { get; set; }
         public string? ConnectionId { get; set; }
         public string? PeerId { get; set; }

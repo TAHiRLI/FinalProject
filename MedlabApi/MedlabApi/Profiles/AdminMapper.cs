@@ -3,11 +3,13 @@ using Medlab.Core.Entities;
 using MedlabApi.Dtos.BlogDtos;
 using MedlabApi.Dtos.DepartmentDtos;
 using MedlabApi.Dtos.DoctorDtos;
+using MedlabApi.Dtos.MessageDto;
 using MedlabApi.Dtos.OrderDtos;
 using MedlabApi.Dtos.ProductCategoryDtos;
 using MedlabApi.Dtos.ProductDtos;
 using MedlabApi.Dtos.ProductReviewDtos;
 using MedlabApi.Dtos.SettingDtos;
+using MedlabApi.Dtos.UserDtos;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
 using System.Runtime.CompilerServices;
 
@@ -89,6 +91,14 @@ namespace MedlabApi.Profiles
             CreateMap<Product, ProductInOrderItem>()
                 .ForMember(x=> x.Link , f=> f.MapFrom(x => $"{config.GetSection("Mvc:Path").Value}Product/Details/{x.Id}"))
                 .ForMember(x=> x.ImageUrl, f=> f.MapFrom(x => $"{config.GetSection("Mvc:Path").Value}Assets/Uploads/Products/{x.ProductImages.FirstOrDefault(x => x.IsMain).ImageUrl}"));
+
+            // Users
+            CreateMap<AppUser, UserGetDto>()
+                .ForMember(x=> x.ImageUrl, f=> f.MapFrom(x=> x.IsAdmin==null? $"{config.GetSection("Mvc:Path").Value}Assets/Uploads/Doctors/{x.ImageUrl}" : $"{config.GetSection("Mvc:Path").Value}Assets/Uploads/Users/{x.ImageUrl}"));
+
+            // Messages
+            CreateMap<ContactMessage, MessageGetDto>();
+            CreateMap<AppUser, AppUserInMessageGetDto>();
 
         }
     }

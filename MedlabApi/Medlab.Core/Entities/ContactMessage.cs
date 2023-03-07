@@ -15,6 +15,7 @@ namespace Medlab.Core.Entities
         public string? AppUserId { get; set; }
         public AppUser? AppUser { get; set; }
         public string PhoneNumber { get; set; }
+        public bool IsReplied { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow.AddHours(4);
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow.AddHours(4);
     }

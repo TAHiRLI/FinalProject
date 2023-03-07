@@ -4,6 +4,7 @@ using Medlab.Core.Repositories;
 using MedlabApi.Dtos.DoctorDtos;
 using MedlabApi.Dtos.ProductDtos;
 using MedlabApi.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,7 @@ using System.Text;
 
 namespace MedlabApi.Controllers
 {
+    [Authorize(Roles ="SuperAdmin, Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class DoctorsController : ControllerBase
@@ -156,8 +158,8 @@ namespace MedlabApi.Controllers
 
                 var mvcProjectDirectory = new DirectoryInfo(Path.Combine(_env.ContentRootPath, "..", "Medlab MVC_Uİ"));
                 var imagePath = Path.Combine(mvcProjectDirectory.FullName, "wwwroot", "Assets");
-
-                FileManager.Delete(imagePath, "Uploads/Doctors", doctor.ImageUrl);
+                if (doctor.ImageUrl != "DEFAULT-USER.jpg")
+                    FileManager.Delete(imagePath, "Uploads/Doctors", doctor.ImageUrl);
                 doctor.ImageUrl = FileManager.Save(dto.Image, imagePath, "Uploads/Doctors", 200);
                 doctor.AppUser.ImageUrl = doctor.ImageUrl;
             }

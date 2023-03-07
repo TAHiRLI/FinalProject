@@ -2,12 +2,14 @@
 using Medlab.Core.Repositories;
 using MedlabApi.Dtos.OrderDtos;
 using MedlabApi.Services.Implementations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace MedlabApi.Controllers
 {
+    [Authorize(Roles ="Admin, SuperAdmin")]
     [Route("api/[controller]")]
     [ApiController]
     public class OrdersController : ControllerBase
@@ -59,7 +61,7 @@ namespace MedlabApi.Controllers
 
 
             order.OrderStatus = false;
-
+            order.UpdatedAt = DateTime.UtcNow.AddHours(4);
 
             EmailService emailService = new EmailService(_configuration);
 
@@ -84,6 +86,8 @@ namespace MedlabApi.Controllers
                 return BadRequest();
 
             order.OrderStatus = true;
+            order.UpdatedAt = DateTime.UtcNow.AddHours(4);
+
 
             EmailService emailService = new EmailService(_configuration);
 

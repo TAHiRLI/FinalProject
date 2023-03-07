@@ -77,6 +77,9 @@ namespace Medlab.Data.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasDefaultValue("DEFAULT-USER.jpg");
 
+                    b.Property<bool?>("IsAdmin")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("LastRequestedEmailAt")
                         .HasColumnType("datetime2");
 
@@ -250,6 +253,9 @@ namespace Medlab.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<bool>("IsReplied")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Message")
                         .IsRequired()

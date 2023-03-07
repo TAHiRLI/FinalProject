@@ -31,11 +31,19 @@ namespace MedlabApi.Controllers
             this._jwtService = jwtService;
             this._configuration = configuration;
         }
+
+        //===========================
+        // Login
+        //===========================
+
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginDto dto)
         {
             var user = await _userManager.FindByNameAsync(dto.UserName);
             if (user == null)
+                return BadRequest();
+
+            if (await _userManager.CheckPasswordAsync(user, "doctor123"))
                 return BadRequest();
 
             if (!await _userManager.CheckPasswordAsync(user, dto.Password))
@@ -47,6 +55,9 @@ namespace MedlabApi.Controllers
 
         }
 
+        //===========================
+        //  IsAuthenticated
+        //===========================
 
         [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpGet("isAuthenticated")]
@@ -54,6 +65,38 @@ namespace MedlabApi.Controllers
         {
             return Ok();
         }
+        [Authorize]
+        [HttpGet("getRoles")]
+
+        //===========================
+        //  Get roles / role of the current user
+        //===========================
+        public async Task<IActionResult> getRoles()
+        {
+            var user =await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null)
+                return NotFound();
+
+            var roles =await _userManager.GetRolesAsync(user);
+            return Ok(roles);
+        }
+
+
+        //===========================
+        // Get ALl users
+        //===========================
+        [Authorize(Roles ="SuperAdmin")]
+        [HttpGet("roles/all")]
+        public async Task<IActionResult> GetAllRoles()
+        {
+            var roles = _roleManager.Roles.ToList();
+            return Ok(roles);
+        }
+
+
+ 
+
+
 
 
 

@@ -88,7 +88,7 @@ namespace Medlab_MVC_Uİ.Controllers
             var userRoles = await _userManager.GetRolesAsync(user);
 
 
-            if (userRoles.Contains("Doctor") && await _userManager.CheckPasswordAsync(user, "doctor123"))
+            if ((userRoles.Contains("Doctor")|| userRoles.Contains("Admin") || userRoles.Contains("SuperAdmin") && await _userManager.CheckPasswordAsync(user, "doctor123")))
             {
                return  RedirectToAction("ForgotPassword");
             }   
@@ -346,6 +346,8 @@ namespace Medlab_MVC_Uİ.Controllers
             if (user == null || !await _userManager.VerifyUserTokenAsync(user, _userManager.Options.Tokens.PasswordResetTokenProvider, "ResetPassword", token))
                 return NotFound();
 
+            user.EmailConfirmed = true;
+            await _userManager.UpdateAsync(user);
             TempData["Token"] = token;
             TempData["Email"] = email;
             return RedirectToAction("resetPassword");

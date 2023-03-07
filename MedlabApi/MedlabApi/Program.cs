@@ -100,9 +100,12 @@ builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IDoctorAppointmentRepository, DoctorAppointmentRepository>();
 
-// Order
+//Order
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+
+//ContactMessage
+builder.Services.AddScoped<IContactMessageRepository, ContactMessageRepository>();
 
 //===================
 // 5 Swager 
