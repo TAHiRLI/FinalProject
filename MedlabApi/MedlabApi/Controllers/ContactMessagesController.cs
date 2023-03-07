@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Medlab.Core.Repositories;
-using MedlabApi.Dtos.MessageDto;
+using MedlabApi.Dtos.MessageDtos;
 using MedlabApi.Services.Implementations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

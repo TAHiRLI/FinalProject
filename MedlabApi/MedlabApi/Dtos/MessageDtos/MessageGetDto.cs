@@ -1,6 +1,6 @@
 ﻿using Medlab.Core.Entities;
 
-namespace MedlabApi.Dtos.MessageDto
+namespace MedlabApi.Dtos.MessageDtos
 {
     public class MessageGetDto
     {

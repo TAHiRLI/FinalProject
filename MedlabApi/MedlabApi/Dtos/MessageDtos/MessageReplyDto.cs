@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace MedlabApi.Dtos.MessageDto
+namespace MedlabApi.Dtos.MessageDtos
 {
     public class MessageReplyDto
     {

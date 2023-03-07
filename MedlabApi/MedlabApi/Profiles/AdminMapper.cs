@@ -3,12 +3,13 @@ using Medlab.Core.Entities;
 using MedlabApi.Dtos.BlogDtos;
 using MedlabApi.Dtos.DepartmentDtos;
 using MedlabApi.Dtos.DoctorDtos;
-using MedlabApi.Dtos.MessageDto;
+using MedlabApi.Dtos.MessageDtos;
 using MedlabApi.Dtos.OrderDtos;
 using MedlabApi.Dtos.ProductCategoryDtos;
 using MedlabApi.Dtos.ProductDtos;
 using MedlabApi.Dtos.ProductReviewDtos;
 using MedlabApi.Dtos.SettingDtos;
+using MedlabApi.Dtos.SliderDtos;
 using MedlabApi.Dtos.UserDtos;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -99,6 +100,10 @@ namespace MedlabApi.Profiles
             // Messages
             CreateMap<ContactMessage, MessageGetDto>();
             CreateMap<AppUser, AppUserInMessageGetDto>();
+            // Sliders
+            CreateMap<Slider, SliderGetDto>()
+                .ForMember(x=> x.ImageUrl, f=> f.MapFrom(x=> $"{config.GetSection("Mvc:Path").Value}Assets/Uploads/Sliders/{x.ImageUrl}"));
+            CreateMap<SliderPostDto, Slider>();
 
         }
     }

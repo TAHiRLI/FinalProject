@@ -180,6 +180,7 @@ namespace MedlabApi.Controllers
             doctor.Instagram = dto.Instagram;
             doctor.Facebook = dto.Facebook;
             doctor.Twitter = dto.Twitter;
+            doctor.UpdatedAt = DateTime.UtcNow.AddHours(4);
 
 
             await _doctorRepository.CommitAsync();
