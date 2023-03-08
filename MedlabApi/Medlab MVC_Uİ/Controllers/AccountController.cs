@@ -83,15 +83,16 @@ namespace Medlab_MVC_Uİ.Controllers
             if (user == null)
             {
                 ModelState.AddModelError("", "User Does not exist");
-                return View(LoginVM);
+                return View(LoginVM); 
             }
             var userRoles = await _userManager.GetRolesAsync(user);
 
 
-            if ((userRoles.Contains("Doctor")|| userRoles.Contains("Admin") || userRoles.Contains("SuperAdmin") && await _userManager.CheckPasswordAsync(user, "doctor123")))
+            if ((userRoles.Contains("Doctor") || userRoles.Contains("Admin") || userRoles.Contains("SuperAdmin")))
             {
-               return  RedirectToAction("ForgotPassword");
-            }   
+                if(await _userManager.CheckPasswordAsync(user, "doctor123"))
+                return RedirectToAction("ForgotPassword");
+            }
 
 
 

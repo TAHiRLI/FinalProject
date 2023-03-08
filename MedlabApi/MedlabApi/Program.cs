@@ -84,6 +84,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 
 builder.Services.AddSingleton<IJwtService, JwtService>();
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
+builder.Services.AddScoped<IAmenityImageRepository, AmenityImageRepository>();
 builder.Services.AddScoped<ISettingRepository, SettingRepository>();
 builder.Services.AddScoped<ISubscriptionRepostiory, SubscriptionRepository>();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
@@ -244,8 +245,8 @@ var job = JobBuilder.Create<EmailSendingJob>()
 var trigger = TriggerBuilder.Create()
     .WithIdentity("sendEmailTrigger", "emailGroup")
     .WithSchedule(CronScheduleBuilder
-           //.WeeklyOnDayAndHourAndMinute(DayOfWeek.Monday, 9, 0))
-           .CronSchedule("0 */1 * ? * *")) // run every 5 minute
+           .WeeklyOnDayAndHourAndMinute(DayOfWeek.Monday, 9, 0))
+           //.CronSchedule("0 */1 * ? * *")) // run every 1 minute
     .Build();
 
 scheduler.ScheduleJob(job, trigger);

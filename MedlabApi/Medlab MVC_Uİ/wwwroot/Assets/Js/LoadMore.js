@@ -26,10 +26,6 @@ $(document).on("click", ".loadmore-btn", function (e) {
             }
             return res.text();
         }).then(data => {
-            console.log(data.length)
-            if (data.length == 0) {
-                console.log("salam")
-            }
 
             document.getElementById("review-container").innerHTML += data;
 

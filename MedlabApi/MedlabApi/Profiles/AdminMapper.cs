@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Medlab.Core.Entities;
+using MedlabApi.Dtos.AmenityImageDtos;
 using MedlabApi.Dtos.BlogDtos;
 using MedlabApi.Dtos.DepartmentDtos;
 using MedlabApi.Dtos.DoctorDtos;
@@ -104,6 +105,10 @@ namespace MedlabApi.Profiles
             CreateMap<Slider, SliderGetDto>()
                 .ForMember(x=> x.ImageUrl, f=> f.MapFrom(x=> $"{config.GetSection("Mvc:Path").Value}Assets/Uploads/Sliders/{x.ImageUrl}"));
             CreateMap<SliderPostDto, Slider>();
+
+            // AmenityImages
+            CreateMap<AmenityImage, AmenityImageGetDto>()
+                .ForMember(x=> x.ImageUrl, f=> f.MapFrom(x => $"{config.GetSection("Mvc:Path").Value}Assets/Uploads/AmenityImages/{x.ImageUrl}"));
 
         }
     }
