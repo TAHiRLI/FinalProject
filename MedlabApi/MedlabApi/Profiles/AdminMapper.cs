@@ -12,6 +12,7 @@ using MedlabApi.Dtos.ProductReviewDtos;
 using MedlabApi.Dtos.SettingDtos;
 using MedlabApi.Dtos.SliderDtos;
 using MedlabApi.Dtos.UserDtos;
+using MedlabApi.Dtos.ValueDtos;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
 using System.Runtime.CompilerServices;
 
@@ -110,6 +111,10 @@ namespace MedlabApi.Profiles
             CreateMap<AmenityImage, AmenityImageGetDto>()
                 .ForMember(x=> x.ImageUrl, f=> f.MapFrom(x => $"{config.GetSection("Mvc:Path").Value}Assets/Uploads/AmenityImages/{x.ImageUrl}"));
 
+            // Values
+            CreateMap<Value, ValueGetDto>();
+            CreateMap<ValuePostDto, Value>();
+            CreateMap<ValuePutDto, Value>();    
         }
     }
 }

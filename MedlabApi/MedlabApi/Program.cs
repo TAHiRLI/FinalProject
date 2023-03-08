@@ -83,11 +83,12 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 //===================
 
 builder.Services.AddSingleton<IJwtService, JwtService>();
+builder.Services.AddScoped<IValueRepository, ValueRepository>();
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
-builder.Services.AddScoped<IAmenityImageRepository, AmenityImageRepository>();
 builder.Services.AddScoped<ISettingRepository, SettingRepository>();
-builder.Services.AddScoped<ISubscriptionRepostiory, SubscriptionRepository>();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+builder.Services.AddScoped<ISubscriptionRepostiory, SubscriptionRepository>();
+builder.Services.AddScoped<IAmenityImageRepository, AmenityImageRepository>();
 
 
 //Product
