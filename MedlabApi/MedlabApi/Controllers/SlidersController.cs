@@ -64,8 +64,8 @@ namespace MedlabApi.Controllers
         {
             var sliders = _sliderRepository.GetAll(x => true);
             var maxOrder = sliders.Max(x => x.Order);
-            if (dto.Order < 0 || dto.Order > maxOrder + 1)
-                return BadRequest(new { errors = new { Order = new[] { $"Invalid Order Value !!! \n Order must be between 0-{maxOrder + 1}" } } });
+            if (dto.Order < 1 || dto.Order > maxOrder + 1)
+                return BadRequest(new { errors = new { Order = new[] { $"Invalid Order Value !!! \n Order must be between 1-{maxOrder + 1}" } } });
 
 
             var mvcProjectDirectory = new DirectoryInfo(Path.Combine(_env.ContentRootPath, "..", "Medlab MVC_Uİ"));
@@ -102,8 +102,8 @@ namespace MedlabApi.Controllers
 
             var sliders = _sliderRepository.GetAll(x => true);
             var maxOrder = sliders.Max(x => x.Order);
-            if (dto.Order < 0 || dto.Order > maxOrder)
-                return BadRequest(new { errors = new { Order = new[] { $"Invalid Order Value !!! \n Order must be between 0-{maxOrder}" } } });
+            if (dto.Order < 1 || dto.Order > maxOrder)
+                return BadRequest(new { errors = new { Order = new[] { $"Invalid Order Value !!! \n Order must be between 1-{maxOrder}" } } });
 
             if (dto.Order != slider.Order)
             {

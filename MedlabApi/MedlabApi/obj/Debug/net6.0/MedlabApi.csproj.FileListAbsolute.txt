@@ -80,3 +80,6 @@ C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\obj\Debug
 C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\obj\Debug\net6.0\MedlabApi.pdb
 C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\obj\Debug\net6.0\MedlabApi.genruntimeconfig.cache
 C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\obj\Debug\net6.0\ref\MedlabApi.dll
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\bin\Debug\net6.0\Quartz.dll
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\bin\Debug\net6.0\Quartz.Extensions.DependencyInjection.dll
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\bin\Debug\net6.0\Quartz.Extensions.Hosting.dll

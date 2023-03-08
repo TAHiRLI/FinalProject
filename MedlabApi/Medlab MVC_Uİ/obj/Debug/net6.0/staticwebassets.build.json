@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "oDqZacd/mq065cuPCppPGo5WxMzEauJ0PxLRup7uGjQ=",
+  "Hash": "KUs0g3NZPGV7F6392VTFpcI4pnvHYmH7do5+PoyH9/8=",
   "Source": "Medlab MVC_Uİ",
   "BasePath": "_content/Medlab MVC_Uİ",
   "Mode": "Default",
@@ -2227,6 +2227,23 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Products\\6c1cfe21-01f2-430e-8e47-f6fc7d6aa565index-img-01-6.jpg"
     },
     {
+      "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Products\\7978bdfc-a167-4c98-8032-01911f5fb661slide-03.jpg",
+      "SourceId": "Medlab MVC_Uİ",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\",
+      "BasePath": "_content/Medlab MVC_Uİ",
+      "RelativePath": "Assets/Uploads/Products/7978bdfc-a167-4c98-8032-01911f5fb661slide-03.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Products\\7978bdfc-a167-4c98-8032-01911f5fb661slide-03.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Products\\86b465e9-f621-437b-9de6-f6650601bf18doctor-05.jpg",
       "SourceId": "Medlab MVC_Uİ",
       "SourceType": "Discovered",
@@ -2771,12 +2788,12 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Sliders\\251898a4-cdc3-47eb-8a3d-2b4d97caa7a9slider-gallery-05.jpg"
     },
     {
-      "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Sliders\\4af15ce3-eef1-479a-8084-a5456a33f644index-img-01-6.jpg",
+      "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Sliders\\314b7273-1bb2-4829-8a8d-53227ca35ab5slide-01.jpg",
       "SourceId": "Medlab MVC_Uİ",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\",
       "BasePath": "_content/Medlab MVC_Uİ",
-      "RelativePath": "Assets/Uploads/Sliders/4af15ce3-eef1-479a-8084-a5456a33f644index-img-01-6.jpg",
+      "RelativePath": "Assets/Uploads/Sliders/314b7273-1bb2-4829-8a8d-53227ca35ab5slide-01.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2785,15 +2802,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Sliders\\4af15ce3-eef1-479a-8084-a5456a33f644index-img-01-6.jpg"
+      "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Sliders\\314b7273-1bb2-4829-8a8d-53227ca35ab5slide-01.jpg"
     },
     {
-      "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Sliders\\696cfe9b-4471-451e-a359-c4e1588b6604index-img-01-5.jpg",
+      "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Sliders\\34484840-ad6e-471e-9063-23225d908166index-img-01-6.jpg",
       "SourceId": "Medlab MVC_Uİ",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\",
       "BasePath": "_content/Medlab MVC_Uİ",
-      "RelativePath": "Assets/Uploads/Sliders/696cfe9b-4471-451e-a359-c4e1588b6604index-img-01-5.jpg",
+      "RelativePath": "Assets/Uploads/Sliders/34484840-ad6e-471e-9063-23225d908166index-img-01-6.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2802,15 +2819,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Sliders\\696cfe9b-4471-451e-a359-c4e1588b6604index-img-01-5.jpg"
+      "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Sliders\\34484840-ad6e-471e-9063-23225d908166index-img-01-6.jpg"
     },
     {
-      "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Sliders\\slide-01.jpg",
+      "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Sliders\\60501e98-6109-4ce8-a968-b9589d5b0be3index-img-01-6.jpg",
       "SourceId": "Medlab MVC_Uİ",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\",
       "BasePath": "_content/Medlab MVC_Uİ",
-      "RelativePath": "Assets/Uploads/Sliders/slide-01.jpg",
+      "RelativePath": "Assets/Uploads/Sliders/60501e98-6109-4ce8-a968-b9589d5b0be3index-img-01-6.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2819,24 +2836,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Sliders\\slide-01.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Sliders\\slide-02.jpg",
-      "SourceId": "Medlab MVC_Uİ",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\",
-      "BasePath": "_content/Medlab MVC_Uİ",
-      "RelativePath": "Assets/Uploads/Sliders/slide-02.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Sliders\\slide-02.jpg"
+      "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Sliders\\60501e98-6109-4ce8-a968-b9589d5b0be3index-img-01-6.jpg"
     },
     {
       "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Sliders\\slide-03.jpg",

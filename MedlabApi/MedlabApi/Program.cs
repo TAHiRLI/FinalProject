@@ -15,6 +15,11 @@ using Medlab.Core.Repositories;
 using AutoMapper;
 using MedlabApi.Profiles;
 using MedlabApi.Dtos.SettingDtos;
+using MedlabApi.Jobs;
+using Quartz.Impl;
+using Quartz.Spi;
+using Quartz;
+using static Quartz.Logging.OperationName;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,10 +34,12 @@ var builder = WebApplication.CreateBuilder(args);
 // 6 Jwt Auth
 // 7 Cors addcors
 // 8 Mapper
+// 9 Quartz
 
 
 //-----------------
 // 1 Cors usecors
+// 2 Quartz
 
 
 builder.Services.AddControllers()
@@ -78,6 +85,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 builder.Services.AddSingleton<IJwtService, JwtService>();
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
 builder.Services.AddScoped<ISettingRepository, SettingRepository>();
+builder.Services.AddScoped<ISubscriptionRepostiory, SubscriptionRepository>();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
 
@@ -181,6 +189,28 @@ builder.Services.AddSingleton(provider => new MapperConfiguration(cfg =>
 }).CreateMapper());
 
 
+//======================
+// 9 Quartz
+//======================
+
+builder.Services.AddSingleton<IJobFactory, MyJobFactory>();
+builder.Services.AddScoped<EmailSendingJob>();
+builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+builder.Services.AddSingleton(provider =>
+{
+    var schedulerFactory = new StdSchedulerFactory();
+    var scheduler = schedulerFactory.GetScheduler().GetAwaiter().GetResult();
+    scheduler.JobFactory = provider.GetRequiredService<IJobFactory>();
+
+    var dataMap = new JobDataMap();
+    dataMap["serviceProvider"] = provider;
+
+    scheduler.Start();
+    return scheduler;
+});
+builder.Services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -193,9 +223,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
-//======================
-// 1 Cors useCors
-//======================
 app.UseCors(builder =>
 {
     builder
@@ -203,6 +230,26 @@ app.UseCors(builder =>
     .AllowAnyMethod()
     .AllowAnyHeader();
 });
+
+//======================
+// 2 Quartz
+//======================
+var scheduler = app.Services.GetRequiredService<IScheduler>();
+
+
+var job = JobBuilder.Create<EmailSendingJob>()
+    .WithIdentity("sendEmailJob", "emailGroup")
+    .Build();
+
+var trigger = TriggerBuilder.Create()
+    .WithIdentity("sendEmailTrigger", "emailGroup")
+    .WithSchedule(CronScheduleBuilder
+           //.WeeklyOnDayAndHourAndMinute(DayOfWeek.Monday, 9, 0))
+           .CronSchedule("0 */1 * ? * *")) // run every 5 minute
+    .Build();
+
+scheduler.ScheduleJob(job, trigger);
+
 
 app.UseAuthentication();
 app.UseAuthorization();
