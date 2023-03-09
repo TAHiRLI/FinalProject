@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Medlab.Core.Entities;
 using MedlabApi.Dtos.AmenityImageDtos;
+using MedlabApi.Dtos.BlgoCategoriyDtos;
 using MedlabApi.Dtos.BlogDtos;
 using MedlabApi.Dtos.DepartmentDtos;
 using MedlabApi.Dtos.DoctorDtos;
@@ -65,7 +66,8 @@ namespace MedlabApi.Profiles
             CreateMap<Blog, BlogGetDto>()
                 .ForMember(x => x.ImageUrl, f => f.MapFrom(x => $"{config.GetSection("Mvc:Path").Value}Assets/Uploads/Blogs/{x.ImageUrl}"))
                 .ForMember(x => x.Link, f => f.MapFrom(x => $"{config.GetSection("Mvc:Path").Value}Blog/Details/{x.Id}"));
-
+            // Blog Categories
+            CreateMap<BlogCategory, BlogCategoryGetDto>();
 
             // Departments
             CreateMap<Department, DepartmentGetDto>();

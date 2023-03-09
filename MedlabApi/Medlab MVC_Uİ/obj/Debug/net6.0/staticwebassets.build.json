@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KUs0g3NZPGV7F6392VTFpcI4pnvHYmH7do5+PoyH9/8=",
+  "Hash": "g1sqrU1HPN9I3/QGFXvf5t+glI+I51AjDsBfUXr6+94=",
   "Source": "Medlab MVC_Uİ",
   "BasePath": "_content/Medlab MVC_Uİ",
   "Mode": "Default",
@@ -1768,6 +1768,23 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Doctors\\doctor-01.jpg"
     },
     {
+      "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Doctors\\doctor-02.jpg",
+      "SourceId": "Medlab MVC_Uİ",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\",
+      "BasePath": "_content/Medlab MVC_Uİ",
+      "RelativePath": "Assets/Uploads/Doctors/doctor-02.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Doctors\\doctor-02.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Doctors\\doctor-03.jpg",
       "SourceId": "Medlab MVC_Uİ",
       "SourceType": "Discovered",
@@ -2346,6 +2363,23 @@
       "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Products\\a6fde6c1-8c1b-440f-acc2-d7bfcd33b4d5slider-gallery-01.jpg"
     },
     {
+      "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Products\\ad6e744f-5a76-403a-ba3f-ea6f4ae44d32index-img-01-5.jpg",
+      "SourceId": "Medlab MVC_Uİ",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\",
+      "BasePath": "_content/Medlab MVC_Uİ",
+      "RelativePath": "Assets/Uploads/Products/ad6e744f-5a76-403a-ba3f-ea6f4ae44d32index-img-01-5.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Products\\ad6e744f-5a76-403a-ba3f-ea6f4ae44d32index-img-01-5.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Products\\be19f198-9f51-4e4c-a375-ddf360292ddfindex-img-01-5.jpg",
       "SourceId": "Medlab MVC_Uİ",
       "SourceType": "Discovered",
@@ -2514,6 +2548,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Products\\f473356d-473b-43a9-ad61-a03b2bec80abservices-08.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Products\\f7181f79-9a6d-417d-bcc8-4a13449d33baabout-04.jpg",
+      "SourceId": "Medlab MVC_Uİ",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\",
+      "BasePath": "_content/Medlab MVC_Uİ",
+      "RelativePath": "Assets/Uploads/Products/f7181f79-9a6d-417d-bcc8-4a13449d33baabout-04.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Assets\\Uploads\\Products\\f7181f79-9a6d-417d-bcc8-4a13449d33baabout-04.jpg"
     },
     {
       "Identity": "C:\\Users\\Hp\\Desktop\\MedlabProject\\FinalProject 1.0\\MedlabApi\\Medlab MVC_Uİ\\wwwroot\\Assets\\Uploads\\Products\\f7dfb51f-92be-4ff0-8f12-8c52fb4ba0d7services-05.jpg",
