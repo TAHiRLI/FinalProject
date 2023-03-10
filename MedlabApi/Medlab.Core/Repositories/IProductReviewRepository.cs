@@ -9,5 +9,9 @@ namespace Medlab.Core.Repositories
 {
     public interface IProductReviewRepository:IEntityRepository<ProductReview>
     {
+        object GetAllReviewsByMonth();
+        object GetApprovedReviewsByMonth();
+        object GetRejectedReviewsByMonth();
+
     }
 }

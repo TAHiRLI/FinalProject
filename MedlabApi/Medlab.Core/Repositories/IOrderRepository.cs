@@ -12,5 +12,9 @@ namespace Medlab.Core.Repositories
     {
         List<Order> GetOrdersWithProducts(string userId);
         Order? GetOrderById(int id);
+        object GetSalesByMonth();
+        object GetSalesSummary();
+
+
     }
 }

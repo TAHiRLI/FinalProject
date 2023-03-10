@@ -11,5 +11,7 @@ namespace Medlab.Core.Repositories
     public interface IDoctorAppointmentRepository:IEntityRepository<DoctorAppointment>
     {
         List<DoctorAppointment> GetAppointmentsIncludingUsers(Expression<Func<DoctorAppointment, bool>> exp);
+        public object GetAppointmentPaymentByMonth();
+
     }
 }

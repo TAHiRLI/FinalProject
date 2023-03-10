@@ -43,7 +43,7 @@ namespace MedlabApi.Profiles
 
             // category
             CreateMap<ProductCategory, ProductCategoryGetDto>();
-            CreateMap<ProductCategory, ProductCategoryPostDto>();
+            CreateMap<ProductCategoryPostDto, ProductCategory>().ReverseMap();
 
             // Review
             CreateMap<AppUser, AppUserInProductReviewGetDto>();

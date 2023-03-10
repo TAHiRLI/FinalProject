@@ -9,5 +9,6 @@ namespace Medlab.Core.Repositories
 {
     public interface IProductCategoryRepository:IEntityRepository<ProductCategory>
     {
+         IQueryable<Object> GetTopSoldCategory();
     }
 }
