@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Medlab_MVC_Uİ.Hubs;
 using Microsoft.Build.Framework;
 using System.Configuration;
+using Medlab_MVC_Uİ.Middlewares;
 
 
 
@@ -157,6 +158,9 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseMiddleware<CheckNotFound>();
+    
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
