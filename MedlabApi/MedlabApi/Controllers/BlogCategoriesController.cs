@@ -4,11 +4,15 @@ using Medlab.Core.Repositories;
 using Medlab.Data.Repositories;
 using MedlabApi.Dtos.BlgoCategoriyDtos;
 using MedlabApi.Dtos.ValueDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace MedlabApi.Controllers
 {
+    [Authorize(Roles = "SuperAdmin, Admin")]
+
     [Route("api/[controller]")]
     [ApiController]
     public class BlogCategoriesController : ControllerBase

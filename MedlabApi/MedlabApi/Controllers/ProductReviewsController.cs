@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using Medlab.Core.Repositories;
 using MedlabApi.Dtos.ProductReviewDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedlabApi.Controllers
 {
+    [Authorize(Roles ="Admin, SuperAdmin")]
+
     [Route("api/[controller]")]
     [ApiController]
     public class ProductReviewsController : ControllerBase

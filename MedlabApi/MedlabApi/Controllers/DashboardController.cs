@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MedlabApi.Controllers
 {
-    //[Authorize(Roles ="Admin, SuperAdmin")]
+    [Authorize(Roles ="Admin, SuperAdmin")]
     [Route("api/[controller]")]
     [ApiController]
     public class DashboardController : ControllerBase

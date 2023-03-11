@@ -5,6 +5,7 @@ using MedlabApi.Dtos.DepartmentDtos;
 using MedlabApi.Dtos.DoctorDtos;
 using MedlabApi.Dtos.SliderDtos;
 using MedlabApi.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
@@ -13,6 +14,7 @@ using System.Text;
 
 namespace MedlabApi.Controllers
 {
+    [Authorize(Roles ="Admin, SuperAdmin")]
     [Route("api/[controller]")]
     [ApiController]
     public class SlidersController : ControllerBase

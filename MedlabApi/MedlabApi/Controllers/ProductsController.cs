@@ -4,12 +4,14 @@ using Medlab.Core.Repositories;
 using MedlabApi.Dtos.ProductCategoryDtos;
 using MedlabApi.Dtos.ProductDtos;
 using MedlabApi.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography.X509Certificates;
 
 namespace MedlabApi.Controllers
 {
+    [Authorize(Roles ="Admin, SuperAdmin")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase

@@ -12,11 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
-using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
-using System.Security.Policy;
 
 
 namespace Medlab_MVC_Uİ.Controllers
@@ -462,7 +459,7 @@ namespace Medlab_MVC_Uİ.Controllers
             ProfileViewModel model = new ProfileViewModel();
             model.EditProfileViewModel = _mapper.Map<EditProfileViewModel>(user);
             model.DoctorAppointments = _doctorAppointmentRepository.GetAppointmentsIncludingUsers(x => x.AppUserId == user.Id).OrderByDescending(x => x.MeetingDate).Take(20).ToList();
-            model.Orders = _orderRepository.GetOrdersWithProducts(user.Id);
+            model.Orders = _orderRepository.GetOrdersWithProducts(user.Id).OrderByDescending(x=> x.CreatedAt).ToList();
             model.UserPhoto = $"Users/{user.ImageUrl}";
             model.Fullname = user.Fullname;
             // Getting user Orders
@@ -668,7 +665,7 @@ namespace Medlab_MVC_Uİ.Controllers
         {
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
             smtpClient.UseDefaultCredentials = false;
-            smtpClient.Credentials = new System.Net.NetworkCredential("tahirtahirli2002@gmail.com", "lsieytvhoimyzhbi");
+            smtpClient.Credentials = new System.Net.NetworkCredential("tahirtahirli2002@gmail.com", _configuration.GetSection("GoogleAuth:AppPassword").Value);
             smtpClient.EnableSsl = true;
 
             // message

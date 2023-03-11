@@ -4,11 +4,14 @@ using Medlab.Core.Repositories;
 using Medlab.Data.Repositories;
 using MedlabApi.Dtos.DepartmentDtos;
 using MedlabApi.Dtos.ProductCategoryDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace MedlabApi.Controllers
 {
+    [Authorize(Roles = "SuperAdmin, Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class DepartmentsController : ControllerBase

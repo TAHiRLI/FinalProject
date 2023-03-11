@@ -1,5 +1,4 @@
 ﻿using MedlabApi.Services.Interfaces;
-using Microsoft.Extensions.Configuration;
 using System.Net.Mail;
 
 namespace MedlabApi.Services.Implementations

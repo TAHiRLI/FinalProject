@@ -3,12 +3,14 @@ using Medlab.Core.Entities;
 using Medlab.Core.Repositories;
 using MedlabApi.Dtos.AmenityImageDtos;
 using MedlabApi.Dtos.ValueDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Validations;
 
 namespace MedlabApi.Controllers
 {
+    [Authorize(Roles ="Admin, SuperAdmin")]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
