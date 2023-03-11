@@ -91,7 +91,7 @@ namespace MedlabApi.Controllers
 
             EmailService emailService = new EmailService(_configuration);
 
-            emailService.SendMail(order.Email, "Order Rejected", $"Your Order at {order.CreatedAt.ToString("dddd, dd MMMM yyyy")} is Approved");
+            emailService.SendMail(order.Email, "Order Approved", $"Your Order at {order.CreatedAt.ToString("dddd, dd MMMM yyyy")} is Approved");
 
             _orderRepository.Commit();
 
