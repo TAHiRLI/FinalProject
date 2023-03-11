@@ -44,6 +44,13 @@
 
                             </a>
                         }
+                        @if(appointment.IsApproved == true && appointment.MeetingDate > DateTime.UtcNow.AddHours(4)){
+                            <a asp-action="cancel" asp-controller="doctor" asp-route-id="@appointment.Id" class="cancel-btn btn d-flex align-items-center">
+                                <i class="fa-solid fa-xmark mx-2"></i>
+                                <span class="d-none d-sm-inline">Cancel</span>
+
+                            </a>
+                        }
 
 
                     </div>

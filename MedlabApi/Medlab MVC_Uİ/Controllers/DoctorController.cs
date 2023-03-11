@@ -1,12 +1,16 @@
 ﻿using Medlab.Core.Entities;
 using Medlab.Core.Repositories;
 using Medlab_MVC_Uİ.Helpers;
+using Medlab_MVC_Uİ.Hubs;
+using Medlab_MVC_Uİ.Services;
 using Medlab_MVC_Uİ.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
+using System.Numerics;
 using System.Security.Claims;
 using X.PagedList;
 
@@ -19,14 +23,26 @@ namespace Medlab_MVC_Uİ.Controllers
         private readonly IBlogRepostiory _blogRepostiory;
         private readonly IDoctorAppointmentRepository _doctorAppointmentRepository;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IConfiguration _configuration;
+        private readonly IHubContext<MeetingHub> _hubContext;
 
-        public DoctorController(IDoctorRepository doctorRepository, IDepartmentRepository departmentRepository, IBlogRepostiory blogRepostiory, IDoctorAppointmentRepository doctorAppointmentRepository, UserManager<AppUser> userManager)
+        public DoctorController(
+            IDoctorRepository doctorRepository,
+            IDepartmentRepository departmentRepository,
+            IBlogRepostiory blogRepostiory,
+            IDoctorAppointmentRepository doctorAppointmentRepository,
+            UserManager<AppUser> userManager,
+            IConfiguration configuration,
+            IHubContext<MeetingHub> hubContext
+            )
         {
             this._doctorRepository = doctorRepository;
             this._departmentRepository = departmentRepository;
             this._blogRepostiory = blogRepostiory;
             _doctorAppointmentRepository = doctorAppointmentRepository;
             _userManager = userManager;
+            _configuration = configuration;
+            _hubContext = hubContext;
         }
 
         //======================
@@ -107,7 +123,7 @@ namespace Medlab_MVC_Uİ.Controllers
         [Authorize(Roles = "Member")]
         public async Task<IActionResult> SetAppointment(SetAppointmentViewModel AppointmentVm)
         {
-            var doctor = await _doctorRepository.GetAsync(x => x.Id == AppointmentVm.DoctorId, "DoctorAppointments", "Blogs");
+            var doctor = await _doctorRepository.GetAsync(x => x.Id == AppointmentVm.DoctorId, "DoctorAppointments", "Blogs", "AppUser");
             if (doctor == null)
                 return NotFound();
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -154,6 +170,12 @@ namespace Medlab_MVC_Uİ.Controllers
 
 
             //^ try to launch Swal
+            await _hubContext.Clients.Client(user.ConnectionId?? "").SendAsync("Appointment-Set", doctor.Fullname, doctorAppointment.MeetingDate.ToString("dd MMMM yyyy"));
+            await _hubContext.Clients.Client(doctor.AppUser?.ConnectionId?? "").SendAsync("Appointment-Set", user.Fullname, doctorAppointment.MeetingDate.ToString("dd MMMM yyyy"));
+
+            EmailService emailService = new EmailService(_configuration);
+            emailService.SendMail(doctor.AppUser?.Email, "Appointment Request", $"User wants to set an appointment with you at {doctorAppointment.MeetingDate.ToString("dd MMMM yyyy HH:mm")}");
+            
             return RedirectToAction("details", new {id= AppointmentVm.DoctorId});
 
         }
@@ -162,7 +184,7 @@ namespace Medlab_MVC_Uİ.Controllers
 
 
         //======================
-        // Tet Availeble Tiem inverval
+        // Get Availeble Tiem inverval
         //======================
 
         public IActionResult GetAvailableTime(int id, int year, int month, int day)
@@ -201,7 +223,7 @@ namespace Medlab_MVC_Uİ.Controllers
         [Authorize(Roles ="Doctor")]
         public async Task<IActionResult> Approve(int id )
         {
-            var appointment = await _doctorAppointmentRepository.GetAsync(x => x.Id == id);
+            var appointment = await _doctorAppointmentRepository.GetAsync(x => x.Id == id, "Doctor", "AppUser");
             if (appointment == null)
                 return NotFound();
 
@@ -220,6 +242,13 @@ namespace Medlab_MVC_Uİ.Controllers
                 return NotFound();
 
             appointment.IsApproved = true;
+            appointment.UpdatedAt = DateTime.UtcNow.AddHours(4);
+
+
+            await _hubContext.Clients.Client(appointment.AppUser?.ConnectionId ?? "").SendAsync("Appointment-Approve", user.Fullname, appointment.MeetingDate.ToString("dd MMMM yyyy"));
+
+            EmailService emailService = new EmailService(_configuration);
+            emailService.SendMail(appointment.AppUser?.Email , "Appointment Approved", $"Your appointment with Dr {appointment.Doctor?.Fullname} at {appointment.MeetingDate.ToString("dd MMMM yyyy HH:mm")}  is approved");
             //^ signalr send message 
 
             _doctorAppointmentRepository.Commit();
@@ -235,7 +264,7 @@ namespace Medlab_MVC_Uİ.Controllers
         [Authorize(Roles = "Doctor")]
         public async Task<IActionResult> Reject(int id)
         {
-            var appointment = await _doctorAppointmentRepository.GetAsync(x => x.Id == id);
+            var appointment = await _doctorAppointmentRepository.GetAsync(x => x.Id == id, "AppUser");
             if (appointment == null)
                 return NotFound();
 
@@ -249,10 +278,15 @@ namespace Medlab_MVC_Uİ.Controllers
                 return NotFound();
 
             appointment.IsApproved = false;
-            //^ signalr send message 
+            appointment.UpdatedAt = DateTime.UtcNow.AddHours(4);
+
+            EmailService emailService = new EmailService(_configuration);
+            emailService.SendMail(appointment.AppUser?.Email, "Appointment Rejected", $"Your appointment with Dr {appointment.Doctor?.Fullname} at {appointment.MeetingDate.ToString("dd MMMM yyyy HH:mm")}  is Rejected");
+
+            
+            await _hubContext.Clients.Client(appointment.AppUser?.ConnectionId ?? "").SendAsync("Appointment-Reject", user.Fullname, appointment.MeetingDate.ToString("dd MMMM yyyy"));
 
             _doctorAppointmentRepository.Commit();
-
 
 
             return RedirectToAction("profile", "account");
@@ -262,18 +296,30 @@ namespace Medlab_MVC_Uİ.Controllers
         //======================
         // Cancel Appointment
         //======================
-        [Authorize(Roles ="Member")]
+        [Authorize(Roles ="Member, Doctor")]
         public async Task<IActionResult>  Cancel(int id)
         {
-            var appointment = await _doctorAppointmentRepository.GetAsync(x => x.Id == id);
+            var appointment = await _doctorAppointmentRepository.GetAsync(x => x.Id == id, "Doctor", "AppUser");
             if (appointment == null)
                 return NotFound();
 
+            var doctor = await _doctorRepository.GetAsync(x => x.Id == appointment.DoctorId, "AppUser");
+            if(doctor == null )
+                return NotFound();
+
+            if (!User.IsInRole("Doctor"))
+            {
             if (appointment.MeetingDate < DateTime.UtcNow.AddHours(4) || ( (appointment.MeetingDate - DateTime.UtcNow.AddHours(4)).TotalMinutes <60)&& appointment.IsApproved ==true)
                 return NotFound();
+            }
 
             _doctorAppointmentRepository.Delete(appointment);
             _doctorAppointmentRepository.Commit();
+
+
+            EmailService emailService = new EmailService(_configuration);
+            emailService.SendMail(doctor.AppUser?.Email, "Appointment Cancelled", $"Your appointment with  {appointment.AppUser?.Email} at {appointment.MeetingDate.ToString("dd MMMM yyyy HH:mm")}  is Cancelled");
+            emailService.SendMail(appointment.AppUser?.Email, "Appointment Cancelled", $"Your appointment with Dr  {appointment.Doctor?.Fullname} at {appointment.MeetingDate.ToString("dd MMMM yyyy HH:mm")}  is Cancelled");
 
             return RedirectToAction("profile", "account");
 

@@ -515,7 +515,16 @@
                 })
             })
 
+            connection.on("Appointment-Set", (userName, date)=>{
+               toastr.info(`Meeting with ${userName} at ${date}`) // error, info, warning
+            })
 
+             connection.on("Appointment-Approve", (userName, date)=>{
+               toastr.success(`Meeting with ${userName} at ${date} Approved`) // error, info, warning
+            })
+             connection.on("Appointment-Reject", (userName, date)=>{
+               toastr.error(`Meeting with ${userName} at ${date} Rejected`) // error, info, warning
+            })
 
             async function reject(appointmentId){
                 await connection.invoke("RejectCall", appointmentId);
