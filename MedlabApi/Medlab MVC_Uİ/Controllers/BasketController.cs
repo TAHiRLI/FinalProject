@@ -20,12 +20,12 @@ namespace Medlab_MVC_Uİ.Controllers
         private readonly IOrderRepository _orderRepository;
 
         public BasketController(
-            IProductRepository productRepository, 
+            IProductRepository productRepository,
             UserManager<AppUser> userManager,
-            IMapper mapper, 
+            IMapper mapper,
             IBasketItemRepository basketItemRepository,
             IOrderRepository orderRepository
-            
+
             )
         {
             _productRepository = productRepository;
@@ -309,15 +309,27 @@ namespace Medlab_MVC_Uİ.Controllers
         public async Task<IActionResult> Order()
         {
             OrderViewModel model = new OrderViewModel();
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
                 if (user == null)
                     return NotFound();
+
+                List<BasketItem> basketItems = _basketItemRepository.GetAll(x => x.AppUserId == user.Id).ToList();
+                if (basketItems.Count == 0)
+                    return NotFound();
+
                 model.Fullname = user.Fullname;
                 model.Email = user.Email;
                 model.PhoneNumber = user.PhoneNumber;
             }
+            List<BasketCookieViewModel> BasketCookieItems = new List<BasketCookieViewModel>();
+            var basket = HttpContext.Request.Cookies["Basket"];
+            if (basket != null)
+               BasketCookieItems = JsonConvert.DeserializeObject<List<BasketCookieViewModel>>(basket);
+
+            if (basket == null || BasketCookieItems?.Count == 0)
+                return NotFound();
 
             return View(model);
         }
@@ -344,11 +356,14 @@ namespace Medlab_MVC_Uİ.Controllers
             };
 
 
-            if(User.Identity.IsAuthenticated && User.IsInRole("Member"))
+            if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
                 if (user == null)
                     return NotFound();
+
+
+
 
                 NewOrder.AppUserId = user.Id;
                 NewOrder.Email = user.Email;
@@ -371,7 +386,7 @@ namespace Medlab_MVC_Uİ.Controllers
                     _basketItemRepository.Delete(item);
 
                 }
-                
+
                 _basketItemRepository.Commit();
             }
             else
@@ -386,7 +401,7 @@ namespace Medlab_MVC_Uİ.Controllers
                 {
                     Product cookieProduct = await _productRepository.GetAsync(x => x.Id == item.ProductId);
 
-                    if(cookieProduct!= null)
+                    if (cookieProduct != null)
                     {
 
                         OrderItem orderItem = new OrderItem
@@ -410,8 +425,8 @@ namespace Medlab_MVC_Uİ.Controllers
             await _orderRepository.AddAsync(NewOrder);
 
             await _orderRepository.CommitAsync();
-            
-            return  RedirectToAction("index" , "Home");
+
+            return RedirectToAction("index", "Home");
         }
     }
 }
