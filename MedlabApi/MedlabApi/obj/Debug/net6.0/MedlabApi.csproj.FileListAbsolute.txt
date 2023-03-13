@@ -83,3 +83,10 @@ C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\obj\Debug
 C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\bin\Debug\net6.0\Quartz.dll
 C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\bin\Debug\net6.0\Quartz.Extensions.DependencyInjection.dll
 C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\bin\Debug\net6.0\Quartz.Extensions.Hosting.dll
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\bin\Debug\net6.0\ClosedXML.dll
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\bin\Debug\net6.0\DocumentFormat.OpenXml.dll
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\bin\Debug\net6.0\ExcelNumberFormat.dll
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\bin\Debug\net6.0\Irony.dll
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\bin\Debug\net6.0\SixLabors.Fonts.dll
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\bin\Debug\net6.0\System.IO.Packaging.dll
+C:\Users\Hp\Desktop\MedlabProject\FinalProject 1.0\MedlabApi\MedlabApi\bin\Debug\net6.0\XLParser.dll

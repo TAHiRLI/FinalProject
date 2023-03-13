@@ -141,7 +141,7 @@
                                 <option selected="@(ViewBag.Sort == "ZA" ? "selected" : null)" value="ZA">Z-A</option>
                             </select>
                         </div>
-                        <p class="col-sm-4 my-2 d-none d-sm-block text-secondary text-center m-0">Showing 1–9 of @(Model.Products.Count) results</p>
+                        <p class="col-sm-4 my-2 d-none d-sm-block text-secondary text-center m-0">@(Model.Products.Count) results Found</p>
 
                         <div class="col-sm-4 my-2  ">
                             <div class="input-group ">

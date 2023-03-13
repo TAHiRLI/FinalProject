@@ -326,7 +326,7 @@ namespace Medlab_MVC_Uİ.Controllers
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                 var url = Url.Action("VerifyPasswordReset", "account", new { email = user.Email, token = token }, Request.Scheme);
 
-                SendMail(PasswordVm.Email, "Password Reset", $"Click <a href='{url}' >here</a> to verify your email");
+                SendMail(PasswordVm.Email, $"Password Reset", $"Click '{url}'  to verify your email");
 
                 user.LastRequestedEmailAt = DateTime.UtcNow.AddHours(4);
                 await _userManager.UpdateAsync(user);

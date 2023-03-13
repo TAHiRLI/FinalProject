@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ClosedXML.Excel;
 using Medlab.Core.Entities;
 using Medlab.Core.Repositories;
 using MedlabApi.Dtos.DoctorDtos;
@@ -7,11 +8,13 @@ using MedlabApi.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.JSInterop.Infrastructure;
 using System;
 using System.Net.Mail;
 using System.Text;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace MedlabApi.Controllers
 {
@@ -238,6 +241,29 @@ namespace MedlabApi.Controllers
 
 
             smtpClient.Send(mailMessage);
+        }
+
+
+        //=================================
+        // Export as Excel
+        //=================================
+        [HttpGet("ExcelFile")]
+
+        public IActionResult ExportAsExcell()
+        {
+            var doctors = _doctorRepository.GetAll(x => true, "Blogs").ToList();
+            var dto = _mapper.Map<List<DoctorGetDto>>(doctors);
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(ExportExcell.ToDataTable<DoctorGetDto>(dto.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{DateTime.UtcNow.AddHours(4).Date}-Doctors.xlsx");
+                }
+            }
+
+       
         }
     }
 }
