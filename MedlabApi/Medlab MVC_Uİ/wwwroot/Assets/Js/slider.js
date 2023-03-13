@@ -2,7 +2,7 @@
 //  Content                           / Index
 // 1 Main Slider                      / Index
 // 2 services slider                  / Index
-// 3  Doctors slider                  / Index
+// 3 Doctors slider                  / Index
 // 4 Core Values Slider               / About Us 
 // 5 Office slider                    / About Us 
 // 7 Product Images Slider            /Details
@@ -25,7 +25,7 @@ $(document).ready(function () {
         dotClass: 'slick-dots',
         infinite: true,
         speed: 600,
-        pauseOnHover:false,
+        pauseOnHover: false,
         fade: true,
         cssEase: 'linear',
         arrows: false,
@@ -39,11 +39,12 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('.tests_sliderNav').slick({
-      autoplay: true,
-      autoplaySpeed: 3000,
-        infinite:true,
-        draggabe:true,
-        touchMove:true,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        infinite: true,
+        swipeToSlide: true,
+        draggabe: true,
+        touchMove: true,
         dotClass: 'slick-dots',
         slidesToShow: 6,
         slidesToScroll: 1,
@@ -54,32 +55,32 @@ $(document).ready(function () {
         nextArrow: $(".next_button"),
         prevArrow: $(".prev_button"),
         responsive: [
-          {
-            breakpoint: 1200,
-            settings: {
-              slidesToShow: 5,
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 5,
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 4,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                }
             }
-          },
-          {
-            breakpoint: 992,
-            settings: {
-              slidesToShow: 4,
+            ,
+            {
+                breakpoint: 560,
+                settings: {
+                    slidesToShow: 2,
+                }
             }
-          },
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 3,
-            }
-          }
-          ,
-          {
-            breakpoint: 560,
-            settings: {
-              slidesToShow: 2,
-            }
-          }
-        
+
         ]
 
     });
@@ -90,51 +91,24 @@ $('.tests_sliderFor').slick({
     slidesToScroll: 1,
     arrows: false,
     centerMode: false,
-    draggabe:false,
-    touchMove:false,
+    draggabe: false,
+    touchMove: false,
     fade: true,
     speed: 0,
     asNavFor: '.tests_sliderNav'
-  });
+});
 
 //=================================
 // 3  Doctors slider
 //=================================
 
-  $('.doctorSlider').slick({
+$('.doctorSlider').slick({
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    centerMode:false,
-    autoplaySpeed: 2000,
-    arrows:false,
-    responsive: [
-     
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        }
-      }
-  
-    
-    ]
-  });
-
-//=================================
-// 4 Core Values Slider / About Us Page
-//=================================
-$('.valuesSlider').slick({
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    centerMode:false,
+    swipeToSlide: true,
+    draggabe: true,
+    centerMode: false,
     autoplaySpeed: 2000,
     arrows: false,
     responsive: [
@@ -154,7 +128,38 @@ $('.valuesSlider').slick({
 
 
     ]
-  });
+});
+
+//=================================
+// 4 Core Values Slider / About Us Page
+//=================================
+$('.valuesSlider').slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    centerMode: false,
+    swipeToSlide: true,
+    draggabe: true,
+    autoplaySpeed: 2000,
+    arrows: false,
+    responsive: [
+
+        {
+            breakpoint: 992,
+            settings: {
+                slidesToShow: 2,
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 1,
+            }
+        }
+
+
+    ]
+});
 
 //=================================
 // 5 Office slider
@@ -165,53 +170,54 @@ $(document).ready(function () {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
-        draggable:true,
+        draggable: true,
         fade: true,
         speed: 0,
-        arrows:true,
+        arrows: true,
         asNavFor: '.galerySliderNav',
-        prevArrow:"<button type='button' class='slick-prev slick-button pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
-        nextArrow:"<button type='button' class='slick-next slick-button pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
-     
-      });
+        prevArrow: "<button type='button' class='slick-prev slick-button pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+        nextArrow: "<button type='button' class='slick-next slick-button pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
+
+    });
 
 
- 
+
 });
 
 
-   $('.galerySliderNav').slick({
-        infinite:true,
-        draggabe:true,
-        touchMove:true,
-        dotClass: 'slick-dots',
-        slidesToShow: 4,
-        slidesToScroll: 1,
-         asNavFor: '.galerySliderFor',
-        dots: false,
-        centerMode: false,
-        focusOnSelect: true,
-        arrows:true,
-        prevArrow:"<button type='button' class='slick-prev slick-button pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
-        nextArrow:"<button type='button' class='slick-next slick-button pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
-        responsive: [
-     
-          {
+$('.galerySliderNav').slick({
+    infinite: true,
+    swipeToSlide: true,
+    draggabe: true,
+    touchMove: true,
+    dotClass: 'slick-dots',
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    asNavFor: '.galerySliderFor',
+    dots: false,
+    centerMode: false,
+    focusOnSelect: true,
+    arrows: true,
+    prevArrow: "<button type='button' class='slick-prev slick-button pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+    nextArrow: "<button type='button' class='slick-next slick-button pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
+    responsive: [
+
+        {
             breakpoint: 992,
             settings: {
-              slidesToShow: 3,
+                slidesToShow: 3,
             }
-          },
-          {
+        },
+        {
             breakpoint: 768,
             settings: {
-              slidesToShow: 2,
+                slidesToShow: 2,
             }
-          }
-      
-        
-        ]
-    });
+        }
+
+
+    ]
+});
 
 
 
@@ -222,44 +228,45 @@ $(document).ready(function () {
 //=================================
 
 $(document).ready(function () {
-  $('.productNavImgSlider').slick({
-      infinite:true,
-      draggabe:true,
-      touchMove:true,
-      dotClass: 'slick-dots',
-      slidesToShow: 5,
-      slidesToScroll: 1,
-      asNavFor: '.productMainImgSlider',
-      dots: false,
-      centerMode: false,
-      focusOnSelect: true,
-      autoplay: false,
-      arrows:false,
-      autoplaySpeed: 4000,
-      
-  responsive: [
-    
-    
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 4,
-      }
-    }
-  
-  ]
+    $('.productNavImgSlider').slick({
+        infinite: true,
+         swipeToSlide: true, 
+        draggabe: true,
+        touchMove: true,
+        dotClass: 'slick-dots',
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        asNavFor: '.productMainImgSlider',
+        dots: false,
+        centerMode: false,
+        focusOnSelect: true,
+        autoplay: false,
+        arrows: false,
+        autoplaySpeed: 4000,
+
+        responsive: [
 
 
-  });
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 4,
+                }
+            }
+
+        ]
+
+
+    });
 });
 
 $('.productMainImgSlider').slick({
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: false,
-  fade: true,
-  speed: 200,
-  asNavFor: '.productNavImgSlider'
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    speed: 200,
+    asNavFor: '.productNavImgSlider'
 });
 
 
@@ -270,36 +277,38 @@ $('.productMainImgSlider').slick({
 
 
 $('.similarPrdSlider').slick({
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  autoplay: true,
-  centerMode:false,
-  autoplaySpeed: 4000,
-  arrows:false,
-  draggabe:true,
-  focusOnSelect: false,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-      }
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 2,
-      }
-    }
-    ,
-    {
-      breakpoint: 560,
-      settings: {
-        slidesToShow: 1,
-      }
-    }
-  
-  ]
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    adaptiveHeight: true,
+    centerMode: false,
+    autoplaySpeed: 4000,
+    arrows: false,
+    swipeToSlide: true, 
+    draggabe: true,
+    focusOnSelect: false,
+    responsive: [
+        {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3,
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 2,
+            }
+        }
+        ,
+        {
+            breakpoint: 560,
+            settings: {
+                slidesToShow: 1,
+            }
+        }
+
+    ]
 });
 
 

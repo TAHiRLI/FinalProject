@@ -130,55 +130,13 @@
             </h2>
         </div>
 
-        <div class="doctors mt-5">
+        <div class="doctors mt-5 pt-3">
             <div class="container">
                 <div class="doctorSlider d-flex mx-5">
-
-                    @if (Model.Doctors.Count < 3)
-                    {
-
-                        @foreach (var doctor in Model.Doctors)
-                        {
-                            <!-- slide -->
-                            <div class="doctor_box mx-3">
-                                <div class="doctor_box_photo position-relative">
-                                    <a asp-action="details" asp-controller="doctor" asp-route-id="@doctor.Id" class="d-block w-100 h-100">
-                                        <img src="~/Assets/Uploads/Doctors/@doctor.ImageUrl" alt="@doctor.ImageUrl" />
-                                    </a>
-                                    <div class="doctor_box_photo_links bg-light position-absolute">
-                                        <div class="p-2 text-center">
-                                            <a href="@doctor.Facebook" class="text-decoration-none text-base">
-                                                <i class="fa-brands fa-facebook-f"></i>
-                                            </a>
-                                        </div>
-                                        <div class="p-2 text-center">
-                                            <a href="@doctor.Instagram" class="text-decoration-none text-base">
-                                                <i class="fa-brands fa-instagram"></i>
-                                            </a>
-                                        </div>
-                                        <div class="p-2 text-center">
-                                            <a href="@doctor.Twitter" class="text-decoration-none text-base">
-                                                <i class="fa-brands fa-twitter"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doctor_box_footer">
-                                    <h5 class="doctor_box_footer_name text-center my-3">
-                                        <a asp-action="details" asp-controller="doctor" asp-route-id="@doctor.Id">@doctor.Fullname</a>
-                                    </h5>
-                                    <div class="doctor_box_footer_position text-center">
-                                        @doctor.Positon
-                                    </div>
-                                </div>
-                            </div>
-
-                        }
-                    }
                     @foreach (var doctor in Model.Doctors)
                     {
                         <!-- slide -->
-                        <div class="doctor_box mx-3">
+                        <div class="doctor_box mx-3 bg-light pb-4">
                             <div class="doctor_box_photo position-relative">
                                 <a asp-action="details" asp-controller="doctor" asp-route-id="@doctor.Id" class="d-block w-100 h-100">
                                     <img src="~/Assets/Uploads/Doctors/@doctor.ImageUrl" alt="@doctor.ImageUrl" />

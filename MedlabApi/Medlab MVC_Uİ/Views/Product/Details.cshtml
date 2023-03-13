@@ -43,7 +43,7 @@
     </div>
 
     <main>
-        <section id="Product-detail_Section" class="py-5">
+        <section id="Product-detail_Section" class="py-5 bg-light">
             <div class="container">
                 <div class="row product-block">
                     <div class="col-md-6">
@@ -256,12 +256,12 @@
                 @foreach (var product in Model.SimilarProducts)
                 {
                     <!-- Item -->
-                    <div class="product  text-center mx-3">
+                    <div class="product d-flex flex-grow-1 flex-column justify-content-between  text-center mx-3 bg-light">
                         <div class="product-img">
                             <a asp-action="details" asp-controller="product" asp-route-id="@product.Id" class="w-100 h-100 d-block">
                                 <img src="~/Assets/Uploads/Products/@product.ProductImages?.FirstOrDefault(x=> x.IsMain == true)?.ImageUrl"
                                  alt=""
-                                 class="w-100" />
+                                 class="w-100 similarPrd_img" />
                             </a>
 
                         </div>

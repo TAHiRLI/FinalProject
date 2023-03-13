@@ -29,9 +29,9 @@ namespace MedlabApi.Dtos.SliderDtos
                 {
                     context.AddFailure("Image", "File Type must be jpeg or png");
                 }
-                else if (x.Image?.Length > 2097152)
+                else if (x.Image?.Length > 40000000)
                 {
-                    context.AddFailure("Image", "File size must be less than 2mb");
+                    context.AddFailure("Image", "File size must be less than 5mb");
                 }
 
                 }
