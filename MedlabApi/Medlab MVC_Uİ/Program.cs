@@ -27,6 +27,7 @@ using Medlab_MVC_Uİ.Middlewares;
 // 4 Custom Services
 // 5 Mapper
 // 6 SignalR
+// 7 Cors
 
 
 
@@ -148,8 +149,22 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 //======================
 builder.Services.AddSignalR();
 
-
+//======================
+// 7 Cors
+//======================
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyCorsPolicy", builder =>
+    {
+        builder.WithOrigins("http://localhost:3000")
+            .AllowCredentials()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -159,10 +174,17 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+//======================
+// 1 Cors
+//======================
+app.UseCors("MyCorsPolicy");
+
 app.UseMiddleware<CheckNotFound>();
     
 
 app.UseHttpsRedirection();
+
+
 app.UseStaticFiles();
 
 app.UseRouting();

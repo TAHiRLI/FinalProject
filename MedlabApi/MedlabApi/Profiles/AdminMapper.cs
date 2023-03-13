@@ -10,6 +10,7 @@ using MedlabApi.Dtos.OrderDtos;
 using MedlabApi.Dtos.ProductCategoryDtos;
 using MedlabApi.Dtos.ProductDtos;
 using MedlabApi.Dtos.ProductReviewDtos;
+using MedlabApi.Dtos.ServiceDtos;
 using MedlabApi.Dtos.SettingDtos;
 using MedlabApi.Dtos.SliderDtos;
 using MedlabApi.Dtos.UserDtos;
@@ -117,6 +118,11 @@ namespace MedlabApi.Profiles
             CreateMap<Value, ValueGetDto>();
             CreateMap<ValuePostDto, Value>();
             CreateMap<ValuePutDto, Value>();    
+
+            // Services 
+            CreateMap<Service, ServiceGetDto>()
+                .ForMember(x=> x.ImageUrl, f=> f.MapFrom(x => $"{config.GetSection("Mvc:Path").Value}Assets/Uploads/Services/{x.ImageUrl}"));
+
         }
     }
 }

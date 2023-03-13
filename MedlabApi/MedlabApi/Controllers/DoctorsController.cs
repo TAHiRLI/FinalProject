@@ -143,12 +143,21 @@ namespace MedlabApi.Controllers
             {
                 if (await _userManager.FindByEmailAsync(dto.Email) != null)
                     return BadRequest(new { errors = new { Email = new[] { "This Email Has Already Been Used !!!" } } });
-             
-
-                SendMail(dto.Email, "Set Your Medlab Password", $"You have been registered as doctor in Medlab.com. Your Username is {dto.Email}. For the firs login you will be redirected to Set Password page");
-
 
                 doctor.Email = dto.Email;
+                try
+                {
+                SendMail(doctor.Email, "Set Your Medlab Password", $"You have been registered as doctor in Medlab.com. Your Username is {dto.Email}. For the firs login you will be redirected to Set Password page");
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+
                 doctor.AppUser.Email = dto.Email;
                 doctor.AppUser.UserName = dto.Email;
 

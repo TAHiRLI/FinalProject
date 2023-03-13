@@ -16,6 +16,7 @@
           "Medlab.Data": "1.0.0",
           "Microsoft.AspNetCore.Authentication.Facebook": "6.0.13",
           "Microsoft.AspNetCore.Authentication.Google": "6.0.12",
+          "Microsoft.AspNetCore.Cors": "2.2.0",
           "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.12",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.13",
@@ -171,6 +172,15 @@
             "assemblyVersion": "6.0.12.0",
             "fileVersion": "6.0.1222.57109"
           }
+        }
+      },
+      "Microsoft.AspNetCore.Cors/2.2.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Extensions": "2.2.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Options": "6.0.0"
         }
       },
       "Microsoft.AspNetCore.Cryptography.Internal/6.0.12": {
@@ -2701,6 +2711,13 @@
       "sha512": "sha512-MjpmmRuVJbR9Ngz54fHT4I2QFZ2zc2wpjb/Jx/L/2EdWEEsSOzA3wgTEUMSNgGg5HmlDn84t6+L/O2OjyJ9tjw==",
       "path": "microsoft.aspnetcore.authentication.google/6.0.12",
       "hashPath": "microsoft.aspnetcore.authentication.google.6.0.12.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Cors/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LFlTM3ThS3ZCILuKnjy8HyK9/IlDh3opogdbCVx6tMGyDzTQBgMPXLjGDLtMk5QmLDCcP3l1TO3z/+1viA8GUg==",
+      "path": "microsoft.aspnetcore.cors/2.2.0",
+      "hashPath": "microsoft.aspnetcore.cors.2.2.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Cryptography.Internal/6.0.12": {
       "type": "package",

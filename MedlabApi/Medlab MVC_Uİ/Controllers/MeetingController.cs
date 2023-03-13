@@ -3,12 +3,14 @@ using Medlab.Core.Repositories;
 using Medlab_MVC_Uİ.Hubs;
 using Medlab_MVC_Uİ.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Medlab_MVC_Uİ.Controllers
 {
-        [Authorize(Roles ="Doctor, Member")]
+    [EnableCors]
+    [Authorize(Roles = "Doctor, Member")]
     public class MeetingController : Controller
     {
         private readonly IDoctorRepository _doctorRepository;
@@ -21,10 +23,10 @@ namespace Medlab_MVC_Uİ.Controllers
             _doctorAppointmentRepository = doctorAppointmentRepository;
             _hubContext = hubContext;
         }
-        public async Task<IActionResult>  Index( int doctorId, int appointmentId)
+        public async Task<IActionResult> Index(int doctorId, int appointmentId)
         {
             var appointment = await _doctorAppointmentRepository.GetAsync(x => x.Id == appointmentId);
-            if(appointment == null )
+            if (appointment == null)
                 return NotFound();
 
             var roomId = Guid.NewGuid().ToString();
@@ -33,7 +35,7 @@ namespace Medlab_MVC_Uİ.Controllers
 
 
         [HttpGet("meeting/{roomId}")]
-        public async Task<IActionResult>  Room(string roomId, int doctorId, int appointmentId)
+        public async Task<IActionResult> Room(string roomId, int doctorId, int appointmentId)
         {
             ViewBag.roomId = roomId;
             ViewBag.doctorId = doctorId;
@@ -54,7 +56,7 @@ namespace Medlab_MVC_Uİ.Controllers
             {
                 if (doctor.AppUser.ConnectionId == null)
                     return NotFound();
-            await _hubContext.Clients.Client(doctor.AppUser.ConnectionId).SendAsync("RecieveRing", roomId, doctorId, appointmentId);
+                await _hubContext.Clients.Client(doctor.AppUser.ConnectionId).SendAsync("RecieveRing", roomId, doctorId, appointmentId);
             }
 
 

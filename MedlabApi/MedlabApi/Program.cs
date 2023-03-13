@@ -117,6 +117,10 @@ builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 //ContactMessage
 builder.Services.AddScoped<IContactMessageRepository, ContactMessageRepository>();
 
+//Service
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+
+
 //===================
 // 5 Swager 
 //===================
@@ -224,6 +228,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+//======================
+// 1 Cors 
+//======================
 
 app.UseCors(builder =>
 {
